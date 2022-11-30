@@ -1,0 +1,46 @@
+<script>
+	// import Header from './Header.svelte';
+	// import './styles.css';
+  import './style.scss'
+</script>
+
+<svelte:head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="andrei0x309">
+
+	<!-- FavIcon  -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="mask-icon" href="/fs-icon-mask.svg" color="#5bbad5">
+	<meta name="theme-color" content="#ffffff">
+
+<!-- Schema  -->
+<script type="application/ld+json">
+{
+"@context": "http://schema.org",
+"@type": "Organization",
+"name": "FlashSoft",
+"url": "https://flashsoft.eu",
+"logo": "https://flashsoft.eu/res/android-chrome-256x256.png",
+"sameAs": [
+	"https://twitter.com/andrei0x309"
+]
+}
+</script>
+<link rel="dns-prefetch preconnect" href="https://fonts.gstatic.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet" />
+<link rel="preload" href="/fonts/icomoon.ttf" as="font" />
+
+</svelte:head>
+
+<slot />
+
+
+	<!-- <footer>
+		<p class="text-[4rem]">visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+	</footer> -->
+
+<style windi:preflights:global windi:safelist:global>
+</style>
