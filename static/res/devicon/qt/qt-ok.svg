@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   width="128"
+   height="128"
+   viewBox="0 0 33.866666 33.866666"
+ >
+  <g
+     id="layer1">
+    <g
+       id="g847"
+       transform="matrix(0.62436922,0,0,0.61457913,0.39395033,4.6666218)">
+      <g
+         id="g863"
+         transform="matrix(1.0290646,0,0,0.97048108,-1.3270667,-0.98360438)">
+        <path
+           fill="#00cc00"
+           d="M 1,42 V 10 l 9,-9 h 43 v 33 l -9,9 z"
+           id="path849" />
+        <text
+           font-family="Arial"
+           fill="#ffffff"
+           font-size="32px"
+           x="9"
+           y="32"
+           id="text851">Qt</text>
+      </g>
+    </g>
+  </g>
+</svg>
