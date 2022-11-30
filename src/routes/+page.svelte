@@ -58,7 +58,7 @@
 		</div>
 	</section>
 	
-	<section id="section-tech ">
+	<section id="section-tech">
 		<div class="l-w-bg icos -mb-8">
 		 <h3><span>Technologies I've worked with</span></h3>
  
