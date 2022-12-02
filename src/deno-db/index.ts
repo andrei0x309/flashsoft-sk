@@ -1,4 +1,4 @@
-import { supabase } from "../lib/deno/supaClient.ts";
+import { supabase } from "../lib/deno/supaClientFS.ts";
 import { $prjCats, tables, $prjTechs, $prjs } from "./projects.ts"
 
 const insertedCats = {}
