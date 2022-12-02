@@ -16,22 +16,8 @@
 	<link rel="mask-icon" href="/fs-icon-mask.svg" color="#5bbad5">
 	<meta name="theme-color" content="#ffffff">
 
-<!-- Schema  -->
-<script type="application/ld+json">
-{
-"@context": "http://schema.org",
-"@type": "Organization",
-"name": "FlashSoft",
-"url": "https://flashsoft.eu",
-"logo": "https://flashsoft.eu/res/android-chrome-256x256.png",
-"sameAs": [
-	"https://twitter.com/andrei0x309"
-]
-}
-</script>
 <link rel="dns-prefetch preconnect" href="https://fonts.gstatic.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet" />
-<link rel="preload" href="/fonts/icomoon.ttf" as="font" />
 
 </svelte:head>
 
@@ -42,5 +28,5 @@
 		<p class="text-[4rem]">visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
 	</footer> -->
 
-<style windi:preflights:global windi:safelist:global>
+<style windi:preflights:global windi:safelist:global windi:global>
 </style>

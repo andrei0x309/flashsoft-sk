@@ -56,8 +56,12 @@
   }
 
 html{
-    scrollbar-width: none;    
-  }
+    scrollbar-width: none;
+    body {
+        font-family: 'Roboto Slab', serif;
+        line-height: 1.3;
+    }
+}
 
 html, .lfc, .rsb {
   scroll-behavior: smooth;
@@ -68,8 +72,6 @@ html, .lfc, .rsb {
 body {
     background-color: #20222B;
     color: #fff;
-    font-family: 'Roboto Slab', serif;
-    line-height: 1.3;
     font-weight: 200;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
