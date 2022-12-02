@@ -8,6 +8,14 @@ export const load: PageLoad = async ({ params }) => {
     } else {
       req = fetch(API_BASE+'/api/projects/get')
     }
-    const data = await (await req).json()
-    return data
+    const rReq = await req
+    let data = { error: ''}
+    if(rReq.ok) {
+      data = await rReq.json()
+    } else {
+      data.error = await rReq.text()
+    }
+    return {
+      data
+    }
 }
