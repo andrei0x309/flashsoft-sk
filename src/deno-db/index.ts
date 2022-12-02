@@ -11,6 +11,7 @@ const clean_PRJ = async ( ) => {
     await supabase
      .from(table)
      .delete()
+     .neq('id', -1)
     } catch(err) {
       console.error(err)
     }

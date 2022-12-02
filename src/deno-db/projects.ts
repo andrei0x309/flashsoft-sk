@@ -6,16 +6,16 @@ export const tables = [
 ]
 
 export const $prjCats = {
-    1 : ['Web Dev/APP', ''],
-    2 : ['Mobile', ''],
-    3 : ['Web Design', ''],
-    4 : ['Desktop Native', ''],
-    5 : ['Bots', ''],
-    6 : ['Embedded Platforms', ''],
-    7 : ['Misc', ''],
-    8 : ['Serverless', ''], 
-    9 : ['Web3 Dev/DAPP', ''],
-    10: ['Desktop VM', '']
+    1 : ['Web Dev', ''],
+    2 : ['Mobile', 'Generaly related to mobile development'],
+    3 : ['Web Design', 'Generaly related to mostly web interface design.'],
+    4 : ['Desktop Native', 'Generaly related to apps that do specific desktop os calls.'],
+    5 : ['Bots', 'Generaly related using services in an automatted manner.'],
+    6 : ['Embedded Platforms', 'Generaly related to dev boards and socs.'],
+    7 : ['Misc', 'Something that is hard to clasify neatly.'],
+    8 : ['Serverless', 'Code that runs on cloud and service scaling is orchestarted by strangers.'], 
+    9 : ['Web3 Dev', 'Code that reletes to blockchain networks.'],
+    10: ['Desktop VM', 'Desktop Code that requires a runtime, mostly a VM to run.']
 };
 
 export const $prjTechs = {
