@@ -38,5 +38,8 @@
 		"vitest": "^0.25.3"
 	},
 	"type": "module",
-	"license": "MIT"
+	"license": "MIT",
+	"dependencies": {
+		"@supabase/supabase-js": "^2.1.1"
+	}
 }

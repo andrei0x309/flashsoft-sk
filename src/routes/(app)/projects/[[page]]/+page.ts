@@ -1,8 +1,15 @@
 import type { PageLoad } from './$types';
- 
+import { createClient } from '@supabase/supabase-js'
+import { SUPA_PUBLIC_TOKEN  } from '@/lib/config'
+
+// Create a single supabase client for interacting with your database
+const supabase = createClient('https://xyzcompany.supabase.co', SUPA_PUBLIC_TOKEN) 
+
 export const load: PageLoad = async ({ params }) => {
-    const token = Deno.env.get('TOKEN')
+
+  const res = await supabase.from('fsk_prj').select('*').range(0, 4)
+
     return {
-      token
+      res
     }
 }
