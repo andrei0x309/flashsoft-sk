@@ -1,6 +1,7 @@
 // import { error } from '@sveltejs/kit';
 import { supabase } from '@/lib/deno/supaClientEdge'
 import type { RequestHandler } from  './$types';
+import { json } from '@sveltejs/kit';
  
 export const GET: RequestHandler = async ({ url }) => {
   let page =  Number(url.searchParams.get('page') ?? '1');
@@ -10,5 +11,5 @@ export const GET: RequestHandler = async ({ url }) => {
 
   const res = await supabase.from('fsk_prj').select('*').range((page-1)*4, page*4)
  
-  return new Response(res);
+  return json(res);
 }
