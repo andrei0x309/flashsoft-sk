@@ -4,7 +4,7 @@ import type { RequestHandler } from  './$types';
 import { json } from '@sveltejs/kit';
  
 export const GET: RequestHandler = async ({ url }) => {
-  let page =  Number(url.searchParams.get('page') ?? '1');
+  let page =  Number(url.searchParams.get('page') ?? 1);
   if (page < 1) {
     page = 1;
   }

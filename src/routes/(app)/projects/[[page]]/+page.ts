@@ -16,6 +16,7 @@ export const load: PageLoad = async ({ params }) => {
       data.error = await rReq.text()
     }
     return {
-      data
+      data,
+      page: params.page
     }
 }
