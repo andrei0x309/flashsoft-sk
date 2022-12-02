@@ -5,15 +5,9 @@
     export let data: any;
     let showSpinner = false
 
-    const getImgStoragePath = () =>{
-        if(typeof window !== "undefined"){
-                   let windowLoc = window.location.href.split('/projects');
-                   return windowLoc[0]+'/res/project/feature-img/';
-               }
-           };
-           const getImgFilePath =  (fileName: string) => {
-               return getImgStoragePath() + fileName;
-           }
+    const getImgFilePath =  (fileName: string) => {
+        return `/res/project/feature-img/${fileName}`
+    }
 
     </script>
     
