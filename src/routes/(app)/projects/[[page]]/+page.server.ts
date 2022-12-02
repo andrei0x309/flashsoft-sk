@@ -7,7 +7,16 @@ export const load: PageServerLoad = async ({ params }) => {
     page = 1;
   }
 
-  const res = await supabase.from('fsk_prj').select('*').range((page-1)*4, page*4)
+  const res = await supabase.from('fsk_prj').select(`
+  *,
+  cat:fsk_prj_cat(
+      cat_name
+  ),
+  techs:fsk_prj_tech_type!inner(
+      id,
+      name
+  )
+  `).range((page-1)*4, page*4)
     return {
       res
     };
