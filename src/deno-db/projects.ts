@@ -14,7 +14,8 @@ export const $prjCats = {
     6 : ['Embedded Platforms', ''],
     7 : ['Misc', ''],
     8 : ['Serverless', ''], 
-    9 : ['Web3 Dev/DAPP', '']
+    9 : ['Web3 Dev/DAPP', ''],
+    10: ['Desktop VM', '']
 };
 
 export const $prjTechs = {
@@ -43,7 +44,6 @@ export const $prjTechs = {
     'tailwindcss' : ['Tailwindcss', ''],
     'wordpress' : ['Wordpress', ''],
     'mix' : ['Laravel Mix', ''],
-    'purge-css' : ['Purge Css', ''],
     'angular' : ['Angular', ''],
     'capacitor' : ['Capacitor', ''],
     'windicss' : ['WindiCss', ''],
@@ -52,6 +52,14 @@ export const $prjTechs = {
     'ethers': ['Ethers', ''],
     'svelte-kit': ['Svelte kit'],
     'serverless' : ['Serverless', ''],
+    'desktop': ['on Desktop OS', ''],
+    'genral-purpose': ['GP Code', ''],
+    'windows': ['Windows Platform', ''],
+    'bot': ['Bots and automation', ''],
+    'os-service': ['Runs as OS service', ''],
+    'embed': ['Embedded Platforms', ''],
+    'react': ['React', ''],
+    'privacy': ['Privacy', ''],
 };
 
 
@@ -60,7 +68,7 @@ export const $prjs = {
     1:
     {
         title: "Fsoft-Center Web APP",
-        cat: "Web Techonologies Front-end/Back-end",
+        cat: 'Web Dev/APP',
         sort_desc: "Written using larvel it features an admin panel a courses database, a project database, a minmal blog system and custom front page it is an hybrid SPA-traditional web app using both REST Laravel Router and Vue router it also uses SSR.",
         feature_image: "1.svg",
         desc: "",
@@ -72,23 +80,23 @@ export const $prjs = {
         sort_desc: "An adroid app to save notes that can be shown easely to other people it uses screen awake, large fonts, display mods, you can also use it just for storing notes.",
         desc: "",
         feature_image: "2.svg",
-        tags: ["mobile", "android", "sqlite", "ts", "webview", "hybrid",]
+        tags: ["mobile", "android", "sqlite", "ts", "webview", "hybrid"]
     },
     3: {
         title: "Tab timer alert - Chrome Extension",
-        cat: "Web Techonologies Front-end/Back-end",
+        cat: 'Web Dev/APP',
         sort_desc: "A chrome extension to notify you wehn a certain ammont of time has passed sice you left a specific tab tahat you place on alert on.",
         desc: "description -> short_description - Lorem lorem lorem lorem",
         feature_image: "3.svg",
-        tags: ["js", "chrome-ext", "webworker", "weak-ref", "browser-api",]
+        tags: ["js", "browser-ext", "webworker", "weak-ref", "browser-api",]
     },
     4: {
         title: "Tailwindcss Wordpress Theme - a309",
-        cat: "Web Design - Front-end",
+        cat: 'Web Design',
         sort_desc: "An optimized flat extremely lightweight responsive theme that uses Tailwindcss.",
         desc: "",
         feature_image: "4.svg",
-        tags: ["php", "tailwindcss", "sass", "wordpress", "mix", 'purge-css']
+        tags: ["php", "tailwindcss", "sass", "wordpress", "mix"]
     },
     5: {
         title: "BlackEllis.Eu Blog APP",
@@ -96,31 +104,31 @@ export const $prjs = {
         sort_desc: "A mobile app that works with wordpress api display and interact with a wordpress blog.",
         desc: "",
         feature_image: "5.svg",
-        tags: ["mobile", "android", "angular", "ts", "webview", "capacitor",]
+        tags: ["mobile", "android", "angular", "ts", "webview", "capacitor"]
     },
     6: {
         title: "Microservices For Fcc Front",
-        cat: "Web Design - Front-end",
+        cat: 'Web Dev/APP',
         sort_desc: "React front-end app to all 5 FCC microservices project challenges.",
         desc: "",
         feature_image: "6.svg",
-        tags: ["laravel", "php", "bootstrap", "sass", "vue", "node", 'ssr']
+        tags: ["react", "js", "ts"]
     },
     7: {
         title: "Microservices For Fcc Back",
-        cat: "Web Techonologies Front-end/Back-end",
+        cat: 'Web Dev/APP',
         sort_desc: "Node.Js express microservices for all 5 FCC microservices project challenges.",
         desc: "",
         feature_image: "6.svg",
-        tags: ["laravel", "php", "bootstrap", "sass", "vue", "node", 'ssr']
+        tags: ["node", "js", "ts",]
     },
     8: {
         title: "Duolingo Puppeteer bot",
-        cat: "Web Techonologies Front-end/Back-end",
+        cat: 'Bots',
         sort_desc: "A Duolingo Puppeteer bot that farms XP by completing german exercises.",
         desc: "",
         feature_image: "7.svg",
-        tags: ["laravel", "php", "bootstrap", "sass", "vue", "node", 'ssr']
+        tags: ["bot", "js", "ts"]
     },
 
     9: {
@@ -129,15 +137,15 @@ export const $prjs = {
         sort_desc: "A small Arduino mini pro project it was featured on Instructables. Radio detection when you are to far from your wallet with alarm trigger.",
         desc: "",
         feature_image: "8.svg",
-        tags: ["laravel", "php", "bootstrap", "sass", "vue", "node", 'ssr']
+        tags: ["embed"]
     },
     10: {
         title: "WinClSvc-PP",
-        cat: "Native to OS",
+        cat: "Desktop Native",
         sort_desc: "This is a personal project written in C++ using QT framework involving a Windows service which runs some jobs according to some specified configured conditions.",
         desc: "",
         feature_image: "9.svg",
-        tags: ["laravel", "php", "bootstrap", "sass", "vue", "node", 'ssr']
+        tags: ["cpp", "qt", "desktop", 'os-service']
     },
     11: {
         title: "CWSoulutions",
@@ -145,15 +153,15 @@ export const $prjs = {
         sort_desc: "Many solutions to programming quizzes and problems in various proggramming languages I sloved on CW.",
         desc: "description -> short_description - Lorem lorem lorem lorem",
         feature_image: "9.svg",
-        tags: ["laravel", "php", "bootstrap", "sass", "vue", "node", 'ssr']
+        tags: ["genral-purpose"]
     },
     12: {
         title: "univ_PGC-project",
-        cat: "Web Techonologies Front-end/Back-end",
+        cat: "Desktop VM",
         sort_desc: "A in java project involving I made during my MSC for a course entitled: \"Multithreading Programming.\" ",
         desc: "",
         feature_image: "10.svg",
-        tags: ["laravel", "php", "bootstrap", "sass", "vue", "node", 'ssr']
+        tags: ["java", "desktop"]
     }
 };
 
