@@ -1,5 +1,5 @@
 // import { error } from '@sveltejs/kit';
-import { supabase } from '@/lib/deno/supaClient'
+import { supabase } from '@/lib/deno/supaClientEdge'
 import type { RequestHandler } from  './$types';
  
 export const GET: RequestHandler = async ({ url }) => {
