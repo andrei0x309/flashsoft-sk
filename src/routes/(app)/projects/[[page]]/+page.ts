@@ -1,15 +1,13 @@
 import type { PageLoad } from './$types';
-import { supabase } from '@/lib/deno/supaClientEdge'
+import { API_BASE } from "@/lib/config"
  
 export const load: PageLoad = async ({ params }) => {
-  let page = Number(params?.page ?? 0)
-  if (page < 1) {
-    page = 1;
-  }
-
-  const res = await supabase.from('fsk_prj').select('*').range((page-1)*4, page*4)
-    return {
-      res
-    };
-
+    let req
+    if(params.page) {
+      req = fetch(API_BASE+'/api/projects/get?page='+params.page)
+    } else {
+      req = fetch(API_BASE+'/api/projects/get')
+    }
+    const data = await (await req).json()
+    return data
 }
