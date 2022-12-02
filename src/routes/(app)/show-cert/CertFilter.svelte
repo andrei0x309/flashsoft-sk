@@ -7,25 +7,37 @@ import CollapsibleSection from '@/components/Collapsible.svelte'
 
 
 <div class="container-fluid">    
-            <button class="row filterLink " @click="toggleCollapse()"
-                 :class="showCollapse ? 'collapsed' : null"
-                 aria-controls="collapse5"
-                 :aria-expanded="showCollapse ? 'true' : 'false'"
+
+
+  <!-- @click="toggleCollapse()"
+  :class="showCollapse ? 'collapsed' : null"
+  aria-controls="collapse5"
+  :aria-expanded="showCollapse ? 'true' : 'false'" -->
+
+            <button class="row filterLink "
             >
             <span class="icon-caret-down"> Filter by tag
                       </span>
             </button>
-      
-          <CollapsibleSection class="row mt-2" v-model="showCollapse" id="collapse5">
+            <!-- class="row mt-2"  id="collapse5" -->
+          <CollapsibleSection headerText={true} >
             <div class="filtercard">
                 <div class="spinner-small"></div>
-                <formv-if="this.tags.length > 0 && !showTagLoading" method='get' class='console.logainer-fluid' > 
+                <!-- v-if="this.tags.length > 0 && !showTagLoading" -->
+
+                <form method='get' class='console.logainer-fluid' > 
                     <div class="row"> 
                <ul class="tagFilter">
-                <li v-for="tag in tags">
+
+                <!-- v-for="tag in tags" -->
+
+                <li>
                           <div class="rkmd-checkbox checkbox-rotate checkbox-ripple">
                   <label class="input-checkbox checkbox-lightBlue">
-                    <input type="checkbox"  v-bind:id="'checkbox-'+tag.tag_id" name="tag[]"  v-bind:value="tag.tag_id"  v-model="checkboxes[tag.tag_id]" >
+
+                    <!-- v-bind:id="'checkbox-'+tag.tag_id" name="tag[]"  v-bind:value="tag.tag_id"  v-model="checkboxes[tag.tag_id]" -->
+
+                    <input type="checkbox" >
                     <span class="checkbox"></span>
                   </label>
                   <!-- <label v-bind:for="'checkbox-'+tag.tag_id" class="label"> {{ tag.name }} ({{ tag.tag_count }})</label> -->
@@ -34,10 +46,13 @@ import CollapsibleSection from '@/components/Collapsible.svelte'
                    </li>
            </ul>
                     </div><div class="row"> 
-                    <button class="filterLink" v-if="!gotAllTags" @click="showAllTags()" > Show all tags …</button>
-                    <button class="filterLink" v-if="gotAllTags" @click="showPopularOnly()" > Show only popular tags …</button>
+                      <!-- v-if="!gotAllTags" @click="showAllTags()"  -->
+                    <button class="filterLink" > Show all tags …</button>
+                    <!-- v-if="gotAllTags" @click="showPopularOnly()" -->
+                    <button class="filterLink" > Show only popular tags …</button>
                     &nbsp;&nbsp;&nbsp;
-                     <input style="border-radius: .125rem; font-size: 0.9em;"  v-on:click="submitForm()" type="submit" value="Filter" class="button btn-search-box">
+                    <!-- v-on:click="submitForm()" -->
+                     <input style="border-radius: .125rem; font-size: 0.9em;" type="submit" value="Filter" class="button btn-search-box">
                     </div>
                 </form>     
             </div>

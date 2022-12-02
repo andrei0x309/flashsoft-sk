@@ -15,7 +15,10 @@ const config = {
 		adapter: adapter({
 			edge:true,
 			split: false
-		})
+		}),
+		alias: {
+				'@': './src'
+		}
 	}
 };
 

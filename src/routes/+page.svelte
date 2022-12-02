@@ -8,15 +8,28 @@
 </script>
 
 <svelte:head>
-<!-- CSRF Token -->
 <title>{ pageTitle }</title>
 <meta name="description" content="{pageDescription}">
-<!-- OpenGraph  -->
 <meta property="og:title" content="{pageTitle}" />
 <meta property="og:description" content="{pageDescription}">
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://flashsoft.eu" />
 <meta property="og:image" content="https://flashsoft.eu/res/flashsoftLogo.png" />
+
+<!-- Schema  -->
+<script type="application/ld+json">
+	{
+	"@context": "http://schema.org",
+	"@type": "Organization",
+	"name": "FlashSoft",
+	"url": "https://flashsoft.eu",
+	"logo": "https://flashsoft.eu/res/android-chrome-256x256.png",
+	"sameAs": [
+		"https://twitter.com/andrei0x309"
+	]
+	}
+</script>
+
 </svelte:head>
 
 

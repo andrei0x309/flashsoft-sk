@@ -1,0 +1,1400 @@
+
+
+body {
+background: #0F2027;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
+// Cat Icons
+
+
+/* Generated using nucleoapp.com */
+/* --------------------------------
+
+Icon colors
+
+-------------------------------- */
+:root {
+  --icon-color-primary: #152bd5;
+  --icon-color-secondary: inherit;
+
+  --icon-size-xs: 0.5em;
+  --icon-size-sm: 0.8em;
+  --icon-size-lg: 1.6em;
+  --icon-size-xl: 2em;
+}
+
+.cat-icon {
+  display: inline-block;
+  /* icon primary color */
+  color: var(--icon-color-primary);
+  height: 1em;
+  width: 1em;
+}
+
+.cat-icon use {
+  /* icon secondary color - fill */
+  fill: var(--icon-color-secondary);
+}
+
+.cat-icon.cat-icon--outline use {
+  /* icon secondary color - stroke */
+  stroke: var(--icon-color-secondary);
+}
+
+/* --------------------------------
+
+Change icon size
+
+-------------------------------- */
+
+.cat-icon--xs {
+  height: var(--icon-size-xs);
+  width: var(--icon-size-xs);
+}
+
+.cat-icon--sm {
+  height: var(--icon-size-sm);
+  width: var(--icon-size-sm);
+}
+
+.cat-icon--lg {
+  height: var(--icon-size-lg);
+  width: var(--icon-size-lg);
+}
+
+.cat-icon--xl {
+  height: var(--icon-size-xl);
+  width: var(--icon-size-xl);
+}
+
+/* -------------------------------- 
+
+Align icon and text 
+
+-------------------------------- */
+
+.cat-icon-text-aligner {
+  /* add this class to parent element that contains icon + text */
+  display: flex;
+  align-items: center;
+}
+
+.cat-icon-text-aligner .cat-icon {
+  color: inherit;
+  margin-right: 0.4em;
+  flex-shrink: 0;
+}
+
+.cat-icon-text-aligner .cat-icon.cat-icon--align-right {
+  margin-right: 0;
+  margin-left: 0.4em;
+}
+
+.cat-icon-text-aligner .cat-icon use {
+  color: inherit;
+  fill: currentColor;
+}
+
+.cat-icon-text-aligner .cat-icon.cat-icon--outline use {
+  stroke: currentColor;
+}
+
+/* -------------------------------- 
+
+Icon reset values - used to enable color customizations
+
+-------------------------------- */
+
+.cat-icon {
+  fill: currentColor;
+  stroke: none;
+}
+
+.cat-icon.cat-icon--outline {
+  stroke: currentColor;
+}
+
+.cat-icon use {
+  stroke: none;
+}
+
+/* -------------------------------- 
+
+Stroke effects - Nucleo outline icons
+
+- 16px icons -> up to 1px stroke (16px outline icons do not support stroke changes)
+- 24px, 32px icons -> up to 2px stroke
+- 48px, 64px icons -> up to 4px stroke
+
+-------------------------------- */
+
+.cat-icon--outline.cat-icon--stroke-1 {
+  stroke-width: 1px;
+}
+
+.cat-icon--outline.cat-icon--stroke-2 {
+  stroke-width: 2px;
+}
+
+.cat-icon--outline.cat-icon--stroke-3 {
+  stroke-width: 3px;
+}
+
+.cat-icon--outline.cat-icon--stroke-4 {
+  stroke-width: 4px;
+}
+
+.cat-icon--outline.cat-icon--stroke-1 use,
+.cat-icon--outline.cat-icon--stroke-3 use {
+  -webkit-transform: translateX(0.5px) translateY(0.5px);
+  -moz-transform: translateX(0.5px) translateY(0.5px);
+  -ms-transform: translateX(0.5px) translateY(0.5px);
+  -o-transform: translateX(0.5px) translateY(0.5px);
+  transform: translateX(0.5px) translateY(0.5px);
+}
+
+
+
+// Cert card body
+
+.certbottommagin {
+    
+img { 
+  /* Same as first example */
+   display: block;
+   min-height: 21vh;
+
+   
+   &:before {
+  width: 100%; /* Make sure we fill in the whole image area */
+  min-height: 21vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  /* We want to center copy from alt tag horizontally & vertically */
+  align-items: center;
+  justify-content: center;
+
+ 
+background: rgb(43,128,153);
+background: radial-gradient(circle, rgba(43,128,153,1) 33%, rgba(18,83,97,1) 68%); 
+
+  color: #FFF;
+  font-size: 1rem;
+  font-weight: bold;
+ 
+
+  /* Cool trick: we're using CSS attr() function to retrieve alt property copy */
+  content: " IMG-Broken : " attr(alt);
+}
+   
+}
+
+ }
+
+.certbottommagin .card-body{
+    padding: 1.1rem 1.1rem 0 1.1rem;
+    display: flex;
+    flex-direction: column;
+ 
+}
+// Cert card tittle
+
+.cert-card-title {
+   text-align: center;
+   font-size:1.4rem;
+   margin:0 0 1rem 0;
+}
+// Cert Pagination
+
+.page-link {
+        color: #ffffff;
+    background-color: #ffffff24;
+    border: 1px solid #101010d4;
+}
+
+.page-item.disabled .page-link {
+    color: #f1f1f1;
+    background-color: #383d41;
+    border-color: #000000;
+}
+
+.page-item.active .page-link {
+    color: #fff;
+    background-color: #212529;
+    border-color: #ffc107;
+}
+
+// Cert Spiner
+
+@keyframes rotate {0%{transform:rotate(360deg)}}
+@keyframes wink {50%{opacity:0}}
+.spinner{
+  width:7em;
+  margin:3em auto;
+	position:relative;
+  &:before{
+		content:"";
+		display:block;
+    width:7em;
+    height:1em;
+    margin:3em auto;
+    padding:3em 0;
+    border-radius:50%;
+    border:0.7em solid #2f416f;
+    border-top:0.7em solid transparent;
+    border-bottom:0.7em solid transparent;
+    animation:rotate 1s ease infinite;
+  }
+  &:after{
+    content:"Loading";
+    position:absolute;
+		top:0;
+    color:#2f416f;
+    font:.9em sans-serif;
+    width:8em;
+    line-height:8em;
+    text-align:center;
+    animation:wink 1.4s ease infinite;
+  }
+}
+
+
+
+// Icons css
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('/fonts/certificate/icomoon.eot?e47dwj');
+  src:  url('/fonts/certificate/icomoon.eot?e47dwj#iefix') format('embedded-opentype'),
+    url('/fonts/certificate/icomoon.ttf?e47dwj') format('truetype'),
+    url('/fonts/certificate/icomoon.woff?e47dwj') format('woff'),
+    url('/fonts/certificate/icomoon.svg?e47dwj#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-caret-down:before {
+  content: "\e907";
+}
+.icon-expand:before {
+  content: "\e900";
+}
+.icon-file-pdf-o:before {
+  content: "\e901";
+}
+.icon-server:before {
+  content: "\e902";
+}
+.icon-list:before {
+  content: "\e903";
+}
+.icon-arrow-left:before {
+  content: "\e904";
+}
+.icon-certificate:before {
+  content: "\e905";
+}
+.icon-gitlab:before {
+  content: "\e906";
+}
+
+
+
+
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.certbottommagin{
+ margin-bottom: 1rem;  
+}
+
+
+/* Cert Error Box */
+.cert-error-box{
+background-color: #FAFAFA;
+    padding: 2em;
+    color: chocolate;
+    font-size: 1.5em;
+}
+
+/*search box results */
+
+
+.search-results{
+    
+    color: #CDDC39;
+    margin-top: 1em;
+    border: 1px solid #cddc3985;
+    padding: 0.6em;
+    
+    .highlight{
+        color: #ffeb3b;
+    }
+}
+
+/* search box */
+
+/* helpers/align.css */
+
+.align {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+/* helpers/grid.css */
+
+.grid {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 320px;
+  max-width: 20rem;
+  width: 90%;
+}
+
+ 
+::-webkit-input-placeholder {
+  color: #42454e;
+}
+
+::-ms-input-placeholder {
+  color: #42454e;
+}
+
+::placeholder {
+  color: #42454e;
+}
+
+input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  font: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+          appearance: textfield;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+          appearance: none;
+}
+
+input[type="submit"] {
+  cursor: pointer;
+}
+
+.form__field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.form__input {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+/* modules/search.css */
+
+.search {
+  background-color: #42454e;
+  border-radius: .125rem;
+  font-size: 12px;
+  font-size: .75rem;
+  padding: 8px;
+  padding: .5rem;
+}
+
+.search input[type="search"],
+.search input[type="submit"] {
+  border-radius: .125rem;
+}
+
+.search input[type="search"] {
+  background-color: #fff;
+  color: #42454e;
+  padding: 6px 8px;
+  padding: .375rem .5rem;
+}
+
+.search input[type="submit"], .btn-search-box {
+  background-color: #1bba9a;
+  color: #fff;
+  font-weight: bold;
+  margin-left: 8px;
+  margin-left: .5rem;
+  padding: 6px 10px;
+  padding: .375rem .625rem;
+}
+
+.search input[type="submit"]:focus,
+.search input[type="submit"]:hover, .btn-search-box:hover, .btn-search-box:focus {
+  background-color: #189e83;
+}
+
+
+
+/* mobile paginator smaller to fit */
+
+ul.mobile-paginator li a, ul.mobile-paginator li span{
+  padding: 0.4rem 0.55rem;
+}
+
+/*checkbox */
+
+
+.rkmd-checkbox {
+  color: #51ebed;
+  font-size: 0.8rem;
+  font-weight: bold;
+  //font-family: 'Roboto', sans-serif;
+  letter-spacing: .5px;
+}
+.rkmd-checkbox .input-checkbox {
+    position: relative;
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    text-align: center;
+    margin-top: 1.1rem;
+    margin-left: 0.5rem;
+    float: left;
+}
+.rkmd-checkbox .input-checkbox input[type="checkbox"] {
+  visibility: hidden;
+  position: absolute;
+  left: 7px;
+  bottom: 7px;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  cursor: pointer;
+  opacity: 0;
+}
+.rkmd-checkbox .input-checkbox input[type="checkbox"] + .checkbox:before {
+  position: absolute;
+  left: 4px;
+  bottom: 8px;
+  width: 18px;
+  height: 18px;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  vertical-align: -6px;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  -webkit-font-feature-settings: 'liga';
+          font-feature-settings: 'liga';
+  transition: all .2s ease;
+  z-index: 1;
+}
+.rkmd-checkbox .input-checkbox input[type="checkbox"] + .checkbox:before {
+  content: "\e835";
+  color: #717171;
+}
+.rkmd-checkbox .input-checkbox input[type="checkbox"]:checked + .checkbox:before {
+  content: "\e834";
+}
+.rkmd-checkbox .input-checkbox input[type="checkbox"]:active:not(:disabled) + .checkbox:before {
+  -webkit-transform: scale3d(0.88, 0.88, 1);
+          transform: scale3d(0.88, 0.88, 1);
+}
+.rkmd-checkbox .input-checkbox input[type="checkbox"]:disabled + .checkbox:before {
+  color: rgba(0, 0, 0, 0.157) !important;
+}
+.rkmd-checkbox.checkbox-light label, .rkmd-checkbox.checkbox-light .label {
+  color: #FFF;
+}
+.rkmd-checkbox.checkbox-light input[type="checkbox"] + .checkbox:before {
+  color: #FFF;
+}
+.rkmd-checkbox.checkbox-light input[type="checkbox"]:disabled + .checkbox:before {
+  color: #5d5d5d !important;
+}
+.rkmd-checkbox.checkbox-light.checkbox-rotate input[type="checkbox"] + .checkbox:before {
+  border-color: #FFF;
+}
+.rkmd-checkbox.checkbox-light.checkbox-rotate input[type="checkbox"]:disabled + .checkbox:before {
+  border-color: #5d5d5d !important;
+}
+.rkmd-checkbox label, .rkmd-checkbox .label {
+  cursor: pointer;
+}
+
+/* ----------------------------------------------------------------------
+  Rotate Checkbox - by Ravikumar Chauhan
+------------------------------------------------------------------------- */
+.rkmd-checkbox.checkbox-rotate .input-checkbox input[type="checkbox"] + .checkbox {
+  cursor: pointer;
+}
+.rkmd-checkbox.checkbox-rotate .input-checkbox input[type="checkbox"] + .checkbox:before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  bottom: 7px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #717171;
+  border-radius: 2px;
+  transition: all .2s ease;
+  z-index: 1;
+}
+.rkmd-checkbox.checkbox-rotate .input-checkbox input[type="checkbox"]:checked + .checkbox:before {
+  left: 11px;
+  width: 12px;
+  height: 20px;
+  border-width: 2px;
+  border-style: solid;
+  border-top: transparent;
+  border-left: transparent;
+  -webkit-transform: rotate(40deg);
+          transform: rotate(40deg);
+  border-radius: 1px;
+}
+.rkmd-checkbox.checkbox-rotate .input-checkbox input[type="checkbox"]:disabled + .checkbox:before {
+  border-color: rgba(0, 0, 0, 0.157) !important;
+}
+ 
+/* ----------------------------------------------------------------------
+  Rotate Checkbox Color - by Ravikumar Chauhan
+------------------------------------------------------------------------- */
+.rkmd-checkbox.checkbox-rotate .checkbox-teal input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #009688;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-lightBlue input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #03a9f4;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-green input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #4caf50;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-amber input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #ffc107;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-orange input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #ff9800;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-cyan input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #00bcd4;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-pink input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #e91e63;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-deepPurple input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #673ab7;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-indigo input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #3f51b5;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-red input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #f44336;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-yellow input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #ffeb3b;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-lime input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #cddc39;
+}
+.rkmd-checkbox.checkbox-rotate .checkbox-brown input[type="checkbox"]:checked + .checkbox:before {
+  border-color: #795548;
+}
+
+/* ----------------------------------------------------------------------
+  Checkbox Ripple Effect - by Ravikumar Chauhan
+------------------------------------------------------------------------- */
+.rkmd-checkbox.checkbox-ripple .ripple {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+.rkmd-checkbox.checkbox-ripple .ripple.animated {
+  display: block;
+  -webkit-animation-name: checkbox-ripple;
+          animation-name: checkbox-ripple;
+  -webkit-animation-duration: 400ms;
+          animation-duration: 400ms;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+}
+@-webkit-keyframes checkbox-ripple {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(1.6);
+            transform: scale(1.6);
+  }
+}
+@keyframes checkbox-ripple {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(1.6);
+            transform: scale(1.6);
+  }
+}
+/* ----------------------------------------------------------------------
+  Checkbox Ripple Effect Color - by Ravikumar Chauhan
+------------------------------------------------------------------------- */
+.rkmd-checkbox .checkbox-teal .ripple {
+  background-color: #009688 !important;
+}
+.rkmd-checkbox .checkbox-lightBlue .ripple {
+  background-color: #03a9f4 !important;
+}
+.rkmd-checkbox .checkbox-green .ripple {
+  background-color: #4caf50 !important;
+}
+.rkmd-checkbox .checkbox-amber .ripple {
+  background-color: #ffc107 !important;
+}
+.rkmd-checkbox .checkbox-orange .ripple {
+  background-color: #ff9800 !important;
+}
+.rkmd-checkbox .checkbox-cyan .ripple {
+  background-color: #00bcd4 !important;
+}
+.rkmd-checkbox .checkbox-pink .ripple {
+  background-color: #e91e63 !important;
+}
+.rkmd-checkbox .checkbox-deepPurple .ripple {
+  background-color: #673ab7 !important;
+}
+.rkmd-checkbox .checkbox-indigo .ripple {
+  background-color: #3f51b5 !important;
+}
+.rkmd-checkbox .checkbox-red .ripple {
+  background-color: #f44336 !important;
+}
+.rkmd-checkbox .checkbox-yellow .ripple {
+  background-color: #ffeb3b !important;
+}
+.rkmd-checkbox .checkbox-lime .ripple {
+  background-color: #cddc39 !important;
+}
+.rkmd-checkbox .checkbox-brown .ripple {
+  background-color: #795548 !important;
+}
+
+
+/* Tags */
+
+.tags, .tagFilter{
+	margin:0;
+	padding:0;
+	list-style:none;
+        display:inline-block;
+}
+
+.tags li, .tagFilter .label{
+	float:left;
+	height:2em;
+	line-height:2em;
+	position:relative;
+	font-size:0.9em;
+        margin-top: 0.5em;
+}
+
+.tagFilter div{
+    float:left;
+    position:relative;
+}
+
+.tagFilter li{
+    float:left;
+    position:relative;
+}
+
+.tags li, .tagFilter .label{
+  font-family: "Open Sans", sans-serif;
+	margin-left:2em;
+	padding:0 1.2em 0 1.2em;
+	background:#3D9970;
+	color:#fff;
+	text-decoration:none;
+	-moz-border-radius-bottomright:0.2em;
+	-webkit-border-bottom-right-radius:0.6em;
+	border-bottom-right-radius:0.6em;
+	-moz-border-radius-topright:0.6em;
+	-webkit-border-top-right-radius:0.6em;	
+	border-top-right-radius:0.6em;	
+}
+
+.tags li:before, .tagFilter .label:before{
+	content:"";
+	float:left;
+	position:absolute;
+	top:-.02em;
+	left:-1em;
+	width:0;
+	height:0;
+	border-color:transparent #368864 transparent transparent;
+	border-style:solid;
+	border-width:1.03em 1.03em 1.03em 0;		
+}
+
+.tags li:after, .tagFilter .label:after{
+	content:"";
+	position:absolute;
+	top:0.8em;
+	left:0;
+	float:left;
+	width:0.4em;
+	height:0.4em;
+	-moz-border-radius:0.2em;
+	-webkit-border-radius:0.2em;
+	border-radius:0.2em;
+	background:#fff;
+	-moz-box-shadow:-1px -1px 2px #368864;
+	-webkit-box-shadow:-1px -1px 2px #368864;
+	box-shadow:-1px -1px 2px #368864;
+}
+
+.tags li:hover, .tagFilter .label:hover {
+	background:#555;
+}
+
+.tags li:hover:before {
+	border-color:transparent #555 transparent transparent;
+}
+
+.tagFilter .label:hover:before {
+	border-color:transparent #ffc107 transparent transparent;
+}
+
+
+/*projects APP -----> */ 
+
+main.project-main {
+    padding: 1rem 1rem 1rem 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(0,0,0, 0.2);
+    border-radius: 1.5rem;
+    min-height: 40em;
+    
+    .card .card-body p {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+    
+    
+}
+
+.project-spinner{
+  width: 7em;
+    margin: 3em auto;
+    position: absolute;
+    z-index: 2;
+    left: 45%;
+    top: 10%;
+        
+        
+
+&:before {
+    content: "";
+    display: block;
+    width: 12em;
+    height: 1em;
+    margin: 5em auto;
+    padding: 5em 0;
+    border-radius: 50%;
+    border: 0.7em solid #17a2b8;
+    border-top: 0.7em solid transparent;
+    border-bottom: 0.7em solid transparent;
+    -webkit-animation: rotate 1s ease infinite;
+    animation: rotate 1s ease infinite;
+}
+
+&:after {
+    content: "Loading";
+    position: absolute;
+    top: 45%;
+    left: 35%;
+    color: #ffffff;
+    font: 2em sans-serif;
+    -webkit-animation: wink 1.4s ease infinite;
+    animation: wink 1.4s ease infinite;
+}
+
+}
+
+.project-main-loading{
+    opacity: 0.2;
+    transition:all 0.3s ease-in-out;
+}
+
+.card-body-project{
+    
+    div{
+        margin: 0.5rem;
+    }
+    
+} 
+figure.project-card{
+    
+   overflow: hidden;
+   float: left;
+   margin: 1rem 0 1rem 0;
+   
+   &:hover .project-img-feature{
+         		opacity: 1;
+		transform: translateY(-20%);
+ 
+           
+    }
+    
+    &:hover figcaption{
+        opacity: 1;
+		transform: translateY(-130%);
+    }
+    
+    figcaption {
+background: rgb(0,8,19);
+background: linear-gradient(90deg, rgba(0,8,19,1) 0%, rgba(1,46,87,0.9528186274509804) 50%);;
+    /*top:100%;*/
+    left:0.2em;
+    display: flex;
+    width: 98%;
+
+    margin-right: 2em;
+    box-shadow: #0F2027 -0.1em 0.1em 0.3em 0px;
+    height: 6em;
+    color: whitesmoke;
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    transition:all 0.3s ease-in-out;
+    
+    .info{
+        margin-left: 1em;
+    }
+    
+    }
+    
+.project-img-feature{
+    width: 98%;
+    margin: 0;
+    border-radius: 1%;
+    z-index: -0;
+    transition:all 0.3s ease-in-out;
+}
+
+    
+}
+
+
+
+h3.project-card-title {
+    font-size: 1.4em;
+    margin-top: 0.2rem;
+    margin-left: 1rem;
+          background: linear-gradient(to right, #0b59aa, #da1b60);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip:  text;
+
+}
+
+// Project tags
+
+
+$color_: #a1a1af; // text
+$border: #4787d2;
+$blocks: #201c29;
+$shadow: #070509;
+
+
+
+@mixin font-size($sizeValue: 1.6) {
+  font-size: $sizeValue + rem;
+
+}
+
+
+ 
+
+  a.tag {
+    text-decoration: none;
+    white-space: nowrap;
+    @include font-size(0.8);
+    color: $color_;
+    display: block;
+    padding: 0.3em 0.85em;
+    margin: 0.5em;
+    text-transform: uppercase;
+    border: 0.1em solid $border;
+    border-radius: 2em;
+ 
+    transition: transform 0.2s;
+    transition-timing-function: cubic-bezier(0.45, -0.85, 0.55, -0.45);
+
+    &:hover {
+      transform: scale(1.2);
+      background: linear-gradient(to right, #ff8a00, #da1b60);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+
+
+  .project-tags {
+    
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    
+    span {
+      margin-right: 0.5em;
+      padding: 1em;
+      cursor: default;
+      text-transform: uppercase;
+      border-right: 0.2em solid $border;
+      background: linear-gradient(to right, #0b59aa, #da1b60);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip:  text;
+    }
+
+    a:last-child {
+      margin-left: 0.5em;
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
+
+
+// btns for pagination
+
+.btn-pagination {
+    color: #fff; cursor: pointer;
+    font-weight: 400;
+    line-height: 1rem; 
+    max-width: 10rem;
+    position: relative;
+    text-decoration: none; 
+    text-transform: uppercase; 
+    height: 2rem;
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+}
+
+.btn-5 {
+  border: 0 solid;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+  outline: 0.2em solid;
+  outline-color: rgba(255, 255, 255, .5);
+  outline-offset: 0px;
+  text-shadow: none;
+  transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+} 
+
+.btn-5:hover {
+  border: 0.2em solid;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+  outline-color: rgba(255, 255, 255, 0);
+  outline-offset: 1em;
+  text-shadow: 0.1em 0.1em 0.2em #427388; 
+}
+
+
+/* < --- projects APP */
+
+
+/*header */
+
+.headtitle-warp{
+      
+    margin-top:2.5rem;
+    margin-left: 1.5rem;
+
+    
+    svg{
+       width: 3rem;
+       height: 3rem;
+    }
+    
+    
+}
+
+h1.headtitle{
+   
+ color: #fff;
+ text-shadow: 0 0 1rem rgba(255, 255, 255, 0.5);
+ font-size:1.8rem;
+ display:inline;
+ vertical-align: middle;
+}
+
+ 
+footer {
+    
+     p{
+    color: #fff;
+     }
+    
+}
+
+
+header.header, footer{
+	margin: 0.5rem 0.7rem 1rem 0.7rem;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+        border-radius: .3em;
+	box-shadow: 0 0 6em 0 rgba(26, 27, 29, 0.73), 0 0 1em 0 rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        background-color: rgb(27 45 72 / 43%);
+}
+
+header.header::before, footer::before {
+	content: '';
+	position: absolute;
+	left: 0; top: 0; right: 0; bottom: 0; 
+	margin: -3em; // min margin needed for blur gradient on edges
+	z-index: -1;
+	filter: blur(20px);
+}
+
+.filterLink{
+    color: #eee;
+    margin-left: .3rem;
+    height: 1.5rem;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 0.01rem solid #333;
+    margin-bottom: 0.2rem;
+    cursor: pointer;
+}
+
+.filterLink:hover{
+    color:#fff;
+    font-weight: bold;
+}
+
+.filterLink:active{
+    outline: none;
+}
+
+.filtercard{
+    background: rgba(255, 255, 255, .1);
+    border: 0.1em solid #00000066;
+    margin: 0.2em 0.2em 0.2em 0.2em;
+    width: 100%;
+    
+.card-body{
+    padding: 1.35rem;
+}
+    
+}
+
+.spinner-small {
+  border-color: rgba(255, 255, 255, 0.4);
+  border-style: solid;
+  animation: smalspin 1.5s infinite linear;
+  border-radius: 30%;
+  height: .8rem;
+  width: .8rem;
+}
+
+@keyframes smalspin {
+  0% {
+    transform: rotate(0deg);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  50%{
+      border-color: white;
+  }
+  100% {
+    transform: rotate(360deg);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+ 
+
+/* Header desktop menu */
+
+$radius: 0.5rem;
+$skew: 25deg;
+$main-color: tomato;
+
+ 
+.skew-menu{
+  text-align:center;
+  margin-top:2.5rem;
+  margin-bottom:1rem;
+  margin-right: 1.5rem;
+  margin-left: 4.5rem;
+}
+
+.skew-menu ul{
+  display:inline-block;
+  margin:0;
+  padding:0;
+  list-style:none;
+  transform:skew(-$skew);
+}
+
+.skew-menu ul li{
+  background:#fff;
+  float:left;
+  margin-bottom: 0.2rem;
+  border-right:0.5rem solid #eee;
+  box-shadow:0 0.5rem 0.5rem rgba(0,0,0,0.1);
+  text-transform:uppercase;
+  color:#555;
+  font-weight:bolder;
+  transition:all 0.3s linear;
+  font-size:0.75rem;
+  
+  &:first-child{
+    border-radius:$radius 0 0 $radius;
+  }
+  
+  &:last-child{
+    border-right:none;
+    border-radius:0 $radius $radius 0;
+  }
+  
+  &:hover{
+    background:#eee;
+    color:$main-color;
+  }
+  
+
+  
+  a{
+    display:block;
+    padding:1em 2em;
+    color:inherit;
+    text-decoration:none;
+    transform:skew($skew);
+  }
+}
+
+  nav.skew-menu ul li a.active{
+      font-size:0.9rem;
+  }
+ /* ZoomModal */
+ 
+ .modal-mask {
+  /*position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+*/
+  
+  position: fixed !important;
+  z-index: 2000 !important;
+  top: 0px !important;
+  right: 0px !important;
+  bottom: 0px !important;
+  left: 0px !important;
+  overflow-y: auto !important;
+  webkit-transform: translate3d(0,0,0) !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  display: -webkit-box !important;
+  display: -moz-box !important;
+  display: -ms-flexbox !important;
+  display: -webkit-flex !important;
+  display: block !important;
+  transition: opacity .3s ease;
+  
+}
+
+.modal-wrapper {
+  /* display: table-cell;
+  vertical-align: middle;
+  */
+  
+    display: -webkit-box !important;
+  display: -moz-box !important;
+  display: -ms-flexbox !important;
+  display: -webkit-flex !important;
+  display: block !important;
+  margin: auto !important;
+  max-width: 62em !important;
+  width: 100% !important;
+  
+}
+
+.modal-container {
+  /*width: 62em;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+  */
+  background-color: #ffffff !important;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2) !important;
+  -webkit-flex: 1 !important;
+  -ms-flex: 1 !important;
+  /*flex: 1 !important;
+  width: 100% !important;
+  */
+  margin-top:2em;
+  width: 62em;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+  
+}
+
+.modal-header h1 {
+  margin-top: 0;
+  color: #42b983;
+  font-size: 1.6rem;
+}
+
+.modal-body {
+  margin: 20px 0;
+}
+
+.modal-default-button {
+  float: right;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+/* Nice Button 11 */
+
+/*
+.raise {
+  --color: #1591a5d1;
+  --hover: #343a40;
+}
+*/
+
+.raise:hover,
+.raise:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em #343a40;
+  -webkit-transform: translateY(-0.25em);
+          transform: translateY(-0.25em);
+}
+
+.btn-11 {
+  color: #0a6a6f9e;
+  transition: 0.25s;
+}
+.btn-11:hover, .btn-11:focus {
+  border-color: #343a40;
+  color: #222;
+}
+
+.btn-11{
+  background: none;
+  border: 1px solid;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+}
+
+//// from BS
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+}
