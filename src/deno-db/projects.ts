@@ -65,7 +65,7 @@ export const $prjTechs = {
 
         // [ title, cat_id, short_description, description, feature_image, video_url, demo_url, open_source, source_url, status, creation_date, weight]
 export const $prjs = {
-    1:
+    12:
     {
         title: "Fsoft-Center Web APP",
         cat: 'Web Dev/APP',
@@ -74,7 +74,7 @@ export const $prjs = {
         desc: "",
         tags: ["laravel", "php", "bootstrap", "sass", "vue", "node", 'ssr']
     },
-    2: {
+    11: {
         title: "ShowNote - Android APP",
         cat: "Mobile",
         sort_desc: "An adroid app to save notes that can be shown easely to other people it uses screen awake, large fonts, display mods, you can also use it just for storing notes.",
@@ -82,7 +82,7 @@ export const $prjs = {
         feature_image: "2.svg",
         tags: ["mobile", "android", "sqlite", "ts", "webview", "hybrid"]
     },
-    3: {
+    10: {
         title: "Tab timer alert - Chrome Extension",
         cat: 'Web Dev/APP',
         sort_desc: "A chrome extension to notify you wehn a certain ammont of time has passed sice you left a specific tab tahat you place on alert on.",
@@ -90,7 +90,7 @@ export const $prjs = {
         feature_image: "3.svg",
         tags: ["js", "browser-ext", "webworker", "weak-ref", "browser-api",]
     },
-    4: {
+    9: {
         title: "Tailwindcss Wordpress Theme - a309",
         cat: 'Web Design',
         sort_desc: "An optimized flat extremely lightweight responsive theme that uses Tailwindcss.",
@@ -98,7 +98,7 @@ export const $prjs = {
         feature_image: "4.svg",
         tags: ["php", "tailwindcss", "sass", "wordpress", "mix"]
     },
-    5: {
+    8: {
         title: "BlackEllis.Eu Blog APP",
         cat: "Mobile",
         sort_desc: "A mobile app that works with wordpress api display and interact with a wordpress blog.",
@@ -106,7 +106,7 @@ export const $prjs = {
         feature_image: "5.svg",
         tags: ["mobile", "android", "angular", "ts", "webview", "capacitor"]
     },
-    6: {
+    7: {
         title: "Microservices For Fcc Front",
         cat: 'Web Dev/APP',
         sort_desc: "React front-end app to all 5 FCC microservices project challenges.",
@@ -114,7 +114,7 @@ export const $prjs = {
         feature_image: "6.svg",
         tags: ["react", "js", "ts"]
     },
-    7: {
+    6: {
         title: "Microservices For Fcc Back",
         cat: 'Web Dev/APP',
         sort_desc: "Node.Js express microservices for all 5 FCC microservices project challenges.",
@@ -122,7 +122,7 @@ export const $prjs = {
         feature_image: "6.svg",
         tags: ["node", "js", "ts",]
     },
-    8: {
+    5: {
         title: "Duolingo Puppeteer bot",
         cat: 'Bots',
         sort_desc: "A Duolingo Puppeteer bot that farms XP by completing german exercises.",
@@ -131,7 +131,7 @@ export const $prjs = {
         tags: ["bot", "js", "ts"]
     },
 
-    9: {
+    4: {
         title: "anti-wallet-lost",
         cat: "Embedded Platforms",
         sort_desc: "A small Arduino mini pro project it was featured on Instructables. Radio detection when you are to far from your wallet with alarm trigger.",
@@ -139,7 +139,7 @@ export const $prjs = {
         feature_image: "8.svg",
         tags: ["embed"]
     },
-    10: {
+    3: {
         title: "WinClSvc-PP",
         cat: "Desktop Native",
         sort_desc: "This is a personal project written in C++ using QT framework involving a Windows service which runs some jobs according to some specified configured conditions.",
@@ -147,7 +147,7 @@ export const $prjs = {
         feature_image: "9.svg",
         tags: ["cpp", "qt", "desktop", 'os-service']
     },
-    11: {
+    2: {
         title: "CWSoulutions",
         cat: "Misc",
         sort_desc: "Many solutions to programming quizzes and problems in various proggramming languages I sloved on CW.",
@@ -155,7 +155,7 @@ export const $prjs = {
         feature_image: "9.svg",
         tags: ["genral-purpose"]
     },
-    12: {
+    1: {
         title: "univ_PGC-project",
         cat: "Desktop VM",
         sort_desc: "A in java project involving I made during my MSC for a course entitled: \"Multithreading Programming.\" ",
