@@ -1,7 +1,6 @@
 <script lang="ts">
-
-    import CollapsibleSection from '@/components/Collapsible.svelte'
-    
+let expanded: boolean = false;
+import { slide } from 'svelte/transition';
 
 
 //     export default {
@@ -80,29 +79,19 @@
 //   };
 
 </script>
-
     <div class="container-fluid">
-        <!-- @click="toggleCollapse()" -->
-        <!-- :class="showCollapse ? 'collapsed' : null" -->
-        <!-- :aria-expanded="showCollapse ? 'true' : 'false'" -->
       <button
-        class="row filterLink"
-
-
-        aria-controls="collapse4"
+        class="row filterLink focus:ring-0 focus:ring-offset-0"
+        on:click={() => expanded = !expanded}
+        aria-expanded={expanded}
+        aria-controls="collapse-search"
 
       >
-        <span class="icon-caret-down"> Search
+        <span class="icon-caret-down focus:ring-0 focus:ring-offset-0">&nbsp;Search
                   </span>
       </button>
-  
-      <!-- <b-collapse class="row mt-2" v-model="showCollapse" id="collapse4"> -->
-        <CollapsibleSection headerText={true}>
-        <div class="filtercard">
-         <!-- <div v-if="showTagLoading" class="spinner-small"></div> !-->
-            
-         <!-- v-on:submit.prevent -->
-
+        {#if expanded}
+        <div class="filtercard mt-2" id="collapse-serach" transition:slide>
           <div class="row">
             <div class="grid">
               <form
@@ -129,6 +118,5 @@
             </div>
           </div>
         </div>
-      </CollapsibleSection>
+        {/if}
     </div>
- 

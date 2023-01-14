@@ -27,7 +27,7 @@ import { supabase } from "../../lib/deno/supaClientFS.ts";
 const resp = await supabase.from('fsk_cert').select(`
 cert_name,
 cert_file_name,
-cert_feature_image
+cert_feature_image,
 cat:fsk_cert_cat(
     cat_name,
     cat_icon_name

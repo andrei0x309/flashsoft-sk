@@ -1,3 +1,83 @@
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+
+  .page-link{
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+  }
+  
+  .page-item.active .page-link {
+    z-index: 3;
+  }
+}
+
+
+
+
+.filterLink {
+  color: #eee;
+  margin-left: .3rem;
+  height: 1.5rem;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-bottom: 0.01rem solid #333;
+  margin-bottom: 0.2rem;
+  cursor: pointer;
+}
+
+.filterLink:hover {
+  color: #fff;
+  font-weight: bold;
+}
+
+.filterLink:active {
+  outline: none;
+}
+
+.filtercard {
+  background: rgba(255, 255, 255, .1);
+  border: 0.1em solid #00000066;
+  margin: 0.2em 0.2em 0.2em 0.2em;
+  width: 100%;
+
+  .card-body {
+    padding: 1.35rem;
+  }
+
+}
+
+.spinner-small {
+    animation: smalspin 1.5s infinite linear;
+    border-radius: 30%;
+    height: 0.8rem;
+    width: 0.8rem;
+    border: 2px solid;
+    margin: 0.8rem;
+}
+
+@keyframes smalspin {
+  0% {
+    transform: rotate(0deg);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  50% {
+    border-color: white;
+  }
+
+  100% {
+    transform: rotate(360deg);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
 
 
 .cat-icon {
@@ -588,7 +668,7 @@
   }
   
   /* ----------------------------------------------------------------------
-    Rotate Checkbox - by Ravikumar Chauhan
+    Rotate Checkbox
   ------------------------------------------------------------------------- */
   .rkmd-checkbox.checkbox-rotate .input-checkbox input[type="checkbox"]+.checkbox {
     cursor: pointer;

@@ -1,13 +1,14 @@
 
 <script lang="ts">
     export let segment: string
+    let logoUrl = segment === 'cert' ? '/show-cert' : '/projects'
 </script>
 
 
 <header class="col header">
     <div class="row">
      <div class="col" style="flex:0.5;">
-     <a style="text-decoration:none;" href="/s">
+     <a style="text-decoration:none;" href="{logoUrl}">
          <div class="headtitle-warp">
             {#if segment === 'cert'}
              <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 512 512"><title>certificate</title><g fill-rule="evenodd" stroke-linejoin="round"><circle cx="256" cy="256" r="256" fill="#272727" fill-opacity=".7"></circle><path d="M512 256L398.222 142.222 206.245 310.253l-92.467 59.525L256 512c141.384 0 256-114.616 256-256z" fill="#191919" fill-opacity=".8" fill-rule="nonzero"></path><path fill="#fff" d="M113.344 142.036h285.01v227.959h-285.01z"></path><path d="M398.354 377.985h-285.01a7.99 7.99 0 0 1-7.991-7.99V142.036a7.99 7.99 0 0 1 7.991-7.99h285.01a7.99 7.99 0 0 1 7.99 7.99v227.959a7.99 7.99 0 0 1-7.99 7.99zm0-235.949h-285.01v227.959h285.01V142.036z" fill-opacity=".7"></path><path fill="#e9eff4" d="M256.293 143.269h141.929v226.384H256.293z"></path><path d="M361.579 355.902H150.421c-10.659 0-19.299-8.64-19.299-19.299V175.397c0-10.659 8.64-19.299 19.299-19.299h211.156c10.659 0 19.299 8.64 19.299 19.299v161.206c.002 10.659-8.638 19.299-19.297 19.299z" fill="#f4e3c3" fill-rule="nonzero"></path><path d="M361.579 156.098H256.288v199.804h105.291c10.659 0 19.299-8.64 19.299-19.299V175.397c0-10.659-8.64-19.299-19.299-19.299z" fill="#fed8b2" fill-rule="nonzero"></path><path d="M349.091 396.283l-20.687-20.113-20.687 20.113v-60.337h41.374v60.337z" fill="#0041b9" fill-opacity=".65" fill-rule="nonzero"></path><path d="M349.091 335.946h-20.687v40.226l20.687 20.111v-60.337z" fill="#2318c8" fill-opacity=".67" fill-rule="nonzero"></path><circle cx="328.404" cy="323.439" r="28.444" fill="#ffaf50"></circle><path d="M356.848 323.448c0-15.71-12.734-28.444-28.444-28.444v56.889c15.71-.001 28.444-12.735 28.444-28.445z" fill="#cf8a01" fill-rule="nonzero"></path><path fill="#324a5e" d="M142.222 210.989h227.556v4.198H142.222z"></path><path fill="#324a5e" d="M142.222 234.072h227.556v4.198H142.222z"></path><path fill="#324a5e" d="M142.222 257.155h227.556v4.198H142.222z"></path><path fill="#324a5e" d="M142.222 280.238h85.333v4.198h-85.333z"></path><path fill="#324a5e" d="M213.333 187.906h85.333v4.198h-85.333z"></path><g><path fill="#2b3b4e" d="M256.293 210.989h113.49v4.198h-113.49z"></path><path fill="#2b3b4e" d="M256.293 234.072h113.49v4.198h-113.49z"></path><path fill="#2b3b4e" d="M256.293 257.155h113.49v4.198h-113.49z"></path><path fill="#2b3b4e" d="M256.293 187.906h42.379v4.198h-42.379z"></path></g></g></svg> <h1 class="headtitle"> Courses - Certification DB</h1>
@@ -20,8 +21,8 @@
     <div class="col">  
                         <nav class="skew-menu">
                    <ul>
-                     <li><a href="/s"><span class="icon-arrow-left"></span> Front Page</a></li>
-                     <li><a href="/s" class={ segment === 'cert'? 'active': ''  }><span class="icon-list"></span> Cert DB</a></li>
+                     <li><a href="/"><span class="icon-arrow-left"></span> Front Page</a></li>
+                     <li><a href="/show-cert" class={ segment === 'cert'? 'active': ''  }><span class="icon-list"></span> Cert DB</a></li>
                      <li><a href="/projects" class={ segment === 'projects'? 'active': ''  }><span class="icon-server"></span> Projects DB</a></li>
                      <li><a href="https://gitlab.flashsoft.eu/explore/projects?sort=created_desc"><span class="icon-gitlab"></span> GitLab Server</a></li>
                    </ul>

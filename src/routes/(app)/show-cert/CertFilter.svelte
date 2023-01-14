@@ -1,7 +1,59 @@
 <script lang="ts">
 
-import CollapsibleSection from '@/components/Collapsible.svelte'
+import { goto } from '$app/navigation';
+import { slide } from 'svelte/transition';
 
+import { PUBLIC_HTTP_ROOT } from '$env/static/public'
+
+
+export let expanded: boolean = false;
+let tags: any[] = [];
+export let selectedTags: number[] = [];
+let allTags = false;
+
+let loadingTags = false;
+
+const fetchTags = async (all = false) => {
+  const response = await fetch(`${PUBLIC_HTTP_ROOT}/api/cert/get/tags${all ? '?all=true' : ''}`);
+  const json = await response.json();
+  return json;
+}
+
+const setTags = (all = false) => {
+  loadingTags = true;
+  allTags = all;
+  fetchTags(all).then((data) => {
+    tags = data?.data ?? [];
+    loadingTags = false;
+  });
+}
+
+const submitForm = () => {
+   if(selectedTags.length > 0){
+      goto(`/show-cert/filter/tags/${selectedTags.join('/')}/tags`);
+  }
+}
+
+$: if (expanded) {
+  if (tags.length < 1) {
+    if(selectedTags.length > 0){
+      loadingTags = true;
+      fetchTags().then((data) => {
+        const alltags = data.data.some((tag: any) => {
+          return !selectedTags.includes(tag.tag_id);
+        });
+        if (alltags) {
+          tags = data?.data ?? []
+          loadingTags = false;
+        } else {
+          setTags(true);
+        }
+      });
+    } else {
+      setTags(allTags);
+    }
+  }
+}
 
 // export default {   
 //   data () {
@@ -176,25 +228,21 @@ import CollapsibleSection from '@/components/Collapsible.svelte'
 // }      
 
 </script>
-
-
 <div class="container-fluid">    
-
-
-  <!-- @click="toggleCollapse()"
-  :class="showCollapse ? 'collapsed' : null"
-  aria-controls="collapse5"
-  :aria-expanded="showCollapse ? 'true' : 'false'" -->
-
-            <button class="row filterLink "
+ 
+            <button class="row filterLink focus:ring-transparent"
+            on:click={() => expanded = !expanded}
+            aria-expanded={expanded}
+            aria-controls="collapse-filter"
             >
-            <span class="icon-caret-down"> Filter by tag
+            <span class="icon-caret-down">&nbsp;Filter by tag
                       </span>
             </button>
-            <!-- class="row mt-2"  id="collapse5" -->
-          <CollapsibleSection headerText={true} >
-            <div class="filtercard">
+            {#if expanded}
+            <div class="filtercard mt-2" transition:slide id="collapse-filter">
+               {#if loadingTags}
                 <div class="spinner-small"></div>
+               {:else}
                 <!-- v-if="this.tags.length > 0 && !showTagLoading" -->
 
                 <form method='get' class='console.logainer-fluid' > 
@@ -202,31 +250,35 @@ import CollapsibleSection from '@/components/Collapsible.svelte'
                <ul class="tagFilter">
 
                 <!-- v-for="tag in tags" -->
-
+                {#each tags as tag}
                 <li>
                           <div class="rkmd-checkbox checkbox-rotate checkbox-ripple">
                   <label class="input-checkbox checkbox-lightBlue">
 
                     <!-- v-bind:id="'checkbox-'+tag.tag_id" name="tag[]"  v-bind:value="tag.tag_id"  v-model="checkboxes[tag.tag_id]" -->
 
-                    <input type="checkbox" >
+                    <input id={`tag${tag.tag_id}`} value={tag.tag_id} type="checkbox" name="tag[]" bind:group={selectedTags} >
                     <span class="checkbox"></span>
                   </label>
-                  <!-- <label v-bind:for="'checkbox-'+tag.tag_id" class="label"> {{ tag.name }} ({{ tag.tag_count }})</label> -->
+                  <!-- v-bind:for="'checkbox-'+tag.tag_id" -->
+                  <label for={`tag${tag.tag_id}`}  class="label"> { tag.name } ({tag.count })</label>
                 </div>    
-      
                    </li>
+                    {/each}
            </ul>
-                    </div><div class="row"> 
-                      <!-- v-if="!gotAllTags" @click="showAllTags()"  -->
-                    <button class="filterLink" > Show all tags …</button>
-                    <!-- v-if="gotAllTags" @click="showPopularOnly()" -->
-                    <button class="filterLink" > Show only popular tags …</button>
-                    &nbsp;&nbsp;&nbsp;
-                    <!-- v-on:click="submitForm()" -->
-                     <input style="border-radius: .125rem; font-size: 0.9em;" type="submit" value="Filter" class="button btn-search-box">
                     </div>
-                </form>     
+                    <div class="row"> 
+                    {#if !allTags}
+                    <button class="filterLink" on:click={() => setTags(true)}> Show all tags …</button>
+                    {:else}
+                    <button class="filterLink" on:click={() => setTags(false)} > Show only popular tags …</button>
+                    &nbsp;&nbsp;&nbsp;
+                    {/if}
+                     <input on:click|preventDefault={submitForm} style="border-radius: .125rem; font-size: 0.9em;" type="submit" value="Filter" class="button btn-search-box">
+                    </div>
+                </form>
+                {/if}
             </div>
-          </CollapsibleSection>
+            {/if}
     </div>
+
