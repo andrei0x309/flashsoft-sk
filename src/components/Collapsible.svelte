@@ -1,9 +1,9 @@
 <script lang="ts">
     // based on suggestions from:
     // Inclusive Components by Heydon Pickering https://inclusive-components.design/collapsible-sections/
-    export let headerText: boolean;
+    export let headerText: string;
 
-    let expanded = false
+    export let expanded: boolean = false;
 </script>
 
 <div class="collapsible">
@@ -16,7 +16,7 @@
         </button>
     </h3>
     
-    <div class='contents' hidden={!expanded}>
+    <div hidden={!expanded}>
         <slot></slot>
     </div>
 </div>

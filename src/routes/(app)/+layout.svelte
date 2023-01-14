@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<meta charset="utf-8">
+	<meta content="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="author" content="andrei0x309">
 
