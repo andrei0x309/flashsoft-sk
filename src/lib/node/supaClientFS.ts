@@ -1,4 +1,4 @@
 import { createClient } from '@supabase/supabase-js'
-import { TOKEN } from './.env'
+import { SECRET_SUPA_TOKEN } from '$env/static/private'
 
-export const supabase = createClient('https://lcspcmmpolegvalxkfsu.supabase.co', TOKEN)
+export const supabase = createClient('https://lcspcmmpolegvalxkfsu.supabase.co', SECRET_SUPA_TOKEN)
