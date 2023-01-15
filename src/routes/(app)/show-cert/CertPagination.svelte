@@ -13,13 +13,27 @@
             linkList.push(i);
         }
     } else {
-        if( currentPage-1 === maxPage -1){
-            linkList.push(1, 2, '...', currentPage-1, currentPage);
+        if( currentPage >= maxPage-2){
+            linkList.push(1, 2, '...');
+            if(currentPage === maxPage) {
+                linkList.push(maxPage-1, maxPage)
+            } else {
+                linkList.push(maxPage-2, maxPage-1, maxPage)
+            }
         }else {
             if(currentPage <= 2) {
-                linkList.push(1, 2, '...', currentPage+2, currentPage+3, currentPage+4, '...', maxPage-1, maxPage);
+                linkList.push(1, 2);
+                if(currentPage === 2) {
+                    linkList.push('...', currentPage+1, currentPage+2, currentPage+3, '...', maxPage-1, maxPage)
+                } else {
+                    linkList.push('...', currentPage+2, currentPage+3, currentPage+4, '...', maxPage-1, maxPage)
+                }
             } else {
-                linkList.push(1, 2, '...', currentPage-1, currentPage, currentPage+1, '...', maxPage-1, maxPage);
+                if(currentPage === 3) {
+                    linkList.push(1, 2, '...', currentPage, currentPage+1, '...', maxPage-1, maxPage);
+                } else {
+                    linkList.push(1, 2, '...', currentPage-1, currentPage, currentPage+1, '...', maxPage-1, maxPage);
+                }
             }
         }
     }

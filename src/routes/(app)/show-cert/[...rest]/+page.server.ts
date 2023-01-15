@@ -50,6 +50,7 @@ const loadFilteredCerts = async (page = 1, tag_ids: number[]) => {
       return -1
     }
     
+    
     return {
         res
       }; 
@@ -115,7 +116,7 @@ const addRestPath = (data: Record<string, unknown> | number, rest: string) => {
 }
 
 export const load: PageServerLoad = async (rest) => {
-  const restPath = '/show-cert' + (rest.params.rest ?? '/')
+  const restPath = '/show-cert/' + (rest.params.rest ?? '/')
   if(!rest.params.rest) {
     const data = await loadCerts(1)
     return addRestPath(checkData(data) as  Record<string, unknown>, restPath)
@@ -142,8 +143,8 @@ export const load: PageServerLoad = async (rest) => {
           throw error(404, 'Not found')
         }
       }
-      const tag_ids = rest.params.rest.split('/tags/')[1].split('/').slice(0, -1).map(Number)
-      const data = await loadFilteredCerts(page, tag_ids)
+      const tag_ids = rest.params.rest.split('/tags/')[1].split('/').map((t) => Number(t)).filter((t) => !isNaN(t))
+      const data =  await loadFilteredCerts(page, tag_ids)
       return addRestPath(checkData(data) as  Record<string, unknown>, restPath)
     }
     default: {

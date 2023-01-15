@@ -79,7 +79,7 @@ import { slide } from 'svelte/transition';
 //   };
 
 </script>
-    <div class="container-fluid">
+    <div class="container-fluid ml-2 mb-2">
       <button
         class="row filterLink focus:ring-0 focus:ring-offset-0"
         on:click={() => expanded = !expanded}
@@ -91,7 +91,7 @@ import { slide } from 'svelte/transition';
                   </span>
       </button>
         {#if expanded}
-        <div class="filtercard mt-2" id="collapse-serach" transition:slide>
+        <div class="filtercard mt-2 p-2" id="collapse-serach" transition:slide>
           <div class="row">
             <div class="grid">
               <form
@@ -101,11 +101,11 @@ import { slide } from 'svelte/transition';
                 class="container-fluid search"
               > <!-- v-if="this.tags.length > 0 && !showTagLoading" -->
               <!-- v-model="query" -->
-                <div class="form__field">
+                <div class="form__field justify-center">
                   <input
                     type="search"
                     placeholder="What are you looking for?"
-                    class="form__input"
+                    class="form__input max-w-[18rem]"
                   >
                   <!-- v-on:click="submitForm()" -->
                   <input type="submit" value="Search" class="button">
@@ -113,7 +113,7 @@ import { slide } from 'svelte/transition';
               </form>
               <!-- v-if="showResults"  -->
               <!-- v-html="msgResults" -->
-                <div class="search-results" ></div>
+                <!-- <div class="search-results" ></div> -->
                 
             </div>
           </div>
