@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
-// import { supabase } from '@/lib/deno/supaClientEdge'
-import { supabase } from '@/lib/node/supaClientFS'
+import { supabase } from '@/lib/deno/supaClientEdge'
+// import { supabase } from '@/lib/node/supaClientFS'
 import { error } from '@sveltejs/kit';
 
 const loadFilteredCerts = async (page = 1, tag_ids: number[]) => {
@@ -21,7 +21,7 @@ const loadFilteredCerts = async (page = 1, tag_ids: number[]) => {
     .range((page-1)*9, (page*9)-1);
     // eslint-disable-next-line prefer-const
     let [count, res] = await Promise.all([countDb, resDb])
-    const ids = res.data?.map((r) => r.id)
+    const ids = res.data?.map((r: { id: number; }) => r.id)
     if (!ids) {
       return -1
     }
