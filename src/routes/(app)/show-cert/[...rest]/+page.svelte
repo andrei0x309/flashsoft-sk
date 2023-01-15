@@ -1,10 +1,15 @@
 <script lang="ts">
-    // import { afterNavigate }  from '$app/navigation'
+    import { afterNavigate }  from '$app/navigation'
     import '@/routes/(app)/cert.scss'
     import Header from "../../Header.svelte"
     import CertFilter from "../CertFilter.svelte";
     import CertSearch from "../CertSearch.svelte";
     import CertList from "../CertList.svelte";
+
+    let pagKey = 0
+    afterNavigate(() => {
+        pagKey = pagKey + 1
+    })
 
     export let data: any;
     let showSpinner = false
@@ -56,6 +61,6 @@
     <CertSearch slot="search" />
 </Header>
 
-{#key data?.res?.page ?? 1}
+{#key pagKey}
 <CertList data={data?.res?.data ?? []} maxPage={data?.res?.totalPages ?? 1} currentPage={data?.res?.page ?? 1} rest={data?.rest?.replace(/page.*?\/?$/gm, '') ?? '/'} />
 {/key}

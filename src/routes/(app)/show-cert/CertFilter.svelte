@@ -31,7 +31,9 @@ const setTags = (all = false) => {
 const submitForm = () => {
    if(selectedTags.length > 0){
       goto(`/show-cert/filter/tags/${selectedTags.join('/')}/tags`);
-  }
+   } else {
+      goto(`/show-cert`);
+   }
 }
 
 $: if (expanded) {
@@ -228,7 +230,7 @@ $: if (expanded) {
 // }      
 
 </script>
-<div class="container-fluid">    
+<div class="container-fluid ml-2">    
  
             <button class="row filterLink focus:ring-transparent"
             on:click={() => expanded = !expanded}
@@ -239,7 +241,7 @@ $: if (expanded) {
                       </span>
             </button>
             {#if expanded}
-            <div class="filtercard mt-2" transition:slide id="collapse-filter">
+            <div class="filtercard mt-2 p-2" transition:slide id="collapse-filter">
                {#if loadingTags}
                 <div class="spinner-small"></div>
                {:else}

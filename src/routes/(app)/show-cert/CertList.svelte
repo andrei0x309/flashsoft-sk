@@ -25,7 +25,7 @@
 </script>
 
 
-<div class="card-deck certbottommagin grid-cols-1 grid md:grid-cols-2 lg:grid-cols-3  gap-2 md:gap-4">
+<div class="card-deck certbottommagin mx-2 md:my-4 lg:mx-6 grid-cols-1 grid md:grid-cols-2 lg:grid-cols-3  gap-2 md:gap-4">
   {#each data as cert}
     <div class="card">
          <CertImg propData={{imageSource:`/res/cert_pic/${cert['cert_feature_image']}`, 
