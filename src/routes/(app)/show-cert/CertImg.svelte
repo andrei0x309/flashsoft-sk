@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
+	
 	interface CertImgProps {
 		imageSource: string;
 		certName: string;
@@ -15,11 +16,11 @@
 		const picName = imgSrc.substring(lastIndex + 1);
 		const filePath = imgSrc.substring(0, lastIndex + 1);
 		return [
-			filePath + '25/' + picName + ' 256w',
-			filePath + '50/' + picName + ' 528w',
-			filePath + '75/' + picName + ' 792w',
-			imgSrc + ' 1056w'
-		].join();
+			filePath + '25/' + encodeURI(picName) + ' 256w, ',
+			filePath + '50/' + encodeURI(picName) + ' 528w, ',
+			filePath + '75/' + encodeURI(picName) + ' 792w, ',
+			encodeURI(imgSrc) + ' 1056w'
+		].join('');
 	};
 	
 	onMount(() => {
@@ -44,7 +45,6 @@
 			alt={altContent}
 			on:load={() => {
 				loaded = true;
-                console.log('loaded')
 			}}
 		/>
 	</div>

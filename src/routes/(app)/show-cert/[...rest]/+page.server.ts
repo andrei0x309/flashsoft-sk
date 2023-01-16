@@ -1,7 +1,13 @@
 import type { PageServerLoad } from './$types';
-import { supabase } from '@/lib/deno/supaClientEdge'
-// import { supabase } from '@/lib/node/supaClientFS'
+// import { supabase } from '@/lib/deno/supaClientEdge'
+import { supabase } from '@/lib/node/supaClientFS'
 import { error } from '@sveltejs/kit';
+import { optionalChain } from '@/lib/utils/index'
+
+
+type SupaClient = typeof supabase
+type PostgesQueryBuilder = ReturnType<SupaClient['from']>
+type PostgesQueryBuilderSelect = ReturnType<PostgesQueryBuilder['select']>
 
 const loadFilteredCerts = async (page = 1, tag_ids: number[]) => {
   try {
@@ -29,6 +35,7 @@ const loadFilteredCerts = async (page = 1, tag_ids: number[]) => {
     res = await supabase.from('fsk_cert').select(`
     id,
     cert_name,
+    cert_description,
     cert_file_name,
     cert_feature_image,
     cat:fsk_cert_cat(
@@ -59,16 +66,21 @@ const loadFilteredCerts = async (page = 1, tag_ids: number[]) => {
     }
   }
 
-const loadCerts = async (page: number) => {
+const loadCerts = async (page: number, search = false, searchTerms: string[] = []) => {
   try {
-    const countDb = supabase
+    const countDb = optionalChain(supabase
     .from('fsk_cert')
-    .select('*', { count: 'exact', head: true });
+    .select('*', { count: 'exact', head: true }))
+    .if(search, 
+      (chain: PostgesQueryBuilderSelect) => 
+      chain.or(searchTerms.map( t => `cert_name.ilike.%${t}%,cert_description.ilike.%${t}%`).join(','))).end()
+
   
-    const resDb = supabase.from('fsk_cert').select(`
+    const resDb = optionalChain(supabase.from('fsk_cert').select(`
   id,
   cert_name,
   cert_file_name,
+  cert_description,
   cert_feature_image,
   cat:fsk_cert_cat(
       cat_name,
@@ -78,7 +90,13 @@ const loadCerts = async (page: number) => {
       id,
       name
   )
-  `).range((page-1)*9, (page*9)-1);
+  `)).if(search, 
+  (chain: PostgesQueryBuilderSelect) => 
+  
+  
+  chain.or(searchTerms.map( t => `cert_name.ilike.%${t}%,cert_description.ilike.%${t}%`).join(',')))
+  .end()
+  .range((page-1)*9, (page*9)-1);
   
     const [count, res] = await Promise.all([countDb, resDb])
       
@@ -115,6 +133,17 @@ const addRestPath = (data: Record<string, unknown> | number, rest: string) => {
   return data
 }
 
+const extractPage = (rest: string) => {
+  if(rest.includes('page/')) {
+    const page = Number(rest.split('page/')[1].replace('/', ''))
+    if(page < 1) {
+      throw error(404, 'Not found')
+    }
+    return page
+  }
+  return 1
+}
+
 export const load: PageServerLoad = async (rest) => {
   const restPath = '/show-cert/' + (rest.params.rest ?? '/')
   if(!rest.params.rest) {
@@ -125,27 +154,30 @@ export const load: PageServerLoad = async (rest) => {
 
     switch(params[0]){
       case 'page': {
-        let page = Number(params[1])
-        if(page < 1) {
-          throw error(404, 'Not found')
-        }
-      if (page < 1) {
-        page = 1;
-      }
+      const page = extractPage(rest.params.rest)
+
       const data = await loadCerts(page)
       return addRestPath(checkData(data) as  Record<string, unknown>, restPath)
     }
     case 'filter': {
-      let page = 1
-      if(rest.params.rest.includes('/page')) {
-        page = Number(rest.params.rest.split('/page')[1].replace('/', ''))
-        if(page < 1) {
-          throw error(404, 'Not found')
-        }
-      }
+      const page = extractPage(rest.params.rest)
+
       const tag_ids = rest.params.rest.split('/tags/')[1].split('/').map((t) => Number(t)).filter((t) => !isNaN(t))
       const data =  await loadFilteredCerts(page, tag_ids)
       return addRestPath(checkData(data) as  Record<string, unknown>, restPath)
+    }
+    case 'search': {
+      const page = extractPage(rest.params.rest)
+      const restWithoutPage = rest.params.rest.replace(/\/page\/\d+\/?/, '')
+      const searchTerms = restWithoutPage.split('search')[1].split('/').filter((t) => t !== '' && t !== 'page' && t.length > 1)
+      console.log(searchTerms)
+      let data = await loadCerts(page, true, searchTerms)
+      data = (addRestPath(checkData(data) as  Record<string, unknown>, restPath)) as { res: Record<string, unknown>}
+      if((data as unknown as number) === -1) {
+        return data
+      }
+      ;(data as unknown as {searchInput: string}).searchInput = searchTerms.join(' ')
+      return data
     }
     default: {
       throw error(404, 'Not found')

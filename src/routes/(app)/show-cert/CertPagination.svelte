@@ -1,11 +1,16 @@
 <script lang="ts">
     import { PUBLIC_HTTP_ROOT } from '$env/static/public'
+    import { onMount } from 'svelte';
 
 	export let maxPage: number;
 	export let currentPage: number;
     export let rest: string;
     const isMinPage = currentPage === 1;
     const isMaxPage = currentPage === maxPage;
+
+    onMount(() => {
+        console.log('pag remounted', currentPage)
+    })
 
     const linkList: (number | string)[] = [];
     if(maxPage < 6) {

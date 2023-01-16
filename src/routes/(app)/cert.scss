@@ -415,8 +415,12 @@
   .cert-error-box {
     background-color: #FAFAFA;
     padding: 2em;
-    color: chocolate;
+    color: #224;
     font-size: 1.5em;
+    min-height: 80vh;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
   }
   
   /*search box results */
@@ -895,26 +899,21 @@
     background: #3D9970;
     color: #fff;
     text-decoration: none;
-    -moz-border-radius-bottomright: 0.2em;
-    -webkit-border-bottom-right-radius: 0.6em;
-    border-bottom-right-radius: 0.6em;
-    -moz-border-radius-topright: 0.6em;
-    -webkit-border-top-right-radius: 0.6em;
-    border-top-right-radius: 0.6em;
+    border-radius: 0.3rem;
+    box-shadow: 1px 1px 1px #0c6a2d;
   }
   
   .tags li:before,
   .tagFilter .label:before {
     content: "";
-    float: left;
     position: absolute;
-    top: -.02em;
-    left: -1em;
+    top: 0.1em;
+    left: -1.8em;
     width: 0;
     height: 0;
-    border-color: transparent #368864 transparent transparent;
+    border-color: transparent #8cd1b2 transparent transparent;
     border-style: solid;
-    border-width: 1.03em 1.03em 1.03em 0;
+    border-width: 0.98em 0.98em 0.98em;
   }
   
   .tags li:after,

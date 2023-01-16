@@ -6,13 +6,14 @@
     import CertSearch from "../CertSearch.svelte";
     import CertList from "../CertList.svelte";
 
+    export let data: any;
+    let showSpinner = false
+
     let pagKey = 0
     afterNavigate(() => {
         pagKey = pagKey + 1
+        console.log('afterNavigate', data?.res?.page ?? 1)
     })
-
-    export let data: any;
-    let showSpinner = false
 
     const getImgFilePath =  (fileName: string) => {
         return `/res/project/feature-img/${fileName}`
@@ -58,7 +59,7 @@
 
 <Header segment="cert">
     <CertFilter slot="filter" selectedTags={ data?.res?.tag_ids ?? []} expanded={(data?.res?.tag_ids ?? []).length > 0} />
-    <CertSearch slot="search" />
+    <CertSearch slot="search" searchInput={data?.searchInput ?? ''} expanded={(data?.searchInput ?? '').length > 0} />
 </Header>
 
 {#key pagKey}

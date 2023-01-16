@@ -1,7 +1,19 @@
 <script lang="ts">
-let expanded: boolean = false;
+export let expanded: boolean = false;
+export let searchInput: string = '';
 import { slide } from 'svelte/transition';
+import { goto } from '$app/navigation';
+let error = ''
 
+const submitForm = () => {
+   const searchTerms = encodeURI((searchInput ?? '').split(' ').filter((term: string) => term.length >= 2).join('/'))
+
+   if(searchTerms.length > 0){
+      goto(`/show-cert/search/${searchTerms}`);
+   } else {
+     error = 'Please enter at least 2 characters to search!'
+   }
+}
 
 //     export default {
 //     data() {
@@ -106,14 +118,17 @@ import { slide } from 'svelte/transition';
                     type="search"
                     placeholder="What are you looking for?"
                     class="form__input max-w-[18rem]"
+                    bind:value={searchInput}
                   >
                   <!-- v-on:click="submitForm()" -->
-                  <input type="submit" value="Search" class="button">
+                  <input type="submit" value="Search" class="button" on:click|preventDefault={submitForm}>
                 </div>
               </form>
               <!-- v-if="showResults"  -->
               <!-- v-html="msgResults" -->
-                <!-- <div class="search-results" ></div> -->
+              {#if error}
+                <div class="search-results max-w-[50rem] mx-auto text-center px-4" >{error}</div>
+              {/if}
                 
             </div>
           </div>
