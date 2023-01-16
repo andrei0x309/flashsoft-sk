@@ -1,3 +1,3 @@
-import { SmtpClient } from "https://deno.land/x/smtp/mod.ts";
+import { SmtpClient } from "smtp-lib";
 
 export const client = new SmtpClient();
