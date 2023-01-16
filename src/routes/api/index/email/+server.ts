@@ -47,7 +47,7 @@ console.log(name, email, message, hCaptcha)
 const emailMessage = {
     from: "website@flashsoft.eu",
     to: "andrei@flashsoft.eu",
-    subject: "Message title",
+    subject: "Message title TEST2",
     text: "Plaintext version of the message",
     html: "<p>HTML version of the message</p>"
   };
