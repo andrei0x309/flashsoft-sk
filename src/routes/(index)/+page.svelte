@@ -3,7 +3,6 @@
 	// import welcome from '$lib/images/svelte-welcome.webp';
 	// import welcome_fallback from '$lib/images/svelte-welcome.png';
 	import { BUILD_CONSTANTS } from '$lib/config';
-	const { VERSION, SK_VERSION } = BUILD_CONSTANTS;
 
 	const pageDescription = 'Test';
 	const pageTitle = 'Test';
@@ -640,8 +639,8 @@
 		</section>
 		<footer class="left-side-footer">
 			<p>Powerd by netlify, deno on edge, SvelteKit</p>
-			<p>APP Version - {VERSION}</p>
-			<p>SvelteKit Version {SK_VERSION}</p>
+			<p>APP Version - {BUILD_CONSTANTS.VERSION}</p>
+			<p>SvelteKit Version {BUILD_CONSTANTS.SK_VERSION}</p>
 			<!-- <a rel="noopener nofollow" href="https://www.codewars.com/r/GFQ2Gg"><p>Join CodeWars: <span class="icon-codewars">.</span></p></a>
             <a rel="nofollow"  href="{{ route ('adminHome') }}"><p>Admin Panel</p></a> -->
 		</footer>
