@@ -7,8 +7,8 @@ const config = {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	},
 	define: {
-		__VERSION__: JSON.stringify(process.env.npm_package_version),
-		__SK_VERSION__: JSON.stringify(process.env['npm_package_devDependencies__sveltejs_kit'])
+		VERSION: JSON.stringify(process.env.npm_package_version),
+		SK_VERSION: JSON.stringify(process.env['npm_package_devDependencies__sveltejs_kit'])
 	},
 };
 

@@ -3,8 +3,7 @@
 // import { supabase } from '@/lib/node/supaClientFS'
 import type { RequestHandler } from  '@sveltejs/kit';
 import { json } from '@sveltejs/kit';
-import nodemailer from 'nodemailer';
-import type { TransportOptions } from 'nodemailer';
+import { SmtpClient } from "https://deno.land/x/smtp/mod.ts";
 
 import { SECRET_SMTP_HOST, SECRET_SMTP_PORT, SECRET_SMTP_USERNAME, SECRET_SMTP_PASSWORD  } from '$env/static/private'
 
@@ -48,22 +47,24 @@ const emailMessage = {
     from: "website@flashsoft.eu",
     to: "andrei@flashsoft.eu",
     subject: "Message title TEST2",
-    text: "Plaintext version of the message",
-    html: "<p>HTML version of the message</p>"
+    content: "Plaintext version of the message",
   };
 
-const transport = nodemailer.createTransport({
-    host: SECRET_SMTP_HOST,
+const client = new SmtpClient();
+
+
+  client.connect({
+    hostname: SECRET_SMTP_HOST,
     port: SECRET_SMTP_PORT,
-    secure: false, // upgrade later with STARTTLS
-    auth: {
-      user: SECRET_SMTP_USERNAME,
-      pass: SECRET_SMTP_PASSWORD,
-    },
-  } as TransportOptions);
-
-transport.sendMail(emailMessage).catch(err => console.error(err));
-
+    username: SECRET_SMTP_USERNAME,
+    password: SECRET_SMTP_PASSWORD,
+  }).then(() => {
+    client.send(emailMessage).then(() => {
+      client.close().catch(err => console.error(err))
+    }).catch(err => console.error(err))
+  }).catch(err => console.error(err))
+  
+  
 return json({data: 'ok'})
 
     } catch (e) {
