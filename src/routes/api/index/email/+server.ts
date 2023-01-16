@@ -3,7 +3,8 @@
 // import { supabase } from '@/lib/node/supaClientFS'
 import type { RequestHandler } from  '@sveltejs/kit';
 import { json } from '@sveltejs/kit';
-import { SmtpClient } from "https://deno.land/x/smtp/mod.ts";
+import { client } from '@/lib/deno/smtpClient'
+
 
 import { SECRET_SMTP_HOST, SECRET_SMTP_PORT, SECRET_SMTP_USERNAME, SECRET_SMTP_PASSWORD  } from '$env/static/private'
 
@@ -49,8 +50,6 @@ const emailMessage = {
     subject: "Message title TEST2",
     content: "Plaintext version of the message",
   };
-
-const client = new SmtpClient();
 
 
   client.connect({
