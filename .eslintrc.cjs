@@ -16,5 +16,9 @@ module.exports = {
 		browser: true,
 		es2017: true,
 		node: true
+	},
+	globals: {
+		__VERSION__: "readonly",
+		__SK_VERSION__: "readonly"
 	}
 };
