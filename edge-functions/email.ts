@@ -1,3 +1,4 @@
+import buffer from "https://esm.sh/buffer@6.0.3"
 import nodemailer from "https://esm.sh/nodemailer@6.9.0";
 
 const SMTP_HOST = Deno.env.get('SECRET_SMTP_HOST')
