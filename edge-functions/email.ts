@@ -1,22 +1,25 @@
-import { SMTPClient } from "https://deno.land/x/denomailer/mod.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
-const SMTP_HOST = Deno.env.get('SECRET_SMTP_HOST')
-const SMTP_PORT = Deno.env.get('SECRET_SMTP_PORT')
-const SMTP_USERNAME = Deno.env.get('SECRET_SMTP_USERNAME')
-const SMTP_PASSWORD = Deno.env.get('SECRET_SMTP_PASSWORD')
+const SUPA_TOKEN = Deno.env.get('TOKEN')
+const EMAIL_ID = Deno.env.get('EMAIL_ID')
+const EMAIL_SECRET = Deno.env.get('EMAIL_SECRET')
 
-const client = new SMTPClient({
-  connection: {
-    hostname: SMTP_HOST,
-    port: SMTP_PORT,
-    secure: false,
-    auth: {
-      username: SMTP_USERNAME,
-      password: SMTP_PASSWORD,
-    },
-  },
-});
+const EMAIL_API_AUTH = 'https://api.sendpulse.com/oauth/access_token'
+const EMAIL_API_ENDPOINT = 'https://api.sendpulse.com/smtp/emails'
 
+const options = {
+  schema: "public",
+  autoRefreshToken: true,
+  persistSession: true,
+  detectSessionInUrl: true,
+};
+
+export const supabase = createClient(
+  "https://lcspcmmpolegvalxkfsu.supabase.co",
+  SUPA_TOKEN,
+  options,
+);
+ 
 export const validateEmail = (email: string) => {
   return String(email)
     .toLowerCase()
@@ -52,17 +55,70 @@ export default async (request: Request) => {
     }
     
     try{
-      const emailMessage = {
-        from: "website@flashsoft.eu",
-        to: "andrei@flashsoft.eu",
-        subject: "Website contact from " + name + " " + email,
-        content: message,
-      };
-    
-      await client.send(emailMessage);
       
-      await client.close();
-    
+      const { data, error } = await supabase.from('fsk_email_token').select('*').eq('id', 1).limit(1)
+
+      if(error) {
+        return Response.json({error: 'Error accesing auth doken email DB'}, {status: 500})
+      }
+      
+      if(!data || !data[0]) {
+        return Response.json({error: 'Access token not found in DB'}, {status: 500})
+      }
+
+      const { token } = data[0]
+      if((token?.expiration ?? 0) <= (Date.now() + 3600000) || !token?.access_token) {
+        const response = await fetch(EMAIL_API_AUTH, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            grant_type: 'client_credentials',
+            client_id: EMAIL_ID,
+            client_secret: EMAIL_SECRET
+          })
+        })
+
+        if(response.status !== 200) {
+          return Response.json({error: 'Error Getting Auth Token'}, {status: 500})
+        }
+
+        const expiration = Date.now() + 3600000
+        const token = await response.json()
+        supabase.from('fsk_email_token').update({token: JSON.stringify(token), expiration}).eq('id', 1)
+      }
+
+      const email = {
+        "email": {
+          "text": message,
+          "subject": `New message from ${name || 'anonymous'} (${email})`,
+          "from": {
+            "name": "Flashsoft Website",
+            "email": "website@flashsoft.eu"
+          },
+          "to": [
+            {
+              "name": "Andrei O.",
+              "email": "andrei@flashsoft.eu"
+            }
+          ]
+        }
+      }
+
+      const response = await fetch(EMAIL_API_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token.access_token}`
+        },
+        body: JSON.stringify(email)
+      })
+
+      if(response.status !== 200) {
+        return Response.json({error: 'Error Sending email to API'}, {status: 500})
+      }
+      
       return Response.json({data: 'ok'})
     } catch (e) {
       return Response.json({error: `Internal Server Error ${SMTP_HOST} ${SMTP_PORT}`}, {status: 500})
