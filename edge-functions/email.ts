@@ -88,41 +88,41 @@ export default async (request: Request) => {
         token = await response.json()
         const { error } = await supabase.from('fsk_email_token').upsert({id: 1, token: JSON.stringify(token), expiration})
         if(error) {
-          console.error('Error updating token in DB', String(error))
+          console.error('Error updating token in DB', JSON.stringify(error))
         }
       }
 
-      const emailMessage = {
-        "email": {
-          "text": message,
-          "subject": `New message from ${name || 'anonymous'} (${email})`,
-          "from": {
-            "name": "Flashsoft Website",
-            "email": "website@flashsoft.eu"
-          },
-          "to": [
-            {
-              "name": "Andrei O.",
-              "email": "andrei@flashsoft.eu"
-            }
-          ]
-        }
-      }
+      // const emailMessage = {
+      //   "email": {
+      //     "text": message,
+      //     "subject": `New message from ${name || 'anonymous'} (${email})`,
+      //     "from": {
+      //       "name": "Flashsoft Website",
+      //       "email": "website@flashsoft.eu"
+      //     },
+      //     "to": [
+      //       {
+      //         "name": "Andrei O.",
+      //         "email": "andrei@flashsoft.eu"
+      //       }
+      //     ]
+      //   }
+      // }
 
-      console.info('Auth Token: ', token)
+      // console.info('Auth Token: ', token)
 
-      const response = await fetch(EMAIL_API_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token?.access_token}`
-        },
-        body: JSON.stringify(emailMessage)
-      })
+      // const response = await fetch(EMAIL_API_ENDPOINT, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Authorization': `Bearer ${token?.access_token}`
+      //   },
+      //   body: JSON.stringify(emailMessage)
+      // })
 
-      if(response.status !== 200) {
-        return Response.json({error: 'Error Sending email to API'}, {status: 500})
-      }
+      // if(response.status !== 200) {
+      //   return Response.json({error: 'Error Sending email to API'}, {status: 500})
+      // }
       
       return Response.json({data: 'ok'})
     } catch (e) {
