@@ -3,7 +3,7 @@
 import { goto } from '$app/navigation';
 import { slide } from 'svelte/transition';
 
-import { PUBLIC_HTTP_ROOT } from '$env/static/public'
+import { PUBLIC_HTTP_ROOT, PUBLIC_RUN_ENV } from '$env/static/public'
 
 
 export let expanded: boolean = false;
@@ -14,7 +14,7 @@ let allTags = false;
 let loadingTags = false;
 
 const fetchTags = async (all = false) => {
-  const response = await fetch(`${PUBLIC_HTTP_ROOT}/api/cert/get/tags${all ? '?all=true' : ''}`);
+  const response = await fetch(`${PUBLIC_HTTP_ROOT}/${PUBLIC_RUN_ENV === 'deno'? 'edge-api': 'api' }/cert/get/tags${all ? '?all=true' : ''}`);
   const json = await response.json();
   return json;
 }

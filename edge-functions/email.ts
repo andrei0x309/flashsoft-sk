@@ -68,7 +68,8 @@ export default async (request: Request) => {
 
       let { token } = data[0]
       const expiration = Date.now() + 3600000
-      if((token?.expiration ?? 0) <= expiration || !token?.access_token) {
+      const oldExpiration = (new Date(data[0]?.expiration ?? 0)).getTime()
+      if(oldExpiration <= expiration || !token?.access_token) {
         const response = await fetch(EMAIL_API_AUTH, {
           method: 'POST',
           headers: {
@@ -86,43 +87,45 @@ export default async (request: Request) => {
         }
 
         token = await response.json()
-        const { error } = await supabase.from('fsk_email_token').upsert({id: 1, token: JSON.stringify(token), expiration})
+        const { error } = await supabase.from('fsk_email_token').upsert({id: 1, token: JSON.stringify(token), expiration: new Date(expiration).toISOString()})
         if(error) {
           console.error('Error updating token in DB', JSON.stringify(error))
         }
       }
 
-      // const emailMessage = {
-      //   "email": {
-      //     "text": message,
-      //     "subject": `New message from ${name || 'anonymous'} (${email})`,
-      //     "from": {
-      //       "name": "Flashsoft Website",
-      //       "email": "website@flashsoft.eu"
-      //     },
-      //     "to": [
-      //       {
-      //         "name": "Andrei O.",
-      //         "email": "andrei@flashsoft.eu"
-      //       }
-      //     ]
-      //   }
-      // }
+      const emailMessage = {
+        "email": {
+          "text": message,
+          "subject": `New message from ${name || 'anonymous'} (${email})`,
+          "from": {
+            "name": "Flashsoft Website",
+            "email": "website@flashsoft.eu"
+          },
+          "to": [
+            {
+              "name": "Andrei O.",
+              "email": "andrei@flashsoft.eu"
+            }
+          ]
+        }
+      }
 
-      // console.info('Auth Token: ', token)
+      console.info('Auth Token: ', token)
 
-      // const response = await fetch(EMAIL_API_ENDPOINT, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authorization': `Bearer ${token?.access_token}`
-      //   },
-      //   body: JSON.stringify(emailMessage)
-      // })
+      const response = await fetch(EMAIL_API_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token?.access_token}`
+        },
+        body: JSON.stringify(emailMessage)
+      })
 
-      // if(response.status !== 200) {
-      //   return Response.json({error: 'Error Sending email to API'}, {status: 500})
-      // }
+      if(response.status !== 200) {
+        return Response.json({error: 'Error Sending email to API'}, {status: 500})
+      }
+
+      supabase.from('fsk_email_copy').insert({json: JSON.stringify(emailMessage)})
       
       return Response.json({data: 'ok'})
     } catch (e) {

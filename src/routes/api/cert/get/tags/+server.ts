@@ -1,7 +1,4 @@
-// import { error } from '@sveltejs/kit';
-// import { supabase } from '@/lib/deno/supaClientEdge'
 import { supabase } from '@/lib/node/supaClientFS'
-// import { client } from '@/lib/deno/smtpClient'
 
 import type { RequestHandler } from  './$types';
 import { json } from '@sveltejs/kit';

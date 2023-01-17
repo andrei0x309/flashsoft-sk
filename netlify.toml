@@ -4,5 +4,9 @@
   edge_functions = "edge-functions"
 
 [[edge_functions]]
-  path = "/edge-api/email"
+  path = "/edge-api/index/email"
   function = "email"
+
+[[edge_functions]]
+  path = "/edge-api/cert/get/tags"
+  function = "gettags"
