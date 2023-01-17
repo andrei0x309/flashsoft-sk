@@ -2,7 +2,7 @@
 	// import Counter from './Counter.svelte';
 	// import welcome from '$lib/images/svelte-welcome.webp';
 	// import welcome_fallback from '$lib/images/svelte-welcome.png';
-	import { BC_VERSION, BC_SK_VERSION } from '$lib/config';
+	// import { BC_VERSION, BC_SK_VERSION } from '$lib/config';
 
 	const pageDescription = 'Test';
 	const pageTitle = 'Test';
@@ -639,8 +639,8 @@
 		</section>
 		<footer class="left-side-footer">
 			<p>Powerd by netlify, deno on edge, SvelteKit</p>
-			<p>APP Version - {BC_VERSION}</p>
-			<p>SvelteKit Version {BC_SK_VERSION}</p>
+			<!-- <p>APP Version - {BC_VERSION}</p>
+			<p>SvelteKit Version {BC_SK_VERSION}</p> -->
 			<!-- <a rel="noopener nofollow" href="https://www.codewars.com/r/GFQ2Gg"><p>Join CodeWars: <span class="icon-codewars">.</span></p></a>
             <a rel="nofollow"  href="{{ route ('adminHome') }}"><p>Admin Panel</p></a> -->
 		</footer>
