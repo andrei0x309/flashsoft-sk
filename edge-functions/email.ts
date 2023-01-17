@@ -61,7 +61,7 @@ export default async (request: Request) => {
       if(error) {
         return Response.json({error: 'Error accesing auth doken email DB'}, {status: 500})
       }
-      
+
       if(!data || !data[0]) {
         return Response.json({error: 'Access token not found in DB'}, {status: 500})
       }
@@ -121,6 +121,6 @@ export default async (request: Request) => {
       
       return Response.json({data: 'ok'})
     } catch (e) {
-      return Response.json({error: `Internal Server Error ${SMTP_HOST} ${SMTP_PORT}`}, {status: 500})
+      return Response.json({error: `Internal Server Error`}, {status: 500})
     }
 }
