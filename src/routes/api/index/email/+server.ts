@@ -29,21 +29,7 @@ const {
 
 console.log(name, email, message, hCaptcha)
 
-// if(!email || !message || !hCaptcha) {
-//     return json({error: 'Missing required fields, email, hCaptcha, message'}, {status: 400})
-// }
-// if(message.length > 2000) {
-//     return json({error: 'Message too long'}, {status: 400})
-// }
-// if(message.length < 10) {
-//     return json({error: 'Message too short'}, {status: 400})
-// }
-// if(name?.length > 150) {
-//     return json({error: 'Name too long'}, {status: 400})
-// }
-// if(!validateEmail(email)) {
-//     return json({error: 'Invalid email'}, {status: 400})
-// }
+
 
 // const emailMessage = {
 //   from: "website@flashsoft.eu",
