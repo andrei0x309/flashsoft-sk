@@ -18,7 +18,8 @@ const options = {
 
   export default async (request: Request) => {
     try{
-      const allTags = !!(request.url.searchParams.get('all') ?? '')
+      const url = new URL(request.url)
+      const allTags = !!(url.searchParams.get('all') ?? '')
         const { data, error } = await supabase.rpc('get_tags', { allTags })
         if(error) {
             return Response.json({error: String(error)}, {status: 500})
