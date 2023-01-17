@@ -15,6 +15,7 @@ let loadingTags = false;
 
 const fetchTags = async (all = false) => {
   const response = await fetch(`${PUBLIC_HTTP_ROOT}/${PUBLIC_RUN_ENV === 'deno'? 'edge-api': 'api' }/cert/get/tags${all ? '?all=true' : ''}`);
+  if(!response.ok) throw new Error(response.statusText)
   const json = await response.json();
   return json;
 }
@@ -24,6 +25,9 @@ const setTags = (all = false) => {
   allTags = all;
   fetchTags(all).then((data) => {
     tags = data?.data ?? [];
+    loadingTags = false;
+  }).catch((err) => {
+    console.log(err);
     loadingTags = false;
   });
 }
@@ -50,6 +54,9 @@ $: if (expanded) {
         } else {
           setTags(true);
         }
+      }).catch((err) => {
+        console.log(err);
+        loadingTags = false;
       });
     } else {
       setTags(allTags);
