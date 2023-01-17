@@ -1,4 +1,3 @@
-import { validateEmail } from './edge-utils'
 import { SmtpClient } from "https://deno.land/x/smtp@v0.7.0/mod.ts";
 
 const SMTP_HOST = Deno.env.get('SECRET_SMTP_HOST')
@@ -7,6 +6,14 @@ const SMTP_USERNAME = Deno.env.get('SECRET_SMTP_USERNAME')
 const SMTP_PASSWORD = Deno.env.get('SECRET_SMTP_PASSWORD')
 
 const client = new SmtpClient()
+
+export const validateEmail = (email: string) => {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
 
 export default async (request: Request) => {
     let  name, email, message;
