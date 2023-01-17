@@ -22,7 +22,7 @@ const options = {
       const allTags = !!(url.searchParams.get('all') ?? '')
         const { data, error } = await supabase.rpc('get_tags', { allTags })
         if(error) {
-            return Response.json({error: String(error)}, {status: 500})
+            return Response.json({error: JSON.stringify(error)}, {status: 500})
         }
         return Response.json({data})
     } catch (e) {
