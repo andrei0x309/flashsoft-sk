@@ -19,9 +19,8 @@ const options = {
   export default async (request: Request) => {
     try{
       const url = new URL(request.url)
-      const allTags = !!(url.searchParams.get('all') ?? '')
-      console.info('allTags', allTags, { allTags })
-        const { data, error } = await supabase.rpc('get_tags', { allTags })
+      const alltags = !!(url.searchParams.get('all') ?? '')
+        const { data, error } = await supabase.rpc('get_tags', { alltags })
         if(error) {
             return Response.json({error: JSON.stringify(error)}, {status: 500})
         }
