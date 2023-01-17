@@ -1,10 +1,22 @@
-import buffer from "https://esm.sh/buffer@6.0.3"
-import nodemailer from "https://esm.sh/nodemailer@6.9.0";
+import { SMTPClient } from "https://deno.land/x/denomailer/mod.ts";
+
 
 const SMTP_HOST = Deno.env.get('SECRET_SMTP_HOST')
 const SMTP_PORT = Deno.env.get('SECRET_SMTP_PORT')
 const SMTP_USERNAME = Deno.env.get('SECRET_SMTP_USERNAME')
 const SMTP_PASSWORD = Deno.env.get('SECRET_SMTP_PASSWORD')
+
+const client = new SMTPClient({
+  connection: {
+    hostname: SMTP_HOST,
+    port: SMTP_PORT,
+    tls: false,
+    auth: {
+      username: SMTP_USERNAME,
+      password: SMTP_PASSWORD,
+    },
+  },
+});
 
 export const validateEmail = (email: string) => {
   return String(email)
@@ -45,20 +57,12 @@ export default async (request: Request) => {
         from: "website@flashsoft.eu",
         to: "andrei@flashsoft.eu",
         subject: "Website contact from " + name + " " + email,
-        text: message,
+        content: message,
       };
     
-    const transport = nodemailer.createTransport({
-        host: SMTP_HOST,
-        port: SMTP_PORT,
-        secure: false, // upgrade later with STARTTLS
-        auth: {
-          user: SMTP_USERNAME,
-          pass: SMTP_PASSWORD,
-        },
-      });
-    
-    transport.sendMail(emailMessage).catch(err => console.error(err));
+      await client.send(emailMessage);
+      
+      await client.close();
     
       return Response.json({data: 'ok'})
     } catch (e) {
