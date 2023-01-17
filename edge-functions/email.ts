@@ -86,7 +86,7 @@ export default async (request: Request) => {
 
         const expiration = Date.now() + 3600000
         token = await response.json()
-        supabase.from('fsk_email_token').update({token: JSON.stringify(token), expiration}).eq('id', 1)
+        await supabase.from('fsk_email_token').update({token: JSON.stringify(token), expiration}).eq('id', '1')
       }
 
       const emailMessage = {
