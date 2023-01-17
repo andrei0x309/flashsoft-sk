@@ -9,6 +9,7 @@ const client = new SMTPClient({
   connection: {
     hostname: SMTP_HOST,
     port: SMTP_PORT,
+    secure: false,
     auth: {
       username: SMTP_USERNAME,
       password: SMTP_PASSWORD,
