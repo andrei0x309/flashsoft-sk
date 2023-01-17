@@ -1,15 +1,11 @@
 import { SMTPClient } from "https://deno.land/x/denomailer/mod.ts";
 
-
 const SMTP_HOST = Deno.env.get('SECRET_SMTP_HOST')
 const SMTP_PORT = Deno.env.get('SECRET_SMTP_PORT')
 const SMTP_USERNAME = Deno.env.get('SECRET_SMTP_USERNAME')
 const SMTP_PASSWORD = Deno.env.get('SECRET_SMTP_PASSWORD')
 
 const client = new SMTPClient({
-  debug: {
-    allowUnsecure: true
-  },
   connection: {
     hostname: SMTP_HOST,
     port: SMTP_PORT,
