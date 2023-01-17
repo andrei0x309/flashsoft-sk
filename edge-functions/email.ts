@@ -7,10 +7,12 @@ const SMTP_USERNAME = Deno.env.get('SECRET_SMTP_USERNAME')
 const SMTP_PASSWORD = Deno.env.get('SECRET_SMTP_PASSWORD')
 
 const client = new SMTPClient({
+  debug: {
+    allowUnsecure: true
+  },
   connection: {
     hostname: SMTP_HOST,
     port: SMTP_PORT,
-    tls: false,
     auth: {
       username: SMTP_USERNAME,
       password: SMTP_PASSWORD,
