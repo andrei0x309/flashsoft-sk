@@ -67,7 +67,8 @@ export default async (request: Request) => {
       }
 
       let { token } = data[0]
-      if((token?.expiration ?? 0) <= (Date.now() + 3600000) || !token?.access_token) {
+      const expiration = Date.now() + 3600000
+      if((token?.expiration ?? 0) <= expiration || !token?.access_token) {
         const response = await fetch(EMAIL_API_AUTH, {
           method: 'POST',
           headers: {
@@ -84,9 +85,11 @@ export default async (request: Request) => {
           return Response.json({error: 'Error Getting Auth Token'}, {status: 500})
         }
 
-        const expiration = Date.now() + 3600000
         token = await response.json()
-        await supabase.from('fsk_email_token').update({token: JSON.stringify(token), expiration}).eq('id', '1')
+        const { error } = await supabase.from('fsk_email_token').upsert({id: 1, token: JSON.stringify(token), expiration})
+        if(error) {
+          console.error('Error updating token in DB', String(error))
+        }
       }
 
       const emailMessage = {
