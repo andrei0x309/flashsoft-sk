@@ -1,4 +1,4 @@
-import { validateEmail } from '../edge-utils'
+import { validateEmail } from './edge-utils'
 import { SmtpClient } from "https://deno.land/x/smtp@v0.7.0/mod.ts";
 
 const SMTP_HOST = Deno.env.get('SECRET_SMTP_HOST')
