@@ -26,6 +26,6 @@ const options = {
         }
         return Response.json({data})
     } catch (e) {
-      return Response.json({error: `Internal Server Error: ${String(e)}`}, {status: 500})
+      return Response.json({error: `Internal Server Error: ${JSON.stringify(e)}`}, {status: 500})
     }
 }
