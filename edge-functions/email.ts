@@ -110,8 +110,6 @@ export default async (request: Request) => {
         }
       }
 
-      console.info('Auth Token: ', token)
-
       const response = await fetch(EMAIL_API_ENDPOINT, {
         method: 'POST',
         headers: {
