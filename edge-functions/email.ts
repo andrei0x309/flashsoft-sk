@@ -1,11 +1,9 @@
-import { SmtpClient } from "https://deno.land/x/smtp@v0.7.0/mod.ts";
+import nodemailer from "https://esm.sh/nodemailer@6.9.0";
 
 const SMTP_HOST = Deno.env.get('SECRET_SMTP_HOST')
 const SMTP_PORT = Deno.env.get('SECRET_SMTP_PORT')
 const SMTP_USERNAME = Deno.env.get('SECRET_SMTP_USERNAME')
 const SMTP_PASSWORD = Deno.env.get('SECRET_SMTP_PASSWORD')
-
-const client = new SmtpClient()
 
 export const validateEmail = (email: string) => {
   return String(email)
@@ -46,20 +44,21 @@ export default async (request: Request) => {
         from: "website@flashsoft.eu",
         to: "andrei@flashsoft.eu",
         subject: "Website contact from " + name + " " + email,
-        content: message,
+        text: message,
       };
     
-    
-      client.connect({
-        hostname: SMTP_HOST,
+    const transport = nodemailer.createTransport({
+        host: SMTP_HOST,
         port: SMTP_PORT,
-        username: SMTP_USERNAME,
-        password: SMTP_PASSWORD,
-      }).then(() => {
-        client.send(emailMessage).then(() => {
-          client.close().catch(err => console.error(err))
-        }).catch(err => console.error(err))
-      }).catch(err => console.error(err))
+        secure: false, // upgrade later with STARTTLS
+        auth: {
+          user: SMTP_USERNAME,
+          pass: SMTP_PASSWORD,
+        },
+      });
+    
+    transport.sendMail(emailMessage).catch(err => console.error(err));
+    
       return Response.json({data: 'ok'})
     } catch (e) {
       return Response.json({error: 'Internal Server Error'}, {status: 500})
