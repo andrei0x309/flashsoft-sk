@@ -66,7 +66,7 @@ export default async (request: Request) => {
         return Response.json({error: 'Access token not found in DB'}, {status: 500})
       }
 
-      const { token } = data[0]
+      let { token } = data[0]
       if((token?.expiration ?? 0) <= (Date.now() + 3600000) || !token?.access_token) {
         const response = await fetch(EMAIL_API_AUTH, {
           method: 'POST',
@@ -85,7 +85,7 @@ export default async (request: Request) => {
         }
 
         const expiration = Date.now() + 3600000
-        const token = await response.json()
+        token = await response.json()
         supabase.from('fsk_email_token').update({token: JSON.stringify(token), expiration}).eq('id', 1)
       }
 
@@ -106,11 +106,13 @@ export default async (request: Request) => {
         }
       }
 
+      console.info('Auth Token: ', token)
+
       const response = await fetch(EMAIL_API_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token.access_token}`
+          'Authorization': `Bearer ${token?.access_token}`
         },
         body: JSON.stringify(emailMessage)
       })
