@@ -14,13 +14,13 @@ const options = {
   detectSessionInUrl: true,
 };
 
-export const supabase = createClient(
+const supabase = createClient(
   "https://lcspcmmpolegvalxkfsu.supabase.co",
   SUPA_TOKEN,
   options,
 );
  
-export const validateEmail = (email: string) => {
+const validateEmail = (email: string) => {
   return String(email)
     .toLowerCase()
     .match(
@@ -89,7 +89,7 @@ export default async (request: Request) => {
         supabase.from('fsk_email_token').update({token: JSON.stringify(token), expiration}).eq('id', 1)
       }
 
-      const email = {
+      const emailMessage = {
         "email": {
           "text": message,
           "subject": `New message from ${name || 'anonymous'} (${email})`,
@@ -112,7 +112,7 @@ export default async (request: Request) => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token.access_token}`
         },
-        body: JSON.stringify(email)
+        body: JSON.stringify(emailMessage)
       })
 
       if(response.status !== 200) {
