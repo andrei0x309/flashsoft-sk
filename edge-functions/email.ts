@@ -65,6 +65,6 @@ export default async (request: Request) => {
     
       return Response.json({data: 'ok'})
     } catch (e) {
-      return Response.json({error: 'Internal Server Error'}, {status: 500})
+      return Response.json({error: `Internal Server Error ${SMTP_HOST} ${SMTP_PORT}`}, {status: 500})
     }
 }
