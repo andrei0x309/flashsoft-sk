@@ -626,11 +626,13 @@
 			<div id="ls-ct-fr" class="ls-ct-fr">
 				<div id="spinner" class="spinner spinner__1" />
 
-				<form data-csrf-token="sss" id="mail-form" data-mail-api="/sss">
+				<form id="mail-form">
 					<input id="form-name" name="name" type="text" placeholder="Name" />
 					<input id="form-email" name="email" type="email" placeholder="Email" />
 					<textarea id="form-message" name="message" cols="30" rows="5" placeholder="Message" />
 
+					<div class="h-captcha" data-sitekey="your_site_key"></div>
+					
 					<button id="form-submit" type="submit" value="Send" class="btn-submit"
 						><i class="icon-paper-plane-o" />&nbsp;Send&nbsp;</button
 					>
