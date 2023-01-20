@@ -3,9 +3,117 @@
 	// import welcome from '$lib/images/svelte-welcome.webp';
 	// import welcome_fallback from '$lib/images/svelte-welcome.png';
 	// import { BC_VERSION, BC_SK_VERSION } from '$lib/config';
+	import { Swipe } from '$lib/utils/swipe';
+	import AlertEmail from './AlertEmail.svelte';
+	import { onMount } from 'svelte';
 
-	const pageDescription = 'Test';
-	const pageTitle = 'Test';
+	const pageDescription = 'Web & App Development Portfolio & Software Developer Profile portal, you can access public my repositories on my GitLab instance.';
+	const pageTitle = 'Web & App Development Portfolio - Software Dev Profile - flashsoft.eu';
+
+	let showAlert: boolean = false;
+	let alertMsg: string = '';
+	let alertType: string = 'error';
+
+	let hcaptchaElement: HTMLElement;
+	let email: string = '';
+	let name: string = '';
+	let message: string = '';
+	let mailForm: HTMLElement;
+	let spinner: HTMLElement;
+	let toggle: HTMLElement; // document.getElementById('menu_toggle');
+	let sideMenu: HTMLElement; // document.getElementById('side-menu');
+	let close: HTMLElement; // document.getElementById('menu-close');
+
+	const showAlertElement = (msg: string, type: string) => {
+		showAlert = true;
+		alertMsg = msg;
+		alertType = type;
+	};
+
+	const toggeleMenu = () => {
+	sideMenu.classList.add('sideMenuToggle');
+    const menuLinks = sideMenu?.querySelector('.sidebar-menu-nav')?.querySelectorAll('.sidemenu');
+    if(menuLinks){
+    let i = 1;
+    for (const menuLink of menuLinks as unknown as HTMLElement[]){
+        const timeout = 130 * i;
+        setTimeout( () => {
+             menuLink.style.animation = 'menuLinkSlideLeft 0.8s ease-in forwards;';
+        },timeout );
+        i++;
+     }
+    }
+	};
+
+	const closeMenu = () => {
+		sideMenu?.classList.remove("sideMenuToggle");
+	}
+
+	const setLoadEmail = (isSending = true) => {
+		if(isSending) {
+		if(mailForm){
+			mailForm.style.display = 'none';
+		}
+		if(spinner){
+			spinner.style.display = 'inline-block';
+		}
+		} else {
+		if(mailForm){
+			mailForm.style.display = 'block';
+		}
+		if(spinner){
+			spinner.style.display = 'none';
+		}
+		}
+	}
+
+
+
+onMount(() => {
+	new Swipe(sideMenu, function(event: unknown, direction: string) {
+	//event.preventDefault();
+	if (direction === "left") {
+		closeMenu()
+	}
+})
+})
+	
+	const submitEmail = async () => {
+
+		setLoadEmail(true)
+		const data = {
+			email,
+			name,
+			message,
+			hCaptcha: hcaptchaElement.getAttribute('data-hcaptcha-response')
+		};
+		setLoadEmail(false)
+		const recentEmail = localStorage.getItem('recent-email')
+		if(recentEmail) {
+			const num = isNaN(parseInt(recentEmail)) ? 0 : parseInt(recentEmail);
+			const date = new Date( num  );
+			const now = new Date();
+			if(date.getTime() + 6e5 > now.getTime()) {
+				showAlertElement('You sent an email recently', 'error');
+				return;
+			}
+		}
+
+		const response = await fetch('/edge-api/index/email', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		});
+		setLoadEmail(false)
+		if(response.ok) {
+			showAlertElement('Email sent!', 'success');
+			localStorage.setItem('recent-email', new Date().getTime().toString());
+		} else {
+			showAlertElement('Email not sent due to an error', 'error');
+		}
+};	
 
 </script>
 
@@ -38,9 +146,11 @@
 		<section id="section-projects">
 			<div class="ls-h mb-4 relative">
 				<button
+					bind:this={toggle}
 					aria-label="Open Side Menu"
 					id="menu_toggle"
 					class="icon-bars menu-phone inline md:hidden "
+					on:click={toggeleMenu}
 				/>
 				<p class="inline-block my-1">projects</p>
 			</div>
@@ -67,7 +177,7 @@
 					/>
 				</a>
 				<p>
-					Also you can visit my <a href="/" class="gitlab-button">Certifications/Courses DB</a>.
+					Visit <a href="/show-cert" class="gitlab-button">Courses DB</a> or <a href="/projects" class="gitlab-button">Projects</a>.
 				</p>
 			</div>
 		</section>
@@ -624,16 +734,16 @@
 				<h2 class="my-3">Contact form</h2>
 			</div>
 			<div id="ls-ct-fr" class="ls-ct-fr">
-				<div id="spinner" class="spinner spinner__1" />
+				<div  bind:this={spinner} id="spinner" class="spinner spinner__1" />
+				<AlertEmail bind:showAlert={showAlert} bind:msg={alertMsg} bind:type={alertType} />
+				<form bind:this={mailForm} id="mail-form">
+					<input  bind:value={name} id="form-name" name="name" type="text" placeholder="Name" />
+					<input  bind:value={email} id="form-email" name="email" type="email" placeholder="Email" />
+					<textarea bind:value={message} id="form-message" name="message" cols="30" rows="5" placeholder="Message" />
 
-				<form id="mail-form">
-					<input id="form-name" name="name" type="text" placeholder="Name" />
-					<input id="form-email" name="email" type="email" placeholder="Email" />
-					<textarea id="form-message" name="message" cols="30" rows="5" placeholder="Message" />
-
-					<div class="h-captcha" data-sitekey="your_site_key"></div>
-					
-					<button id="form-submit" type="submit" value="Send" class="btn-submit"
+					<div bind:this={hcaptchaElement} class="h-captcha flex justify-center" data-theme="dark" data-sitekey="c529949f-b6e7-4e97-af3a-0ddb0f7c1c5a"></div>
+					<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+					<button on:click|preventDefault={submitEmail} id="form-submit" type="submit" value="Send" class="btn-submit"
 						><i class="icon-paper-plane-o" />&nbsp;Send&nbsp;</button
 					>
 				</form>
@@ -648,8 +758,8 @@
 		</footer>
 	</div>
 
-	<nav id="side-menu" class="fixed w-11/12 h-full top-0 left-0 overflow-auto bg-white">
-		<button aria-label="Close Side Menu" id="menu-close">×</button>
+	<nav bind:this={sideMenu} id="side-menu" class="fixed w-11/12 h-full top-0 left-0 overflow-auto bg-white">
+		<button on:click={closeMenu} bind:this={close} aria-label="Close Side Menu" id="menu-close">×</button>
 
 		<ul class="sidebar-menu-nav">
 			<li class="sidemenu">

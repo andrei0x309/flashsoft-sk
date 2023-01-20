@@ -323,17 +323,24 @@ input{
     border: px solid #222;
 }
 
-.alert-svg{
-    position: relative;
-    top: 2px;
-    left: 2px;
-}
- 
 .alert-error{
      border-color: #af3a2a;
      background-color: #fff1f1;
 }
 
+.alert-close{
+  position: relative;
+  right: -15.5rem;
+  top: -1.5rem;
+  border: 1px #3a3a3a8f solid;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  line-height: 0;
+  color: #000;
+  text-transform: uppercase;
+}
 
 .left-side-footer {
     background-color: #191a21;
@@ -938,8 +945,8 @@ a.gitlab-button:active {
 
 .spinner {
   position: relative;
-  margin: 5rem;
-  display: inline-block;
+  margin-top: 6rem;
+  margin-bottom: 10rem;
   display:none;
 }
 .spinner:after, .spinner:before {

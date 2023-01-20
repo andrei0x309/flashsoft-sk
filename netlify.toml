@@ -10,3 +10,7 @@
 [[edge_functions]]
   path = "/edge-api/cert/get/tags"
   function = "gettags"
+
+[[edge_functions]]
+  path = "/edge-api/test"
+  function = "test"
