@@ -6,6 +6,7 @@ const EMAIL_SECRET = Deno.env.get('EMAIL_SECRET')
 
 const EMAIL_API_AUTH = 'https://api.sendpulse.com/oauth/access_token'
 const EMAIL_API_ENDPOINT = 'https://api.sendpulse.com/smtp/emails'
+const SECRET_HCAPTCHA_SECRET = Deno.env.get('SECRET_HCAPTCHA_SECRET')
 
 const options = {
   schema: "public",
@@ -29,16 +30,13 @@ const validateEmail = (email: string) => {
 };
 
 export default async (request: Request) => {
-    let  name, email, message;
-    // hCaptcha
+    let  name, email, message, hCaptcha;
     try {
-      // , hCaptcha
-      ({ name, email, message } = await request.json());
+      ({ name, email, message, hCaptcha } = await request.json());
     } catch (error) {
       return Response.json({error: 'Missing required fields, email, hCaptcha, message'}, {status: 400})
     }
-    // || !hCaptcha
-    if(!email || !message ) {
+    if(!email || !message || !hCaptcha ) {
         return Response.json({error: 'Missing required fields, email, hCaptcha, message'}, {status: 400})
     }
     if(message.length > 2000) {
@@ -52,6 +50,25 @@ export default async (request: Request) => {
     }
     if(!validateEmail(email)) {
         return Response.json({error: 'Invalid email'}, {status: 400})
+    }
+
+    try {
+      const response = await fetch(`https://hcaptcha.com/siteverify`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+          secret: SECRET_HCAPTCHA_SECRET,
+          response: hCaptcha
+        })
+      })
+      const { success } = await response.json()
+      if(!success) {
+        return Response.json({error: 'Invalid hCaptcha'}, {status: 400})
+      }
+    } catch (error) {
+      return Response.json({error: 'Error validating hCaptcha'}, {status: 500})
     }
     
     try{
