@@ -1,4 +1,6 @@
 
+import { createClient } from "https://esm.sh/@supabase/supabase-js";
+
 const SUPA_TOKEN = Deno.env.get('TOKEN')
 
 const options = {
