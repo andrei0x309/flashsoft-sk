@@ -25,6 +25,6 @@ export default async (request: Request) => {
                 message: 'test',
             }
         )})
-        }, 1000);
+        }, 7000);
     return Response.json('Hello world', {status: 200})
 }
