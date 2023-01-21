@@ -140,9 +140,11 @@ export default async (request: Request) => {
         return Response.json({error: 'Error Sending email to API'}, {status: 500})
       }
 
-      supabase.from('fsk_email_copy').insert({json: JSON.stringify(emailMessage)})
+      setTimeout(async () => {
+      await supabase.from('fsk_email_copy').insert({json: JSON.stringify(emailMessage)})
+      }, 50)
       
-      return Response.json({data: 'ok'})
+      return Response.json({data: 'ok'}, {status: 200})
     } catch (e) {
       return Response.json({error: `Internal Server Error: ${String(e)}`}, {status: 500})
     }

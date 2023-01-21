@@ -115,6 +115,10 @@ onMount(() => {
 		}
 };	
 
+export let data: any;
+
+const html = data?.html;
+
 </script>
 
 <svelte:head>
@@ -155,7 +159,7 @@ onMount(() => {
 				<p class="inline-block my-1">projects</p>
 			</div>
 			<div class="ls-pr-ct flex -mr-4 -ml-4 text-center p-6 justify-center flex-col items-center">
-				<h1>
+				<!-- <h1>
 					Visit my own <a
 						rel="noopener"
 						href="https://gitlab.flashsoft.eu/explore/projects?sort=created_desc"
@@ -175,7 +179,12 @@ onMount(() => {
 						width="550"
 						height="259"
 					/>
-				</a>
+				</a> -->
+				{#if html}
+				<div class="github-contributions">
+					{@html html}
+				</div>
+				{/if}
 				<p>
 					Visit <a href="/show-cert" class="gitlab-button">Courses DB</a> or <a href="/projects" class="gitlab-button">Projects</a>.
 				</p>
