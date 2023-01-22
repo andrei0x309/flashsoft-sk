@@ -76,7 +76,7 @@
 			email,
 			name,
 			message,
-			hCaptcha: hcaptchaElement.getAttribute('data-hcaptcha-response')
+			hCaptcha: hcaptchaElement.dataset.hcaptchaResponse
 		};
 		setLoadEmail(false)
 		const recentEmail = localStorage.getItem('recent-email')
@@ -102,7 +102,9 @@
 			showAlertElement('Email sent!', 'success');
 			localStorage.setItem('recent-email', new Date().getTime().toString());
 		} else {
-			showAlertElement('Email not sent due to an error', 'error');
+			await response.json().then((data: any) => {
+				showAlertElement(`Error: ${data?.error}`, 'error');
+			});
 		}
 };	
 
@@ -111,7 +113,6 @@ export let data: any;
 const html = data?.html;
 
 const renderCaptcha = () => {
-	console.log('rendering captcha', hcaptchaElement)
 	if(hcaptchaElement && (window as unknown as {hcaptcha: unknown})?.hcaptcha) {
 		(window as unknown as {hcaptcha: { render: (el: HTMLElement, op: {
 			sitekey: string,
