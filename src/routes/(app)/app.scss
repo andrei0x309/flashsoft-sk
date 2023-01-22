@@ -10,16 +10,18 @@
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: #2a2a2a80;
   background-clip: border-box;
-  border: 1px solid rgba(0,0,0,.125);
-  border-radius: 0.25rem;
+  border: 1px solid rgb(0 0 0 / 69%);
+  border-radius: 0.5rem;
+  color: darkgray;
+  padding: 0.8rem;
 }
 // END
 
 body {
     background: #0F2027;
-    background: linear-gradient(90deg, rgb(54 68 129 / 65%), #061626d9), url(/images/bg.png);
+    background: linear-gradient(90deg, rgb(21 38 68 / 78%), rgb(24 23 28 / 90%)), url(/images/bg.png);
   }
   
   

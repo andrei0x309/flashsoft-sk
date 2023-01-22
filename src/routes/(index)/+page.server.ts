@@ -8,6 +8,7 @@ const htmlRemoveActivityGraph = (html: string) => {
     return html.replace(/<div class="js-activity-overview-graph-container.*?<\/div>/gms, '')
     .replace(/<details.*?<\/details>/gms, '')
     .replace(/<svg.*?js-calendar-graph-svg.*?>/gms, '<svg class="js-calendar-graph-svg" width="99%" viewBox="0 0 717 112">')
+    .replace(/<div class="float-left.*?<\/div>/gms, '')
 }
 
 const updateContributions = async () => {

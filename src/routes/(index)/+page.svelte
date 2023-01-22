@@ -4,31 +4,18 @@
 	// import welcome_fallback from '$lib/images/svelte-welcome.png';
 	// import { BC_VERSION, BC_SK_VERSION } from '$lib/config';
 	import { Swipe } from '$lib/utils/swipe';
-	import AlertEmail from './AlertEmail.svelte';
 	import { onMount } from 'svelte';
+	import ContactForm from './ContactForm.svelte';
+	import Interests from './Interests.svelte';
+	import Skills from './Skills.svelte';
+	import Techs from './Techs.svelte';
 
 	const pageDescription = 'Web & App Development Portfolio & Software Developer Profile portal, you can access public my repositories on my GitLab instance.';
 	const pageTitle = 'Web & App Development Portfolio - Software Dev Profile - flashsoft.eu';
 
-	let showAlert: boolean = false;
-	let alertMsg: string = '';
-	let alertType: string = 'error';
-
-	let hcaptchaElement: HTMLElement;
-	let email: string = '';
-	let name: string = '';
-	let message: string = '';
-	let mailForm: HTMLElement;
-	let spinner: HTMLElement;
 	let toggle: HTMLElement; // document.getElementById('menu_toggle');
 	let sideMenu: HTMLElement; // document.getElementById('side-menu');
 	let close: HTMLElement; // document.getElementById('menu-close');
-
-	const showAlertElement = (msg: string, type: string) => {
-		showAlert = true;
-		alertMsg = msg;
-		alertType = type;
-	};
 
 	const toggeleMenu = () => {
 	sideMenu.classList.add('sideMenuToggle');
@@ -49,82 +36,10 @@
 		sideMenu?.classList.remove("sideMenuToggle");
 	}
 
-	const setLoadEmail = (isSending = true) => {
-		if(isSending) {
-		if(mailForm){
-			mailForm.style.display = 'none';
-		}
-		if(spinner){
-			spinner.style.display = 'inline-block';
-		}
-		} else {
-		if(mailForm){
-			mailForm.style.display = 'block';
-		}
-		if(spinner){
-			spinner.style.display = 'none';
-		}
-		}
-	}
-
-
-	
-	const submitEmail = async () => {
-
-		const hCaptcha = (document?.querySelector('form div iframe')as HTMLElement)?.dataset?.hcaptchaResponse
-
-		setLoadEmail(true)
-		const data = {
-			email,
-			name,
-			message,
-			hCaptcha
-		};
-		setLoadEmail(false)
-		const recentEmail = localStorage.getItem('recent-email')
-		if(recentEmail) {
-			const num = isNaN(parseInt(recentEmail)) ? 0 : parseInt(recentEmail);
-			const date = new Date( num  );
-			const now = new Date();
-			if(date.getTime() + 6e5 > now.getTime()) {
-				showAlertElement('You sent an email recently', 'error');
-				return;
-			}
-		}
-
-		const response = await fetch('/edge-api/index/email', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		});
-		setLoadEmail(false)
-		if(response.ok) {
-			showAlertElement('Email sent!', 'success');
-			localStorage.setItem('recent-email', new Date().getTime().toString());
-		} else {
-			await response.json().then((data: any) => {
-				showAlertElement(`Error: ${data?.error}`, 'error');
-			});
-		}
-};	
 
 export let data: any;
 
 const html = data?.html;
-
-const renderCaptcha = () => {
-	if(hcaptchaElement && (window as unknown as {hcaptcha: unknown})?.hcaptcha) {
-		(window as unknown as {hcaptcha: { render: (el: HTMLElement, op: {
-			sitekey: string,
-			theme: string,
-		}) => void }}).hcaptcha.render(hcaptchaElement, {
-			sitekey: 'c529949f-b6e7-4e97-af3a-0ddb0f7c1c5a',
-			theme: 'dark',
-		});
-	}
-}
 
 onMount(() => {
 	new Swipe(sideMenu, function(event: unknown, direction: string) {
@@ -133,7 +48,6 @@ onMount(() => {
 		closeMenu()
 	}
 })
-renderCaptcha();
 })
 
 </script>
@@ -162,6 +76,7 @@ renderCaptcha();
 	</script>
 </svelte:head>
 
+<body id="index">
 <main id="main" class="relative top-0 right-0 w-full overflow-visible">
 	<div id="left-side" class="lfc h-full pt-14 overflow-y-scroll overflow-x-hidden w-full md:w-3/5 ">
 		<section id="section-projects">
@@ -175,7 +90,7 @@ renderCaptcha();
 				/>
 				<p class="inline-block my-1">projects</p>
 			</div>
-			<div class="ls-pr-ct flex -mr-4 -ml-4 text-center p-6 justify-center flex-col items-center">
+			<div class="ls-pr-ct flex -mr-4 -ml-4 text-center p-6 justify-center flex-col items-center mb-2">
 				<!-- <h1>
 					Visit my own <a
 						rel="noopener"
@@ -202,581 +117,20 @@ renderCaptcha();
 					{@html html}
 				</div>
 				{/if}
+				<p>Also Check:</p>
 				<p>
-					Visit <a href="/show-cert" class="gitlab-button">Courses DB</a> or <a href="/projects" class="gitlab-button">Projects</a>.
+					<a href="/show-cert" class="gitlab-button">Courses DB</a> || <a href="/projects" class="gitlab-button">Projects</a>
 				</p>
 			</div>
 		</section>
-		<section id="section-skills">
-			<div class="ls-h ls-skh mb-4"><p class="my-1">Skills</p></div>
-			<div class="ls-skh ls-sk-ct">
-				<ul class="mb-8">
-					<li><h2>back end development</h2></li>
-					<li><h2>front end development</h2></li>
-					<li><h2>mobile / desktop app development</h2></li>
-					<li><h2>network and server administration</h2></li>
-				</ul>
-			</div>
-		</section>
 
-		<section id="section-tech">
-			<div class="l-w-bg icos -mb-8">
-				<h3><span>Technologies I've worked with</span></h3>
+		<Skills />
+		<Techs />
+		<Interests />
+		<ContactForm />
 
-				<img
-					src="/res/devicon/amp/amp-opt.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="AMP logo"
-				/>
-
-				<img
-					src="/res/devicon/html5/html5-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="html5 logo"
-				/>
-
-				<img
-					src="/res/devicon/css3/css3-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="css3 logo"
-				/>
-
-				<img
-					src="/res/devicon/sass/sass-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="sass logo"
-				/>
-
-				<img
-					src="/res/devicon/tailwind/tailwind-opt.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="tailwind logo"
-				/>
-
-				<img
-					src="/res/devicon/javascript/javascript-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="javascript logo"
-				/>
-
-				<img
-					src="/res/devicon/typescript/typescript-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="Webpack logo"
-				/>
-
-				<img
-					src="/res/devicon/react/react-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="react logo"
-				/>
-
-				<img
-					src="/res/devicon/vuejs/vuejs-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="vue logo"
-				/>
-
-				<img
-					src="/res/devicon/angularjs/angularjs-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="Angular logo"
-				/>
-
-				<img
-					src="/res/devicon/python/python-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="python logo"
-				/>
-
-				<img
-					src="/res/devicon/php/php-plain.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="php logo"
-				/>
-
-				<img
-					src="/res/devicon/nodejs/nodejs-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="nodejs logo"
-				/>
-
-				<img
-					src="/res/devicon/c/c-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="c-lang logo"
-				/>
-
-				<img
-					src="/res/devicon/cplusplus/cplusplus-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="cplusplus-lang logo"
-				/>
-
-				<img
-					src="/res/devicon/qt/qt-round.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="qt logo"
-				/>
-
-				<img
-					src="/res/devicon/csharp/csharp-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="csharp-lang logo"
-				/>
-
-				<img
-					src="/res/devicon/dot-net/dot-net-plain-wordmark.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="dot-net logo"
-				/>
-
-				<img
-					src="/res/devicon/kotlin/kotlin-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="java logo"
-				/>
-
-				<img
-					src="/res/devicon/java/java-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="java logo"
-				/>
-
-				<img
-					src="/res/devicon/laravel/laravel-plain.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="laravel logo"
-				/>
-
-				<img
-					src="/res/devicon/symfony/symfony-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="symfony logo"
-				/>
-
-				<img
-					src="/res/devicon/codeigniter/codeigniter-plain.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="codeigniter logo"
-				/>
-
-				<img
-					src="/res/devicon/flask/flask-opt.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="flask logo"
-				/>
-
-				<img
-					src="/res/devicon/ssh/ssh-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="ssh logo"
-				/>
-
-				<img
-					src="/res/devicon/bash/bash-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="bash logo"
-				/>
-
-				<img
-					src="/res/devicon/autoit/autoit.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="autoit logo"
-				/>
-
-				<img
-					src="/res/devicon/linux/toxOpt.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="linux logo"
-				/>
-
-				<img
-					src="/res/devicon/debian/debian-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="debian logo"
-				/>
-
-				<img
-					src="/res/devicon/redhat/redhat-plain.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="redhat logo"
-				/>
-
-				<img
-					src="/res/devicon/ubuntu/ubuntu-plain.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="ubuntu logo"
-				/>
-
-				<img
-					src="/res/devicon/docker/docker-plain.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="ubuntu logo"
-				/>
-
-				<img
-					src="/res/devicon/nginx/nginx.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="linux logo"
-				/>
-
-				<img
-					src="/res/devicon/apache/apache-opt.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="apache logo"
-				/>
-
-				<img
-					src="/res/devicon/oracle/oracle-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="oracle logo"
-				/>
-
-				<img
-					src="/res/devicon/postgresql/postgres-opt.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="postgres logo"
-				/>
-
-				<img
-					src="/res/devicon/mysql/mysql-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="mysql logo"
-				/>
-
-				<img
-					src="/res/devicon/redis/redis-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="redis logo"
-				/>
-
-				<img
-					src="/res/devicon/mongodb/mongodb-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="mongodb logo"
-				/>
-
-				<img
-					src="/res/devicon/android/android-plain.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="android logo"
-				/>
-
-				<img
-					src="/res/devicon/ionic/ionic-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="ionic logo"
-				/>
-
-				<img
-					src="/res/devicon/gradle/gradle-plain.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="gradle logo"
-				/>
-
-				<img
-					src="/res/devicon/composer/composer-opt.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="composer logo"
-				/>
-
-				<img
-					src="/res/devicon/npm/npm-original-wordmark.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="composer logo"
-				/>
-
-				<img
-					src="/res/devicon/yarn/yarn-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="composer logo"
-				/>
-
-				<img
-					src="/res/devicon/git/git-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="git logo"
-				/>
-
-				<img
-					src="/res/devicon/gitlab/gitlab-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="github logo"
-				/>
-
-				<img
-					src="/res/devicon/github/github-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="github logo"
-				/>
-
-				<img
-					src="/res/devicon/visualstudio/visualstudio-plain.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="visualstudio logo"
-				/>
-
-				<img
-					src="/res/devicon/netbeans/netbeans-opt.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="netbeans logo"
-				/>
-
-				<img
-					src="/res/devicon/eclipse/eclipseOpt.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="eclipse logo"
-				/>
-
-				<img
-					src="/res/devicon/photoshop/photoshop-plain.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="photoshop logo"
-				/>
-
-				<img
-					src="/res/devicon/inkscape/inkscape-plain.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="inkscape logo"
-				/>
-
-				<img
-					src="/res/devicon/materialui/materialui-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="bootstrap logo"
-				/>
-
-				<img
-					src="/res/devicon/bulma/bulma.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="bulma logo"
-				/>
-
-				<img
-					src="/res/devicon/bootstrap/bootstrap-plain.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="bootstrap logo"
-				/>
-
-				<img
-					src="/res/devicon/jquery/jquery-plain.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="jquery logo"
-				/>
-
-				<img
-					src="/res/devicon/webpack/webpack-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="Webpack logo"
-				/>
-
-				<img
-					src="/res/devicon/moodle/moodle-original.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="moodle logo"
-				/>
-
-				<img
-					src="/res/devicon/wordpress/wordpress-plain.svg"
-					width="64"
-					height="64"
-					loading="lazy"
-					alt="wordpress logo"
-				/>
-			</div>
-		</section>
-
-		<section id="section-interests">
-			<div class="l-w-bg">
-				<h3><span>Topics I follow</span></h3>
-
-				<ul class="tags mb-6">
-					<li><span class="taglink">GP programming / scripting <span>99</span></span></li>
-					<li><span class="taglink">computer science <span>98</span></span></li>
-					<li><span class="taglink">web development <span>96</span></span></li>
-					<li><span class="taglink">web design <span>93</span></span></li>
-					<li><span class="taglink">mobile app development <span>93</span></span></li>
-					<li><span class="taglink">RDBMS <span>90</span></span></li>
-					<li><span class="taglink">NoSQL databases <span>87</span></span></li>
-					<li><span class="taglink">cloud computing <span>84</span></span></li>
-					<li><span class="taglink">SEO <span>81</span></span></li>
-					<li><span class="taglink">hybrid applications <span>78</span></span></li>
-					<li><span class="taglink">native applications <span>75</span></span></li>
-					<li><span class="taglink">network systems <span>72</span></span></li>
-					<li><span class="taglink">network security <span>70</span></span></li>
-					<li><span class="taglink">emulators & VMs <span>69</span></span></li>
-					<li><span class="taglink">software RE <span>66</span></span></li>
-					<li><span class="taglink">malware RE <span>60</span></span></li>
-					<li><span class="taglink">OSs APis <span>57</span></span></li>
-					<li><span class="taglink">IDEs <span>54</span></span></li>
-					<li><span class="taglink">biometrics security <span>50</span></span></li>
-					<li><span class="taglink">open source <span>48</span></span></li>
-					<li><span class="taglink">AI & ML & DL & GANs <span>46</span></span></li>
-					<li><span class="taglink">VR & AR <span>46</span></span></li>
-				</ul>
-
-				<ul class="tags green mb-6">
-					<li><span class="taglink">automation <span>30</span></span></li>
-					<li><span class="taglink">open hardware <span>28</span></span></li>
-					<li><span class="taglink">circuit design <span>26</span></span></li>
-					<li><span class="taglink">arduino compatible <span>24</span></span></li>
-					<li><span class="taglink">embeded systems<span>21</span></span></li>
-					<li><span class="taglink">NFC apps<span>21</span></span></li>
-					<li><span class="taglink">dev boards <span>22</span></span></li>
-				</ul>
-
-				<ul class="tags blue mb-6">
-					<li><span class="taglink">reading sci-fi and technical books <span>20</span></span></li>
-					<li><span class="taglink">technology <span>18</span></span></li>
-					<li><span class="taglink">gaming <span>16</span></span></li>
-					<li><span class="taglink">running <span>14</span></span></li>
-					<li><span class="taglink">philosophy <span>12</span></span></li>
-					<li><span class="taglink">politics <span>10</span></span></li>
-				</ul>
-			</div>
-		</section>
-
-		<section id="section-contact">
-			<div class="ls-h mb-0">
-				<h2 class="my-3">Contact form</h2>
-			</div>
-			<div id="ls-ct-fr" class="ls-ct-fr">
-				<div  bind:this={spinner} id="spinner" class="spinner spinner__1" />
-				<AlertEmail bind:showAlert={showAlert} bind:msg={alertMsg} bind:type={alertType} />
-				<form bind:this={mailForm} id="mail-form">
-					<input  bind:value={name} id="form-name" name="name" type="text" placeholder="Name" />
-					<input  bind:value={email} id="form-email" name="email" type="email" placeholder="Email" />
-					<textarea bind:value={message} id="form-message" name="message" cols="30" rows="5" placeholder="Message" />
-
-					<div bind:this={hcaptchaElement} class="flex justify-center"></div>
-					<script src="https://js.hcaptcha.com/1/api.js?render=explicit" on:load={renderCaptcha} async defer></script>
-					<button on:click|preventDefault={submitEmail} id="form-submit" type="submit" value="Send" class="btn-submit"
-						><i class="icon-paper-plane-o" />&nbsp;Send&nbsp;</button
-					>
-				</form>
-			</div>
-		</section>
 		<footer class="left-side-footer">
-			<p>Powerd by netlify, deno on edge, SvelteKit</p>
+			<p>Powerd by Netlify, Deno on edge, SvelteKit</p>
 			<!-- <p>APP Version - {BC_VERSION}</p>
 			<p>SvelteKit Version {BC_SK_VERSION}</p> -->
 			<!-- <a rel="noopener nofollow" href="https://www.codewars.com/r/GFQ2Gg"><p>Join CodeWars: <span class="icon-codewars">.</span></p></a>
@@ -1024,4 +378,5 @@ renderCaptcha();
 	</aside>
 	<!--
 	<a href="#0" class="cd-top">Top</a> -->
-</main>
+	</main>
+</body>
