@@ -76,7 +76,7 @@ body {
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
     height: 100%;
-    background: linear-gradient(90deg, rgba(32, 34, 43, 0.4), #212529), url(/images/bg.png);
+    background: linear-gradient(90deg, rgb(21 38 68 / 78%), rgb(24 23 28 / 90%)), url(/images/bg.png);
     background-size: 100vw 130vh;
     background-position: 0;
     background-attachment: fixed;
@@ -225,12 +225,6 @@ nav {
     border-bottom: 0.2rem solid #f1b01e;
     
 }
-
-.ls-skh {
-    transform-origin: 0 100%;
-    transform: skewY(1deg);
-}
-
 
 .ls-pr-ct{
     color: #026084;
@@ -765,34 +759,22 @@ svg.keyboard path:hover {
 }
 
 a.gitlab-button {
-      font-size: 1rem;
-    text-align: center;
-    line-height: 3.2rem;
-    text-decoration: none;
-    color: white;
-    background-color: #CC4331;
-    border-radius: 0.5em;
-    /* position: absolute; */
-    /* top: 50%; */
-    /* left: 50%; */
-    width: 8rem;
-    padding: 0.3rem;
-  text-shadow: 0 -1px -1px #af3a2a;
-  -moz-box-shadow: 0 4px 0 #af3a2a, 0 5px 5px 1px rgba(0, 0, 0, 0.4);
-  -webkit-box-shadow: 0 4px 0 #af3a2a, 0 5px 5px 1px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 4px 0 #af3a2a, 0 5px 5px 1px rgba(0, 0, 0, 0.4);
-  -moz-transition: all 0.15s ease-in-out;
-  -o-transition: all 0.15s ease-in-out;
-  -webkit-transition: all 0.15s ease-in-out;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 3.2rem;
+  text-decoration: none;
+  color: white;
+  background-color: #3162a5;
+  border-radius: 0.5em;
+  width: 8rem;
+  padding: 0.5rem;
+  text-shadow: 0px 1px #000000bf;
+  box-shadow: 0 4px 0 #0d124cc7, 0 5px 5px 1px rgb(0 0 0 / 40%);
   transition: all 0.15s ease-in-out;
 }
 a.gitlab-button:hover {
-  background-color: #d25544;
-  text-shadow: 0 -1px -1px #c4402f;
-  -moz-box-shadow: 0 4px 0 #c4402f, 0 5px 5px 1px rgba(0, 0, 0, 0.4);
-  -webkit-box-shadow: 0 4px 0 #c4402f, 0 5px 5px 1px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 4px 0 #c4402f, 0 5px 5px 1px rgba(0, 0, 0, 0.4);
-  color: white;
+  background-color: #3447bb;
+  box-shadow: 0 4px 0 #1e2658, 0 5px 5px 1px rgb(0 0 0 / 40%);
 }
 a.gitlab-button:active {
   margin-top: 3rem;
@@ -1030,12 +1012,16 @@ a.gitlab-button:active {
     --color-calendar-winter-graph-day-L2-bg: #0969DA;
     --color-calendar-winter-graph-day-L3-bg: #54AEFF;
     --color-calendar-winter-graph-day-L4-bg: #B6E3FF;
-    --color-calendar-graph-day-bg: var(--color-scale-gray-8);
+    --color-calendar-graph-day-bg: #161b22;
     --color-calendar-graph-day-border: rgba(27, 31, 35, 0.06);
-    --color-calendar-graph-day-L1-bg: #0e4429;
-    --color-calendar-graph-day-L2-bg: #006d32;
-    --color-calendar-graph-day-L3-bg: #26a641;
-    --color-calendar-graph-day-L4-bg: #39d353;
+    // --color-calendar-graph-day-L1-bg: #0e4429;
+    // --color-calendar-graph-day-L2-bg: #006d32;
+    // --color-calendar-graph-day-L3-bg: #26a641;
+    // --color-calendar-graph-day-L4-bg: #39d353;
+    --color-calendar-graph-day-L1-bg: #0A3069;
+    --color-calendar-graph-day-L2-bg: #0969DA;
+    --color-calendar-graph-day-L3-bg: #54AEFF;
+    --color-calendar-graph-day-L4-bg: #B6E3FF;
     --color-calendar-graph-day-L1-border: rgba(255, 255, 255, 0.05);
     --color-calendar-graph-day-L2-border: rgba(255, 255, 255, 0.05);
     --color-calendar-graph-day-L3-border: rgba(255, 255, 255, 0.05);
@@ -1043,7 +1029,7 @@ a.gitlab-button:active {
     --color-user-mention-fg: var(--color-scale-yellow-0);
     --color-user-mention-bg: var(--color-scale-yellow-8);
     --color-text-white: var(--color-scale-white);
-
+    --color-calendar-graph-day-bg: #161b22;
 .position-relative {
     position: relative !important;
 }

@@ -3,6 +3,7 @@
 
     import Header from "../../Header.svelte"
     // import type { PageServerLoad } from './$types';
+    import { afterNavigate, beforeNavigate } from '$app/navigation';
 
     export let data: any;
     let showSpinner = false
@@ -10,7 +11,6 @@
     const getImgFilePath =  (fileName: string) => {
         return `/res/project/feature-img/${fileName}`
     }
-    let page = data.res.page
 
     const pageTitle = "test"
     const pageDescription = "This is a test page"
@@ -23,27 +23,40 @@
         }
     }
 
-    const goBack = async () => {
-        page = page - 1
-        history.pushState({}, '', `/projects/page/${page}`)
+    // const goBack = async () => {
+    //     page = page - 1
+    //     history.pushState({}, '', `/projects/page/${page}`)
+    //     showSpinner = true
+    //     const res = await getPage(page)
+    //     data.res = res
+    //     page = res.page
+    //     showSpinner = false
+    // }
+
+    // const goForward = async () => {
+    //     page = page + 1
+    //     history.pushState({}, '', `/projects/page/${page}`)
+    //     showSpinner = true
+    //     const res = await getPage(page)
+    //     data.res = res
+    //     page = res.page
+    //     showSpinner = false
+    // }
+
+    beforeNavigate(() => {
         showSpinner = true
-        const res = await getPage(page)
-        data.res = res
-        page = res.page
+    })
+
+    afterNavigate(() => {
         showSpinner = false
+    })
+
+    let page: number
+    $:{
+        page = data.res.page
+        console.log(page)
     }
-
-    const goForward = async () => {
-        page = page + 1
-        history.pushState({}, '', `/projects/page/${page}`)
-        showSpinner = true
-        const res = await getPage(page)
-        data.res = res
-        page = res.page
-        showSpinner = false
-    }
-
-
+    
     </script>
 
 <svelte:head>
@@ -133,11 +146,11 @@
     </div>
     <!-- v-show='showPrevious' -->
     {#if page > 1}
-    <button class="button center btn-pagination btn-5" on:click={goBack}>&#8249; Previous </button>
+    <a href={`/projects/page/${page-1}`} class="button center btn-pagination btn-5 p-2 mx-2 my-10" >&#8249; Previous </a>
     {/if}
     <!-- v-show='showNext' -->
     {#if page < data.res.totalPages}
-    <button class="button center btn-pagination btn-5" on:click={goForward}>Next &#8250;</button>
+    <a href={`/projects/page/${page+1}`} class="button center btn-pagination btn-5 p-2 mx-2 my-10">Next &#8250;</a>
     {/if}
     </div>
     
