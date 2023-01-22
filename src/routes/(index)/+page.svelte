@@ -68,15 +68,6 @@
 	}
 
 
-
-onMount(() => {
-	new Swipe(sideMenu, function(event: unknown, direction: string) {
-	//event.preventDefault();
-	if (direction === "left") {
-		closeMenu()
-	}
-})
-})
 	
 	const submitEmail = async () => {
 
@@ -118,6 +109,29 @@ onMount(() => {
 export let data: any;
 
 const html = data?.html;
+
+const renderCaptcha = () => {
+	console.log('rendering captcha', hcaptchaElement)
+	if(hcaptchaElement && (window as unknown as {hcaptcha: unknown})?.hcaptcha) {
+		(window as unknown as {hcaptcha: { render: (el: HTMLElement, op: {
+			sitekey: string,
+			theme: string,
+		}) => void }}).hcaptcha.render(hcaptchaElement, {
+			sitekey: 'c529949f-b6e7-4e97-af3a-0ddb0f7c1c5a',
+			theme: 'dark',
+		});
+	}
+}
+
+onMount(() => {
+	new Swipe(sideMenu, function(event: unknown, direction: string) {
+	//event.preventDefault();
+	if (direction === "left") {
+		closeMenu()
+	}
+})
+renderCaptcha();
+})
 
 </script>
 
@@ -750,8 +764,8 @@ const html = data?.html;
 					<input  bind:value={email} id="form-email" name="email" type="email" placeholder="Email" />
 					<textarea bind:value={message} id="form-message" name="message" cols="30" rows="5" placeholder="Message" />
 
-					<div bind:this={hcaptchaElement} class="h-captcha flex justify-center" data-theme="dark" data-sitekey="c529949f-b6e7-4e97-af3a-0ddb0f7c1c5a"></div>
-					<script src="https://js.hcaptcha.com/1/api.js?render=explicit" async defer></script>
+					<div bind:this={hcaptchaElement} class="flex justify-center"></div>
+					<script src="https://js.hcaptcha.com/1/api.js?render=explicit" on:load={renderCaptcha} async defer></script>
 					<button on:click|preventDefault={submitEmail} id="form-submit" type="submit" value="Send" class="btn-submit"
 						><i class="icon-paper-plane-o" />&nbsp;Send&nbsp;</button
 					>
