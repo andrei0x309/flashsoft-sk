@@ -71,6 +71,8 @@
 	
 	const submitEmail = async () => {
 
+		console.log(hcaptchaElement.dataset, 'test')
+
 		setLoadEmail(true)
 		const data = {
 			email,
