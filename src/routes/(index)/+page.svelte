@@ -71,14 +71,14 @@
 	
 	const submitEmail = async () => {
 
-		const hcaptcha = (document?.querySelector('form div iframe')as HTMLElement)?.dataset?.hcaptchaResponse
+		const hCaptcha = (document?.querySelector('form div iframe')as HTMLElement)?.dataset?.hcaptchaResponse
 
 		setLoadEmail(true)
 		const data = {
 			email,
 			name,
 			message,
-			hcaptcha
+			hCaptcha
 		};
 		setLoadEmail(false)
 		const recentEmail = localStorage.getItem('recent-email')
