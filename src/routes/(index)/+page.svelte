@@ -751,7 +751,7 @@ const html = data?.html;
 					<textarea bind:value={message} id="form-message" name="message" cols="30" rows="5" placeholder="Message" />
 
 					<div bind:this={hcaptchaElement} class="h-captcha flex justify-center" data-theme="dark" data-sitekey="c529949f-b6e7-4e97-af3a-0ddb0f7c1c5a"></div>
-					<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+					<script src="https://js.hcaptcha.com/1/api.js?render=explicit" async defer></script>
 					<button on:click|preventDefault={submitEmail} id="form-submit" type="submit" value="Send" class="btn-submit"
 						><i class="icon-paper-plane-o" />&nbsp;Send&nbsp;</button
 					>
