@@ -1,48 +1,20 @@
 <script lang="ts">
     import '@/routes/(app)/projects.scss'
-
+    // import { page } from '$app/stores';
     import Header from "../../Header.svelte"
     // import type { PageServerLoad } from './$types';
     import { afterNavigate, beforeNavigate } from '$app/navigation';
+    import { page as SveltePage } from '$app/stores';
+    import { projectBackRoute } from '@/stores/client-route'
+    import ProjectSingle from '../ProjectSingle.svelte';
+    import { getPrjFeatureImage } from '@/lib/utils/common';
 
     export let data: any;
     let showSpinner = false
 
-    const getImgFilePath =  (fileName: string) => {
-        return `/res/project/feature-img/${fileName}`
-    }
-
-    const pageTitle = "test"
-    const pageDescription = "This is a test page"
     //history.pushState({}, null, newUrl);
-
-    const getPage = async (page: number) => {
-        const req = await fetch('/api/projects/get?page=' + page)
-        if(req.ok) {
-            return await req.json()
-        }
-    }
-
-    // const goBack = async () => {
-    //     page = page - 1
-    //     history.pushState({}, '', `/projects/page/${page}`)
-    //     showSpinner = true
-    //     const res = await getPage(page)
-    //     data.res = res
-    //     page = res.page
-    //     showSpinner = false
-    // }
-
-    // const goForward = async () => {
-    //     page = page + 1
-    //     history.pushState({}, '', `/projects/page/${page}`)
-    //     showSpinner = true
-    //     const res = await getPage(page)
-    //     data.res = res
-    //     page = res.page
-    //     showSpinner = false
-    // }
-
+    let viewKey = 0
+    let isView = false
     beforeNavigate(() => {
         showSpinner = true
     })
@@ -51,41 +23,46 @@
         showSpinner = false
     })
 
+    const setBackRoute = () => {
+        projectBackRoute.set($SveltePage.url.toString())
+    }
+
+    console.log(data)
     let page: number
+   
+    console.log(isView)
     $:{
         page = data.res.page
-        console.log(page)
+        isView = data.rest?.includes('/view/') || false
+        if(isView) {
+            viewKey = viewKey + 1
+            console.log('isView')
+        }
     }
     
     </script>
 
 <svelte:head>
-<title>{ pageTitle }</title>
-<meta name="description" content="{pageDescription}">
-<meta property="og:title" content="{pageTitle}" />
-<meta property="og:description" content="{pageDescription}">
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://flashsoft.eu" />
-<meta property="og:image" content="https://flashsoft.eu/res/flashsoftLogo.png" />
+    <title>{ data.pageTitle }</title>
+    <meta name="description" content="{data.pageDescription}">
+    <meta property="og:title" content="{data.pageTitle}" />
+    <meta property="og:description" content="{data.pageDescription}">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={`${$SveltePage.url}`} />
+    <meta property="og:image" content="https://flashsoft.eu/res/flashsoftLogo.png" />
 
-<!-- Schema  -->
-<script type="application/ld+json">
-	{
-	"@context": "http://schema.org",
-	"@type": "Organization",
-	"name": "FlashSoft",
-	"url": "https://flashsoft.eu",
-	"logo": "https://flashsoft.eu/res/android-chrome-256x256.png",
-	"sameAs": [
-		"https://twitter.com/andrei0x309"
-	]
-	}
-</script>
+{#if page > 1}
+<link rel="prev" href="/projects/page/{page - 1}" />
+{/if}
+{#if page < data.res.totalPages}
+<link rel="next" href="/projects/page/{page + 1}" />
+{/if}
 </svelte:head>
 
 <Header segment="projects" />
 
-<main class="project-main text-center md:w-[98.5vw]">
+{#if !isView}
+<main  class="{`project-main md:mx-4 mb-2 ${showSpinner? 'blink-loading': ''}`}">
     <!-- v-if='isLoading' -->
     {#if showSpinner}
     <div class="project-spinner"></div>
@@ -100,30 +77,35 @@
       <div  class="card mb-6">
       <div class="row no-gutters">
     
-        <div class="col-lg-12">
-        <figure class="project-card block md:inline">
+        <div class="flex flex-col md:flex-row justify-center">
+        <figure class="project-card block md:inline max-w-[16rem] mx-auto w-full">
 
                         <!-- v-bind:src="getImgFilePath(project.feature_image)" v-bind:alt="'Project ' + project.feature_image + 'image'" -->
 
-        <img class="project-img-feature" src={getImgFilePath(project.feature_image)} alt="{'Project ' + project.title + 'image'}">	
-                <figcaption >
+        <img class="project-img-feature" 
+        src={getPrjFeatureImage(project.feature_image)} alt="{'Project ' + project.title + 'image'}"
+        width="800" height="600" />
+                <!-- <figcaption >
                 <span class="info" >
                     <span>Git Repo</span>
                     <span>gitlab/repo </span>
                 </span>
-            </figcaption>
+            </figcaption> -->
         </figure>
-            <div class="card-body text-left" style="display:inline">
+            <div class="card-body text-left grow">
                 <!-- {{ project.title }} -->
-            <h3 class="card-title project-card-title">
+            <h2 class="card-title project-card-title">
                 {project.title}
-            </h3>
+            </h2>
             <!-- {{ project.short_description }} -->
             <p class="card-text">{project.short_description}</p>
             <!-- {{ JSON.parse(project.cat).cat_name }} -->
-            <p class="card-text" ><b>Category:</b><br> {project.cat.cat_name}<p>
-         
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <p class="card-text my-4" ><b>Category:</b><br> {project.cat.cat_name}<p>
+            <p class="card-text mt-2">
+            <a on:click={setBackRoute} href={`/projects/view/${project.id}/${(project.title).replace(/ /gms, '-')}`} class="button center btn-pagination btn-projects px-2 py-1">
+                <small class="text-muted">Details</small>
+            </a>
+           </p>
           </div>
         </div>
       </div>
@@ -132,10 +114,10 @@
                      
                     -->
                     <!-- v-show='Array.isArray(JSON.parse(project.techs_data)) && JSON.parse(project.techs_data).length' -->
-                 <p class="project-tags"  ><span>Technology</span>
+                 <p class="project-tags my-3"  ><span>Technology</span>
                     <!-- v-for="tech in JSON.parse(project.techs_data)"  {{ tech.name }}  -->
                     {#each project.techs as tech}
-                    <button   class="tag">{ tech.name }</button>
+                    <button class="tag">{ tech.name }</button>
                     {/each}
                  </p>
     
@@ -145,13 +127,19 @@
        
     </div>
     <!-- v-show='showPrevious' -->
+    <div class="flex justify-center">
     {#if page > 1}
-    <a href={`/projects/page/${page-1}`} class="button center btn-pagination btn-5 p-2 mx-2 my-10" >&#8249; Previous </a>
+    <a href={`/projects/page/${page-1}`} class="btn-projects p-2 mx-2 my-1" >&#8249; Previous </a>
     {/if}
     <!-- v-show='showNext' -->
     {#if page < data.res.totalPages}
-    <a href={`/projects/page/${page+1}`} class="button center btn-pagination btn-5 p-2 mx-2 my-10">Next &#8250;</a>
+    <a href={`/projects/page/${page+1}`} class=" btn-projects p-2 mx-2 my-1">Next &#8250;</a>
     {/if}
     </div>
-    
-     </main>   
+    </div>
+     </main>
+    {:else}
+    {#key viewKey}
+    <ProjectSingle data={data} />
+    {/key}
+{/if}
