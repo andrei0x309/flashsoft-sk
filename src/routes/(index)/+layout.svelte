@@ -1,5 +1,5 @@
 <script>
-
+// @ts-nocheck
 
 	// import Header from './Header.svelte';
 	// import './styles.css';
@@ -19,7 +19,6 @@
 	<meta name="theme-color" content="#ffffff">
 
 <link rel="dns-prefetch preconnect" href="https://fonts.gstatic.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet" />
 
 </svelte:head>
 

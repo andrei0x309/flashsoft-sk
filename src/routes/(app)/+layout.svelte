@@ -1,7 +1,5 @@
 <script>
-	// import Header from './Header.svelte';
-	// import './styles.css';
-  import './app.scss'
+
 </script>
 
 <svelte:head>
@@ -15,13 +13,12 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 	<link rel="mask-icon" href="/fs-icon-mask.svg" color="#5bbad5">
 	<meta name="theme-color" content="#ffffff">
-
-<link rel="dns-prefetch preconnect" href="https://fonts.gstatic.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet" />
+	<link rel="dns-prefetch preconnect" href="https://fonts.gstatic.com"/>
 
 </svelte:head>
 
 <slot />
+
 
 
 	<!-- <footer>

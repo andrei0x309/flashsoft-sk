@@ -6,7 +6,7 @@
     import { afterNavigate, beforeNavigate } from '$app/navigation';
     import { page as SveltePage } from '$app/stores';
     import { projectBackRoute } from '@/stores/client-route'
-    import ProjectSingle from '../ProjectSingle.svelte';
+    import ProjectSingle  from '../ProjectSingle.svelte';
     import { getPrjFeatureImage } from '@/lib/utils/common';
 
     export let data: any;
@@ -27,16 +27,13 @@
         projectBackRoute.set($SveltePage.url.toString())
     }
 
-    console.log(data)
     let page: number
    
-    console.log(isView)
     $:{
         page = data.res.page
         isView = data.rest?.includes('/view/') || false
         if(isView) {
             viewKey = viewKey + 1
-            console.log('isView')
         }
     }
     
@@ -49,7 +46,12 @@
     <meta property="og:description" content="{data.pageDescription}">
     <meta property="og:type" content="website" />
     <meta property="og:url" content={`${$SveltePage.url}`} />
-    <meta property="og:image" content="https://flashsoft.eu/res/flashsoftLogo.png" />
+    {#if !isView}
+	<meta property="og:image" content="https://flashsoft.eu/res/og-flashsoft.png" />
+    {:else}
+    <meta property="og:image" content="{getPrjFeatureImage(data?.res?.data?.[0]?.feature_image)}" />
+    {/if}
+
 
 {#if page > 1}
 <link rel="prev" href="/projects/page/{page - 1}" />
@@ -62,7 +64,7 @@
 <Header segment="projects" />
 
 {#if !isView}
-<main  class="{`project-main md:mx-4 mb-2 ${showSpinner? 'blink-loading': ''}`}">
+<main class="{`project-main md:mx-4 mb-2 ${showSpinner? 'blink-loading': ''}`}" id="app">
     <!-- v-if='isLoading' -->
     {#if showSpinner}
     <div class="project-spinner"></div>
@@ -94,7 +96,7 @@
         </figure>
             <div class="card-body text-left grow">
                 <!-- {{ project.title }} -->
-            <h2 class="card-title project-card-title">
+            <h2 class="card-title header-card-title">
                 {project.title}
             </h2>
             <!-- {{ project.short_description }} -->
@@ -102,7 +104,7 @@
             <!-- {{ JSON.parse(project.cat).cat_name }} -->
             <p class="card-text my-4" ><b>Category:</b><br> {project.cat.cat_name}<p>
             <p class="card-text mt-2">
-            <a on:click={setBackRoute} href={`/projects/view/${project.id}/${(project.title).replace(/ /gms, '-')}`} class="button center btn-pagination btn-projects px-2 py-1">
+            <a on:click={setBackRoute} href={`/projects/view/${project.id}/${(project.title).replace(/ /gms, '-')}`} class="button center btn-pagination btn-projects px-2 pt-1 pb-2">
                 <small class="text-muted">Details</small>
             </a>
            </p>
