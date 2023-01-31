@@ -5,7 +5,7 @@
             <li><h2>back end development</h2></li>
             <li><h2>front end development</h2></li>
             <li><h2>mobile / desktop app development</h2></li>
-            <li><h2>network /cloud / devops</h2></li>
+            <li><h2>network / cloud / devops</h2></li>
         </ul>
     </div>
 </section>

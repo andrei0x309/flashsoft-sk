@@ -1,87 +1,22 @@
-.text-custom-v {
-    color:#43445d;
-}
+@use '../global';
 
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
-::-webkit-scrollbar-thumb {
-  background: #888; 
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-
-@media only screen and (min-width: 100px){
-  html{
-    font-size: 0.7rem;
-   }
-  }
-
-@media only screen and (min-width: 200px){
-  html{
-    font-size: 0.8rem;
-   }
-  }
-  
-@media only screen and (min-width: 400px){
-  html{
-    font-size: 1rem;
-   }
-  }
+/* IcoMoon */
  
-@media only screen and (min-width: 2400px){
-  html{
-    font-size: 1.4rem;
-   }
-  }
-@media only screen and (min-width: 3000px){
-  html{
-    font-size: 1.6rem;
-   }
-  }
-@media only screen and (min-width: 3500px){
-  html{
-    font-size: 2.8rem;
-   }
-  }
-
-  @media only screen and (min-width: 4500px){
-  html{
-    font-size: 4.2rem;
-   }
-  }
-
-html{
-    scrollbar-width: none;
-    body {
-        font-family: 'Roboto Slab', serif;
-        line-height: 1.3;
-    }
+@font-face {
+  font-family: 'icomoon';
+  src:
+    url('/fonts/index/icomoon/icomoon.ttf?a2zlr4') format('truetype'),
+    url('/fonts/index/icomoon/icomoon.woff?a2zlr4') format('woff'),
+    url('/fonts/index/icomoon/icomoon.svg?a2zlr4#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-html, .lfc, .rsb {
+.lfc, .rsb {
   scroll-behavior: smooth;
   min-height: 100%; /* enforce height */
 }      
-
-
-body {
-    background-color: #20222B;
-    color: #fff;
-    font-weight: 200;
-    text-rendering: optimizeLegibility;
-    overflow-x: hidden;
-    height: 100%;
-    background: linear-gradient(90deg, rgb(21 38 68 / 78%), rgb(24 23 28 / 90%)), url(/images/bg.png);
-    background-size: 100vw 130vh;
-    background-position: 0;
-    background-attachment: fixed;
-  }
- 
 
 #main {
   max-width: 120rem;
@@ -147,7 +82,7 @@ nav {
 }
 
 .at-sign-sidebar {
-       fill: rgb(51 51 51);
+       fill: rgb(120 120 120);
 }
 
 .rst-s {
@@ -343,14 +278,16 @@ input{
 }
 
 #side-menu{
-    box-shadow: 0 12px 15px 0 rgb(0 0 0 / 24%);
-    border-top: .5rem solid #f1b01e;
+    border-right: 2px solid #000;
+    border-top: .6rem solid #f1b01e;
     z-index: 6;
     transition: all .15s cubic-bezier(.55,.085,.68,.53);
     transform: translateX(-100%);
     max-width: 40rem;
     scrollbar-width: none; 
     -ms-overflow-style: none;
+    background: #02030ef5;
+    backdrop-filter: blur(10px);
     
  &.sideMenuToggle {
   -webkit-transform: translateX(0);
@@ -363,7 +300,7 @@ input{
 }
 
 #menu-close{
-    color: #222;
+    color: rgb(214, 214, 214);
     font-size: 3rem;
     position: relative;
     right: -90%;
@@ -785,6 +722,9 @@ a.gitlab-button:active {
 
 /* side menu */
 
+.text-custom-v {
+  color:#cfcfcf;
+}
 
 .sidebar-menu-nav li {
 	font-size: 1.4em;
@@ -798,7 +738,7 @@ a.gitlab-button:active {
 }
 
 .sidebar-menu-nav li a {
-	color: #333;
+	color: rgb(224, 224, 224);
 	text-decoration: none;
 	transition: color .4s;
 
@@ -830,23 +770,9 @@ a.gitlab-button:active {
     left:60%;
 }
 
-/* Icons */
- 
-@font-face {
-  font-family: 'icomoon';
-  src:
-    url('/fonts/icomoon.ttf?a2zlr4') format('truetype'),
-    url('/fonts/icomoon.woff?a2zlr4') format('woff'),
-    url('/fonts/icomoon.svg?a2zlr4#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
-  font-display:swap;
-}
-
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon';
-  speak: never;
+  font-family: 'icomoon'!important;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -1030,124 +956,42 @@ a.gitlab-button:active {
     --color-user-mention-bg: var(--color-scale-yellow-8);
     --color-text-white: var(--color-scale-white);
     --color-calendar-graph-day-bg: #161b22;
-.position-relative {
-    position: relative !important;
-}
 
-.dropdown {
+width: 94%;
+
+.position-relative {
     position: relative;
 }
-.mt-1 {
-    margin-top: var(--base-size-4, 4px) !important;
-}
-.float-right {
-    float: right !important;
-}
-article, aside, details, figcaption, figure, footer, header, main, menu, nav, section {
-    display: block;
-}
-* {
-    box-sizing: border-box;
-}
-details {
-    display: block;
-}
 
-.text-normal {
-    font-weight: var(--base-text-weight-normal, 400) !important;
+.float-right {
+    float: right;
 }
+ 
 .f4 {
-    font-size: var(--h4-size, 16px) !important;
+    font-size: 1.1rem;
 }
 .mb-2 {
-    margin-bottom: var(--base-size-8, 8px) !important;
-}
-h2 {
-    font-size: var(--h2-size, 24px);
-    font-weight: var(--base-text-weight-semibold, 600);
-}
-h1, h2, h3, h4, h5, h6 {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-* {
-    box-sizing: border-box;
-}
-
-.graph-before-activity-overview {
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-}
-.py-2 {
-  padding-top: var(--base-size-8, 8px) !important;
-  padding-bottom: var(--base-size-8, 8px) !important;
-}
-.border {
-  border: var(--primer-borderWidth-thin, 1px) solid var(--color-border-default) !important;
-}
-
-h2 {
-    display: block;
-    font-size: 1.5em;
-    margin-block-start: 0.83em;
-    margin-block-end: 0.83em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
-}
-
-.graph-before-activity-overview {
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-}
-.py-2 {
-    padding-top: var(--base-size-8, 8px) !important;
-    padding-bottom: var(--base-size-8, 8px) !important;
-}
-
-.border {
-    border: var(--primer-borderWidth-thin, 1px) solid var(--color-border-default) !important;
-}
-* {
-    box-sizing: border-box;
-}
-
-div {
-    display: block;
+    margin-bottom: var(--base-size-8, 8px);
 }
 
 .d-flex {
-    display: flex !important;
+    display: flex;
 }
-.text-center {
-    text-align: center !important;
-}
-.pt-1 {
-    padding-top: var(--base-size-4, 4px) !important;
-}
-.mx-3 {
-    margin-right: var(--base-size-16, 16px) !important;
-    margin-left: var(--base-size-16, 16px) !important;
-}
+
 .height-full {
-    height: 100% !important;
+    height: 100% ;
 }
 
 .overflow-hidden {
-    overflow: hidden !important;
-}
-.flex-items-end {
-    align-items: flex-end !important;
-}
-.flex-column {
-    flex-direction: column !important;
-}
-* {
-    box-sizing: border-box;
+    overflow: hidden;
 }
 
-div {
-    display: block;
+.flex-items-end {
+    align-items: flex-end;
+}
+
+.flex-column {
+    flex-direction: column;
 }
 
 svg:not(:root) {
@@ -1162,7 +1006,6 @@ svg:not(:root) {
     outline: 1px solid var(--color-calendar-graph-day-border);
     outline-offset: -1px;
 }
-
 
 .ContributionCalendar-label {
     padding: 0.125em 0.5em 0.125em 0;
@@ -1207,38 +1050,20 @@ svg:not(:root) {
 }
 
 .f6 {
-  font-size: var(--h6-size, 12px) !important;
+  font-size: 0.875rem;
 }
 
-.py-1 {
-  padding-top: var(--base-size-4, 4px) !important;
-  padding-bottom: var(--base-size-4, 4px) !important;
-}
-.px-0 {
-  padding-right: 0 !important;
-  padding-left: 0 !important;
-}
 .width-full {
-  width: 100% !important;
+  width: 100%;
 }
+
 .d-inline-block {
-  display: inline-block !important;
+  display: inline-block;
 }
  
-.Box {
-  background-color: var(--color-canvas-default);
-  border-color: var(--color-border-default);
-  border-radius: var(--primer-borderRadius-medium, 6px);
-  border-style: solid;
-  border-width: var(--primer-borderWidth-thin, 1px);
-}
-
-.mb-2 {
-  margin-bottom: var(--base-size-8, 8px) !important;
-}
 
 .flex-wrap {
-  flex-wrap: wrap !important;
+  flex-wrap: wrap;
 }
 
 .css-truncate .css-truncate-target, .css-truncate.css-truncate-target {
@@ -1254,25 +1079,6 @@ svg:not(:root) {
 .subnav-item:first-child {
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
-}
-.f6 {
-  font-size: var(--h6-size, 12px) !important;
-}
-.pr-2 {
-  padding-right: var(--base-size-8, 8px) !important;
-}
-.py-1 {
-  padding-top: var(--base-size-4, 4px) !important;
-  padding-bottom: var(--base-size-4, 4px) !important;
-}
-.pl-1 {
-  padding-left: var(--base-size-4, 4px) !important;
-}
-.mr-2 {
-  margin-right: var(--base-size-8, 8px) !important;
-}
-.mb-2 {
-  margin-bottom: var(--base-size-8, 8px) !important;
 }
 .rounded-2 {
   border-radius: var(--primer-borderRadius-medium, 6px) !important;
@@ -1336,6 +1142,21 @@ h5 {
 
 .float-left {
   float: left !important;
+}
+
+div.activity-overview-box {
+  font-size: 0.9rem;
+  width: 90%;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top: -1.2rem;
+}
+
+.pr-lg-5 {
+  margin-top: -1rem;
+  margin-bottom: 1.3rem;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 }

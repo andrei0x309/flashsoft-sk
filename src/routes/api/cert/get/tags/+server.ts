@@ -9,7 +9,7 @@ export const GET: RequestHandler = async ({ url }) => {
 const { data, error } = await supabase.rpc('get_tags', { alltags })
 
 if(error) {
-    return json({error: String(error)}, {status: 500})
+    return json({error: JSON.stringify(error)}, {status: 500})
 }
 return json({data})
 

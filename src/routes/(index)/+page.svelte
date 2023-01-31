@@ -43,7 +43,6 @@ const html = data?.html;
 
 onMount(() => {
 	new Swipe(sideMenu, function(event: unknown, direction: string) {
-	//event.preventDefault();
 	if (direction === "left") {
 		closeMenu()
 	}
@@ -59,7 +58,7 @@ onMount(() => {
 	<meta property="og:description" content={pageDescription} />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://flashsoft.eu" />
-	<meta property="og:image" content="https://flashsoft.eu/res/flashsoftLogo.png" />
+	<meta property="og:image" content="https://flashsoft.eu/res/og-flashsoft.png" />
 
 	<!-- Schema  -->
 	<script type="application/ld+json">
@@ -76,7 +75,6 @@ onMount(() => {
 	</script>
 </svelte:head>
 
-<body id="index">
 <main id="main" class="relative top-0 right-0 w-full overflow-visible">
 	<div id="left-side" class="lfc h-full pt-14 overflow-y-scroll overflow-x-hidden w-full md:w-3/5 ">
 		<section id="section-projects">
@@ -117,9 +115,9 @@ onMount(() => {
 					{@html html}
 				</div>
 				{/if}
-				<p>Also Check:</p>
+				<p>ALSO CHECK:</p>
 				<p>
-					<a href="/show-cert" class="gitlab-button">Courses DB</a> || <a href="/projects" class="gitlab-button">Projects</a>
+					<a href="/certs" class="gitlab-button">Courses DB</a> || <a href="/projects" class="gitlab-button">Projects</a>
 				</p>
 			</div>
 		</section>
@@ -169,7 +167,7 @@ onMount(() => {
 			</li>
 		</ul>
 		<div class="rst-sb text-2xl mt-16 ">
-			<p class="text-gray-900 ">
+			<p class="text-gray-200 ">
 				andrei<svg width="142mm" height="142mm" viewBox="0 0 142 142" class="at-sign-sidebar">
 					<g id="at-sign-path">
 						<path
@@ -180,32 +178,32 @@ onMount(() => {
 			</p>
 		</div>
 		<div class="rsd-sb">
-			<p class="text-gray-600">Web Developer</p>
-			<p class="text-gray-600">Software Developer</p>
+			<p class="text-gray-300">Web Developer</p>
+			<p class="text-gray-300">Software Developer</p>
 		</div>
 
 		<div class="flex pl-16">
 			<ul>
 				<li>
 					<a
-						rel="noopener noreferrer"
-						class="text-gray-600 p-2 inline-block"
+						rel="noopener noreferrer external"
+						class="text-gray-200 p-2 inline-block"
 						href="https://blog.flashsoft.eu"
 						target="_blank">My Blog <i class="icon-my-blog text-custom-v" /></a
 					>
 				</li>
 				<li>
 					<a
-						rel="noopener noreferrer"
-						class="text-gray-600 p-2 inline-block"
+						rel="noopener noreferrer external"
+						class="text-gray-200 p-2 inline-block"
 						href="https://gitlab.flashsoft.eu/explore/projects?sort=latest_activity_desc"
 						target="_blank">GitLab <i class="icon-gitlab text-custom-v" /></a
 					>
 				</li>
 				<li>
 					<a
-						rel="noopener nofollow noreferrer"
-						class="text-gray-600 p-2 inline-block"
+						rel="noopener nofollow noreferrer external"
+						class="text-gray-200 p-2 inline-block"
 						href="https://www.linkedin.com/in/andrei0x309/"
 						target="_blank">Linkedin <i class="icon-linkedin text-custom-v" /></a
 					>
@@ -215,24 +213,24 @@ onMount(() => {
 			<ul>
 				<li>
 					<a
-						rel="noopener nofollow noreferrer"
-						class="text-gray-600 p-2 inline-block"
+						rel="noopener nofollow noreferrer external"
+						class="text-gray-200 p-2 inline-block"
 						href="https://www.goodreads.com/user/show/52338687-andrei"
 						target="_blank">Goodreads <i class="icon-goodreads text-custom-v" /></a
 					>
 				</li>
 				<li>
 					<a
-						rel="noopener nofollow noreferrer"
-						class="text-gray-600 p-2 inline-block"
+						rel="noopener nofollow noreferrer external"
+						class="text-gray-200 p-2 inline-block"
 						href="https://pinterest.com/andrei0x309/"
 						target="_blank">Pinterest <i class="icon-pinterest-square text-custom-v" /></a
 					>
 				</li>
 				<li>
 					<a
-						rel="noopener nofollow noreferrer"
-						class="text-gray-600 p-2 inline-block"
+						rel="noopener nofollow noreferrer external"
+						class="text-gray-200 p-2 inline-block"
 						href="https://www.reddit.com/user/andrei0x309"
 						target="_blank">Reddit <i class="icon-reddit text-custom-v" /></a
 					>
@@ -330,20 +328,20 @@ onMount(() => {
 		<div class="rs-slc inline-block ml-p10 mt-p10">
 			<ul class="rs-links-b">
 				<li class="relative">
-					<a rel="noopener noreferrer" href="https://blog.flashsoft.eu" target="_blank"
+					<a rel="noopener noreferrer external" href="https://blog.flashsoft.eu" target="_blank"
 						>My Blog <i class="icon-my-blog rs-slc-nonactive" /></a
 					>
 				</li>
 				<li class="relative">
 					<a
-						rel="noopener noreferrer"
+						rel="noopener noreferrer external"
 						href="https://gitlab.flashsoft.eu/explore/projects?sort=latest_activity_desc"
 						target="_blank">GitLab <i class="icon-gitlab rs-slc-nonactive" /></a
 					>
 				</li>
 				<li class="relative">
 					<a
-						rel="noopener nofollow noreferrer"
+						rel="noopener nofollow noreferrer external"
 						href="https://www.linkedin.com/in/andrei0x309/"
 						target="_blank">Linkedin <i class="icon-linkedin rs-slc-nonactive" /></a
 					>
@@ -354,21 +352,21 @@ onMount(() => {
 			<ul class="rs-links-b">
 				<li class="relative">
 					<a
-						rel="noopener nofollow noreferrer"
+						rel="noopener nofollow noreferrer external"
 						href="https://www.goodreads.com/user/show/52338687-andrei"
 						target="_blank">Goodreads <i id="islc4" class="icon-goodreads rs-slc-nonactive" /></a
 					>
 				</li>
 				<li class="relative">
 					<a
-						rel="noopener nofollow noreferrer"
+						rel="noopener nofollow noreferrer external"
 						href="https://pinterest.com/andrei0x309/"
 						target="_blank">Pinterest <i class="icon-pinterest-square rs-slc-nonactive" /></a
 					>
 				</li>
 				<li class="relative">
 					<a
-						rel="noopener nofollow noreferrer"
+						rel="noopener nofollow noreferrer external"
 						href="https://github.com/andrei0x309"
 						target="_blank">GitHub <i class="icon-github-original rs-slc-nonactive " /></a
 					>
@@ -379,4 +377,3 @@ onMount(() => {
 	<!--
 	<a href="#0" class="cd-top">Top</a> -->
 	</main>
-</body>

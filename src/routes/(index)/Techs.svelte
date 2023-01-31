@@ -1,3 +1,32 @@
+<!-- 
+
+
+
+
+puppeteer.svg
+solidity-original.svg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -->
+
+
 <section id="section-tech" class="mb-2">
     <div class="l-w-bg icos -mb-8">
         <h3 class="mb-4"><span>Technologies I've worked with</span></h3>
@@ -42,6 +71,16 @@
             alt="tailwind logo"
         />
 
+        
+        <img
+        src="/res/devicon2/eslint-original.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="eslint logo"
+    />
+
+
         <img
             src="/res/devicon/javascript/javascript-original.svg"
             width="64"
@@ -50,12 +89,23 @@
             alt="javascript logo"
         />
 
+
         <img
             src="/res/devicon/typescript/typescript-original.svg"
             width="64"
             height="64"
             loading="lazy"
-            alt="Webpack logo"
+            alt="Typescript logo"
+        />
+
+        
+
+        <img
+            src="/res/devicon2/Svelte_Logo.svg"
+            width="64"
+            height="64"
+            loading="lazy"
+            alt="react logo"
         />
 
         <img
@@ -67,12 +117,48 @@
         />
 
         <img
+        src="/res/devicon2/nextjs-line.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="nextjs logo"
+    />
+
+
+        <img
             src="/res/devicon/vuejs/vuejs-original.svg"
             width="64"
             height="64"
             loading="lazy"
             alt="vue logo"
         />
+
+        <img
+        src="/res/devicon2/nuxtjs-original.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="nuxtjs logo"
+    />
+
+        <img
+        src="/res/devicon2/vuetify-original.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="vuetify logo"
+         />
+         
+         <img
+         src="/res/devicon2/pinia.svg"
+         width="64"
+         height="64"
+         loading="lazy"
+         alt="pinia logo"
+          />
+
+         
+
 
         <img
             src="/res/devicon/angularjs/angularjs-original.svg"
@@ -98,6 +184,23 @@
             alt="php logo"
         />
 
+       
+        <img
+        src="/res/devicon2/graphql.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="graphql logo"
+    />
+
+        <img
+            src="/res/devicon2/Deno_2021.svg"
+            width="64"
+            height="64"
+            loading="lazy"
+            alt="deno logo"
+        />
+        
         <img
             src="/res/devicon/nodejs/nodejs-original.svg"
             width="64"
@@ -105,6 +208,24 @@
             loading="lazy"
             alt="nodejs logo"
         />
+
+        <img
+        src="/res/devicon2/fastify.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="fastify logo"
+        />
+
+        <img
+        src="/res/devicon2/express-original.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="express logo"
+        />
+        
+        
 
         <img
             src="/res/devicon/c/c-original.svg"
@@ -151,7 +272,7 @@
             width="64"
             height="64"
             loading="lazy"
-            alt="java logo"
+            alt="kotlin logo"
         />
 
         <img
@@ -161,6 +282,16 @@
             loading="lazy"
             alt="java logo"
         />
+
+        <img
+        src="/res/devicon2/go-original-wordmark.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="go logo"
+    />
+
+       
 
         <img
             src="/res/devicon/laravel/laravel-plain.svg"
@@ -249,6 +380,23 @@
             loading="lazy"
             alt="ubuntu logo"
         />
+        
+
+        <img
+        src="/res/devicon2/circleci-icon.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="circleci logo"
+    />
+
+        <img
+        src="/res/devicon2/amazonwebservices-original.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="amazonwebservices logo"
+    />
 
         <img
             src="/res/devicon/docker/docker-plain.svg"
@@ -257,6 +405,8 @@
             loading="lazy"
             alt="ubuntu logo"
         />
+
+        
 
         <img
             src="/res/devicon/nginx/nginx.svg"
@@ -281,6 +431,31 @@
             loading="lazy"
             alt="oracle logo"
         />
+
+        <img
+        src="/res/devicon2/couchdb-original.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="couchdb logo"
+        />
+        
+        <img
+        src="/res/devicon2/firebase-plain.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="firebase logo"
+        />
+
+        <img
+        src="/res/devicon2/supabase-seeklogo.com.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="supabase logo"
+        />
+
 
         <img
             src="/res/devicon/postgresql/postgres-opt.svg"
@@ -314,6 +489,26 @@
             alt="mongodb logo"
         />
 
+        
+
+        <img
+        src="/res/devicon2/electron-original.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="electron logo"
+        />
+
+        <img
+        src="/res/devicon2/tauri.dark.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="tauri logo"
+    />
+
+   
+
         <img
             src="/res/devicon/android/android-plain.svg"
             width="64"
@@ -321,7 +516,24 @@
             loading="lazy"
             alt="android logo"
         />
+       
+        <img
+        src="/res/devicon2/expo.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="expo logo"
+    />
 
+    <img
+    src="/res/devicon2/hermes.dark.svg"
+    width="64"
+    height="64"
+    loading="lazy"
+    alt="hermes logo"
+/>
+
+    
         <img
             src="/res/devicon/ionic/ionic-original.svg"
             width="64"
@@ -387,6 +599,23 @@
         />
 
         <img
+        src="/res/devicon2/androidstudio-original.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="androidstudio logo"
+       />
+        
+       <img
+       src="/res/devicon2/vscode-original.svg"
+       width="64"
+       height="64"
+       loading="lazy"
+       alt="vscode logo"
+        />
+
+       
+        <img
             src="/res/devicon/visualstudio/visualstudio-plain.svg"
             width="64"
             height="64"
@@ -409,6 +638,16 @@
             loading="lazy"
             alt="eclipse logo"
         />
+
+        
+
+        <img
+        src="/res/devicon2/d3js-plain.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="d3js logo"
+    />
 
         <img
             src="/res/devicon/photoshop/photoshop-plain.svg"
@@ -450,13 +689,23 @@
             alt="bootstrap logo"
         />
 
+ 
         <img
-            src="/res/devicon/jquery/jquery-plain.svg"
+        src="/res/devicon2/Vitejs-logo.svg"
+        width="64"
+        height="64"
+        loading="lazy"
+        alt="Vitejs logo"
+        />
+
+        <img
+            src="/res/devicon2/turborepo.dark.svg"
             width="64"
             height="64"
             loading="lazy"
-            alt="jquery logo"
+            alt="turborepo logo"
         />
+        
 
         <img
             src="/res/devicon/webpack/webpack-original.svg"

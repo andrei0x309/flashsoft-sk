@@ -1,7 +1,5 @@
-import { config } from "https://deno.land/x/dotenv/mod.ts";
+import { TOKEN } from "./.env.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js";
-
-const env = config()
 
 const options = {
   schema: "public",
@@ -12,6 +10,6 @@ const options = {
 
 export const supabase = createClient(
   "https://lcspcmmpolegvalxkfsu.supabase.co",
-  env.TOKEN,
+  TOKEN,
   options,
 );

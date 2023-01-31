@@ -1,11 +1,11 @@
 
 <script lang="ts">
     export let segment: string
-    let logoUrl = segment === 'cert' ? '/show-cert' : '/projects'
+    let logoUrl = segment === 'cert' ? '/certs' : '/projects'
 </script>
 
 
-<header class="col header">
+<header id='app-header' class="col header">
     <div class="row">
      <div class="col" style="flex:0.5;">
      <a style="text-decoration:none;" href="{logoUrl}">
@@ -22,7 +22,7 @@
                         <nav class="skew-menu">
                    <ul>
                      <li><a href="/"><span class="icon-arrow-left"></span> Front Page</a></li>
-                     <li><a href="/show-cert" class={ segment === 'cert'? 'active': ''  }><span class="icon-list"></span> Cert DB</a></li>
+                     <li><a href="/certs" class={ segment === 'cert'? 'active': ''  }><span class="icon-list"></span> Cert DB</a></li>
                      <li><a href="/projects" class={ segment === 'projects'? 'active': ''  }><span class="icon-server"></span> Projects DB</a></li>
                      <li><a href="https://gitlab.flashsoft.eu/explore/projects?sort=created_desc"><span class="icon-gitlab"></span> GitLab Server</a></li>
                    </ul>

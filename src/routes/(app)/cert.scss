@@ -1,3 +1,18 @@
+
+@use './app';
+
+main#app {
+
+.card-footer {
+  padding: 0.75rem 1.25rem;
+  background-color: rgb(0 0 0 / 53%);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  margin: -0.8rem;
+  margin-top: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+  border-bottom-left-radius: 0.2rem;
+}
+
 .pagination {
   display: flex;
   padding-left: 0;
@@ -18,8 +33,6 @@
     z-index: 3;
   }
 }
-
-
 
 
 .filterLink {
@@ -177,15 +190,6 @@
     stroke: none;
   }
   
-  /* -------------------------------- 
-  
-  Stroke effects - Nucleo outline icons
-  
-  - 16px icons -> up to 1px stroke (16px outline icons do not support stroke changes)
-  - 24px, 32px icons -> up to 2px stroke
-  - 48px, 64px icons -> up to 4px stroke
-  
-  -------------------------------- */
   
   .cat-icon--outline.cat-icon--stroke-1 {
     stroke-width: 1px;
@@ -305,7 +309,8 @@
   .spinner {
     width: 7em;
     margin: 3em auto;
-    position: relative;
+    left: 40%;
+    position: absolute;
   
     &:before {
       content: "";
@@ -315,7 +320,7 @@
       margin: 3em auto;
       padding: 3em 0;
       border-radius: 50%;
-      border: 0.7em solid #2f416f;
+      border: 0.7em solid #cdcdcd;
       border-top: 0.7em solid transparent;
       border-bottom: 0.7em solid transparent;
       animation: rotate 1s ease infinite;
@@ -325,10 +330,10 @@
       content: "Loading";
       position: absolute;
       top: 0;
-      color: #2f416f;
-      font: .9em sans-serif;
+      color: #e9e9e9;
+      font: 0.9em sans-serif;
       width: 8em;
-      line-height: 8em;
+      line-height: 15em;
       text-align: center;
       animation: wink 1.4s ease infinite;
     }
@@ -337,69 +342,6 @@
   
   
   // Icons css
-  
-  @font-face {
-    font-family: 'icomoon';
-    src: url('/fonts/certificate/icomoon.eot?e47dwj');
-    src: url('/fonts/certificate/icomoon.eot?e47dwj#iefix') format('embedded-opentype'),
-      url('/fonts/certificate/icomoon.ttf?e47dwj') format('truetype'),
-      url('/fonts/certificate/icomoon.woff?e47dwj') format('woff'),
-      url('/fonts/certificate/icomoon.svg?e47dwj#icomoon') format('svg');
-    font-weight: normal;
-    font-style: normal;
-  }
-  
-  [class^="icon-"],
-  [class*=" icon-"] {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'icomoon' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-  
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  .icon-caret-down:before {
-    content: "\e907";
-  }
-  
-  .icon-expand:before {
-    content: "\e900";
-  }
-  
-  .icon-file-pdf-o:before {
-    content: "\e901";
-  }
-  
-  .icon-server:before {
-    content: "\e902";
-  }
-  
-  .icon-list:before {
-    content: "\e903";
-  }
-  
-  .icon-arrow-left:before {
-    content: "\e904";
-  }
-  
-  .icon-certificate:before {
-    content: "\e905";
-  }
-  
-  .icon-gitlab:before {
-    content: "\e906";
-  }
-  
-  
-  
-  
   
   .navbar-laravel {
     background-color: #fff;
@@ -578,7 +520,6 @@
   
   .rkmd-checkbox .input-checkbox {
     position: relative;
-    display: inline-block;
     width: 1rem;
     height: 1rem;
     text-align: center;
@@ -673,9 +614,6 @@
     cursor: pointer;
   }
   
-  /* ----------------------------------------------------------------------
-    Rotate Checkbox
-  ------------------------------------------------------------------------- */
   .rkmd-checkbox.checkbox-rotate .input-checkbox input[type="checkbox"]+.checkbox {
     cursor: pointer;
   }
@@ -710,9 +648,6 @@
     border-color: rgba(0, 0, 0, 0.157) !important;
   }
   
-  /* ----------------------------------------------------------------------
-    Rotate Checkbox Color - by Ravikumar Chauhan
-  ------------------------------------------------------------------------- */
   .rkmd-checkbox.checkbox-rotate .checkbox-teal input[type="checkbox"]:checked+.checkbox:before {
     border-color: #009688;
   }
@@ -765,9 +700,6 @@
     border-color: #795548;
   }
   
-  /* ----------------------------------------------------------------------
-    Checkbox Ripple Effect - by Ravikumar Chauhan
-  ------------------------------------------------------------------------- */
   .rkmd-checkbox.checkbox-ripple .ripple {
     position: absolute;
     top: 0px;
@@ -805,9 +737,6 @@
     }
   }
   
-  /* ----------------------------------------------------------------------
-    Checkbox Ripple Effect Color - by Ravikumar Chauhan
-  ------------------------------------------------------------------------- */
   .rkmd-checkbox .checkbox-teal .ripple {
     background-color: #009688 !important;
   }
@@ -896,22 +825,22 @@
     font-family: "Open Sans", sans-serif;
     margin-left: 2em;
     padding: 0 1.2em 0 1.2em;
-    background: #3D9970;
+    background: #117c7c;
     color: #fff;
     text-decoration: none;
     border-radius: 0.3rem;
-    box-shadow: 1px 1px 1px #0c6a2d;
+    box-shadow: 1px 1px 1px #2bb19e;
   }
   
   .tags li:before,
   .tagFilter .label:before {
     content: "";
     position: absolute;
-    top: 0.1em;
+    top: 0.01em;
     left: -1.8em;
     width: 0;
     height: 0;
-    border-color: transparent #8cd1b2 transparent transparent;
+    border-color: transparent rgb(68 97 110) transparent transparent;
     border-style: solid;
     border-width: 0.98em 0.98em 0.98em;
   }
@@ -946,4 +875,4 @@
   .tagFilter .label:hover:before {
     border-color: transparent #ffc107 transparent transparent;
   }
-  
+}
