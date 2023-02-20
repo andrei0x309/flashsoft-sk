@@ -1,9 +1,10 @@
-<script>
+<script lang="ts">
 // @ts-nocheck
 
 	// import Header from './Header.svelte';
 	// import './styles.css';
   import './style.scss'
+  import { analyticsCode } from '$lib/utils/analytics'
 </script>
 
 <svelte:head>
@@ -24,10 +25,9 @@
 
 <slot />
 
-
-	<!-- <footer>
-		<p class="text-[4rem]">visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</footer> -->
+{#if analyticsCode}
+ {@html analyticsCode}
+{/if}
 
 <style windi:preflights:global windi:safelist:global windi:global>
 </style>
