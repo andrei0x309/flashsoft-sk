@@ -46,12 +46,7 @@
     <meta property="og:description" content="{data.pageDescription}">
     <meta property="og:type" content="website" />
     <meta property="og:url" content={`${$SveltePage.url}`} />
-    {#if !isView}
-	<meta property="og:image" content="https://flashsoft.eu/res/og-flashsoft.png" />
-    {:else}
-    <meta property="og:image" content="{getPrjFeatureImage(data?.res?.data?.[0]?.feature_image)}" />
-    {/if}
-
+    <meta property="og:image" content="{data?.res?.data?.[0]?.og_image}" />
 
 {#if page > 1}
 <link rel="prev" href="/projects/page/{page - 1}" />
