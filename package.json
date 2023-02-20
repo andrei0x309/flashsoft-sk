@@ -3,7 +3,7 @@
 	"version": "1.4.9",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build",
+		"build": "node --experimental-network-imports ./node_modules/vite/bin/vite build",
 		"preview": "vite preview",
 		"test": "playwright test",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",

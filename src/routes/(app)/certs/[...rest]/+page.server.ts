@@ -22,7 +22,8 @@ const loadFilteredCerts = async (page = 1, tag_ids: number[]) => {
     )
     `)
     .in('fsk_cert_tag_type.id', tag_ids)
-    .range((page-1)*9, (page*9)-1);
+    .order('id', {ascending: false})
+    .range((page-1)*9, (page*9)-1)
     let count
     let res
     [count, res] = await Promise.all([countDb, resDb])
@@ -96,11 +97,11 @@ const loadCerts = async (page: number, search = false, searchTerms: string[] = [
   )
   `)).if(search, 
   (chain: PostgesQueryBuilderSelect) => 
-  
-  
   chain.or(searchTerms.map( t => `cert_name.ilike.%${t}%,cert_description.ilike.%${t}%`).join(',')))
   .end()
-  .range((page-1)*9, (page*9)-1);
+  .order('id', {ascending: false})
+  .range((page-1)*9, (page*9)-1)
+  
   
     const [count, res] = await Promise.all([countDb, resDb])
     
