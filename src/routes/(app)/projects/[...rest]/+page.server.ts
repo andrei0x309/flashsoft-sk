@@ -79,7 +79,7 @@ export const load: PageServerLoad = async (rest) => {
     case 'view': {
       const id = Number(params[1])
       const data = await loadProject(id)
-      return appendToData(checkData(data), {rest: restPath, pageTitle: `${data?.res?.data?.[0]?.title ?? 'NA'} | andrei0x309`, pageDescription: `${data?.res?.data?.[0]?.short_desc ?? 'Description of this project is missing'}`})
+      return appendToData(checkData(data), {rest: restPath, pageTitle: `${data?.res?.data?.[0]?.title ?? 'N\\A'} | andrei0x309`, pageDescription: `${data?.res?.data?.[0]?.short_description ?? 'Description of this project is missing'}`})
     }
     default: {
       throw error(404, 'Not found')
