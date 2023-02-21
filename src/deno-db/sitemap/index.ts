@@ -102,7 +102,3 @@ export const generatePaths = async () => {
 
     return paths
 }
-
-console.log(
-   JSON.stringify(await generatePaths())
-)
