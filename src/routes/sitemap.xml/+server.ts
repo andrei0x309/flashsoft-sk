@@ -1,24 +1,13 @@
-import type { RequestHandler } from  './$types';
-
 export const prerender = true;
- 
+import type { RequestHandler } from  './$types';
+import { generatePaths } from '@/deno-db/sitemap/index'
+
 const website = 'https://flashsoft.eu';
-
-const pages = [
-	{
-		url: '',
-		priority: 0.8
-	},
-	{
-		url: 'mypage'
-	}
-];
-
 
 export const GET: RequestHandler = async () => {
   return new Response(`<?xml version="1.0" encoding="UTF-8" ?>
 	<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
-		${pages
+		${(await generatePaths())
       .map(
         (page) => `<url>
 			<loc>${website}/${page.url}</loc>
