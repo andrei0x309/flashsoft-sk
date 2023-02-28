@@ -19,7 +19,11 @@
 	<link rel="mask-icon" href="/fs-icon-mask.svg" color="#5bbad5">
 	<meta name="theme-color" content="#ffffff">
 
-<link rel="dns-prefetch preconnect" href="https://fonts.gstatic.com"/>
+	<link rel="dns-prefetch preconnect" href="https://fonts.gstatic.com"/>
+	{#if analyticsCode}
+	<link rel="preconnect" href="https://www.googletagmanager.com">
+	<link rel="preconnect" href="https://www.google-analytics.com">
+	{/if}
 
 </svelte:head>
 
