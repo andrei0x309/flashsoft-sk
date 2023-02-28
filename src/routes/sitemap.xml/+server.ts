@@ -1,4 +1,4 @@
-export const prerender = true;
+// export const prerender = true;
 import type { RequestHandler } from  './$types';
 import { generatePaths } from '@/lib/sitemap/index'
 
