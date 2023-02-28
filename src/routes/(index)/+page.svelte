@@ -9,6 +9,7 @@
 	import Interests from './Interests.svelte';
 	import Skills from './Skills.svelte';
 	import Techs from './Techs.svelte';
+	import GiteaIcon from './GiteaIcon.svelte';
 
 	const pageDescription = 'Web & App Development Portfolio & Software Developer Profile portal, you can access public my repositories on my GitLab instance.';
 	const pageTitle = 'Web & App Development Portfolio - Software Dev Profile - flashsoft.eu';
@@ -196,8 +197,8 @@ onMount(() => {
 					<a
 						rel="noopener noreferrer external"
 						class="text-gray-200 p-2 inline-block"
-						href="https://gitlab.flashsoft.eu/explore/projects?sort=latest_activity_desc"
-						target="_blank">GitLab <i class="icon-gitlab text-custom-v" /></a
+						href="https://gitea.flashsoft.eu/explore/repos"
+						target="_blank">Gitea <GiteaIcon exportClass="{` w-4 inline-block ml-2`}" /></a
 					>
 				</li>
 				<li>
@@ -335,8 +336,8 @@ onMount(() => {
 				<li class="relative">
 					<a
 						rel="noopener noreferrer external"
-						href="https://gitlab.flashsoft.eu/explore/projects?sort=latest_activity_desc"
-						target="_blank">GitLab <i class="icon-gitlab rs-slc-nonactive" /></a
+						href="https://gitea.flashsoft.eu/explore/repos"
+						target="_blank">Gitea <GiteaIcon exportClass="{` w-4 inline-block ml-2`}" /></a
 					>
 				</li>
 				<li class="relative">
