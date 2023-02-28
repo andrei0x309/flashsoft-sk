@@ -1,6 +1,6 @@
 export const prerender = true;
 import type { RequestHandler } from  './$types';
-import { generatePaths } from '@/deno-db/sitemap/index'
+import { generatePaths } from '@/lib/sitemap/index'
 
 const website = 'https://flashsoft.eu';
 

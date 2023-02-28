@@ -1,5 +1,5 @@
-import { supabase } from "../../lib/deno/supaClientFS.ts";
-import { makeTitle } from  "../../lib/utils/common.ts";
+import { supabase } from "@/lib/deno/supaClientEdge";
+import { makeTitle } from  "@/lib/utils/common";
 
 const CERT_PATH = 'certs'
 const PROJECT_PATH = 'projects'
