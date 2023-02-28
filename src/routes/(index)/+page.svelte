@@ -11,8 +11,6 @@
 	import Techs from './Techs.svelte';
 	import GiteaIcon from './GiteaIcon.svelte';
 
-	// const giteaComp = new GiteaIcon({ target: null});
-
 	const pageDescription = 'Web & App Development Portfolio & Software Developer Profile portal, you can access public my repositories on my GitLab instance.';
 	const pageTitle = 'Web & App Development Portfolio - Software Dev Profile - flashsoft.eu';
 
@@ -200,7 +198,7 @@ onMount(() => {
 						rel="noopener noreferrer external"
 						class="text-gray-200 p-2 inline-block"
 						href="https://gitea.flashsoft.eu/explore/repos"
-						target="_blank">Gitea <svelte:component this={GiteaIcon} /></a
+						target="_blank">Gitea<i class="text-custom-v"><GiteaIcon size={1.6} magrinRight={0.2} magrinLeft={0.3} /></i></a
 					>
 				</li>
 				<li>
@@ -339,7 +337,7 @@ onMount(() => {
 					<a
 						rel="noopener noreferrer external"
 						href="https://gitea.flashsoft.eu/explore/repos"
-						target="_blank">Gitea <svelte:component this={GiteaIcon} /></a
+						target="_blank">Gitea <i class="rs-slc-nonactive"><GiteaIcon size={1.6} magrinRight={0.2} /></i></a
 					>
 				</li>
 				<li class="relative">
