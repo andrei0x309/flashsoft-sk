@@ -2,6 +2,7 @@
 <script lang="ts">
     export let segment: string
     let logoUrl = segment === 'cert' ? '/certs' : '/projects'
+    import GiteaIcon from  '../(index)/GiteaIcon.svelte'
 </script>
 
 
@@ -24,7 +25,7 @@
                      <li><a href="/"><span class="icon-arrow-left"></span> Front Page</a></li>
                      <li><a href="/certs" class={ segment === 'cert'? 'active': ''  }><span class="icon-list"></span> Cert DB</a></li>
                      <li><a href="/projects" class={ segment === 'projects'? 'active': ''  }><span class="icon-server"></span> Projects DB</a></li>
-                     <li><a href="https://gitlab.flashsoft.eu/explore/projects?sort=created_desc"><span class="icon-gitlab"></span> GitLab Server</a></li>
+                     <li><a href="https://gitea.flashsoft.eu/explore/repos"><GiteaIcon exportClass="{` w-4 inline-block ml-2`}" />Gitea</a></li>
                    </ul>
                  </nav>
     </div>
