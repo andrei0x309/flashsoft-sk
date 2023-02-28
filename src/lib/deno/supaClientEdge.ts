@@ -1,6 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js";
-
-const token =  Deno.env.get("TOKEN");
+import { TOKEN } from "$env/static/private"
 
 const options = {
   schema: "public",
@@ -11,6 +10,6 @@ const options = {
 
 export const supabase = createClient(
   "https://lcspcmmpolegvalxkfsu.supabase.co",
-  token,
+  TOKEN,
   options,
 );
