@@ -8,6 +8,10 @@ import { partytownVite } from '@builder.io/partytown/utils'
 const config = {
 	plugins: [
 		sveltekit(),
+		partytownVite({
+			// `dest` specifies where files are copied to in production
+			dest: join(process.cwd(), 'static', '~partytown')
+		  }),
 		SvelteKitPWA({
 			manifest: {
 				"$schema": "https://json.schemastore.org/web-manifest-combined.json",
@@ -52,11 +56,7 @@ const config = {
 				"background_color": "#ffffff",
 				"display": "standalone"
 			}
-		}),
-		partytownVite({
-			// `dest` specifies where files are copied to in production
-			dest: join(process.cwd(), 'static', '~partytown')
-		  })
+		})
 	],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
