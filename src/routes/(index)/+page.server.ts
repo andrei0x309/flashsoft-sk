@@ -5,7 +5,7 @@ import { error } from '@sveltejs/kit';
 
 
 const prepareHtml = (html: string) => {
-    return html.replace(/<div[^>]+Box-header Box-header--blue.*?(<div class="js-calendar-graph)/gms, '$1') // remove stupid 100M dev celebration or other github ADS
+    return html.replace(/<div[^>]+Box-header Box-header--blue.*?(<div class="js-calendar-graph)/gms, '$1') // remove potential github ADS
     .replace(/<div class="js-activity-overview-graph-container.*?<\/div>/gms, '') // remove activity graph
     .replace(/<details.*?<\/details>/gms, '') // remove details
     .replace(/<svg.*?js-calendar-graph-svg.*?>/gms, '<svg class="js-calendar-graph-svg" width="99%" viewBox="0 0 717 112">') // make svg responsive
