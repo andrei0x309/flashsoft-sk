@@ -35,7 +35,7 @@
 		"svelte-check": "^3.0.4",
 		"svelte-lightbox": "^1.1.1",
 		"svelte-preprocess": "^5.0.1",
-		"svelte-windicss-preprocess": "^4.2.8",
+		"svelte-windicss-preprocess": "~4.1.0",		
 		"tslib": "^2.5.0",
 		"typescript": "^4.9.5",
 		"vite": "^4.1.4",
