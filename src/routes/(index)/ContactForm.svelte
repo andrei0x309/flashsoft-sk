@@ -129,6 +129,7 @@
 
 					<div bind:this={hcaptchaElement} class="flex justify-center" />
 					<script
+						type="text/partytown"
 						src="https://js.hcaptcha.com/1/api.js?render=explicit"
 						on:load={renderCaptcha}
 						async

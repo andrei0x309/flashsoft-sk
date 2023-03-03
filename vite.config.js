@@ -1,5 +1,7 @@
+import { join } from 'path'
 import { sveltekit } from '@sveltejs/kit/vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit'
+import { partytownVite } from '@builder.io/partytown/utils'
 
 
 /** @type {import('vite').UserConfig} */
@@ -50,7 +52,11 @@ const config = {
 				"background_color": "#ffffff",
 				"display": "standalone"
 			}
-		})
+		}),
+		partytownVite({
+			// `dest` specifies where files are copied to in production
+			dest: join(process.cwd(), 'static', '~partytown')
+		  })
 	],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
