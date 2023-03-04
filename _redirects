@@ -1,14 +1,2 @@
-[[redirects]]
-  from = "/pt/gmt"
-  to = "https://www.googletagmanager.com/gtag/js"
-  status = 200
-  force = true
-  headers = {X-From = "Netlify"}
-
-[[redirects]]
-  from = "/pt/hcaptcha"
-  to = "https://js.hcaptcha.com/1/api.js"
-  status = 200
-  force = true
-  headers = {X-From = "Netlify"}
-
+/pt/gmt  https://www.googletagmanager.com/gtag/js  200
+/pt/hcaptcha https://js.hcaptcha.com/1/api.js 200
