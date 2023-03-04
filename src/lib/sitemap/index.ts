@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/deno/supaClientEdge";
+import { supabase } from "@/lib/node/supaClientFS";
 import { makeTitle } from  "@/lib/utils/common";
 
 const CERT_PATH = 'certs'
@@ -24,7 +24,7 @@ export const generatePaths = async () => {
 
     // Single 
     let { data } = await supabase.from('fsk_cert').select('id, cert_name')
-    for (const cert of data) {
+    for (const cert of data ?? []) {
         paths.push({
             url: `${CERT_PATH}/view/${cert.id}/${makeTitle(cert.cert_name)}`,
             priority: 0.6,
@@ -82,7 +82,7 @@ export const generatePaths = async () => {
     // Single
     ;({ data } = await supabase.from('fsk_prj').select('id, title'))
 
-    for (const project of data) {
+    for (const project of data ?? []) {
         paths.push({
             url: `${PROJECT_PATH}/view/${project.id}/${makeTitle(project.title)}`,
             priority: 0.7,
