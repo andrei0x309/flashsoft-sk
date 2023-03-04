@@ -1,5 +1,4 @@
 import type { PageServerLoad } from './$types';
-// import { supabase } from '@/lib/deno/supaClientEdge'
 import { supabase } from '@/lib/node/supaClientFS'
 import { optionalChain } from '@/lib/utils/index'
 import { checkData, extractPage, error, appendToData, makeTitle } from '@/lib/utils/page'

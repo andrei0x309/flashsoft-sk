@@ -10,13 +10,6 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@antfu/utils@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@antfu/utils/-/utils-0.3.0.tgz#6306c43b52a883bd8e973e3ed8dd64248418bcc4"
-  integrity sha512-UU8TLr/EoXdg7OjMp0h9oDoIAVr+Z/oW9cpOxQQyrsz6Qzd2ms/1CdWx8fl2OQdFpxGmq5Vc4TwfLHId6nAZjA==
-  dependencies:
-    "@types/throttle-debounce" "^2.1.0"
-
 "@apideck/better-ajv-errors@^0.3.1":
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/@apideck/better-ajv-errors/-/better-ajv-errors-0.3.6.tgz#957d4c28e886a64a8141f7522783be65733ff097"
@@ -1084,10 +1077,10 @@
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-2.2.5.tgz#b32366c89b43c6f8cefbdefac778b9c828e3ba8c"
   integrity sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==
 
-"@iconify/json@1.1.432":
-  version "1.1.432"
-  resolved "https://registry.yarnpkg.com/@iconify/json/-/json-1.1.432.tgz#35c65c90acce30e6f722979b109932d06f9ddcc5"
-  integrity sha512-ZcQKCnJXmeKDKxSu4vOFCYkCv8sjX1OASTMQpzqVzt3ivBBDudAYyXJlO4hgk0X4B2R0IMHRNvRgCAYkKDa2eQ==
+"@iconify/json@1.1.426":
+  version "1.1.426"
+  resolved "https://registry.yarnpkg.com/@iconify/json/-/json-1.1.426.tgz#55b68e59ef627a6beaf804167ed799fdde60932c"
+  integrity sha512-hY0VC4JAnHaXdHkUzNuoSGKS493TN+tu6BVFmT/olNVZgl2ovwiOjNhpEhBHEcOb9DRV6cV5kZH9YeNzMlVTog==
 
 "@jridgewell/gen-mapping@^0.1.0":
   version "0.1.1"
@@ -1409,11 +1402,6 @@
   version "7.3.13"
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.3.13.tgz#da4bfd73f49bd541d28920ab0e2bf0ee80f71c91"
   integrity sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==
-
-"@types/throttle-debounce@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@types/throttle-debounce/-/throttle-debounce-2.1.0.tgz#1c3df624bfc4b62f992d3012b84c56d41eab3776"
-  integrity sha512-5eQEtSCoESnh2FsiLTxE121IiE60hnMqcb435fShf4bpLRjEu1Eoekht23y6zXS9Ts3l+Szu3TARnTsA0GkOkQ==
 
 "@types/trusted-types@^2.0.2":
   version "2.0.2"
@@ -1957,11 +1945,6 @@ define-properties@^1.1.3, define-properties@^1.1.4:
     has-property-descriptors "^1.0.0"
     object-keys "^1.1.1"
 
-defu@^5.0.0:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/defu/-/defu-5.0.1.tgz#a034278f9b032bf0845d261aa75e9ad98da878ac"
-  integrity sha512-EPS1carKg+dkEVy3qNTqIdp2qV7mUP08nIsupfwQpz++slCVRw7qbQyWvSTig+kFPwz2XXp5/kIIkH+CwrJKkQ==
-
 detect-indent@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-6.1.0.tgz#592485ebbbf6b3b1ab2be175c8393d04ca0d57e6"
@@ -2297,17 +2280,6 @@ fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
   integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
-
-fast-glob@3.2.7:
-  version "3.2.7"
-  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.7.tgz#fd6cb7a2d7e9aa7a7846111e85a196d6b2f766a1"
-  integrity sha512-rYGMRwip6lUMvYD3BTScMwT1HtAs2d71SMv66Vrxs0IekGZEjhM0pcMfjQPnknBt2zeCwQMEupiN02ZP4DiT1Q==
-  dependencies:
-    "@nodelib/fs.stat" "^2.0.2"
-    "@nodelib/fs.walk" "^1.2.3"
-    glob-parent "^5.1.2"
-    merge2 "^1.3.0"
-    micromatch "^4.0.4"
 
 fast-glob@^3.2.12, fast-glob@^3.2.7, fast-glob@^3.2.9:
   version "3.2.12"
@@ -2827,11 +2799,6 @@ jest-worker@^26.2.1:
     "@types/node" "*"
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
-
-jiti@^1.12.9:
-  version "1.17.1"
-  resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.17.1.tgz#264daa43ee89a03e8be28c3d712ccc4eb9f1e8ed"
-  integrity sha512-NZIITw8uZQFuzQimqjUxIrIcEdxYDFIe/0xYfIlVXTkiBjjyBEvgasj5bb0/cHtPRD/NziPbT312sFrkI5ALpw==
 
 js-sdsl@^4.1.4:
   version "4.2.0"
@@ -3802,15 +3769,13 @@ svelte-preprocess@^5.0.1:
     sorcery "^0.11.0"
     strip-indent "^3.0.0"
 
-svelte-windicss-preprocess@^4.2.8:
-  version "4.2.8"
-  resolved "https://registry.yarnpkg.com/svelte-windicss-preprocess/-/svelte-windicss-preprocess-4.2.8.tgz#31f05a17366aac15e73a33c74ed04b72a2ff030c"
-  integrity sha512-Z6pmFbHqJ19SgCiXiVRC/hlRBgZ/5LksMjPF3ilF/1HESP2L+secuaPjr3xOjJW67iZQpT2YdXzGe+MvdsJ6OQ==
+svelte-windicss-preprocess@~4.1.0:
+  version "4.1.7"
+  resolved "https://registry.yarnpkg.com/svelte-windicss-preprocess/-/svelte-windicss-preprocess-4.1.7.tgz#2c9b5c9bee0be98262de6642ea2ad88c5cb7c091"
+  integrity sha512-+jQD1zlpOlKg1AFOs/2wrubzUbRzG4KBCzeho7kXyUoSi4OOWqMP1l4roHZTEOqLqmja4eVi0RVEI5RhjqgZIA==
   dependencies:
-    "@iconify/json" "1.1.432"
-    fast-glob "3.2.7"
-    unconfig "0.2.2"
-    windicss "3.5.4"
+    "@iconify/json" "1.1.426"
+    windicss "3.2.1"
     windicss-runtime-dom "3.0.0"
 
 svelte@^3.55.1:
@@ -3989,15 +3954,6 @@ unbox-primitive@^1.0.2:
     has-bigints "^1.0.2"
     has-symbols "^1.0.3"
     which-boxed-primitive "^1.0.2"
-
-unconfig@0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/unconfig/-/unconfig-0.2.2.tgz#08742355bdadb8cf9d1f1870a971fec87f38726e"
-  integrity sha512-JN1MeYJ/POnjBj7NgOJJxPp6+NcD6Nd0hEuK0D89kjm9GvQQUq8HeE2Eb7PZgtu+64mWkDiqeJn1IZoLH7htPg==
-  dependencies:
-    "@antfu/utils" "^0.3.0"
-    defu "^5.0.0"
-    jiti "^1.12.9"
 
 undici@5.20.0:
   version "5.20.0"
@@ -4234,10 +4190,10 @@ windicss-runtime-dom@3.0.0:
   resolved "https://registry.yarnpkg.com/windicss-runtime-dom/-/windicss-runtime-dom-3.0.0.tgz#1b7d4d7e07099a6f38b681adeb272992e57858d5"
   integrity sha512-a12Uhu71yT1U8w0PzJ3amF9xmC8b1rWFLgXEfI/UyuwUi6D1vUACOO6vb0iY4T4OtP/bJAjQMM7lv3hMWSwLuQ==
 
-windicss@3.5.4:
-  version "3.5.4"
-  resolved "https://registry.yarnpkg.com/windicss/-/windicss-3.5.4.tgz#e55b9e1803d63c2256ddb94e60af8f582489b402"
-  integrity sha512-x2Iu0a69dtNiKHMkR886lx0WKbZI5GqvXyvGBCJ2VA6rcjKYjnzCA/Ljd6hNQBfqlkSum8J+qAVcCfLzQFI4rQ==
+windicss@3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/windicss/-/windicss-3.2.1.tgz#bd0f7b9ebabba04ea8dfedcbb0263c2ef9591db4"
+  integrity sha512-LusrIrryBFHAPQ/OOTbS4EWWuzI6eGeJglI9nQ3kDBr1cqH69NWt8Z8q59f9kTkgptXroejmWfksWwqgHs8EVw==
 
 word-wrap@^1.2.3:
   version "1.2.3"
