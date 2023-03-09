@@ -12,6 +12,9 @@ const config = {
 	})],
 
 	kit: {
+		serviceWorker: {
+			register: false
+		},
 		adapter: adapter({
 			edge:true,
 			split: false

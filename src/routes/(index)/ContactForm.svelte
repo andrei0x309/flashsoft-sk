@@ -15,6 +15,9 @@
 	let alertMsg: string = '';
 	let alertType: string = 'error';
 
+	let HCScriptEl: HTMLScriptElement;
+
+
 	const showAlertElement = (msg: string, type: string) => {
 		showAlert = true;
 		alertMsg = msg;
@@ -101,8 +104,24 @@
 		}
 	};
 
+// 	const config = { attributes: true, childList: true, subtree: true };
+
+// 	const mutationCallback = (mutationList: {type: string}[], observer: unknown) => {
+//   for (const mutation of mutationList) {
+// 	if (mutation.type === "attributes") {
+//       renderCaptcha();
+// 	  (observer as {disconnect: () => void}).disconnect();
+//     }
+//   }
+// };
+
+// const checkForCaptcha = () => {
+// 	const observer = new MutationObserver(mutationCallback);
+// 		observer.observe(HCScriptEl, config);
+// }
+
+
 	onMount(() => {
-		renderCaptcha();
 	});
 </script>
 
@@ -129,11 +148,10 @@
 
 					<div bind:this={hcaptchaElement} class="flex justify-center" />
 					<script
-						type="text/partytown"
 						src="https://js.hcaptcha.com/1/api.js?render=explicit"
-						on:load={renderCaptcha}
 						async
 						defer
+						on:load={renderCaptcha}
 					></script>
 					<button
 						on:click|preventDefault={submitEmail}

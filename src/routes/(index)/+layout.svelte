@@ -6,16 +6,20 @@
   import './style.scss'
   import { analyticsCode } from '$lib/utils/analytics'
   import { onMount } from 'svelte'
-  import { partytownSnippet } from 'https://cdn.jsdelivr.net/npm/@builder.io/partytown@0.7.5/integration/index.mjs'
 
-  let scriptEl
+//   import { partytownSnippet } from 'https://cdn.jsdelivr.net/npm/@builder.io/partytown@0.7.5/integration/index.mjs'
+  import { partytownSnippet } from '@builder.io/partytown/integration'
+  
+  let scriptEl: HTMLScriptElement
 	onMount(
-	  () => {
+	  async () => {
+
 		if (scriptEl) {
 		  scriptEl.textContent = partytownSnippet()
 		}
 	  }
 	)
+ 
 </script>
 
 <svelte:head>
@@ -36,14 +40,14 @@
 	{/if}
 
 	<!-- Config options -->
-	<script>
+  <script>
+
 		partytown = {
 		  forward: ['dataLayer.push'],
 		  resolveUrl: (url) => {
-			const siteUrl = '/pt'
-
+			const siteUrl = 'https://flashsoft.eu/pt'
 			if (url.hostname === 'www.googletagmanager.com') {
-			  const proxyUrl = new URL(`${siteUrl}/gtm`)
+			  const proxyUrl = new URL(siteUrl + '/gtm')
 	
 			  const gtmId = new URL(url).searchParams.get('id')
 			  gtmId && proxyUrl.searchParams.append('id', gtmId)
@@ -52,7 +56,14 @@
 			} else if (
 			  url.hostname === 'js.hcaptcha.com'
 			) {
-			  const proxyUrl = new URL(`${siteUrl}/hcaptcha`)
+			  const proxyUrl = new URL(siteUrl + 'hcaptcha')
+	
+			  return proxyUrl
+			} else if (
+			  url.href.includes('google-analytics.com')
+			) {
+				 console.log('google-analytics.com 22')
+			  const proxyUrl = new URL(url.href.replace(url.hostname, 'flashsoft.eu/pt') + '/ga')
 	
 			  return proxyUrl
 			}
@@ -60,10 +71,11 @@
 			return url
 		  }
 		}
-	  </script>
+  </script>
 	
 	  <!-- `partytownSnippet` is inserted here -->
 	  <script bind:this={scriptEl}></script>
+	  <!-- {@html webManifest} -->
 
 </svelte:head>
 

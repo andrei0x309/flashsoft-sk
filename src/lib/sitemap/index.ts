@@ -84,7 +84,7 @@ export const generatePaths = async () => {
 
     for (const project of data ?? []) {
         paths.push({
-            url: `${PROJECT_PATH}/view/${project.id}/${makeTitle(project.title)}`,
+            url: `${PROJECT_PATH}/view/${project.id}/${makeTitle((project as unknown as {title: string}).title)}`,
             priority: 0.7,
         })
     }
