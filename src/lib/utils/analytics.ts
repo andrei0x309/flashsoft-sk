@@ -6,7 +6,8 @@ export const analyticsCode =
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
-  gtag('config', 'G-R3P9V6BE5J');
+  gtag('config', 'G-R3P9V6BE5J', {
+    page_path: window.location.pathname
+  });
 </script>
 `
