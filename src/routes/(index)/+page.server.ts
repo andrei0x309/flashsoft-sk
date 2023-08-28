@@ -9,6 +9,8 @@ const prepareHtml = (html: string) => {
     .replace(/<details.*?<\/details>/gms, '') // remove details
     .replace(/<svg.*?js-calendar-graph-svg.*?>/gms, '<svg class="js-calendar-graph-svg" width="99%" viewBox="0 0 717 112">') // make svg responsive
     .replace(/<div class="float-left.*?<\/div>/gms, '') // remove float left
+    .replace(/height: 10px/gms , 'height: 0.8vw') // increase height of graph
+    .replace(/width: 10px/gms , 'width: 0.8vw') // increase width of graph
     .replace(/<a/gms, '<a  rel="noopener noreferrer external" ') // indicate to sveltekit to not preload external links
 }
 

@@ -909,6 +909,22 @@ a.gitlab-button:active {
 
 // TEST
  
+.ContributionCalendar-grid {
+  width: max-content;
+  border-collapse: separate;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  word-wrap: normal;
+  border: 0;
+}
+
 .github-contributions {
 	  --color-workflow-card-connector: var(--color-scale-gray-5);
     --color-workflow-card-connector-bg: var(--color-scale-gray-5);
@@ -987,7 +1003,7 @@ width: 94%;
 }
 
 .flex-items-end {
-    align-items: flex-end;
+    align-items: center;
 }
 
 .flex-column {
@@ -1153,10 +1169,15 @@ div.activity-overview-box {
 }
 
 .pr-lg-5 {
-  margin-top: -1rem;
+  margin-top: -0.2rem;
   margin-bottom: 1.3rem;
   margin-left:auto;
   margin-right:auto;
+}
+
+.subnav {
+  display: inline-table;
+  padding-top: 1.5rem;
 }
 
 }
