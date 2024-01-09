@@ -43,6 +43,6 @@ export const load: PageServerLoad = async () => {
         }; 
     } catch (e) {
         console.log(e)
-        throw error(500, 'Internal Server Error')
+        error(500, 'Internal Server Error');
   }
 }

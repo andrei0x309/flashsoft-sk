@@ -103,7 +103,7 @@ const submitForm = () => {
                   </span>
       </button>
         {#if expanded}
-        <div class="filtercard mt-2 p-2" id="collapse-serach" transition:slide>
+        <div class="filtercard mt-2 p-2" id="collapse-serach" transition:slide|global>
           <div class="row">
             <div class="grid">
               <form
