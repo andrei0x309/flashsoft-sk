@@ -248,7 +248,7 @@ $: if (expanded) {
                       </span>
             </button>
             {#if expanded}
-            <div class="filtercard mt-2 p-2" transition:slide id="collapse-filter">
+            <div class="filtercard mt-2 p-2" transition:slide|global id="collapse-filter">
                {#if loadingTags}
                 <div class="spinner-small"></div>
                {:else}

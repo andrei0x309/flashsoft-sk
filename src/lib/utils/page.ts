@@ -4,9 +4,9 @@ import { makeTitle, appendToData } from '@/lib/utils/common'
 export const checkData = (data: unknown): Record<string, unknown> => {
     if(!data) {
       if(data === -1) {
-        throw error(404, 'Not found')
+        error(404, 'Not found');
       }
-      throw error(500, 'Error loading data')
+      error(500, 'Error loading data');
     }
     return data as Record<string, unknown>
   }
@@ -15,7 +15,7 @@ export const checkData = (data: unknown): Record<string, unknown> => {
     if(rest.includes('page/')) {
       const page = Number(rest.split('page/')[1].replace('/', ''))
       if(page < 1) {
-        throw error(404, 'Not found')
+        error(404, 'Not found');
       }
       return page
     }
