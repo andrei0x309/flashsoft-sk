@@ -14,33 +14,4 @@
 [[edge_functions]]
   path = "/edge-api/test"
   function = "test"
-
-[[redirects]]
-  from = "https://www.fsk.netlify.app/*"
-  to = "https://flashsoft.eu/*"
-  force = true
-  status = 301
-
-[[redirects]]
-  from = "https://fsk.netlify.app/*"
-  to = "https://flashsoft.eu/*"
-  force = true
-  status = 301
-
-[[redirects]]
-  from = "http://www.fsk.netlify.app/*"
-  to = "https://flashsoft.eu/*"
-  force = true
-  status = 301
-
-[[redirects]]
-  from = "http://fsk.netlify.app/*"
-  to = "https://flashsoft.eu/*"
-  force = true
-  status = 301
-
-[[redirects]]
-  from = "https://www.flashsoft.eu/*"
-  to = "https://flashsoft.eu/*"
-  force = true
-  status = 301
+  
