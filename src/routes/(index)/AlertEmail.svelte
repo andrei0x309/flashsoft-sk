@@ -1,13 +1,17 @@
 <script lang="ts">
-    export let showAlert: boolean = false;
-    export let msg: string = '';
-    export let type: string = 'error';
+    interface Props {
+        showAlert?: boolean;
+        msg?: string;
+        type?: string;
+    }
+
+    let { showAlert = $bindable(false), msg = $bindable(''), type = $bindable('error') }: Props = $props();
 
 </script>
 {#if showAlert}
 {#if type === 'error'}
 <div id="alert-box" class="alert-base alert-error alert flex flex-row items-center bg-red-200 p-5 rounded border-b-2 border-red-300 fade-in">
-    <button class="alert-close" on:click={() => {showAlert = false}} aria-label="close">x</button>
+    <button class="alert-close" onclick={() => {showAlert = false}} aria-label="close">x</button>
     <div class="alert-icon flex items-center bg-red-100 border-2 border-red-500 justify-center h-10 w-10 flex-shrink-0 rounded-full">
         <span class="text-red-500">
             <svg fill="currentColor"
@@ -30,7 +34,7 @@
 </div>
 {:else if type === 'success'}
 <div id="alert-box" class="alert-base alert flex flex-row items-center bg-green-200 p-5 rounded border-b-2 border-green-300 fade-in">
-    <button class="alert-close" on:click={() => {showAlert = false}} aria-label="close">x</button>
+    <button class="alert-close" onclick={() => {showAlert = false}} aria-label="close">x</button>
     <div class="alert-icon flex items-center bg-green-100 border-2 border-green-500 justify-center h-10 w-10 flex-shrink-0 rounded-full">
         <span class="text-green-500">
             <svg fill="currentColor"
@@ -53,7 +57,7 @@
 </div>
 {:else if type === 'info'}
 <div id="alert-box" class="alert-base alert flex flex-row items-center bg-blue-200 p-5 rounded border-b-2 border-blue-300 fade-in">
-    <button class="alert-close" on:click={() => {showAlert = false}} aria-label="close">x</button>
+    <button class="alert-close" onclick={() => {showAlert = false}} aria-label="close">x</button>
     <div class="alert-icon flex items-center bg-blue-100 border-2 border-blue-500 justify-center h-10 w-10 flex-shrink-0 rounded-full">
         <span class="text-blue-500">
             <svg fill="currentColor"

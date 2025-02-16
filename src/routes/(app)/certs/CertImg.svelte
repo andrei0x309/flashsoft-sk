@@ -9,12 +9,16 @@
 		certName: string;
 	}
 
-	let loaded = false;
-	export let propData: CertImgProps;
-	export let lazy: boolean = true;
-	let imgSrc: string;
-	let altContent: string;
-	let srcset: string;
+	let loaded = $state(false);
+	interface Props {
+		propData: CertImgProps;
+		lazy?: boolean;
+	}
+
+	let { propData, lazy = true }: Props = $props();
+	let imgSrc: string = $state();
+	let altContent: string = $state();
+	let srcset: string = $state();
 
 	const createImgSet = () => {
 		const lastIndex = imgSrc.lastIndexOf('/');
@@ -40,7 +44,7 @@
 <template>
 	<div>
 		{#if !loaded}
-			<div class="spinner size" />
+			<div class="spinner size"></div>
 		{/if}
 		{#if browser}
 		<Lightbox>
@@ -52,7 +56,7 @@
 			src={imgSrc}
 			{srcset}
 			alt={altContent}
-			on:load={() => {
+			onload={() => {
 				loaded = true;
 			}}
 		/>
@@ -66,7 +70,7 @@
 		src={imgSrc}
 		{srcset}
 		alt={altContent}
-		on:load={() => {
+		onload={() => {
 			loaded = true;
 		}}
 		/>

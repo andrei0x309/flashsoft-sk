@@ -1,19 +1,20 @@
 <script lang="ts">
+
 	import AlertEmail from './AlertEmail.svelte';
 	import { onMount } from 'svelte';
 	import Lazy from '@/components/Lazy.svelte';
 	import { browser } from '$app/environment';
 
-	let email: string = '';
-	let name: string = '';
-	let message: string = '';
-	let mailForm: HTMLElement;
-	let spinner: HTMLElement;
-	let hcaptchaElement: HTMLElement;
+	let email: string = $state('');
+	let name: string = $state('');
+	let message: string = $state('');
+	let mailForm: HTMLElement | undefined = $state();
+	let spinner: HTMLElement | undefined = $state();
+	let hcaptchaElement: HTMLElement | undefined = $state();
 
-	let showAlert: boolean = false;
-	let alertMsg: string = '';
-	let alertType: string = 'error';
+	let showAlert: boolean = $state(false);
+	let alertMsg: string = $state('');
+	let alertType: string = $state('error');
 
 	let HCScriptEl: HTMLScriptElement;
 
@@ -42,7 +43,8 @@
 		}
 	};
 
-	const submitEmail = async () => {
+	const submitEmail = async (event: Event) => {
+		event.preventDefault();
 		const hCaptcha = (document?.querySelector('form div iframe') as HTMLElement)?.dataset
 			?.hcaptchaResponse;
 
@@ -53,7 +55,7 @@
 			message,
 			hCaptcha
 		};
-		setLoadEmail(false);
+
 		const recentEmail = localStorage.getItem('recent-email');
 		if (recentEmail) {
 			const num = isNaN(parseInt(recentEmail)) ? 0 : parseInt(recentEmail);
@@ -61,10 +63,11 @@
 			const now = new Date();
 			if (date.getTime() + 6e5 > now.getTime()) {
 				showAlertElement('You sent an email recently', 'error');
+				setLoadEmail(false);
 				return;
 			}
 		}
-
+		try {
 		const response = await fetch('/edge-api/index/email', {
 			method: 'POST',
 			headers: {
@@ -77,9 +80,20 @@
 			showAlertElement('Email sent!', 'success');
 			localStorage.setItem('recent-email', new Date().getTime().toString());
 		} else {
-			await response.json().then((data: any) => {
-				showAlertElement(`Error: ${data?.error}`, 'error');
-			});
+			if (response.status === 400) {
+					await response.json().then((data: any) => {
+					showAlertElement(`Error: ${data?.error}`, 'error');
+				});
+				return;
+			}
+			if (response.status === 404) {
+				showAlertElement('Error: edge-api not found', 'error');
+				return;
+			}
+			showAlertElement('Error: Something went wrong', 'error');
+		}
+		} catch (error) {
+			showAlertElement(`Error: ${error}`, 'error');
 		}
 	};
 
@@ -130,7 +144,7 @@
 		<h2 class="my-3">Contact form</h2>
 	</div>
 	<div id="ls-ct-fr" class="ls-ct-fr">
-		<div bind:this={spinner} id="spinner" class="spinner spinner__1" />
+		<div bind:this={spinner} id="spinner" class="spinner spinner__1"></div>
 		<AlertEmail bind:showAlert bind:msg={alertMsg} bind:type={alertType} />
 		{#if browser}
 			<Lazy>
@@ -144,21 +158,21 @@
 						cols="30"
 						rows="5"
 						placeholder="Message"
-					/>
+					></textarea>
 
-					<div bind:this={hcaptchaElement} class="flex justify-center" />
+					<div bind:this={hcaptchaElement} class="flex justify-center"></div>
 					<script
 						src="https://js.hcaptcha.com/1/api.js?render=explicit"
 						async
 						defer
-						on:load={renderCaptcha}
+						onload={renderCaptcha}
 					></script>
 					<button
-						on:click|preventDefault={submitEmail}
+						onclick={submitEmail}
 						id="form-submit"
 						type="submit"
 						value="Send"
-						class="btn-submit"><i class="icon-paper-plane-o" />&nbsp;Send&nbsp;</button
+						class="btn-submit"><i class="icon-paper-plane-o"></i>&nbsp;Send&nbsp;</button
 					>
 				</form>
 			</Lazy>
@@ -173,14 +187,14 @@
 					cols="30"
 					rows="5"
 					placeholder="Message"
-				/>
+				></textarea>
 
 				<button
-					on:click|preventDefault={submitEmail}
+					onclick={submitEmail}
 					id="form-submit"
 					type="submit"
 					value="Send"
-					class="btn-submit"><i class="icon-paper-plane-o" />&nbsp;Send&nbsp;</button
+					class="btn-submit"><i class="icon-paper-plane-o"></i>&nbsp;Send&nbsp;</button
 				>
 			</form>
 		{/if}

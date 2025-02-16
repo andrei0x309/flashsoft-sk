@@ -14,12 +14,12 @@
 	const pageDescription = 'Web & App Development Portfolio & Software Developer Profile portal, you can access public my repositories on my GitLab instance.';
 	const pageTitle = 'Web & App Development Portfolio - Software Dev Profile - flashsoft.eu';
 
-	let toggle: HTMLElement; // document.getElementById('menu_toggle');
-	let sideMenu: HTMLElement; // document.getElementById('side-menu');
-	let close: HTMLElement; // document.getElementById('menu-close');
+	let toggle: HTMLElement | undefined = $state(); // document.getElementById('menu_toggle');
+	let sideMenu: HTMLElement | undefined = $state(); // document.getElementById('side-menu');
+	let close: HTMLElement | undefined = $state(); // document.getElementById('menu-close');
 
 	const toggeleMenu = () => {
-	sideMenu.classList.add('sideMenuToggle');
+	sideMenu?.classList.add('sideMenuToggle');
     const menuLinks = sideMenu?.querySelector('.sidebar-menu-nav')?.querySelectorAll('.sidemenu');
     if(menuLinks){
     let i = 1;
@@ -38,7 +38,11 @@
 	}
 
 
-export let data: any;
+	interface Props {
+		data: any;
+	}
+
+	let { data }: Props = $props();
 
 const html = data?.html;
 
@@ -85,8 +89,8 @@ onMount(() => {
 					aria-label="Open Side Menu"
 					id="menu_toggle"
 					class="icon-bars menu-phone inline md:hidden "
-					on:click={toggeleMenu}
-				/>
+					onclick={toggeleMenu}
+				></button>
 				<p class="inline-block my-1">projects</p>
 			</div>
 			<div class="ls-pr-ct flex -mr-4 -ml-4 text-center p-6 justify-center flex-col items-center mb-2">
@@ -138,32 +142,32 @@ onMount(() => {
 	</div>
 
 	<nav bind:this={sideMenu} id="side-menu" class="fixed w-11/12 h-full top-0 left-0 overflow-auto bg-white">
-		<button on:click={closeMenu} bind:this={close} aria-label="Close Side Menu" id="menu-close">×</button>
+		<button onclick={closeMenu} bind:this={close} aria-label="Close Side Menu" id="menu-close">×</button>
 
 		<ul class="sidebar-menu-nav">
 			<li class="sidemenu">
 				<a id="lsm-projects" href="#section-projects"
-					><i class="icon-home text-custom-v" aria-hidden="true" />Projects</a
+					><i class="icon-home text-custom-v" aria-hidden="true"></i>Projects</a
 				>
 			</li>
 			<li class="sidemenu">
 				<a id="lsm-skills" href="#section-skills"
-					><i class="icon-user-circle-o text-custom-v" aria-hidden="true" />Skills</a
+					><i class="icon-user-circle-o text-custom-v" aria-hidden="true"></i>Skills</a
 				>
 			</li>
 			<li class="sidemenu">
 				<a id="lsm-tech" href="#section-tech"
-					><i class="icon-server text-custom-v" aria-hidden="true" />Technology</a
+					><i class="icon-server text-custom-v" aria-hidden="true"></i>Technology</a
 				>
 			</li>
 			<li class="sidemenu">
 				<a id="lsm-interests" href="#section-interests"
-					><i class="icon-tags text-custom-v" aria-hidden="true" />Interests</a
+					><i class="icon-tags text-custom-v" aria-hidden="true"></i>Interests</a
 				>
 			</li>
 			<li class="sidemenu">
 				<a id="lsm-contact" href="#section-contact"
-					><i class="icon-envelope text-custom-v" />Contact</a
+					><i class="icon-envelope text-custom-v"></i>Contact</a
 				>
 			</li>
 		</ul>
@@ -190,7 +194,7 @@ onMount(() => {
 						rel="noopener noreferrer external"
 						class="text-gray-200 p-2 inline-block"
 						href="https://blog.flashsoft.eu"
-						target="_blank">My Blog <i class="icon-my-blog text-custom-v" /></a
+						target="_blank">My Blog <i class="icon-my-blog text-custom-v"></i></a
 					>
 				</li>
 				<li>
@@ -206,7 +210,7 @@ onMount(() => {
 						rel="noopener nofollow noreferrer external"
 						class="text-gray-200 p-2 inline-block"
 						href="https://www.linkedin.com/in/andrei0x309/"
-						target="_blank">Linkedin <i class="icon-linkedin text-custom-v" /></a
+						target="_blank">Linkedin <i class="icon-linkedin text-custom-v"></i></a
 					>
 				</li>
 			</ul>
@@ -217,7 +221,7 @@ onMount(() => {
 						rel="noopener nofollow noreferrer external"
 						class="text-gray-200 p-2 inline-block"
 						href="https://www.goodreads.com/user/show/52338687-andrei"
-						target="_blank">Goodreads <i class="icon-goodreads text-custom-v" /></a
+						target="_blank">Goodreads <i class="icon-goodreads text-custom-v"></i></a
 					>
 				</li>
 				<li>
@@ -225,7 +229,7 @@ onMount(() => {
 						rel="noopener nofollow noreferrer external"
 						class="text-gray-200 p-2 inline-block"
 						href="https://pinterest.com/andrei0x309/"
-						target="_blank">Pinterest <i class="icon-pinterest-square text-custom-v" /></a
+						target="_blank">Pinterest <i class="icon-pinterest-square text-custom-v"></i></a
 					>
 				</li>
 				<li>
@@ -233,7 +237,7 @@ onMount(() => {
 						rel="noopener nofollow noreferrer external"
 						class="text-gray-200 p-2 inline-block"
 						href="https://www.reddit.com/user/andrei0x309"
-						target="_blank">Reddit <i class="icon-reddit text-custom-v" /></a
+						target="_blank">Reddit <i class="icon-reddit text-custom-v"></i></a
 					>
 				</li>
 			</ul>
@@ -243,51 +247,51 @@ onMount(() => {
 		<div class="nav-and-logo">
 			<nav class="rsn pt-18">
 				<ul class="leading-[3.2rem] text-[1.4rem]">
-					<li><i class="icon-bars" /></li>
+					<li><i class="icon-bars"></i></li>
 					<li>
 						<a rel="section" href="#section-projects"
-							><i class="icon-home" aria-hidden="true" />Projects</a
+							><i class="icon-home" aria-hidden="true"></i>Projects</a
 						>
 					</li>
 					<li>
 						<a rel="section" href="#section-skills"
-							><i class="icon-user-circle-o" aria-hidden="true" />Skills</a
+							><i class="icon-user-circle-o" aria-hidden="true"></i>Skills</a
 						>
 					</li>
 					<li>
 						<a rel="section" href="#section-tech"
-							><i class="icon-server" aria-hidden="true" />Technology</a
+							><i class="icon-server" aria-hidden="true"></i>Technology</a
 						>
 					</li>
 					<li>
 						<a rel="section" href="#section-interests"
-							><i class="icon-tags" aria-hidden="true" />Interests</a
+							><i class="icon-tags" aria-hidden="true"></i>Interests</a
 						>
 					</li>
-					<li><a rel="section" href="#section-contact"><i class="icon-envelope" />Contact</a></li>
+					<li><a rel="section" href="#section-contact"><i class="icon-envelope"></i>Contact</a></li>
 				</ul>
 			</nav>
 			<figure class="rsl absolute hidden lg:block">
 				<div class="box">
 					<div class="computer-top">
-						<div class="camera" />
+						<div class="camera"></div>
 						<div class="screen">
 							<div class="code">
-								<div class="line line01" />
-								<div class="line line02" />
-								<div class="line line03" />
-								<div class="line line04" />
-								<div class="line line05" />
-								<div class="line line06" />
-								<div class="line line07" />
-								<div class="line line08" />
-								<div class="line line09" />
-								<div class="line line10" />
-								<div class="line line11" />
-								<div class="line line12" />
-								<div class="line line13" />
-								<div class="line line14" />
-								<div class="line line15" />
+								<div class="line line01"></div>
+								<div class="line line02"></div>
+								<div class="line line03"></div>
+								<div class="line line04"></div>
+								<div class="line line05"></div>
+								<div class="line line06"></div>
+								<div class="line line07"></div>
+								<div class="line line08"></div>
+								<div class="line line09"></div>
+								<div class="line line10"></div>
+								<div class="line line11"></div>
+								<div class="line line12"></div>
+								<div class="line line13"></div>
+								<div class="line line14"></div>
+								<div class="line line15"></div>
 							</div>
 						</div>
 					</div>
@@ -309,7 +313,7 @@ onMount(() => {
 							</svg>
 						</div>
 					</div>
-					<div class="bottom-box" />
+					<div class="bottom-box"></div>
 				</div>
 			</figure>
 		</div>
@@ -330,7 +334,7 @@ onMount(() => {
 			<ul class="rs-links-b">
 				<li class="relative">
 					<a rel="noopener noreferrer external" href="https://blog.flashsoft.eu" target="_blank"
-						>My Blog <i class="icon-my-blog rs-slc-nonactive" /></a
+						>My Blog <i class="icon-my-blog rs-slc-nonactive"></i></a
 					>
 				</li>
 				<li class="relative">
@@ -344,7 +348,7 @@ onMount(() => {
 					<a
 						rel="noopener nofollow noreferrer external"
 						href="https://www.linkedin.com/in/andrei0x309/"
-						target="_blank">Linkedin <i class="icon-linkedin rs-slc-nonactive" /></a
+						target="_blank">Linkedin <i class="icon-linkedin rs-slc-nonactive"></i></a
 					>
 				</li>
 			</ul>
@@ -355,21 +359,21 @@ onMount(() => {
 					<a
 						rel="noopener nofollow noreferrer external"
 						href="https://www.goodreads.com/user/show/52338687-andrei"
-						target="_blank">Goodreads <i id="islc4" class="icon-goodreads rs-slc-nonactive" /></a
+						target="_blank">Goodreads <i id="islc4" class="icon-goodreads rs-slc-nonactive"></i></a
 					>
 				</li>
 				<li class="relative">
 					<a
 						rel="noopener nofollow noreferrer external"
 						href="https://pinterest.com/andrei0x309/"
-						target="_blank">Pinterest <i class="icon-pinterest-square rs-slc-nonactive" /></a
+						target="_blank">Pinterest <i class="icon-pinterest-square rs-slc-nonactive"></i></a
 					>
 				</li>
 				<li class="relative">
 					<a
 						rel="noopener nofollow noreferrer external"
 						href="https://github.com/andrei0x309"
-						target="_blank">GitHub <i class="icon-github-original rs-slc-nonactive " /></a
+						target="_blank">GitHub <i class="icon-github-original rs-slc-nonactive "></i></a
 					>
 				</li>
 			</ul>

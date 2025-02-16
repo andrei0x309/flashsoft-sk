@@ -2,9 +2,6 @@
 	import CertImg from './CertImg.svelte';
 	import CertPagination from './CertPagination.svelte';
 	import { makeTitle } from '@/lib/utils/page';
-	export let currentPage: number;
-	export let maxPage: number;
-	export let rest: string;
 	import { certBackRoute } from '@/stores/client-route'
 	import { page as SveltePage } from '$app/stores';
 
@@ -23,7 +20,19 @@
 			name: string;
 		}[];
 	}
-	export let data = [] as Cert[];
+	interface Props {
+		currentPage: number;
+		maxPage: number;
+		rest: string;
+		data?: any;
+	}
+
+	let {
+		currentPage,
+		maxPage,
+		rest,
+		data = [] as Cert[]
+	}: Props = $props();
 
 	const setBackRoute = () => {
 		certBackRoute.set($SveltePage.url.toString())
@@ -56,7 +65,7 @@
 							{/each}
 						</ul>
 					{/if}
-					<p class="card-text" />
+					<p class="card-text"></p>
 
 					{#if cert['cat']?.cat_name}
 						<p class="text-right mt-auto py-4">
@@ -72,7 +81,7 @@
 				<div class="card-footer">
       <small class="text-muted"> 
        
-          <a on:click={setBackRoute} href="{`/certs/view/${cert['id']}/${makeTitle(cert['cert_name'])}`}" ><button type="button" class="btn-11 raise"><span class="icon-expand" style="color:#f11154;"></span>&nbsp;&nbsp;&nbsp;View Details</button></a>
+          <a onclick={setBackRoute} href="{`/certs/view/${cert['id']}/${makeTitle(cert['cert_name'])}`}" ><button type="button" class="btn-11 raise"><span class="icon-expand" style="color:#f11154;"></span>&nbsp;&nbsp;&nbsp;View Details</button></a>
           <a href="{`/res/cert_pdf/${cert['cert_file_name']}`}" rel="external" >
             <button type="button" class="btn-11 raise">
               <span class="icon-file-pdf-o" style="color:#f11154;"></span>&nbsp;&nbsp;&nbsp;View PDF</button>
@@ -96,7 +105,7 @@
 						stroke-width: 2px;
 					}
 				</style></defs
-			><title /><g data-name="36-404 error" id="_36-404_error"
+			><title></title><g data-name="36-404 error" id="_36-404_error"
 				><polyline class="cls-1" points="12 25 1 25 1 21 1 1 31 1 31 21 31 25 20 25" /><line
 					class="cls-1"
 					x1="22"
