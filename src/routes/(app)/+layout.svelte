@@ -23,6 +23,3 @@
 {#if analyticsCode}
  {@html analyticsCode}
 {/if}
-
-<style windi:preflights:global windi:safelist:global windi:global>
-</style>

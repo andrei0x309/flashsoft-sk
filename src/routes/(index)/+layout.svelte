@@ -3,6 +3,7 @@
 
 	// import Header from './Header.svelte';
 	// import './styles.css';
+  import '../tailwind.css'
   import './style.scss'
   import { analyticsCode } from '$lib/utils/analytics'
   import { onMount } from 'svelte'
@@ -84,8 +85,10 @@
 {#if analyticsCode}
  {@html analyticsCode}
 {/if}
-
-<style windi:preflights:global windi:safelist:global windi:global>
-</style>
-
  
+<style>
+:global(.border) {
+  border: 0px;
+}
+
+</style>
