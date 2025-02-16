@@ -2,9 +2,13 @@
     import { PUBLIC_HTTP_ROOT } from '$env/static/public'
     import { onMount } from 'svelte';
 
-	export let maxPage: number;
-	export let currentPage: number;
-    export let rest: string;
+    interface Props {
+        maxPage: number;
+        currentPage: number;
+        rest: string;
+    }
+
+    let { maxPage, currentPage, rest }: Props = $props();
     const isMinPage = currentPage === 1;
     const isMaxPage = currentPage === maxPage;
 

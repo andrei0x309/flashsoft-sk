@@ -10,8 +10,13 @@
 
 //   import { partytownSnippet } from 'https://cdn.jsdelivr.net/npm/@builder.io/partytown@0.7.5/integration/index.mjs'
   import { partytownSnippet } from '@builder.io/partytown/integration'
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
   
-  let scriptEl: HTMLScriptElement
+  let scriptEl: HTMLScriptElement = $state()
 	onMount(
 	  async () => {
 
@@ -80,7 +85,7 @@
 
 </svelte:head>
 
-<slot />
+{@render children?.()}
 
 {#if analyticsCode}
  {@html analyticsCode}

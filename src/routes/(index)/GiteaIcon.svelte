@@ -1,9 +1,19 @@
 <script lang="ts">
-    export let fill = '#fff';
-	export let size = 1;
-	export let magrinLeft = 0;
-	export let magrinRight = 0;
-	export let top = 0;
+	interface Props {
+		fill?: string;
+		size?: number;
+		magrinLeft?: number;
+		magrinRight?: number;
+		top?: number;
+	}
+
+	let {
+		fill = '#fff',
+		size = 1,
+		magrinLeft = 0,
+		magrinRight = 0,
+		top = 0
+	}: Props = $props();
 </script>
 
 <svg

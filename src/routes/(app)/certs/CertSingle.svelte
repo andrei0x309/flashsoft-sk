@@ -4,9 +4,10 @@
 	import { onMount } from 'svelte';
 	import CertImg from './CertImg.svelte';
 
-	let backRoute: string;
-	let showSpinner = false;
-	export let data: {
+	let backRoute: string = $state();
+	let showSpinner = $state(false);
+	interface Props {
+		data: {
 		res: {
 			cert_name: string;
 			cert_description: string;
@@ -22,6 +23,9 @@
 			}[];
 		};
 	};
+	}
+
+	let { data }: Props = $props();
 
 	beforeNavigate(() => {
 		showSpinner = true;

@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { run } from 'svelte/legacy';
+
     import { afterNavigate, beforeNavigate }  from '$app/navigation'
     import '@/routes/(app)/cert.scss'
     import Header from "../../Header.svelte"
@@ -9,10 +11,14 @@
     import CertSingle from '../CertSingle.svelte';
 
 
-    export let data: any;
-    let isLoading = false
+    interface Props {
+        data: any;
+    }
 
-    let pagKey = 0
+    let { data }: Props = $props();
+    let isLoading = $state(false)
+
+    let pagKey = $state(0)
     beforeNavigate(() => {
         isLoading = true
     })
@@ -23,10 +29,10 @@
     })
 
 
-    let isView = false
-    $:{
+    let isView = $state(false)
+    run(() => {
         isView = data.rest?.includes('/view/') || false
-    }
+    });
 
     console.log(data)
 
@@ -56,8 +62,12 @@
 <main id="app">
 
 <Header segment="cert">
-    <CertFilter slot="filter" selectedTags={ data?.res?.tag_ids ?? []} expanded={(data?.res?.tag_ids ?? []).length > 0} />
-    <CertSearch slot="search" searchInput={data?.searchInput ?? ''} expanded={(data?.searchInput ?? '').length > 0} />
+    {#snippet filter()}
+                <CertFilter  selectedTags={ data?.res?.tag_ids ?? []} expanded={(data?.res?.tag_ids ?? []).length > 0} />
+            {/snippet}
+    {#snippet search()}
+                <CertSearch  searchInput={data?.searchInput ?? ''} expanded={(data?.searchInput ?? '').length > 0} />
+            {/snippet}
 </Header>
 
 {#if !isView}

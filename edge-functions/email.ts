@@ -1,19 +1,28 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js";
+import { createClient, SupabaseClientOptions } from "https://esm.sh/@supabase/supabase-js@2.48.1";
 
-const SUPA_TOKEN = Deno.env.get('TOKEN')
-const EMAIL_ID = Deno.env.get('EMAIL_ID')
-const EMAIL_SECRET = Deno.env.get('EMAIL_SECRET')
+const SUPA_TOKEN = Deno.env.get('SECRET_SUPA_TOKEN') as string
+const EMAIL_ID = Deno.env.get('SECRET_EMAIL_ID') as string
+const EMAIL_SECRET = Deno.env.get('SECRET_EMAIL_KEY') as string
+const SECRET_HCAPTCHA_SECRET = Deno.env.get('SECRET_HCAPTCHA_SECRET') as string
 
 const EMAIL_API_AUTH = 'https://api.sendpulse.com/oauth/access_token'
 const EMAIL_API_ENDPOINT = 'https://api.sendpulse.com/smtp/emails'
-const SECRET_HCAPTCHA_SECRET = Deno.env.get('SECRET_HCAPTCHA_SECRET')
+
+const printSecrets = () => {
+  console.log('SUPA_TOKEN', SUPA_TOKEN)
+  console.log('EMAIL_ID', EMAIL_ID)
+  console.log('EMAIL_SECRET', EMAIL_SECRET)
+  console.log('SECRET_HCAPTCHA_SECRET', SECRET_HCAPTCHA_SECRET)
+}
+
+printSecrets()
 
 const options = {
   schema: "public",
   autoRefreshToken: true,
   persistSession: true,
   detectSessionInUrl: true,
-};
+} as SupabaseClientOptions<"public">;
 
 const supabase = createClient(
   "https://lcspcmmpolegvalxkfsu.supabase.co",
@@ -33,7 +42,7 @@ export default async (request: Request) => {
     let  name, email, message, hCaptcha;
     try {
       ({ name, email, message, hCaptcha } = await request.json());
-    } catch (error) {
+    } catch (_error) {
       return Response.json({error: 'Missing required fields, email, hCaptcha, message'}, {status: 400})
     }
     if(!email || !message || !hCaptcha ) {
@@ -67,7 +76,7 @@ export default async (request: Request) => {
       if(!success) {
         return Response.json({error: 'Invalid hCaptcha'}, {status: 400})
       }
-    } catch (error) {
+    } catch (_error) {
       return Response.json({error: 'Error validating hCaptcha'}, {status: 500})
     }
     

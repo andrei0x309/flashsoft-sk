@@ -6,10 +6,11 @@
     import { Lightbox } from 'svelte-lightbox';
 	import { browser } from '$app/environment';
 
-    let backRoute: string
+    let backRoute: string = $state()
 
-    let showSpinner = false
-    export let data:
+    let showSpinner = $state(false)
+    interface Props {
+        data: 
     {
         res: {
             data: {
@@ -32,7 +33,10 @@
                 }]
             }[]
         }
+    };
     }
+
+    let { data }: Props = $props();
 
     beforeNavigate(() => {
         showSpinner = true

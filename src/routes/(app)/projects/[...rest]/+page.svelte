@@ -1,4 +1,6 @@
 <script lang="ts">
+   import { run } from 'svelte/legacy';
+
     import '@/routes/(app)/projects.scss'
     // import { page } from '$app/stores';
     import Header from "../../Header.svelte"
@@ -9,12 +11,16 @@
     import ProjectSingle  from '../ProjectSingle.svelte';
     import { getPrjFeatureImage } from '@/lib/utils/common';
 
-    export let data: any;
-    let showSpinner = false
+   interface Props {
+      data: any;
+   }
+
+   let { data }: Props = $props();
+    let showSpinner = $state(false)
 
     //history.pushState({}, null, newUrl);
-    let viewKey = 0
-    let isView = false
+    let viewKey = $state(0)
+    let isView = $state(false)
     beforeNavigate(() => {
         showSpinner = true
     })
@@ -27,15 +33,15 @@
         projectBackRoute.set($SveltePage.url.toString())
     }
 
-    let page: number
+    let page: number = $state()
    
-    $:{
+    run(() => {
         page = data.res.page
         isView = data.rest?.includes('/view/') || false
         if(isView) {
             viewKey = viewKey + 1
         }
-    }
+    });
     
     </script>
 
@@ -99,7 +105,7 @@
             <!-- {{ JSON.parse(project.cat).cat_name }} -->
             <p class="card-text my-4" ><b>Category:</b><br> {project.cat.cat_name}<p>
             <p class="card-text mt-2">
-            <a on:click={setBackRoute} href={`/projects/view/${project.id}/${(project.title).replace(/ /gms, '-')}`} class="button center btn-pagination btn-projects px-2 pt-1 pb-2">
+            <a onclick={setBackRoute} href={`/projects/view/${project.id}/${(project.title).replace(/ /gms, '-')}`} class="button center btn-pagination btn-projects px-2 pt-1 pb-2">
                 <small class="text-muted">Details</small>
             </a>
            </p>

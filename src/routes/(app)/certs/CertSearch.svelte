@@ -1,9 +1,15 @@
 <script lang="ts">
-export let expanded: boolean = false;
-export let searchInput: string = '';
+  import { preventDefault } from 'svelte/legacy';
+
 import { slide } from 'svelte/transition';
 import { goto } from '$app/navigation';
-let error = ''
+  interface Props {
+    expanded?: boolean;
+    searchInput?: string;
+  }
+
+  let { expanded = $bindable(false), searchInput = $bindable('') }: Props = $props();
+let error = $state('')
 
 const submitForm = () => {
    const searchTerms = encodeURI((searchInput ?? '').split(' ').filter((term: string) => term.length >= 2).join(' '))
@@ -94,7 +100,7 @@ const submitForm = () => {
     <div class="container-fluid ml-2 mb-2">
       <button
         class="row filterLink focus:ring-0 focus:ring-offset-0"
-        on:click={() => expanded = !expanded}
+        onclick={() => expanded = !expanded}
         aria-expanded={expanded}
         aria-controls="collapse-search"
 
@@ -121,7 +127,7 @@ const submitForm = () => {
                     bind:value={searchInput}
                   >
                   <!-- v-on:click="submitForm()" -->
-                  <input type="submit" value="Search" class="button" on:click|preventDefault={submitForm}>
+                  <input type="submit" value="Search" class="button" onclick={preventDefault(submitForm)}>
                 </div>
               </form>
               <!-- v-if="showResults"  -->

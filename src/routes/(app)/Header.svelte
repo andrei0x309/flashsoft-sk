@@ -1,8 +1,15 @@
 
 <script lang="ts">
-    export let segment: string
-    let logoUrl = segment === 'cert' ? '/certs' : '/projects'
     import GiteaIcon from  '../(index)/GiteaIcon.svelte'
+  interface Props {
+    segment: string;
+    filter?: import('svelte').Snippet;
+    search?: import('svelte').Snippet;
+  }
+
+  let { segment, filter, search }: Props = $props();
+  let logoUrl = segment === 'cert' ? '/certs' : '/projects'
+
 </script>
 
 
@@ -31,6 +38,6 @@
     </div>
     </div>
        
-    <slot name="filter"></slot>
-    <slot name="search"></slot>      
+    {@render filter?.()}
+    {@render search?.()}      
   </header>

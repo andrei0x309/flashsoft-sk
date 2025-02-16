@@ -1,9 +1,14 @@
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
   import { fade } from "svelte/transition";
+  interface Props {
+    children?: import('svelte').Snippet;
+  }
 
-  let loaded = false;
-  let root: HTMLElement;
+  let { children }: Props = $props();
+
+  let loaded = $state(false);
+  let root: HTMLElement | undefined = $state();
 
   let observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -15,7 +20,7 @@
   });
 
   onMount(() => {
-    observer.observe(root);
+    observer.observe(root as Element);
   });
 
   onDestroy(() => {
@@ -26,7 +31,7 @@
 <div bind:this={root}>
   {#if loaded}
     <div transition:fade|global>
-      <slot></slot>
+      {@render children?.()}
     </div>
   {/if}
 </div>

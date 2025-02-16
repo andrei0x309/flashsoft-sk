@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run, preventDefault } from 'svelte/legacy';
+
 
 import { goto } from '$app/navigation';
 import { slide } from 'svelte/transition';
@@ -6,12 +8,16 @@ import { slide } from 'svelte/transition';
 import { PUBLIC_HTTP_ROOT, PUBLIC_RUN_ENV } from '$env/static/public'
 
 
-export let expanded: boolean = false;
-let tags: any[] = [];
-export let selectedTags: number[] = [];
-let allTags = false;
+let tags: any[] = $state([]);
+  interface Props {
+    expanded?: boolean;
+    selectedTags?: number[];
+  }
 
-let loadingTags = false;
+  let { expanded = $bindable(false), selectedTags = $bindable([]) }: Props = $props();
+let allTags = $state(false);
+
+let loadingTags = $state(false);
 
 const fetchTags = async (all = false) => {
   const response = await fetch(`${PUBLIC_HTTP_ROOT}/${PUBLIC_RUN_ENV === 'deno'? 'edge-api': 'api' }/cert/get/tags${all ? '?all=true' : ''}`);
@@ -40,29 +46,31 @@ const submitForm = () => {
    }
 }
 
-$: if (expanded) {
-  if (tags.length < 1) {
-    if(selectedTags.length > 0){
-      loadingTags = true;
-      fetchTags().then((data) => {
-        const alltags = data.data.some((tag: any) => {
-          return !selectedTags.includes(tag.tag_id);
-        });
-        if (alltags) {
-          tags = data?.data ?? []
+run(() => {
+    if (expanded) {
+    if (tags.length < 1) {
+      if(selectedTags.length > 0){
+        loadingTags = true;
+        fetchTags().then((data) => {
+          const alltags = data.data.some((tag: any) => {
+            return !selectedTags.includes(tag.tag_id);
+          });
+          if (alltags) {
+            tags = data?.data ?? []
+            loadingTags = false;
+          } else {
+            setTags(true);
+          }
+        }).catch((err) => {
+          console.log(err);
           loadingTags = false;
-        } else {
-          setTags(true);
-        }
-      }).catch((err) => {
-        console.log(err);
-        loadingTags = false;
-      });
-    } else {
-      setTags(allTags);
+        });
+      } else {
+        setTags(allTags);
+      }
     }
   }
-}
+  });
 
 // export default {   
 //   data () {
@@ -240,7 +248,7 @@ $: if (expanded) {
 <div class="container-fluid ml-2">    
  
             <button class="row filterLink focus:ring-transparent"
-            on:click={() => expanded = !expanded}
+            onclick={() => expanded = !expanded}
             aria-expanded={expanded}
             aria-controls="collapse-filter"
             >
@@ -278,12 +286,12 @@ $: if (expanded) {
                     </div>
                     <div class="row"> 
                     {#if !allTags}
-                    <button class="filterLink" on:click={() => setTags(true)}> Show all tags …</button>
+                    <button class="filterLink" onclick={() => setTags(true)}> Show all tags …</button>
                     {:else}
-                    <button class="filterLink" on:click={() => setTags(false)} > Show only popular tags …</button>
+                    <button class="filterLink" onclick={() => setTags(false)} > Show only popular tags …</button>
                     &nbsp;&nbsp;&nbsp;
                     {/if}
-                     <input on:click|preventDefault={submitForm} style="border-radius: .125rem; font-size: 0.9em;" type="submit" value="Filter" class="button btn-search-box">
+                     <input onclick={preventDefault(submitForm)} style="border-radius: .125rem; font-size: 0.9em;" type="submit" value="Filter" class="button btn-search-box">
                     </div>
                 </form>
                 {/if}
