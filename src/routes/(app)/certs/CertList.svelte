@@ -4,8 +4,6 @@
 	import { makeTitle } from '@/lib/utils/page';
 	import { certBackRoute } from '@/stores/client-route'
 	import { page as SveltePage } from '$app/stores';
-
-
 	interface Cert {
 		id: number;
 		cert_name: string;
@@ -19,6 +17,7 @@
 			id: number;
 			name: string;
 		}[];
+		weight: number;
 	}
 	interface Props {
 		currentPage: number;
@@ -71,10 +70,8 @@
 						<p class="text-right mt-auto py-4">
 							<small class="text-muted text-right">
 								Issued by: {cert['cat']?.cat_name}
-							</small>&nbsp;<svg class="cat-icon"
-								><use
-									href="/res/cert/cat_icons/{cert['cat']?.cat_icon_name}.svg#icon"
-								/></svg>
+							</small>&nbsp;
+							<img class="cat-icon" src="/res/cert/cat_icons/{cert['cat']?.cat_icon_name}.svg" alt="{cert['cat']?.cat_name}" />
 						</p>
 					{/if}
 				</div>
@@ -82,7 +79,7 @@
       <small class="text-muted"> 
        
           <a onclick={setBackRoute} href="{`/certs/view/${cert['id']}/${makeTitle(cert['cert_name'])}`}" ><button type="button" class="btn-11 raise"><span class="icon-expand" style="color:#f11154;"></span>&nbsp;&nbsp;&nbsp;View Details</button></a>
-          <a href="{`/res/cert_pdf/${cert['cert_file_name']}`}" rel="external" >
+          <a href="{`${cert['cert_file_name']}`}" rel="external" >
             <button type="button" class="btn-11 raise">
               <span class="icon-file-pdf-o" style="color:#f11154;"></span>&nbsp;&nbsp;&nbsp;View PDF</button>
            </a> 

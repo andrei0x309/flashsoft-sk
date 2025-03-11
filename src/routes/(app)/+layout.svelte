@@ -1,5 +1,6 @@
 <script lang="ts">
-	  import { analyticsCode } from '$lib/utils/analytics'
+	import '../tailwind.css'
+	import { analyticsCode } from '$lib/utils/analytics'
 	interface Props {
 		children?: import('svelte').Snippet;
 	}

@@ -50,7 +50,7 @@
 		<Lightbox>
 		<img
 			loading={lazy ? 'lazy' : 'eager'}
-			class="{`mx-auto card-img-top ${loaded ? '' : 'hidden'}`}"
+			class="{`mx-auto card-img-top aspect-ratio-image  ${loaded ? '' : 'hidden'}`}"
 			width="800"
 			height="600"
 			src={imgSrc}
@@ -80,8 +80,13 @@
 </template>
 
 <style lang="scss">
-	.size {
-		width: 800;
-		height: 600;
-	}
+ 
+
+.aspect-ratio-image {
+  aspect-ratio: 16 / 9; /* Or 4 / 3, 1 / 1, etc. */
+  width: 100%;
+  object-fit: contain;
+  max-height: 20rem;
+}
+
 </style>

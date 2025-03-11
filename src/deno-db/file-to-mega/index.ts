@@ -1,7 +1,38 @@
 import { walk } from "https://deno.land/std/fs/walk.ts";
 import { join } from "https://deno.land/std/path/mod.ts";
 
-const megaFiles = {}
+
+const megaJsonPath = './src/deno-db/db/megaFiles.json'
+const megaJsonPathBackup = './src/deno-db/db/megaFilesBackup.json'
+
+const filesLocation = "../res/flashsoft-sk/cert_pdf"
+const megaFolder = "cert_pdf"
+const megaCmdPath = "C:\\Users\\andrei0x309\\AppData\\Local\\MEGAcmd\\MEGAclient.exe"
+
+const excludePatterns = [ '/unopt/']
+const mustMatchPatterns = [ '.pdf']
+
+// create a backup of the current megaFiles.json
+try {
+  if (Deno.statSync(megaJsonPath)) {
+    Deno.copyFileSync(megaJsonPath, megaJsonPathBackup)
+  }
+} catch (e) {
+  console.log('No backup created')
+}
+
+// load the current megaFiles.json
+let megaFiles
+try {
+  megaFiles = JSON.parse(Deno.readTextFileSync(megaJsonPath))
+}
+catch (e) {
+  megaFiles = {}
+}
+
+console.log('Loaded', Object.keys(megaFiles).length, 'files')
+
+// const megaFiles = {}
 
 async function crawlDirectory(relativePath: string): Promise<string[]> {
   const filePaths: string[] = [];
@@ -15,6 +46,17 @@ async function crawlDirectory(relativePath: string): Promise<string[]> {
         .replace(absolutePath, "")
         .replace(/\\/g, "/")
         .replace(/^\//, "");
+    
+      if (excludePatterns.some((pattern) => relativePath.includes(pattern))) {
+        console.log('Excluding', relativePath)
+        continue;
+      }
+
+      if (!mustMatchPatterns.some((pattern) => relativePath.includes(pattern))) {
+        console.log('Excluding', relativePath)
+        continue;
+      }
+
       filePaths.push(relativePath);
     }
   }
@@ -22,12 +64,24 @@ async function crawlDirectory(relativePath: string): Promise<string[]> {
   return filePaths;
 }
 
+const megaSyncFolder = async () => {
+  const cmd = []
+  cmd.push('sync')
+  cmd.push(filesLocation)
+  cmd.push(`${megaFolder}`)
+  const exec =  new Deno.Command(megaCmdPath, {
+      args: [...cmd],
+    })
+  const { code, stdout, stderr } = await exec.output();
+  if (code !== 0) {
+    console.log('Error', code)
+    console.log(stderr)
+    console.log(new TextDecoder().decode(stdout));
+  }
+  console.log('Synced', megaFolder)
+}
 
-const filesLocation = "../res/flashsoft-sk/cert_pdf"
-const megaFolder = "cert_pdf"
-const megaCmdPath = "C:\\Users\\andrei0x309\\AppData\\Local\\MEGAcmd\\MEGAclient.exe"
-
-const megeGetExportedFile = async (file: string) => {
+ const megeGetExportedFile = async (file: string) => {
   const cmd = []
   cmd.push('export')
   cmd.push(`${megaFolder}/${file}`)
@@ -45,12 +99,22 @@ const megeGetExportedFile = async (file: string) => {
   const exportedLink = output.split(': ')[1].trim()
   return [file, exportedLink]
 }
-  
+
+
+await megaSyncFolder()
+console.log('Synced', megaFolder)
 
 const files = await crawlDirectory(filesLocation)
-for (const file of files) {
+const excludeFilesAlreadyExported = files.filter(file => !megaFiles[file])
+
+const numFiles = excludeFilesAlreadyExported.length
+console.log('Files Length: ', files.length)
+console.log('Found ', numFiles, ' files to export')
+
+for (const file of excludeFilesAlreadyExported) {
   const [fileName, link] = await megeGetExportedFile(file)
+  console.log('Exported', fileName, link)
   megaFiles[fileName] = link
 }
 
-Deno.writeTextFile('megaFiles.json', JSON.stringify(megaFiles, null, 2))
+Deno.writeTextFile(megaJsonPath, JSON.stringify(megaFiles, null, 2))
