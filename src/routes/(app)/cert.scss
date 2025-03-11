@@ -95,128 +95,14 @@ main#app {
 
 
 
-.cat-icon {
+.certbottommagin .card .cat-icon {
     display: inline-block;
-    /* icon primary color */
     color: var(--icon-color-primary);
-    height: 1em;
-    width: 1em;
+    height: 1.75rem;
+    width: 1.75rem;
   }
   
-  .cat-icon use {
-    /* icon secondary color - fill */
-    fill: var(--icon-color-secondary);
-  }
-  
-  .cat-icon.cat-icon--outline use {
-    /* icon secondary color - stroke */
-    stroke: var(--icon-color-secondary);
-  }
-  
-  /* --------------------------------
-  
-  Change icon size
-  
-  -------------------------------- */
-  
-  .cat-icon--xs {
-    height: var(--icon-size-xs);
-    width: var(--icon-size-xs);
-  }
-  
-  .cat-icon--sm {
-    height: var(--icon-size-sm);
-    width: var(--icon-size-sm);
-  }
-  
-  .cat-icon--lg {
-    height: var(--icon-size-lg);
-    width: var(--icon-size-lg);
-  }
-  
-  .cat-icon--xl {
-    height: var(--icon-size-xl);
-    width: var(--icon-size-xl);
-  }
-  
-  /* -------------------------------- 
-  
-  Align icon and text 
-  
-  -------------------------------- */
-  
-  .cat-icon-text-aligner {
-    /* add this class to parent element that contains icon + text */
-    display: flex;
-    align-items: center;
-  }
-  
-  .cat-icon-text-aligner .cat-icon {
-    color: inherit;
-    margin-right: 0.4em;
-    flex-shrink: 0;
-  }
-  
-  .cat-icon-text-aligner .cat-icon.cat-icon--align-right {
-    margin-right: 0;
-    margin-left: 0.4em;
-  }
-  
-  .cat-icon-text-aligner .cat-icon use {
-    color: inherit;
-    fill: currentColor;
-  }
-  
-  .cat-icon-text-aligner .cat-icon.cat-icon--outline use {
-    stroke: currentColor;
-  }
-  
-  /* -------------------------------- 
-  
-  Icon reset values - used to enable color customizations
-  
-  -------------------------------- */
-  
-  .cat-icon {
-    fill: currentColor;
-    stroke: none;
-  }
-  
-  .cat-icon.cat-icon--outline {
-    stroke: currentColor;
-  }
-  
-  .cat-icon use {
-    stroke: none;
-  }
-  
-  
-  .cat-icon--outline.cat-icon--stroke-1 {
-    stroke-width: 1px;
-  }
-  
-  .cat-icon--outline.cat-icon--stroke-2 {
-    stroke-width: 2px;
-  }
-  
-  .cat-icon--outline.cat-icon--stroke-3 {
-    stroke-width: 3px;
-  }
-  
-  .cat-icon--outline.cat-icon--stroke-4 {
-    stroke-width: 4px;
-  }
-  
-  .cat-icon--outline.cat-icon--stroke-1 use,
-  .cat-icon--outline.cat-icon--stroke-3 use {
-    -webkit-transform: translateX(0.5px) translateY(0.5px);
-    -moz-transform: translateX(0.5px) translateY(0.5px);
-    -ms-transform: translateX(0.5px) translateY(0.5px);
-    -o-transform: translateX(0.5px) translateY(0.5px);
-    transform: translateX(0.5px) translateY(0.5px);
-  }
-  
-  
+ 
   
   // Cert card body
   
@@ -225,9 +111,7 @@ main#app {
     img {
       /* Same as first example */
       display: block;
-      min-height: 21vh;
-  
-  
+ 
       &:before {
         width: 100%;
         /* Make sure we fill in the whole image area */
