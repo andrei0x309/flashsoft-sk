@@ -68,7 +68,7 @@
 			}
 		}
 		try {
-		const response = await fetch('/edge-api/index/email', {
+		const response = await fetch('/api/index/email', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -87,7 +87,7 @@
 				return;
 			}
 			if (response.status === 404) {
-				showAlertElement('Error: edge-api not found', 'error');
+				showAlertElement('Error: api not found', 'error');
 				return;
 			}
 			showAlertElement('Error: Something went wrong', 'error');
