@@ -20,7 +20,7 @@ let allTags = $state(false);
 let loadingTags = $state(false);
 
 const fetchTags = async (all = false) => {
-  const response = await fetch(`${PUBLIC_HTTP_ROOT}/${PUBLIC_RUN_ENV === 'deno'? 'edge-api': 'api' }/cert/get/tags${all ? '?all=true' : ''}`);
+  const response = await fetch(`${PUBLIC_HTTP_ROOT}/api/cert/get/tags${all ? '?all=true' : ''}`);
   if(!response.ok) throw new Error(response.statusText)
   const json = await response.json();
   return json;
