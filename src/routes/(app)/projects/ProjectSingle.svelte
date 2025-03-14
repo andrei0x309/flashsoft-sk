@@ -1,58 +1,58 @@
 <script lang="ts">
-    import { afterNavigate, beforeNavigate } from '$app/navigation';
-    import { projectBackRoute } from '@/stores/client-route'
-    import { onMount } from 'svelte';
-    import { getPrjFeatureImage } from '@/lib/utils/common';
-    import { Lightbox } from 'svelte-lightbox';
-	import { browser } from '$app/environment';
+import { afterNavigate, beforeNavigate } from '$app/navigation';
+import { projectBackRoute } from '@/stores/client-route';
+import { onMount } from 'svelte';
+import { getPrjFeatureImage } from '@/lib/utils/common';
+import { Lightbox } from 'svelte-lightbox';
+import { browser } from '$app/environment';
 
-    let backRoute: string = $state()
+let backRoute: string = $state();
 
-    let showSpinner = $state(false)
-    interface Props {
-        data: 
-    {
-        res: {
-            data: {
-                title: string
-                short_description: string
-                feature_image: string
-                open_source: boolean
-                links: {
-                    [key: string]: string
-                },
-                screen_pics: {
-                    [key: string]: string
-                }
-                cat : {
-                    cat_name: string
-                    cat_description: string
-                }
-                techs: [{
-                    name: string
-                }]
-            }[]
-        }
+let showSpinner = $state(false);
+interface Props {
+  data: {
+    res: {
+      data: {
+        title: string;
+        short_description: string;
+        feature_image: string;
+        open_source: boolean;
+        links: {
+          [key: string]: string;
+        };
+        screen_pics: {
+          [key: string]: string;
+        };
+        cat: {
+          cat_name: string;
+          cat_description: string;
+        };
+        techs: [
+          {
+            name: string;
+          }
+        ];
+      }[];
     };
-    }
+  };
+}
 
-    let { data }: Props = $props();
+let { data }: Props = $props();
 
-    beforeNavigate(() => {
-        showSpinner = true
-    })
+beforeNavigate(() => {
+  showSpinner = true;
+});
 
-    afterNavigate(() => {
-        showSpinner = false
-    })
+afterNavigate(() => {
+  showSpinner = false;
+});
 
-    onMount(() => {
-        projectBackRoute.subscribe((val) => {
-            backRoute = val || '/projects'
-        })
-        console.log(data)
-    })
-
+onMount(() => {
+  projectBackRoute.subscribe((val) => {
+    backRoute = val || '/projects';
+  });
+  console.log(data);
+});
 </script>
 
 <main class="{`project-main text-center md:mx-4 mb-2 flex ${showSpinner? 'blink-loading': ''}`}" id="app">

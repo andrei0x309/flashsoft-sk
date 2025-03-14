@@ -1,44 +1,41 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
-	import { Lightbox } from 'svelte-lightbox';
-	import { browser } from '$app/environment';
+import { onMount } from 'svelte';
+import { Lightbox } from 'svelte-lightbox';
+import { browser } from '$app/environment';
 
+interface CertImgProps {
+  imageSource: string;
+  certName: string;
+}
 
-	interface CertImgProps {
-		imageSource: string;
-		certName: string;
-	}
+let loaded = $state(false);
+interface Props {
+  propData: CertImgProps;
+  lazy?: boolean;
+}
 
-	let loaded = $state(false);
-	interface Props {
-		propData: CertImgProps;
-		lazy?: boolean;
-	}
+let { propData, lazy = true }: Props = $props();
+let imgSrc: string = $state();
+let altContent: string = $state();
+let srcset: string = $state();
 
-	let { propData, lazy = true }: Props = $props();
-	let imgSrc: string = $state();
-	let altContent: string = $state();
-	let srcset: string = $state();
+const createImgSet = () => {
+  const lastIndex = imgSrc.lastIndexOf('/');
+  const picName = imgSrc.substring(lastIndex + 1);
+  const filePath = imgSrc.substring(0, lastIndex + 1);
+  return [
+    filePath + '25/' + encodeURI(picName) + ' 256w, ',
+    filePath + '50/' + encodeURI(picName) + ' 528w, ',
+    filePath + '75/' + encodeURI(picName) + ' 792w, ',
+    encodeURI(imgSrc) + ' 1056w'
+  ].join('');
+};
 
-	const createImgSet = () => {
-		const lastIndex = imgSrc.lastIndexOf('/');
-		const picName = imgSrc.substring(lastIndex + 1);
-		const filePath = imgSrc.substring(0, lastIndex + 1);
-		return [
-			filePath + '25/' + encodeURI(picName) + ' 256w, ',
-			filePath + '50/' + encodeURI(picName) + ' 528w, ',
-			filePath + '75/' + encodeURI(picName) + ' 792w, ',
-			encodeURI(imgSrc) + ' 1056w'
-		].join('');
-	};
-	
-	onMount(() => {
-	 imgSrc = propData.imageSource;
-	 altContent = `Certificate ${propData.certName} image`;
-	 srcset = createImgSet();
-		 
-	});
-
+onMount(() => {
+  imgSrc = propData.imageSource;
+  altContent = `Certificate ${propData.certName} image`;
+  srcset = createImgSet();
+});
 </script>
 
 <template>

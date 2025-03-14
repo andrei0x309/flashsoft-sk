@@ -1,4 +1,4 @@
-import { supabase } from "../../lib/deno/supaClientFS.ts";
+import { supabase } from '../../lib/deno/supaClientFS.ts';
 
 // const resp = await supabase.from('fsk_prj').select(`
 // title,
@@ -12,9 +12,7 @@ import { supabase } from "../../lib/deno/supaClientFS.ts";
 // )
 // `).in('fsk_prj_tech_type.id', [1,2])
 
-
 // const { data, error } = await supabase.rpc('get_tags', { alltags: false })
-
 
 // console.log(
 //     data
@@ -24,7 +22,9 @@ import { supabase } from "../../lib/deno/supaClientFS.ts";
 //     console.error(error)
 // }
 
-const resp = await supabase.from('fsk_cert').select(`
+const resp = await supabase
+  .from('fsk_cert')
+  .select(`
 cert_name,
 cert_file_name,
 cert_feature_image,
@@ -36,14 +36,13 @@ tags:fsk_cert_tag_type!inner(
     id,
     name
 )
-`).limit(9)
+`)
+  .limit(9);
 
-const { data, error } = resp
+const { data, error } = resp;
 
-console.log(
-    data
-)
+console.log(data);
 
-if(error) {
-    console.error(error)
+if (error) {
+  console.error(error);
 }

@@ -1,31 +1,27 @@
 <script lang="ts">
 // @ts-nocheck
 
-	// import Header from './Header.svelte';
-	// import './styles.css';
-  import '../tailwind.css'
-  import './style.scss'
-  import { analyticsCode } from '$lib/utils/analytics'
-  import { onMount } from 'svelte'
+// import Header from './Header.svelte';
+// import './styles.css';
+import '../tailwind.css';
+import './style.scss';
+import { analyticsCode } from '$lib/utils/analytics';
+import { onMount } from 'svelte';
 
 //   import { partytownSnippet } from 'https://cdn.jsdelivr.net/npm/@builder.io/partytown@0.7.5/integration/index.mjs'
-  import { partytownSnippet } from '@builder.io/partytown/integration'
-	interface Props {
-		children?: import('svelte').Snippet;
-	}
+import { partytownSnippet } from '@builder.io/partytown/integration';
+interface Props {
+  children?: import('svelte').Snippet;
+}
 
-	let { children }: Props = $props();
-  
-  let scriptEl: HTMLScriptElement = $state()
-	onMount(
-	  async () => {
+let { children }: Props = $props();
 
-		if (scriptEl) {
-		  scriptEl.textContent = partytownSnippet()
-		}
-	  }
-	)
- 
+let scriptEl: HTMLScriptElement = $state();
+onMount(async () => {
+  if (scriptEl) {
+    scriptEl.textContent = partytownSnippet();
+  }
+});
 </script>
 
 <svelte:head>

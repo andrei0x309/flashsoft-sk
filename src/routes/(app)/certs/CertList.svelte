@@ -1,42 +1,36 @@
 <script lang="ts">
-	import CertImg from './CertImg.svelte';
-	import CertPagination from './CertPagination.svelte';
-	import { makeTitle } from '@/lib/utils/page';
-	import { certBackRoute } from '@/stores/client-route'
-	import { page as SveltePage } from '$app/stores';
-	interface Cert {
-		id: number;
-		cert_name: string;
-		cert_feature_image: string;
-		cert_file_name: string;
-		cat: {
-			cat_name: string;
-			cat_icon_name: string;
-		};
-		tags: {
-			id: number;
-			name: string;
-		}[];
-		weight: number;
-	}
-	interface Props {
-		currentPage: number;
-		maxPage: number;
-		rest: string;
-		data?: any;
-	}
+import CertImg from './CertImg.svelte';
+import CertPagination from './CertPagination.svelte';
+import { makeTitle } from '@/lib/utils/page';
+import { certBackRoute } from '@/stores/client-route';
+import { page as SveltePage } from '$app/stores';
+interface Cert {
+  id: number;
+  cert_name: string;
+  cert_feature_image: string;
+  cert_file_name: string;
+  cat: {
+    cat_name: string;
+    cat_icon_name: string;
+  };
+  tags: {
+    id: number;
+    name: string;
+  }[];
+  weight: number;
+}
+interface Props {
+  currentPage: number;
+  maxPage: number;
+  rest: string;
+  data?: any;
+}
 
-	let {
-		currentPage,
-		maxPage,
-		rest,
-		data = [] as Cert[]
-	}: Props = $props();
+let { currentPage, maxPage, rest, data = [] as Cert[] }: Props = $props();
 
-	const setBackRoute = () => {
-		certBackRoute.set($SveltePage.url.toString())
-	}
-
+const setBackRoute = () => {
+  certBackRoute.set($SveltePage.url.toString());
+};
 </script>
 
 {#if data.length > 0}

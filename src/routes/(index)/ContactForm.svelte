@@ -1,122 +1,119 @@
 <script lang="ts">
+import AlertEmail from './AlertEmail.svelte';
+import { onMount } from 'svelte';
+import Lazy from '@/components/Lazy.svelte';
+import { browser } from '$app/environment';
 
-	import AlertEmail from './AlertEmail.svelte';
-	import { onMount } from 'svelte';
-	import Lazy from '@/components/Lazy.svelte';
-	import { browser } from '$app/environment';
+let email: string = $state('');
+let name: string = $state('');
+let message: string = $state('');
+let mailForm: HTMLElement | undefined = $state();
+let spinner: HTMLElement | undefined = $state();
+let hcaptchaElement: HTMLElement | undefined = $state();
 
-	let email: string = $state('');
-	let name: string = $state('');
-	let message: string = $state('');
-	let mailForm: HTMLElement | undefined = $state();
-	let spinner: HTMLElement | undefined = $state();
-	let hcaptchaElement: HTMLElement | undefined = $state();
+let showAlert: boolean = $state(false);
+let alertMsg: string = $state('');
+let alertType: string = $state('error');
 
-	let showAlert: boolean = $state(false);
-	let alertMsg: string = $state('');
-	let alertType: string = $state('error');
+let HCScriptEl: HTMLScriptElement;
 
-	let HCScriptEl: HTMLScriptElement;
+const showAlertElement = (msg: string, type: string) => {
+  showAlert = true;
+  alertMsg = msg;
+  alertType = type;
+};
 
+const setLoadEmail = (isSending = true) => {
+  if (isSending) {
+    if (mailForm) {
+      mailForm.style.display = 'none';
+    }
+    if (spinner) {
+      spinner.style.display = 'inline-block';
+    }
+  } else {
+    if (mailForm) {
+      mailForm.style.display = 'block';
+    }
+    if (spinner) {
+      spinner.style.display = 'none';
+    }
+  }
+};
 
-	const showAlertElement = (msg: string, type: string) => {
-		showAlert = true;
-		alertMsg = msg;
-		alertType = type;
-	};
+const submitEmail = async (event: Event) => {
+  event.preventDefault();
+  const hCaptcha = (document?.querySelector('form div iframe') as HTMLElement)?.dataset?.hcaptchaResponse;
 
-	const setLoadEmail = (isSending = true) => {
-		if (isSending) {
-			if (mailForm) {
-				mailForm.style.display = 'none';
-			}
-			if (spinner) {
-				spinner.style.display = 'inline-block';
-			}
-		} else {
-			if (mailForm) {
-				mailForm.style.display = 'block';
-			}
-			if (spinner) {
-				spinner.style.display = 'none';
-			}
-		}
-	};
+  setLoadEmail(true);
+  const data = {
+    email,
+    name,
+    message,
+    hCaptcha
+  };
 
-	const submitEmail = async (event: Event) => {
-		event.preventDefault();
-		const hCaptcha = (document?.querySelector('form div iframe') as HTMLElement)?.dataset
-			?.hcaptchaResponse;
+  const recentEmail = localStorage.getItem('recent-email');
+  if (recentEmail) {
+    const num = isNaN(parseInt(recentEmail)) ? 0 : parseInt(recentEmail);
+    const date = new Date(num);
+    const now = new Date();
+    if (date.getTime() + 6e5 > now.getTime()) {
+      showAlertElement('You sent an email recently', 'error');
+      setLoadEmail(false);
+      return;
+    }
+  }
+  try {
+    const response = await fetch('/api/index/email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    setLoadEmail(false);
+    if (response.ok) {
+      showAlertElement('Email sent!', 'success');
+      localStorage.setItem('recent-email', new Date().getTime().toString());
+    } else {
+      if (response.status === 400) {
+        await response.json().then((data: any) => {
+          showAlertElement(`Error: ${data?.error}`, 'error');
+        });
+        return;
+      }
+      if (response.status === 404) {
+        showAlertElement('Error: api not found', 'error');
+        return;
+      }
+      showAlertElement('Error: Something went wrong', 'error');
+    }
+  } catch (error) {
+    showAlertElement(`Error: ${error}`, 'error');
+  }
+};
 
-		setLoadEmail(true);
-		const data = {
-			email,
-			name,
-			message,
-			hCaptcha
-		};
-
-		const recentEmail = localStorage.getItem('recent-email');
-		if (recentEmail) {
-			const num = isNaN(parseInt(recentEmail)) ? 0 : parseInt(recentEmail);
-			const date = new Date(num);
-			const now = new Date();
-			if (date.getTime() + 6e5 > now.getTime()) {
-				showAlertElement('You sent an email recently', 'error');
-				setLoadEmail(false);
-				return;
-			}
-		}
-		try {
-		const response = await fetch('/api/index/email', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		});
-		setLoadEmail(false);
-		if (response.ok) {
-			showAlertElement('Email sent!', 'success');
-			localStorage.setItem('recent-email', new Date().getTime().toString());
-		} else {
-			if (response.status === 400) {
-					await response.json().then((data: any) => {
-					showAlertElement(`Error: ${data?.error}`, 'error');
-				});
-				return;
-			}
-			if (response.status === 404) {
-				showAlertElement('Error: api not found', 'error');
-				return;
-			}
-			showAlertElement('Error: Something went wrong', 'error');
-		}
-		} catch (error) {
-			showAlertElement(`Error: ${error}`, 'error');
-		}
-	};
-
-	const renderCaptcha = () => {
-		if (hcaptchaElement && (window as unknown as { hcaptcha: unknown })?.hcaptcha) {
-			(
-				window as unknown as {
-					hcaptcha: {
-						render: (
-							el: HTMLElement,
-							op: {
-								sitekey: string;
-								theme: string;
-							}
-						) => void;
-					};
-				}
-			).hcaptcha.render(hcaptchaElement, {
-				sitekey: 'c529949f-b6e7-4e97-af3a-0ddb0f7c1c5a',
-				theme: 'dark'
-			});
-		}
-	};
+const renderCaptcha = () => {
+  if (hcaptchaElement && (window as unknown as { hcaptcha: unknown })?.hcaptcha) {
+    (
+      window as unknown as {
+        hcaptcha: {
+          render: (
+            el: HTMLElement,
+            op: {
+              sitekey: string;
+              theme: string;
+            }
+          ) => void;
+        };
+      }
+    ).hcaptcha.render(hcaptchaElement, {
+      sitekey: 'c529949f-b6e7-4e97-af3a-0ddb0f7c1c5a',
+      theme: 'dark'
+    });
+  }
+};
 
 // 	const config = { attributes: true, childList: true, subtree: true };
 
@@ -134,9 +131,7 @@
 // 		observer.observe(HCScriptEl, config);
 // }
 
-
-	onMount(() => {
-	});
+onMount(() => {});
 </script>
 
 <section id="section-contact">

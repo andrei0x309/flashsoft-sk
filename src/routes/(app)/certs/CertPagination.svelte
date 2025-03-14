@@ -1,52 +1,51 @@
 <script lang="ts">
-    import { PUBLIC_HTTP_ROOT } from '$env/static/public'
-    import { onMount } from 'svelte';
+import { PUBLIC_HTTP_ROOT } from '$env/static/public';
+import { onMount } from 'svelte';
 
-    interface Props {
-        maxPage: number;
-        currentPage: number;
-        rest: string;
-    }
+interface Props {
+  maxPage: number;
+  currentPage: number;
+  rest: string;
+}
 
-    let { maxPage, currentPage, rest }: Props = $props();
-    const isMinPage = currentPage === 1;
-    const isMaxPage = currentPage === maxPage;
+let { maxPage, currentPage, rest }: Props = $props();
+const isMinPage = currentPage === 1;
+const isMaxPage = currentPage === maxPage;
 
-    onMount(() => {
-        console.log('pag remounted', currentPage)
-    })
+onMount(() => {
+  console.log('pag remounted', currentPage);
+});
 
-    const linkList: (number | string)[] = [];
-    if(maxPage < 6) {
-        for(let i = 1; i <= maxPage; i++) {
-            linkList.push(i);
-        }
+const linkList: (number | string)[] = [];
+if (maxPage < 6) {
+  for (let i = 1; i <= maxPage; i++) {
+    linkList.push(i);
+  }
+} else {
+  if (currentPage >= maxPage - 2) {
+    linkList.push(1, 2, '...');
+    if (currentPage === maxPage) {
+      linkList.push(maxPage - 1, maxPage);
     } else {
-        if( currentPage >= maxPage-2){
-            linkList.push(1, 2, '...');
-            if(currentPage === maxPage) {
-                linkList.push(maxPage-1, maxPage)
-            } else {
-                linkList.push(maxPage-2, maxPage-1, maxPage)
-            }
-        }else {
-            if(currentPage <= 2) {
-                linkList.push(1, 2);
-                if(currentPage === 2) {
-                    linkList.push('...', currentPage+1, currentPage+2, currentPage+3, '...', maxPage-1, maxPage)
-                } else {
-                    linkList.push('...', currentPage+2, currentPage+3, currentPage+4, '...', maxPage-1, maxPage)
-                }
-            } else {
-                if(currentPage === 3) {
-                    linkList.push(1, 2, '...', currentPage, currentPage+1, '...', maxPage-1, maxPage);
-                } else {
-                    linkList.push(1, 2, '...', currentPage-1, currentPage, currentPage+1, '...', maxPage-1, maxPage);
-                }
-            }
-        }
+      linkList.push(maxPage - 2, maxPage - 1, maxPage);
     }
-
+  } else {
+    if (currentPage <= 2) {
+      linkList.push(1, 2);
+      if (currentPage === 2) {
+        linkList.push('...', currentPage + 1, currentPage + 2, currentPage + 3, '...', maxPage - 1, maxPage);
+      } else {
+        linkList.push('...', currentPage + 2, currentPage + 3, currentPage + 4, '...', maxPage - 1, maxPage);
+      }
+    } else {
+      if (currentPage === 3) {
+        linkList.push(1, 2, '...', currentPage, currentPage + 1, '...', maxPage - 1, maxPage);
+      } else {
+        linkList.push(1, 2, '...', currentPage - 1, currentPage, currentPage + 1, '...', maxPage - 1, maxPage);
+      }
+    }
+  }
+}
 </script>
 
 <nav aria-label="Pagination Navigation">

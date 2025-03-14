@@ -1,9 +1,9 @@
-const baseSiteUrl = 'https://flashsoft.eu'
+const baseSiteUrl = 'https://flashsoft.eu';
 
 const baseData = `User-agent: *
-Disallow:`
+Disallow:`;
 
 export const renderRobots = () => {
-    const sitemap = `Sitemap: ${baseSiteUrl}/sitemap.xml`
-    return baseData + '\n\n' + sitemap
-}
+  const sitemap = `Sitemap: ${baseSiteUrl}/sitemap.xml`;
+  return baseData + '\n\n' + sitemap;
+};
