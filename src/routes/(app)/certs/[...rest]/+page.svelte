@@ -1,43 +1,38 @@
 <script lang="ts">
-    import { run } from 'svelte/legacy';
+import { run } from 'svelte/legacy';
 
-    import { afterNavigate, beforeNavigate }  from '$app/navigation'
-    import '@/routes/(app)/cert.scss'
-    import Header from "../../Header.svelte"
-    import CertFilter from "../CertFilter.svelte";
-    import CertSearch from "../CertSearch.svelte";
-    import CertList from "../CertList.svelte";
-    import { page as SveltePage } from '$app/stores';
-    import CertSingle from '../CertSingle.svelte';
+import { afterNavigate, beforeNavigate } from '$app/navigation';
+import '@/routes/(app)/cert.scss';
+import Header from '../../Header.svelte';
+import CertFilter from '../CertFilter.svelte';
+import CertSearch from '../CertSearch.svelte';
+import CertList from '../CertList.svelte';
+import { page as SveltePage } from '$app/stores';
+import CertSingle from '../CertSingle.svelte';
 
+interface Props {
+  data: any;
+}
 
-    interface Props {
-        data: any;
-    }
+let { data }: Props = $props();
+let isLoading = $state(false);
 
-    let { data }: Props = $props();
-    let isLoading = $state(false)
+let pagKey = $state(0);
+beforeNavigate(() => {
+  isLoading = true;
+});
 
-    let pagKey = $state(0)
-    beforeNavigate(() => {
-        isLoading = true
-    })
+afterNavigate(() => {
+  pagKey = pagKey + 1;
+  isLoading = false;
+});
 
-    afterNavigate(() => {
-        pagKey = pagKey + 1
-        isLoading = false 
-    })
+let isView = $state(false);
+run(() => {
+  isView = data.rest?.includes('/view/') || false;
+});
 
-
-    let isView = $state(false)
-    run(() => {
-        isView = data.rest?.includes('/view/') || false
-    });
-
-    console.log(data)
-
-
-
+console.log(data);
 </script>
 
 <svelte:head>

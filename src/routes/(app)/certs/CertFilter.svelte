@@ -1,78 +1,80 @@
 <script lang="ts">
-  import { run, preventDefault } from 'svelte/legacy';
-
+import { run, preventDefault } from 'svelte/legacy';
 
 import { goto } from '$app/navigation';
 import { slide } from 'svelte/transition';
 
-import { PUBLIC_HTTP_ROOT, PUBLIC_RUN_ENV } from '$env/static/public'
-
+import { PUBLIC_HTTP_ROOT, PUBLIC_RUN_ENV } from '$env/static/public';
 
 let tags: any[] = $state([]);
-  interface Props {
-    expanded?: boolean;
-    selectedTags?: number[];
-  }
+interface Props {
+  expanded?: boolean;
+  selectedTags?: number[];
+}
 
-  let { expanded = $bindable(false), selectedTags = $bindable([]) }: Props = $props();
+let { expanded = $bindable(false), selectedTags = $bindable([]) }: Props = $props();
 let allTags = $state(false);
 
 let loadingTags = $state(false);
 
 const fetchTags = async (all = false) => {
   const response = await fetch(`${PUBLIC_HTTP_ROOT}/api/cert/get/tags${all ? '?all=true' : ''}`);
-  if(!response.ok) throw new Error(response.statusText)
+  if (!response.ok) throw new Error(response.statusText);
   const json = await response.json();
   return json;
-}
+};
 
 const setTags = (all = false) => {
   loadingTags = true;
   allTags = all;
-  fetchTags(all).then((data) => {
-    tags = data?.data ?? [];
-    loadingTags = false;
-  }).catch((err) => {
-    console.log(err);
-    loadingTags = false;
-  });
-}
+  fetchTags(all)
+    .then((data) => {
+      tags = data?.data ?? [];
+      loadingTags = false;
+    })
+    .catch((err) => {
+      console.log(err);
+      loadingTags = false;
+    });
+};
 
 const submitForm = () => {
-   if(selectedTags.length > 0){
-      goto(`/certs/filter/tags/${selectedTags.join('/')}/tags`);
-   } else {
-      goto(`/certs`);
-   }
-}
+  if (selectedTags.length > 0) {
+    goto(`/certs/filter/tags/${selectedTags.join('/')}/tags`);
+  } else {
+    goto(`/certs`);
+  }
+};
 
 run(() => {
-    if (expanded) {
+  if (expanded) {
     if (tags.length < 1) {
-      if(selectedTags.length > 0){
+      if (selectedTags.length > 0) {
         loadingTags = true;
-        fetchTags().then((data) => {
-          const alltags = data.data.some((tag: any) => {
-            return !selectedTags.includes(tag.tag_id);
-          });
-          if (alltags) {
-            tags = data?.data ?? []
+        fetchTags()
+          .then((data) => {
+            const alltags = data.data.some((tag: any) => {
+              return !selectedTags.includes(tag.tag_id);
+            });
+            if (alltags) {
+              tags = data?.data ?? [];
+              loadingTags = false;
+            } else {
+              setTags(true);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
             loadingTags = false;
-          } else {
-            setTags(true);
-          }
-        }).catch((err) => {
-          console.log(err);
-          loadingTags = false;
-        });
+          });
       } else {
         setTags(allTags);
       }
     }
   }
-  });
+});
 
-// export default {   
+// export default {
 //   data () {
 //     return {
 //       showCollapse: false,
@@ -83,7 +85,7 @@ run(() => {
 //       errorMsg:'',
 //       checkboxes:{},
 //       tags: []
-      
+
 //     }
 //   },props: ['tagsRoute'],
 //   created() {
@@ -94,7 +96,7 @@ run(() => {
 //       }else{
 //          url = window.location.href;
 //       }
- 
+
 //       if(url.indexOf(this.tagsRoute.filterUrl) === 0){
 //       let queryStr = url.substring(this.tagsRoute.filterUrl.length,url.length);
 //       let myRegexp = /.*?tags\/(.*?)\/tags/g;
@@ -107,11 +109,11 @@ run(() => {
 //         return vci.tags.some( function(oitem){
 //         // for not converting str to int
 //         return oitem.tag_id == fitem ;
-              
+
 //           }   );
 
 //       });
-      
+
 //       if(hasAllKeys){
 //          filterIds.forEach( function(item){
 //                vci.$set(vci.checkboxes, item, true);
@@ -121,66 +123,56 @@ run(() => {
 //       }else{
 //           vci.showAllTags(true).then(
 //           function (){
-              
+
 //               filterIds.forEach( function(item){
 //               vci.$set(vci.checkboxes, item, true);
 //           });
 //          vci.stopCollapse = false;
 //          vci.showTagLoading = false;
-              
+
 //           }
-                
+
 //                 );
 //       }
 
-                 
-          
 //       });
-                            
-                            
-      
-      
-//      } 
-      
+
+//      }
+
 //   },
 //     methods: {
 //            toggleCollapse: function(dontTouchColapse = false, keepLoading=false){
 //                if(!this.stopCollapse){
-             
+
 //                if(!dontTouchColapse){
 //                this.showCollapse = !this.showCollapse;
 //                }
 //                let compTemp = this;
 //                if(this.tags.length < 1 ){
-//                  this.stopCollapse = true;    
+//                  this.stopCollapse = true;
 //                     let vci = this;
 //                           return this.$http
 //       .get(this.tagsRoute.popularTags)
 //       .then(function(response) {
 //                 let data = response.data;
 //                 if(data.hasOwnProperty('error')){
-//                 vci.showError = true;    
-//                 vci.errorMsg = data.error; 
+//                 vci.showError = true;
+//                 vci.errorMsg = data.error;
 //                 }else{
 //                     vci.tags = response.data;
 //                 }
-                
-                
-                
+
 //                 if(keepLoading){
 //                      vci.showTagLoading = true;
 //                 }else{
 //                     vci.stopCollapse = false;
 //                     vci.showTagLoading = false;
 //                 }
-                
-                 
-                
-//       });   
-                   
-                   
-//                } 
-        
+
+//       });
+
+//                }
+
 //                }
 //               //setTimeout(function(){  compTemp.showTagLoading = false; }, 3000);
 //            },
@@ -188,16 +180,15 @@ run(() => {
 //            this.tags = [];
 //            this.stopCollapse = true;
 //            this.showTagLoading = true;
-           
-           
+
 //                                let vci = this;
 //                           return this.$http
 //       .get(this.tagsRoute.allTags)
 //       .then(function(response) {
 //                 let data = response.data;
 //                 if(data.hasOwnProperty('error')){
-//                 vci.showError = true;    
-//                 vci.errorMsg = data.error; 
+//                 vci.showError = true;
+//                 vci.errorMsg = data.error;
 //                 }else{
 //                     vci.tags = response.data;
 //                 }
@@ -206,16 +197,15 @@ run(() => {
 //                 vci.stopCollapse = false;
 //                 vci.showTagLoading = false;
 //             }
-//       }); 
-           
-           
+//       });
+
 //        },
 //      showPopularOnly: function(){
 //          this.showTagLoading = true;
 //          this.gotAllTags = false;
 //          this.tags = [];
 //          this.toggleCollapse(true);
-         
+
 //      },
 //      submitForm: function(){
 //          let submitStr = "/tags/";
@@ -226,9 +216,9 @@ run(() => {
 //             }
 //          }
 //          submitStr+= ids+"tags";
-           
+
 //         let isNode=new Function("try {return this===global;}catch(e){return false;}")();
-         
+
 //         if(ids.length > 0) {
 //             if(!isNode){
 //                window.location.href = this.tagsRoute.filterUrl+submitStr;
@@ -238,12 +228,11 @@ run(() => {
 //             window.location.href = this.tagsRoute.indexUrl;
 //            }
 //         }
-   
-//      }
-     
-//     } 
-// }      
 
+//      }
+
+//     }
+// }
 </script>
 <div class="container-fluid ml-2">    
  

@@ -1,25 +1,25 @@
 import { error } from '@sveltejs/kit';
-import { makeTitle, appendToData } from '@/lib/utils/common'
+import { makeTitle, appendToData } from '@/lib/utils/common';
 
 export const checkData = (data: unknown): Record<string, unknown> => {
-    if(!data) {
-      if(data === -1) {
-        error(404, 'Not found');
-      }
-      error(500, 'Error loading data');
+  if (!data) {
+    if (data === -1) {
+      error(404, 'Not found');
     }
-    return data as Record<string, unknown>
+    error(500, 'Error loading data');
   }
-    
-  export const extractPage = (rest: string) => {
-    if(rest.includes('page/')) {
-      const page = Number(rest.split('page/')[1].replace('/', ''))
-      if(page < 1) {
-        error(404, 'Not found');
-      }
-      return page
-    }
-    return 1
-  }
+  return data as Record<string, unknown>;
+};
 
-export { error, makeTitle, appendToData }
+export const extractPage = (rest: string) => {
+  if (rest.includes('page/')) {
+    const page = Number(rest.split('page/')[1].replace('/', ''));
+    if (page < 1) {
+      error(404, 'Not found');
+    }
+    return page;
+  }
+  return 1;
+};
+
+export { error, makeTitle, appendToData };

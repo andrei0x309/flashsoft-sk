@@ -1,46 +1,46 @@
 <script lang="ts">
-	import { afterNavigate, beforeNavigate } from '$app/navigation';
-	import { certBackRoute } from '@/stores/client-route';
-	import { onMount } from 'svelte';
-	import CertImg from './CertImg.svelte';
+import { afterNavigate, beforeNavigate } from '$app/navigation';
+import { certBackRoute } from '@/stores/client-route';
+import { onMount } from 'svelte';
+import CertImg from './CertImg.svelte';
 
-	let backRoute: string = $state();
-	let showSpinner = $state(false);
-	interface Props {
-		data: {
-		res: {
-			cert_name: string;
-			cert_description: string;
-			cert_feature_image: string;
-			cert_file_name: string;
-			cat: {
-				cat_name: string;
-				cat_icon_name: string;
-			};
-			tags: {
-				id: number;
-				name: string;
-			}[];
-		};
-	};
-	}
+let backRoute: string = $state();
+let showSpinner = $state(false);
+interface Props {
+  data: {
+    res: {
+      cert_name: string;
+      cert_description: string;
+      cert_feature_image: string;
+      cert_file_name: string;
+      cat: {
+        cat_name: string;
+        cat_icon_name: string;
+      };
+      tags: {
+        id: number;
+        name: string;
+      }[];
+    };
+  };
+}
 
-	let { data }: Props = $props();
+let { data }: Props = $props();
 
-	beforeNavigate(() => {
-		showSpinner = true;
-	});
+beforeNavigate(() => {
+  showSpinner = true;
+});
 
-	afterNavigate(() => {
-		showSpinner = false;
-	});
+afterNavigate(() => {
+  showSpinner = false;
+});
 
-	onMount(() => {
-		certBackRoute.subscribe((val) => {
-			backRoute = val || '/certs';
-		});
-		console.log(data);
-	});
+onMount(() => {
+  certBackRoute.subscribe((val) => {
+    backRoute = val || '/certs';
+  });
+  console.log(data);
+});
 </script>
 
 <div class="{`text-center md:mx-4 mb-2 flex ${showSpinner ? 'blink-loading' : ''}`}">

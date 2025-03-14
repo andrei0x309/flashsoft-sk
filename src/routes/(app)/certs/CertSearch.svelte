@@ -1,25 +1,30 @@
 <script lang="ts">
-  import { preventDefault } from 'svelte/legacy';
+import { preventDefault } from 'svelte/legacy';
 
 import { slide } from 'svelte/transition';
 import { goto } from '$app/navigation';
-  interface Props {
-    expanded?: boolean;
-    searchInput?: string;
-  }
+interface Props {
+  expanded?: boolean;
+  searchInput?: string;
+}
 
-  let { expanded = $bindable(false), searchInput = $bindable('') }: Props = $props();
-let error = $state('')
+let { expanded = $bindable(false), searchInput = $bindable('') }: Props = $props();
+let error = $state('');
 
 const submitForm = () => {
-   const searchTerms = encodeURI((searchInput ?? '').split(' ').filter((term: string) => term.length >= 2).join(' '))
+  const searchTerms = encodeURI(
+    (searchInput ?? '')
+      .split(' ')
+      .filter((term: string) => term.length >= 2)
+      .join(' ')
+  );
 
-   if(searchTerms.length > 0){
-      goto(`/certs/search?q=${searchTerms}`);
-   } else {
-     error = 'Please enter at least 2 characters to search!'
-   }
-}
+  if (searchTerms.length > 0) {
+    goto(`/certs/search?q=${searchTerms}`);
+  } else {
+    error = 'Please enter at least 2 characters to search!';
+  }
+};
 
 //     export default {
 //     data() {
@@ -43,31 +48,28 @@ const submitForm = () => {
 //          url = this.searchRoute.indexUrl;
 //       }else{
 //          url = window.location.href;
-//       }       
+//       }
 //       if(url.indexOf(this.searchRoute.searchRoute) === 0){
 //       let query= url.replace(this.searchRoute.searchRoute+"/",'');
 //       let sepPosition = query.indexOf("/");
 //       if( sepPosition < 0 ) {
 //            sepPosition = query.indexOf("?");
 //       }
-      
+
 //       if( sepPosition > 0 ){
 //          query = query.slice(0, sepPosition);
 //       }
 //       this.query = decodeURI(query);
-                      
-                      
+
 //        if(this.searchRoute.nrResults){
-       
-//        this.msgResults = 'For the search query <b class="highlight">'+ this.query +'</b> you got a total of <b class="highlight">'+ this.searchRoute.nrResults +'</b> results.';                       
+
+//        this.msgResults = 'For the search query <b class="highlight">'+ this.query +'</b> you got a total of <b class="highlight">'+ this.searchRoute.nrResults +'</b> results.';
 //        this.showResults = true;
-//        this.showCollapse = true;   
+//        this.showCollapse = true;
 //       }
-      
-   
+
 //       }
-  
-   
+
 //     },
 //     methods: {
 //       toggleCollapse: function(dontTouchColapse = false, keepLoading = false) {
@@ -75,14 +77,13 @@ const submitForm = () => {
 //           if (!dontTouchColapse) {
 //             this.showCollapse = !this.showCollapse;
 //           }
-   
+
 //         }
-        
+
 //       },
-      
+
 //       submitForm: function() {
-  
-         
+
 //         if (this.query.length > 0) {
 //               if(typeof window !== "undefined"){
 //               window.location.href = this.searchRoute.searchRoute + "/" + this.query;
@@ -95,7 +96,6 @@ const submitForm = () => {
 //       }
 //     }
 //   };
-
 </script>
     <div class="container-fluid ml-2 mb-2">
       <button

@@ -1,59 +1,58 @@
 <script lang="ts">
-	// import Counter from './Counter.svelte';
-	// import welcome from '$lib/images/svelte-welcome.webp';
-	// import welcome_fallback from '$lib/images/svelte-welcome.png';
-	// import { BC_VERSION, BC_SK_VERSION } from '$lib/config';
-	import { Swipe } from '$lib/utils/swipe';
-	import { onMount } from 'svelte';
-	import ContactForm from './ContactForm.svelte';
-	import Interests from './Interests.svelte';
-	import Skills from './Skills.svelte';
-	import Techs from './Techs.svelte';
-	import GiteaIcon from './GiteaIcon.svelte';
+// import Counter from './Counter.svelte';
+// import welcome from '$lib/images/svelte-welcome.webp';
+// import welcome_fallback from '$lib/images/svelte-welcome.png';
+// import { BC_VERSION, BC_SK_VERSION } from '$lib/config';
+import { Swipe } from '$lib/utils/swipe';
+import { onMount } from 'svelte';
+import ContactForm from './ContactForm.svelte';
+import Interests from './Interests.svelte';
+import Skills from './Skills.svelte';
+import Techs from './Techs.svelte';
+import GiteaIcon from './GiteaIcon.svelte';
 
-	const pageDescription = 'Web & App Development Portfolio & Software Developer Profile portal, you can access public my repositories on my GitLab instance.';
-	const pageTitle = 'Web & App Development Portfolio - Software Dev Profile - flashsoft.eu';
+const pageDescription =
+  'Web & App Development Portfolio & Software Developer Profile portal, you can access public my repositories on my GitLab instance.';
+const pageTitle = 'Web & App Development Portfolio - Software Dev Profile - flashsoft.eu';
 
-	let toggle: HTMLElement | undefined = $state(); // document.getElementById('menu_toggle');
-	let sideMenu: HTMLElement | undefined = $state(); // document.getElementById('side-menu');
-	let close: HTMLElement | undefined = $state(); // document.getElementById('menu-close');
+let toggle: HTMLElement | undefined = $state(); // document.getElementById('menu_toggle');
+let sideMenu: HTMLElement | undefined = $state(); // document.getElementById('side-menu');
+let close: HTMLElement | undefined = $state(); // document.getElementById('menu-close');
 
-	const toggeleMenu = () => {
-	sideMenu?.classList.add('sideMenuToggle');
-    const menuLinks = sideMenu?.querySelector('.sidebar-menu-nav')?.querySelectorAll('.sidemenu');
-    if(menuLinks){
+const toggeleMenu = () => {
+  sideMenu?.classList.add('sideMenuToggle');
+  const menuLinks = sideMenu?.querySelector('.sidebar-menu-nav')?.querySelectorAll('.sidemenu');
+  if (menuLinks) {
     let i = 1;
-    for (const menuLink of menuLinks as unknown as HTMLElement[]){
-        const timeout = 130 * i;
-        setTimeout( () => {
-             menuLink.style.animation = 'menuLinkSlideLeft 0.8s ease-in forwards;';
-        },timeout );
-        i++;
-     }
+    for (const menuLink of menuLinks as unknown as HTMLElement[]) {
+      const timeout = 130 * i;
+      setTimeout(() => {
+        menuLink.style.animation = 'menuLinkSlideLeft 0.8s ease-in forwards;';
+      }, timeout);
+      i++;
     }
-	};
+  }
+};
 
-	const closeMenu = () => {
-		sideMenu?.classList.remove("sideMenuToggle");
-	}
+const closeMenu = () => {
+  sideMenu?.classList.remove('sideMenuToggle');
+};
 
+interface Props {
+  data: any;
+}
 
-	interface Props {
-		data: any;
-	}
-
-	let { data }: Props = $props();
+let { data }: Props = $props();
 
 const html = data?.html;
 
 onMount(() => {
-	new Swipe(sideMenu, function(event: unknown, direction: string) {
-	if (direction === "left") {
-		closeMenu()
-	}
-})
-})
-
+  new Swipe(sideMenu, function (event: unknown, direction: string) {
+    if (direction === 'left') {
+      closeMenu();
+    }
+  });
+});
 </script>
 
 <svelte:head>

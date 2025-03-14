@@ -1,12 +1,11 @@
 <script lang="ts">
-    interface Props {
-        showAlert?: boolean;
-        msg?: string;
-        type?: string;
-    }
+interface Props {
+  showAlert?: boolean;
+  msg?: string;
+  type?: string;
+}
 
-    let { showAlert = $bindable(false), msg = $bindable(''), type = $bindable('error') }: Props = $props();
-
+let { showAlert = $bindable(false), msg = $bindable(''), type = $bindable('error') }: Props = $props();
 </script>
 {#if showAlert}
 {#if type === 'error'}

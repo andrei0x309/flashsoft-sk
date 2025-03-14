@@ -1,49 +1,48 @@
 <script lang="ts">
-   import { run } from 'svelte/legacy';
+import { run } from 'svelte/legacy';
 
-    import '@/routes/(app)/projects.scss'
-    // import { page } from '$app/stores';
-    import Header from "../../Header.svelte"
-    // import type { PageServerLoad } from './$types';
-    import { afterNavigate, beforeNavigate } from '$app/navigation';
-    import { page as SveltePage } from '$app/stores';
-    import { projectBackRoute } from '@/stores/client-route'
-    import ProjectSingle  from '../ProjectSingle.svelte';
-    import { getPrjFeatureImage } from '@/lib/utils/common';
+import '@/routes/(app)/projects.scss';
+// import { page } from '$app/stores';
+import Header from '../../Header.svelte';
+// import type { PageServerLoad } from './$types';
+import { afterNavigate, beforeNavigate } from '$app/navigation';
+import { page as SveltePage } from '$app/stores';
+import { projectBackRoute } from '@/stores/client-route';
+import ProjectSingle from '../ProjectSingle.svelte';
+import { getPrjFeatureImage } from '@/lib/utils/common';
 
-   interface Props {
-      data: any;
-   }
+interface Props {
+  data: any;
+}
 
-   let { data }: Props = $props();
-    let showSpinner = $state(false)
+let { data }: Props = $props();
+let showSpinner = $state(false);
 
-    //history.pushState({}, null, newUrl);
-    let viewKey = $state(0)
-    let isView = $state(false)
-    beforeNavigate(() => {
-        showSpinner = true
-    })
+//history.pushState({}, null, newUrl);
+let viewKey = $state(0);
+let isView = $state(false);
+beforeNavigate(() => {
+  showSpinner = true;
+});
 
-    afterNavigate(() => {
-        showSpinner = false
-    })
+afterNavigate(() => {
+  showSpinner = false;
+});
 
-    const setBackRoute = () => {
-        projectBackRoute.set($SveltePage.url.toString())
-    }
+const setBackRoute = () => {
+  projectBackRoute.set($SveltePage.url.toString());
+};
 
-    let page: number = $state()
-   
-    run(() => {
-        page = data.res.page
-        isView = data.rest?.includes('/view/') || false
-        if(isView) {
-            viewKey = viewKey + 1
-        }
-    });
-    
-    </script>
+let page: number = $state();
+
+run(() => {
+  page = data.res.page;
+  isView = data.rest?.includes('/view/') || false;
+  if (isView) {
+    viewKey = viewKey + 1;
+  }
+});
+</script>
 
 <svelte:head>
     <title>{ data.pageTitle }</title>

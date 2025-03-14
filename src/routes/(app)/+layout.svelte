@@ -1,11 +1,11 @@
 <script lang="ts">
-	import '../tailwind.css'
-	import { analyticsCode } from '$lib/utils/analytics'
-	interface Props {
-		children?: import('svelte').Snippet;
-	}
+import '../tailwind.css';
+import { analyticsCode } from '$lib/utils/analytics';
+interface Props {
+  children?: import('svelte').Snippet;
+}
 
-	let { children }: Props = $props();
+let { children }: Props = $props();
 </script>
 
 <svelte:head>

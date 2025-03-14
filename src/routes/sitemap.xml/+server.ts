@@ -1,11 +1,12 @@
 // export const prerender = true;
-import type { RequestHandler } from  './$types';
-import { generatePaths } from '@/lib/sitemap/index'
+import type { RequestHandler } from './$types';
+import { generatePaths } from '@/lib/sitemap/index';
 
 const website = 'https://flashsoft.eu';
 
 export const GET: RequestHandler = async () => {
-  return new Response(`<?xml version="1.0" encoding="UTF-8" ?>
+  return new Response(
+    `<?xml version="1.0" encoding="UTF-8" ?>
 	<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
 		${(await generatePaths())
       .map(
@@ -24,5 +25,6 @@ export const GET: RequestHandler = async () => {
         'Content-Type': 'application/xml'
       },
       status: 200
-    });
-}
+    }
+  );
+};

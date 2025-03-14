@@ -1,19 +1,13 @@
 <script lang="ts">
-	interface Props {
-		fill?: string;
-		size?: number;
-		magrinLeft?: number;
-		magrinRight?: number;
-		top?: number;
-	}
+interface Props {
+  fill?: string;
+  size?: number;
+  magrinLeft?: number;
+  magrinRight?: number;
+  top?: number;
+}
 
-	let {
-		fill = '#fff',
-		size = 1,
-		magrinLeft = 0,
-		magrinRight = 0,
-		top = 0
-	}: Props = $props();
+let { fill = '#fff', size = 1, magrinLeft = 0, magrinRight = 0, top = 0 }: Props = $props();
 </script>
 
 <svg
