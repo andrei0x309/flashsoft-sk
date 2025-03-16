@@ -141,7 +141,7 @@ footer::before {
 
 $radius: 0.5rem;
 $skew: 25deg;
-$main-color: tomato;
+$main-color: #0b0809;
 
 
 .skew-menu {
@@ -161,13 +161,13 @@ $main-color: tomato;
 }
 
 .skew-menu ul li {
-  background: #fff;
+  background: var(--color-zinc-900);
   float: left;
   margin-bottom: 0.2rem;
-  border-right: 0.5rem solid #eee;
+  border-right: 0.5rem solid oklch(0.18 0 0);
   box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
   text-transform: uppercase;
-  color: #555;
+  color: var(--tw-ring-offset-color);
   font-weight: bolder;
   transition: all 0.3s linear;
   font-size: 0.75rem;
