@@ -16,7 +16,11 @@
 .lfc, .rsb {
   scroll-behavior: smooth;
   min-height: 100%; /* enforce height */
-}      
+}
+
+.lfc {
+  border-right: 3px solid var(--color-slate-950);
+}
 
 #main {
   max-width: 120rem;
@@ -132,7 +136,6 @@ nav {
     border-radius: 50%;
     position: absolute;
     margin: 0.2rem;
-    font-size: 150%;
     border: 0.18rem solid #f1b01e;
     transition: all 0.4s;
 }
@@ -157,12 +160,12 @@ nav {
     text-align: right;
     padding: 0.5rem 1rem;
     padding-left: 3rem;
-    border-bottom: 0.2rem solid #f1b01e;
+    border-bottom: 0.2rem solid var(--color-amber-500);
     
 }
 
 .ls-pr-ct{
-    color: #026084;
+    color: var(--color-stone-950);
     background-color: #fafafa;
     font-size: 1.3em;
 }
@@ -199,21 +202,23 @@ nav {
 
  
 .ls-ct-fr {
-    background-color: rgba(32, 34, 43, 0.95);
-    font-size: 1.2rem;
-    text-align: center;
-    padding: 2rem 1rem;
+  background-color: var(--color-zinc-900);
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 2rem 1rem;
     
     
 input, textarea {
-	display: block;
-	margin: 1rem auto;
-	color: #f1b01e;
-	background-color: rgb(32,34,43);
-	border: 0.1rem solid transparent;
-	width: 50%;
-	transition: border .4s;
-        border-bottom: 0.02em solid #f1b01e52;
+  display: block;
+  margin: 1rem auto;
+  color: #f1b01e;
+  background-color: rgb(11 8 9 / 61%);
+  border: 0.1rem solid transparent;
+  width: 50%;
+  transition: border 0.4s;
+  border-bottom: 0.02em solid rgba(241, 176, 30, 0.3215686275);
+  text-indent: 0.4rem;
+  line-height: 2rem;
 }
 
 input:focus, textarea:focus {
@@ -227,13 +232,16 @@ input{
 }
 
 .btn-submit{
-	border: none;
-	width: 50%;
-	color: #f1b01e;
-	border: 0.1rem solid #f1b01e;
-	background-color: rgb(32,34,43);	
-	transition: color .5s, background-color .5s;
-        margin-top:0.7em;
+  border: none;
+  width: 50%;
+  color: #f1b01e;
+  border: 0.1rem solid #f1b01e;
+  background-color: rgb(26 26 26);
+  transition: color 0.5s, background-color 0.5s;
+  margin-top: 0.7em;
+  max-width: 10rem;
+  height: 3rem;
+  cursor: pointer;
 }
 
 .btn-submit:hover {
@@ -271,12 +279,7 @@ input{
   text-transform: uppercase;
 }
 
-.left-side-footer {
-    background-color: #191a21;
-    padding: 1.6em 0;
-    text-align: center;
-}
-
+ 
 #side-menu{
     border-right: 2px solid #000;
     border-top: .6rem solid #f1b01e;
@@ -310,7 +313,7 @@ input{
 /* H3 */
 h3 {
   margin: 2rem 0;
-  color: #426990;
+  color: #1e2022;
   text-align: center;
   overflow: hidden;
 }
@@ -352,14 +355,14 @@ h3 span:after {
 
 
 .left-side-footer {
-	background-color: #191a21;
-	padding: 1.6em 0;
-	text-align: center;
+  background-color: #101010;
+  padding: 1.6em 0;
+  text-align: center;
 }
 
 .left-side-footer a, .left-side-footer p{
     color: #f8f9fa;
-    font-size: 0.9em;
+    font-size: 0.75em;
     
 }
 
@@ -385,7 +388,7 @@ h3 span:after {
 	height:30%;
 	left:35%;
 	top:15%;
-	background:#fff;
+	background: var(--color-zinc-500);
 	border-radius:4px 4px 0 0;
 	border-bottom: 0.1rem solid #222
 }
@@ -437,7 +440,7 @@ h3 span:after {
     height: 2vw;
     left: 7.585vw;
     top: 7.2vw;
-    border-bottom: 2vw solid #fff;
+    border-bottom: 2vw solid var(--color-zinc-500);
     border-left: 1.2vw solid transparent;
     border-right: 1.2vw solid transparent;
  
@@ -465,7 +468,7 @@ h3 span:after {
     left: 7.6vw;
     height: 0.5vw;
     top: 9.26vw;
-    background: #e2e2e2;
+    background: var(--color-zinc-600);
 }
 
 @keyframes slide {
@@ -954,16 +957,17 @@ a.gitlab-button:active {
     --color-calendar-winter-graph-day-L2-bg: #0969DA;
     --color-calendar-winter-graph-day-L3-bg: #54AEFF;
     --color-calendar-winter-graph-day-L4-bg: #B6E3FF;
-    --color-calendar-graph-day-bg: #161b22;
     --color-calendar-graph-day-border: rgba(27, 31, 35, 0.06);
     // --color-calendar-graph-day-L1-bg: #0e4429;
     // --color-calendar-graph-day-L2-bg: #006d32;
     // --color-calendar-graph-day-L3-bg: #26a641;
     // --color-calendar-graph-day-L4-bg: #39d353;
-    --color-calendar-graph-day-L1-bg: #0A3069;
-    --color-calendar-graph-day-L2-bg: #0969DA;
-    --color-calendar-graph-day-L3-bg: #54AEFF;
-    --color-calendar-graph-day-L4-bg: #B6E3FF;
+
+    --color-calendar-graph-day-bg: rgba(27, 31, 35, 0.06);
+    --color-calendar-graph-day-L1-bg: var(--color-sky-950);
+    --color-calendar-graph-day-L2-bg: var(--color-sky-800);
+    --color-calendar-graph-day-L3-bg: var(--color-sky-700);
+    --color-calendar-graph-day-L4-bg: var(--color-sky-600);
     --color-calendar-graph-day-L1-border: rgba(255, 255, 255, 0.05);
     --color-calendar-graph-day-L2-border: rgba(255, 255, 255, 0.05);
     --color-calendar-graph-day-L3-border: rgba(255, 255, 255, 0.05);
@@ -971,7 +975,7 @@ a.gitlab-button:active {
     --color-user-mention-fg: var(--color-scale-yellow-0);
     --color-user-mention-bg: var(--color-scale-yellow-8);
     --color-text-white: var(--color-scale-white);
-    --color-calendar-graph-day-bg: #161b22;
+    
 
 width: 94%;
 
@@ -1177,7 +1181,6 @@ div.activity-overview-box {
 
 .subnav {
   display: inline-table;
-  padding-top: 1.5rem;
 }
 
 }

@@ -69,10 +69,11 @@ body {
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
   height: 100%;
-  background: linear-gradient(90deg, rgb(21 38 68 / 78%), rgb(24 23 28 / 90%)), url(/images/bg.png);
+  background: linear-gradient(90deg, rgb(34 32 50), rgb(21 7 44 / 96%)), url(../../../images/bg.png);
   background-size: 100vw 130vh;
   background-position: 0;
   background-attachment: fixed;
+  background-blend-mode: luminosity;
 }
 
 /* latin-ext */

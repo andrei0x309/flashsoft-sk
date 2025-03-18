@@ -1,12 +1,10 @@
 <script lang="ts">
-import { run } from 'svelte/legacy';
-
 import '@/routes/(app)/projects.scss';
 // import { page } from '$app/stores';
 import Header from '../../Header.svelte';
 // import type { PageServerLoad } from './$types';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
-import { page as SveltePage } from '$app/stores';
+import { page as SveltePage } from '$app/state';
 import { projectBackRoute } from '@/stores/client-route';
 import ProjectSingle from '../ProjectSingle.svelte';
 import { getPrjFeatureImage } from '@/lib/utils/common';
@@ -30,18 +28,19 @@ afterNavigate(() => {
 });
 
 const setBackRoute = () => {
-  projectBackRoute.set($SveltePage.url.toString());
+  projectBackRoute.set(SveltePage.url.toString());
 };
 
-let page: number = $state();
+let page: number = $state(0);
 
-run(() => {
+$effect(() => {
   page = data.res.page;
   isView = data.rest?.includes('/view/') || false;
   if (isView) {
     viewKey = viewKey + 1;
   }
 });
+
 </script>
 
 <svelte:head>
@@ -50,7 +49,7 @@ run(() => {
     <meta property="og:title" content="{data.pageTitle}" />
     <meta property="og:description" content="{data.pageDescription}">
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={`${$SveltePage.url}`} />
+    <meta property="og:url" content={`${SveltePage.url}`} />
     <meta property="og:image" content="{data?.res?.data?.[0]?.og_image}" />
 
 {#if page > 1}
@@ -145,3 +144,7 @@ run(() => {
     <ProjectSingle data={data} />
     {/key}
 {/if}
+
+<a rel="nofollow external" href="https://status.flashsoft.eu">
+  <img class="mx-auto mt-2 mb-6" src="https://uptime.betterstack.com/status-badges/v1/monitor/1u13o.svg" alt="flashsoft.eu Status" />
+</a>
