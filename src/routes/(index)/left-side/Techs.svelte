@@ -1,31 +1,3 @@
-<!-- 
-
-
-
-
-puppeteer.svg
-solidity-original.svg
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- -->
-
 
 <section id="section-tech" class="mb-2">
     <div class="l-w-bg icos -mb-8">

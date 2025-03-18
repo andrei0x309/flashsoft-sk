@@ -19,11 +19,11 @@ const loadProjects = async (page = 1) => {
     )
     `)
       .order('id', { ascending: false })
-      .range((page - 1) * 4, page * 4 - 1);
+      .range((page - 1) * 12, page * 12 - 1);
 
     const [count, res] = await Promise.all([countDb, resDb]);
     (res as unknown as { page: number }).page = page;
-    (res as unknown as { totalPages: number }).totalPages = Math.ceil((count?.count ?? 0) / 4);
+    (res as unknown as { totalPages: number }).totalPages = Math.ceil((count?.count ?? 0) / 12);
 
     if (page > (res as unknown as { totalPages: number }).totalPages) {
       throw error(404, 'Not found');

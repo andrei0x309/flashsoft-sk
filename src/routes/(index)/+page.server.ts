@@ -3,7 +3,9 @@ import { supabase } from '@/lib/node/supaClientFS';
 import { error } from '@sveltejs/kit';
 
 const prepareHtml = (html: string) => {
-  return html
+  let graph = '';
+  let activity = '';
+  const parsedHtml = html
     .replace(/<div[^>]+Box-header Box-header--blue.*?(<div class="js-calendar-graph)/gms, '$1') // remove potential github ADS
     .replace(/<div class="js-activity-overview-graph-container.*?<\/div>/gms, '') // remove activity graph
     .replace(/<details.*?<\/details>/gms, '') // remove details
@@ -11,7 +13,19 @@ const prepareHtml = (html: string) => {
     .replace(/<div class="float-left.*?<\/div>/gms, '') // remove float left
     .replace(/height: 10px/gms, 'height: 0.8vw') // increase height of graph
     .replace(/width: 10px/gms, 'width: 0.8vw') // increase width of graph
-    .replace(/<a/gms, '<a  rel="noopener noreferrer external" '); // indicate to sveltekit to not preload external links
+    .replace(/<a/gms, '<a rel="noopener noreferrer external" ') // indicate to sveltekit to not preload external links
+    .replace(/href="\//gms, 'href="https://github.com/'); // fix links
+
+    const capPattern = /<div class="col-12 col-lg-6 d-flex flex-column pr-lg-5">.*?<\/div>.*?<\/div>.*?<\/div>/gms
+
+    const captureActivity = parsedHtml.match(capPattern);
+    if (captureActivity) {
+      graph = parsedHtml.replace(capPattern, '');
+      if(captureActivity[0]) {
+      activity = captureActivity[0]
+      }
+    }
+    return activity ? `${graph}|||${activity}` : graph;
 };
 
 const updateContributions = async () => {
@@ -31,7 +45,6 @@ export const load: PageServerLoad = async () => {
     if (!html) {
       ({ html, updated_at } = await updateContributions());
     }
-
     setTimeout(async () => {
       if (Date.now() - new Date(updated_at).getTime() > 1000 * 60 * 60 * 6) {
         await updateContributions();

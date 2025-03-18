@@ -8,6 +8,9 @@
             <li><span class="taglink">web development <span>96</span></span></li>
             <li><span class="taglink">web design <span>93</span></span></li>
             <li><span class="taglink">mobile app development <span>93</span></span></li>
+            <li><span class="taglink">open source <span>91</span></span></li>
+            <li><span class="taglink">browser extensions <span>90</span></span></li>
+            <li><span class="taglink">networking <span>90</span></span></li>
             <li><span class="taglink">RDBMS <span>90</span></span></li>
             <li><span class="taglink">NoSQL databases <span>87</span></span></li>
             <li><span class="taglink">cloud computing <span>84</span></span></li>
@@ -19,10 +22,9 @@
             <li><span class="taglink">emulators & VMs <span>69</span></span></li>
             <li><span class="taglink">software RE <span>66</span></span></li>
             <li><span class="taglink">malware RE <span>60</span></span></li>
-            <li><span class="taglink">OSs APis <span>57</span></span></li>
+            <li><span class="taglink">OSs APIs <span>57</span></span></li>
             <li><span class="taglink">IDEs <span>54</span></span></li>
             <li><span class="taglink">biometrics security <span>50</span></span></li>
-            <li><span class="taglink">open source <span>48</span></span></li>
             <li><span class="taglink">AI & ML & DL & GANs <span>46</span></span></li>
             <li><span class="taglink">VR & AR <span>46</span></span></li>
         </ul>
@@ -38,11 +40,12 @@
         </ul>
 
         <ul class="tags blue mb-6">
-            <li><span class="taglink">reading sci-fi and technical books <span>20</span></span></li>
+            <li><span class="taglink">reading SciFi and technical books <span>20</span></span></li>
             <li><span class="taglink">technology <span>18</span></span></li>
             <li><span class="taglink">gaming <span>16</span></span></li>
-            <li><span class="taglink">running <span>14</span></span></li>
+            <li><span class="taglink">exercising <span>14</span></span></li>
             <li><span class="taglink">philosophy <span>12</span></span></li>
+            <li><span class="taglink">finance <span>11</span></span></li>
             <li><span class="taglink">politics <span>10</span></span></li>
         </ul>
     </div>
