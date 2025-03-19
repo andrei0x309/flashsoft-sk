@@ -6,7 +6,6 @@
 	let toggle: HTMLElement | undefined; // document.getElementById('menu_toggle');
 
 	const toggeleMenu = () => {
-		console.log('Element reference in Child B:', sideMenu);
 		sideMenu?.classList.add('sideMenuToggle');
 		const menuLinks = sideMenu?.querySelector('.sidebar-menu-nav')?.querySelectorAll('.sidemenu');
 		if (menuLinks) {
