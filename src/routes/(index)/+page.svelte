@@ -35,7 +35,7 @@ const html = data?.html;
 	<meta property="og:description" content={indexPageDescription} />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://flashsoft.eu" />
-	<meta property="og:image" content="https://flashsoft.eu/res/og-flashsoft-v2.webp" />
+	<meta property="og:image" content={config.defaultOpenGraphImage} />
 
 	<!-- Schema  -->
 	<script type="application/ld+json">

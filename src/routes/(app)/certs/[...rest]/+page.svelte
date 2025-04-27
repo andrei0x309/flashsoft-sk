@@ -1,14 +1,14 @@
 <script lang="ts">
-import { run } from 'svelte/legacy';
-
 import { afterNavigate, beforeNavigate } from '$app/navigation';
 import '@/routes/(app)/cert.scss';
 import Header from '../../Header.svelte';
 import CertFilter from '../CertFilter.svelte';
 import CertSearch from '../CertSearch.svelte';
 import CertList from '../CertList.svelte';
-import { page as SveltePage } from '$app/stores';
+import { page as SveltePage } from '$app/state';
 import CertSingle from '../CertSingle.svelte';
+import { config } from '$lib/config';
+
 
 interface Props {
   data: any;
@@ -27,12 +27,10 @@ afterNavigate(() => {
   isLoading = false;
 });
 
-let isView = $state(false);
-run(() => {
-  isView = data.rest?.includes('/view/') || false;
-});
+let isView = $state(data.rest?.includes('/view/') || false);
+ 
 
-console.log(data);
+const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 </script>
 
 <svelte:head>
@@ -41,8 +39,8 @@ console.log(data);
 <meta property="og:title" content="{data.pageTitle}" />
 <meta property="og:description" content="{data.pageDescription}">
 <meta property="og:type" content="website" />
-<meta property="og:url" content={`${$SveltePage.url}`} />
-<meta property="og:image" content="https://flashsoft.eu/res/flashsoftLogo.png" />
+<meta property="og:url" content={pageUrl} />
+<meta property="og:image" content={config.defaultOpenGraphImage} />
 
 {#if !isView}
 {#if (data?.res?.page ?? 1) > 1}
