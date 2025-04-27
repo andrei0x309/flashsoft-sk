@@ -1,13 +1,14 @@
 <script lang="ts">
 import { afterNavigate, beforeNavigate } from '$app/navigation';
 import '@/routes/(app)/cert.scss';
-import Header from '../../Header.svelte';
+import Header from '../../projects/components/Header.svelte';
 import CertFilter from '../CertFilter.svelte';
 import CertSearch from '../CertSearch.svelte';
 import CertList from '../CertList.svelte';
 import { page as SveltePage } from '$app/state';
 import CertSingle from '../CertSingle.svelte';
 import { config } from '$lib/config';
+import { onMount } from 'svelte';
 
 
 interface Props {
@@ -31,6 +32,14 @@ let isView = $state(data.rest?.includes('/view/') || false);
  
 
 const pageUrl = SveltePage.url.href.replace('http://', 'https://');
+
+onMount(()=> {
+  if (isView) {
+    pagKey = pagKey + 1;
+    isLoading = false;
+  }
+})
+
 </script>
 
 <svelte:head>

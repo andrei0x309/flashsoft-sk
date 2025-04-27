@@ -7,9 +7,9 @@ export const handle = (async ({ event, resolve }) => {
   const path = event.url.pathname.startsWith('/') ? event.url.pathname.slice(1) : event.url.pathname;
   const hostname = event.request.headers.get('host') || '';
   if (hostname.startsWith('www.')) {
-    return redirect(301, `${baseSiteUrl}${path}`);
+    return redirect(301, `${baseSiteUrl}/${path}`);
   } else if (['fsk.netlify.app'].includes(hostname)) {
-    return redirect(301, `https://flashsoft.eu${path}`);
+    return redirect(301, `https://flashsoft.eu/${path}`);
   }
 
   return resolve(event, {

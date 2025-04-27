@@ -4,7 +4,7 @@ import { certBackRoute } from '@/stores/client-route';
 import { onMount } from 'svelte';
 import CertImg from './CertImg.svelte';
 
-let backRoute: string = $state();
+let backRoute: string = $state('');
 let showSpinner = $state(false);
 interface Props {
   data: {
@@ -39,7 +39,6 @@ onMount(() => {
   certBackRoute.subscribe((val) => {
     backRoute = val || '/certs';
   });
-  console.log(data);
 });
 </script>
 

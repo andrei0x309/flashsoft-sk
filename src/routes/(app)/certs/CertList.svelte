@@ -3,7 +3,7 @@ import CertImg from './CertImg.svelte';
 import CertPagination from './CertPagination.svelte';
 import { makeTitle } from '@/lib/utils/page';
 import { certBackRoute } from '@/stores/client-route';
-import { page as SveltePage } from '$app/stores';
+import { page as SveltePage } from '$app/state';
 interface Cert {
   id: number;
   cert_name: string;
@@ -29,7 +29,7 @@ interface Props {
 let { currentPage, maxPage, rest, data = [] as Cert[] }: Props = $props();
 
 const setBackRoute = () => {
-  certBackRoute.set($SveltePage.url.toString());
+  certBackRoute.set(SveltePage.url.toString());
 };
 </script>
 

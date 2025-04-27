@@ -128,39 +128,3 @@ export const POST: RequestHandler = async ({ request }) => {
     return json({ error: `Internal Server Error: ${String(e)}` }, { status: 500 });
   }
 };
-
-// import { createClient, SupabaseClientOptions } from "https://esm.sh/@supabase/supabase-js@2.48.1";
-
-// const SUPA_TOKEN = Deno.env.get('SECRET_SUPA_TOKEN') as string
-// const EMAIL_ID = Deno.env.get('SECRET_EMAIL_ID') as string
-// const EMAIL_SECRET = Deno.env.get('SECRET_EMAIL_KEY') as string
-// const SECRET_HCAPTCHA_SECRET = Deno.env.get('SECRET_HCAPTCHA_SECRET') as string
-
-// const EMAIL_API_AUTH = 'https://api.sendpulse.com/oauth/access_token'
-// const EMAIL_API_ENDPOINT = 'https://api.sendpulse.com/smtp/emails'
-
-// const printSecrets = () => {
-//   console.log('SUPA_TOKEN', SUPA_TOKEN)
-//   console.log('EMAIL_ID', EMAIL_ID)
-//   console.log('EMAIL_SECRET', EMAIL_SECRET)
-//   console.log('SECRET_HCAPTCHA_SECRET', SECRET_HCAPTCHA_SECRET)
-// }
-
-// printSecrets()
-
-// const options = {
-//   schema: "public",
-//   autoRefreshToken: true,
-//   persistSession: true,
-//   detectSessionInUrl: true,
-// } as SupabaseClientOptions<"public">;
-
-// const supabase = createClient(
-//   "https://lcspcmmpolegvalxkfsu.supabase.co",
-//   SUPA_TOKEN,
-//   options,
-// );
-
-// export default async (request: Request) => {
-
-// }

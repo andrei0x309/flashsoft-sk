@@ -1,10 +1,9 @@
 <script lang="ts">
 import '@/routes/(app)/projects.scss';
-import Header from '../../Header.svelte';
+import Header from '../components/Header.svelte';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
 import { page as SveltePage } from '$app/state';
 import { projectBackRoute } from '@/stores/client-route';
-import ProjectSingle from '../ProjectSingle.svelte';
 import { getPrjFeatureImage } from '@/lib/utils/common';
 import { config } from '$lib/config';
 
@@ -62,7 +61,6 @@ const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 
 <Header segment="projects" />
 
-{#if !isView}
 <main class="{`project-main md:mx-4 mb-2 ${showSpinner? 'blink-loading': ''}`}" id="app">
     <!-- v-if='isLoading' -->
     {#if showSpinner}
@@ -103,7 +101,7 @@ const pageUrl = SveltePage.url.href.replace('http://', 'https://');
             <!-- {{ JSON.parse(project.cat).cat_name }} -->
             <p class="card-text my-4" ><b>Category:</b><br> {project.cat.cat_name}<p>
             <p class="card-text mt-2">
-            <a onclick={setBackRoute} href={`/projects/view/${project.id}/${(project.title).replace(/ /gms, '-')}`} class="button center btn-pagination btn-projects px-2 pt-1 pb-2">
+            <a href={`/projects/view/${project.slug}`} class="button center btn-pagination btn-projects px-2 pt-1 pb-2">
                 <small class="text-muted">Details</small>
             </a>
            </p>
@@ -139,12 +137,4 @@ const pageUrl = SveltePage.url.href.replace('http://', 'https://');
     </div>
     </div>
      </main>
-    {:else}
-    {#key viewKey}
-    <ProjectSingle data={data} />
-    {/key}
-{/if}
 
-<a rel="nofollow external" href="https://status.flashsoft.eu">
-  <img class="mx-auto mt-2 mb-6" src="https://uptime.betterstack.com/status-badges/v1/monitor/1u13o.svg" alt="flashsoft.eu Status" />
-</a>
