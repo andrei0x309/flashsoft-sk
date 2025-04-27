@@ -5,8 +5,6 @@ const {sideMenu, closeMenu, html} = $props<{sideMenu: HTMLElement | undefined, c
 
 const htmlPats = html.split('|||');
 
-console.log( htmlPats?.[1])
-
 </script>
 
 <section id="section-projects">
@@ -39,7 +37,7 @@ console.log( htmlPats?.[1])
 </section>
 
 
-<style lang="scss" scoped>
+<style lang="scss">
 
     .container {
         width: 100%;

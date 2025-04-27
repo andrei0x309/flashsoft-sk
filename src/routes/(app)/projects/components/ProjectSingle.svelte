@@ -6,7 +6,7 @@ import { getPrjFeatureImage } from '@/lib/utils/common';
 import { Lightbox } from 'svelte-lightbox';
 import { browser } from '$app/environment';
 
-let backRoute: string = $state();
+let backRoute: string = $state('');
 
 let showSpinner = $state(false);
 interface Props {

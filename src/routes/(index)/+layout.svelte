@@ -3,12 +3,12 @@
 
 // import Header from './Header.svelte';
 // import './styles.css';
+
 import '../tailwind.css';
 import './style.scss';
 import { analyticsCode } from '$lib/utils/analytics';
 import { onMount } from 'svelte';
 
-//   import { partytownSnippet } from 'https://cdn.jsdelivr.net/npm/@builder.io/partytown@0.7.5/integration/index.mjs'
 import { partytownSnippet } from '@builder.io/partytown/integration';
 interface Props {
   children?: import('svelte').Snippet;
@@ -47,7 +47,7 @@ onMount(async () => {
 		partytown = {
 		  forward: ['dataLayer.push'],
 		  resolveUrl: (url) => {
-			const siteUrl = 'https://flashsoft.eu/pt'
+			const siteUrl = '/pt'
 			if (url.hostname === 'www.googletagmanager.com') {
 			  const proxyUrl = new URL(siteUrl + '/gtm')
 	

@@ -1,4 +1,5 @@
 <script lang="ts">
+
 import '../tailwind.css';
 import { analyticsCode } from '$lib/utils/analytics';
 interface Props {
@@ -24,7 +25,9 @@ let { children }: Props = $props();
 
 {@render children?.()}
 
-
+<a rel="nofollow external" href="https://status.flashsoft.eu">
+	<img class="mx-auto mt-2 mb-6" src="https://uptime.betterstack.com/status-badges/v1/monitor/1u13o.svg" alt="flashsoft.eu Status" />
+</a>
 
 {#if analyticsCode}
  {@html analyticsCode}

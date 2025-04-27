@@ -50,7 +50,7 @@ if (maxPage < 6) {
 
 <nav aria-label="Pagination Navigation">
 <ul class="pagination justify-center">
-	<li aria-disabled="true" aria-label="« Previous" class="page-item">
+	<li aria-label="« Previous" class="page-item">
         {#if isMinPage}
             <span aria-hidden="true" class="page-link">‹</span>
         {:else}
@@ -65,7 +65,7 @@ if (maxPage < 6) {
 	</li>
     {#each linkList as link }
         {#if link === '...'}
-            <li aria-disabled="true" class="page-item disabled"><span class="page-link">...</span></li>
+            <li class="page-item disabled"><span class="page-link">...</span></li>
         {:else}
             {#if link === currentPage}
                 <li aria-current="page" class="page-item active"><span class="page-link">{link}</span></li>
