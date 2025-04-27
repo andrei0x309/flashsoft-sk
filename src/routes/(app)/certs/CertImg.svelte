@@ -15,9 +15,9 @@ interface Props {
 }
 
 let { propData, lazy = true }: Props = $props();
-let imgSrc: string = $state();
-let altContent: string = $state();
-let srcset: string = $state();
+let imgSrc: string = $state('');
+let altContent: string = $state('');
+let srcset: string = $state('');
 
 const createImgSet = () => {
   const lastIndex = imgSrc.lastIndexOf('/');
@@ -34,7 +34,7 @@ const createImgSet = () => {
 onMount(() => {
   imgSrc = propData.imageSource;
   altContent = `Certificate ${propData.certName} image`;
-  srcset = createImgSet();
+  // srcset = createImgSet();
 });
 </script>
 
@@ -51,7 +51,6 @@ onMount(() => {
 			width="800"
 			height="600"
 			src={imgSrc}
-			{srcset}
 			alt={altContent}
 			onload={() => {
 				loaded = true;

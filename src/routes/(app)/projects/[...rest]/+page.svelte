@@ -1,13 +1,13 @@
 <script lang="ts">
 import '@/routes/(app)/projects.scss';
-// import { page } from '$app/stores';
 import Header from '../../Header.svelte';
-// import type { PageServerLoad } from './$types';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
 import { page as SveltePage } from '$app/state';
 import { projectBackRoute } from '@/stores/client-route';
 import ProjectSingle from '../ProjectSingle.svelte';
 import { getPrjFeatureImage } from '@/lib/utils/common';
+import { config } from '$lib/config';
+
 
 interface Props {
   data: any;
@@ -18,7 +18,7 @@ let showSpinner = $state(false);
 
 //history.pushState({}, null, newUrl);
 let viewKey = $state(0);
-let isView = $state(false);
+let isView = $state(data.rest?.includes('/view/') || false);
 beforeNavigate(() => {
   showSpinner = true;
 });
@@ -35,12 +35,12 @@ let page: number = $state(0);
 
 $effect(() => {
   page = data.res.page;
-  isView = data.rest?.includes('/view/') || false;
   if (isView) {
     viewKey = viewKey + 1;
   }
 });
 
+const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 </script>
 
 <svelte:head>
@@ -49,8 +49,8 @@ $effect(() => {
     <meta property="og:title" content="{data.pageTitle}" />
     <meta property="og:description" content="{data.pageDescription}">
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={`${SveltePage.url}`} />
-    <meta property="og:image" content="{data?.res?.data?.[0]?.og_image}" />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content="{isView ? data?.res?.data?.[0]?.og_image : config.defaultOpenGraphImage}" />
 
 {#if page > 1}
 <link rel="prev" href="/projects/page/{page - 1}" />
