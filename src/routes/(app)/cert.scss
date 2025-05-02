@@ -366,7 +366,6 @@ main#app {
   
   .search input[type="submit"],
   .btn-search-box {
-    background-color: #1bba9a;
     color: #fff;
     font-weight: bold;
     margin-left: 8px;
@@ -374,15 +373,7 @@ main#app {
     padding: 6px 10px;
     padding: .375rem .625rem;
   }
-  
-  .search input[type="submit"]:focus,
-  .search input[type="submit"]:hover,
-  .btn-search-box:hover,
-  .btn-search-box:focus {
-    background-color: #189e83;
-  }
-  
-  
+ 
   
   /* mobile paginator smaller to fit */
   
@@ -709,11 +700,11 @@ main#app {
     font-family: "Open Sans", sans-serif;
     margin-left: 2em;
     padding: 0 1.2em 0 1.2em;
-    background: #117c7c;
+    background: var(--color-sky-700);
     color: #fff;
     text-decoration: none;
     border-radius: 0.3rem;
-    box-shadow: 1px 1px 1px #2bb19e;
+    box-shadow: 1px 1px 1px  var(--color-sky-950)
   }
   
   .tags li:before,
@@ -724,7 +715,7 @@ main#app {
     left: -1.8em;
     width: 0;
     height: 0;
-    border-color: transparent rgb(68 97 110) transparent transparent;
+    border-color: transparent var(--color-sky-600) transparent transparent;
     border-style: solid;
     border-width: 0.98em 0.98em 0.98em;
   }

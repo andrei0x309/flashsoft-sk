@@ -1,0 +1,21 @@
+create table public.fsk_prj (
+  id integer not null,
+  title character varying(191) not null,
+  short_description text null,
+  feature_image text null,
+  weight integer not null default 1,
+  created_at timestamp with time zone null default now(),
+  updated_at timestamp with time zone null,
+  cat_id integer not null,
+  links jsonb null,
+  open_source boolean null,
+  status text null,
+  creation_date date null,
+  screen_pics jsonb null,
+  og_image text null,
+  youtube text null,
+  slug text null,
+  mega text null,
+  constraint fsk_prj_pkey primary key (id),
+  constraint FK_fsk_prj_fsk_prj_cat foreign KEY (cat_id) references fsk_prj_cat (id) on update CASCADE on delete CASCADE
+) TABLESPACE pg_default;

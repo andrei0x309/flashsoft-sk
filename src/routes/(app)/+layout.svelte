@@ -1,5 +1,4 @@
 <script lang="ts">
-
 import '../tailwind.css';
 import { analyticsCode } from '$lib/utils/analytics';
 interface Props {

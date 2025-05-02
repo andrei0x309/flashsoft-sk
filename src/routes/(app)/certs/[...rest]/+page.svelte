@@ -7,9 +7,8 @@ import CertSearch from '../CertSearch.svelte';
 import CertList from '../CertList.svelte';
 import { page as SveltePage } from '$app/state';
 import CertSingle from '../CertSingle.svelte';
-import { config } from '$lib/config';
+import { config } from '@/lib/config/config';
 import { onMount } from 'svelte';
-
 
 interface Props {
   data: any;
@@ -29,17 +28,15 @@ afterNavigate(() => {
 });
 
 let isView = $state(data.rest?.includes('/view/') || false);
- 
 
 const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 
-onMount(()=> {
+onMount(() => {
   if (isView) {
     pagKey = pagKey + 1;
     isLoading = false;
   }
-})
-
+});
 </script>
 
 <svelte:head>
@@ -86,7 +83,3 @@ onMount(()=> {
 <CertSingle data={data ?? {}} />
 {/if}
 </main>
-
-<a rel="nofollow external" href="https://status.flashsoft.eu">
-  <img class="mx-auto mt-2 mb-6" src="https://uptime.betterstack.com/status-badges/v1/monitor/1u13o.svg" alt="flashsoft.eu Status" />
-</a>

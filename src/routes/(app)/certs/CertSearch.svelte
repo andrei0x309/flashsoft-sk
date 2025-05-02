@@ -1,6 +1,4 @@
 <script lang="ts">
-import { preventDefault } from 'svelte/legacy';
-
 import { slide } from 'svelte/transition';
 import { goto } from '$app/navigation';
 interface Props {
@@ -11,7 +9,8 @@ interface Props {
 let { expanded = $bindable(false), searchInput = $bindable('') }: Props = $props();
 let error = $state('');
 
-const submitForm = () => {
+const submitForm = (e: Event) => {
+  e.preventDefault();
   const searchTerms = encodeURI(
     (searchInput ?? '')
       .split(' ')
@@ -127,7 +126,7 @@ const submitForm = () => {
                     bind:value={searchInput}
                   >
                   <!-- v-on:click="submitForm()" -->
-                  <input type="submit" value="Search" class="button" onclick={preventDefault(submitForm)}>
+                  <input type="submit" value="Search" class="button bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded" onclick={submitForm}>
                 </div>
               </form>
               <!-- v-if="showResults"  -->

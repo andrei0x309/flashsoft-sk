@@ -4,7 +4,7 @@
 .paperWeight {
     width: 6rem;
     height: 6rem;
-    background-color: rgba(0, 0, 0, 0.253);
+    background-color: rgb(0 0 0 / 79%);
     box-shadow: inset 10px 10px 10px 10px rgba(8, 7, 7, 0.342),
       inset 20px 20px 20px 20px rgba(8, 7, 7, 0.1),
       10px 10px 20px rgba(0, 0, 0, 0.425),

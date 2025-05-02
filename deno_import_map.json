@@ -1,5 +1,0 @@
-{
-  "imports": {
-    "smtp-lib": "https://deno.land/x/smtp/mod.ts"
-  }
-}

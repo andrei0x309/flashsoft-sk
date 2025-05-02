@@ -1,7 +1,6 @@
 import { join } from 'path';
 import { sveltekit } from '@sveltejs/kit/vite';
 // import { SvelteKitPWA } from '@vite-pwa/sveltekit'
-import { partytownVite } from '@builder.io/partytown/utils';
 import tailwindcss from '@tailwindcss/vite';
 
 /** @type {import('vite').UserConfig} */
@@ -15,10 +14,7 @@ const config = {
   },
   plugins: [
     tailwindcss(),
-    partytownVite({
-      // `dest` specifies where files are copied to in production
-      dest: join(process.cwd(), 'static', '~partytown')
-    }),
+    sveltekit()
     // 	  SvelteKitPWA({
     // 		manifest: {
     // 			"$schema": "https://json.schemastore.org/web-manifest-combined.json",
@@ -72,7 +68,6 @@ const config = {
     // 		kit: {}
     // 	}
     // ),
-    sveltekit()
   ]
 };
 

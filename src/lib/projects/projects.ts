@@ -1,5 +1,4 @@
-
-import { supabase } from '@/lib/node/supaClientFS';
+import { supabase } from '@/lib/db-client/supaClientFS';
 import { error } from '@/lib/utils/page';
 
 export const loadProjects = async (page = 1) => {
@@ -28,6 +27,30 @@ export const loadProjects = async (page = 1) => {
     if (page > (res as unknown as { totalPages: number }).totalPages) {
       throw error(404, 'Not found');
     }
+
+    return {
+      res
+    };
+  } catch (e) {
+    return null;
+  }
+};
+
+export const loadAllProjects = async () => {
+  try {
+    const res = await supabase
+      .from('fsk_prj')
+      .select(`
+  *,
+    cat:fsk_prj_cat(
+      cat_name,
+      cat_description
+  ),
+  techs:fsk_prj_tech_type!inner(
+      id,
+      name
+  )`)
+      .order('id', { ascending: false });
 
     return {
       res

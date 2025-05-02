@@ -1,5 +1,5 @@
 <script lang="ts">
-import { config } from '$lib/config';
+import { config } from '@/lib/config/config';
 import MainSection from './left-side/MainSection.svelte';
 import ContactForm from './left-side/ContactForm.svelte';
 import Interests from './left-side/Interests.svelte';
@@ -9,11 +9,10 @@ import Footer from './left-side/Footer.svelte';
 import SideMenu from './mobile/SideMenu.svelte';
 
 import PaperWeight from './right-side/PaperWeight.svelte';
-import RightSideMenu from './right-side/RightSideMenu.svelte'
+import RightSideMenu from './right-side/RightSideMenu.svelte';
 import RightSideLogo from './right-side/RightSideLogo.svelte';
 import RightSideName from './right-side/RightSideName.svelte';
 import RightSideLinks from './right-side/RightSideLinks.svelte';
-
 
 const { indexPageDescription, indexPageTitle } = config;
 

@@ -82,7 +82,6 @@ onMount(() => {
   aspect-ratio: 16 / 9; /* Or 4 / 3, 1 / 1, etc. */
   width: 100%;
   object-fit: contain;
-  max-height: 20rem;
 }
 
 </style>
