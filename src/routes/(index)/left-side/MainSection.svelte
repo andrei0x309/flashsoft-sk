@@ -1,10 +1,9 @@
 <script lang="ts">
 import SideMenuToggle from '../mobile/SideMenuToggle.svelte';
 
-const {sideMenu, closeMenu, html} = $props<{sideMenu: HTMLElement | undefined, closeMenu: () => void, html: string}>();
+const { sideMenu, closeMenu, html } = $props<{ sideMenu: HTMLElement | undefined; closeMenu: () => void; html: string }>();
 
 const htmlPats = html.split('|||');
-
 </script>
 
 <section id="section-projects">
@@ -59,7 +58,7 @@ const htmlPats = html.split('|||');
       }
 
         :global(a) {
-            color: var(--color-orange-100);
+            color: var(--color-orange-300);
             font-weight: bold;
             text-decoration: underline;
             &:hover {
@@ -68,7 +67,7 @@ const htmlPats = html.split('|||');
         }
 
         :global(h3) {
-            color: var(--color-orange-100);
+            color: var(--color-orange-300);
             text-align: center;
             overflow: hidden;
             margin: 0;
@@ -80,7 +79,7 @@ const htmlPats = html.split('|||');
             display: none;
 
             :global(path) {
-                fill: var(--color-orange-100);
+                fill: var(--color-orange-300);
             }
         }
     }

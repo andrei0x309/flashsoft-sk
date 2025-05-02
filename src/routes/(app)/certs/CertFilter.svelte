@@ -1,5 +1,5 @@
 <script lang="ts">
-import { run, preventDefault } from 'svelte/legacy';
+import { run } from 'svelte/legacy';
 
 import { goto } from '$app/navigation';
 import { slide } from 'svelte/transition';
@@ -38,7 +38,8 @@ const setTags = (all = false) => {
     });
 };
 
-const submitForm = () => {
+const submitForm = (e: Event) => {
+  e.preventDefault();
   if (selectedTags.length > 0) {
     goto(`/certs/filter/tags/${selectedTags.join('/')}/tags`);
   } else {
@@ -280,7 +281,7 @@ run(() => {
                     <button class="filterLink" onclick={() => setTags(false)} > Show only popular tags …</button>
                     &nbsp;&nbsp;&nbsp;
                     {/if}
-                     <input onclick={preventDefault(submitForm)} style="border-radius: .125rem; font-size: 0.9em;" type="submit" value="Filter" class="button btn-search-box">
+                     <input onclick={submitForm} style="border-radius: .125rem; font-size: 0.9em;" type="submit" value="Filter" class="button btn-search-box bg-sky-600 hover:bg-sky-700 text-white px-3 py-1.5" />
                     </div>
                 </form>
                 {/if}

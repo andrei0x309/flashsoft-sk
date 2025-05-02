@@ -1,5 +1,5 @@
 // import { error } from '@sveltejs/kit';
-import { supabase } from '@/lib/node/supaClientFS';
+import { supabase } from '@/lib/db-client/supaClientFS';
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
 

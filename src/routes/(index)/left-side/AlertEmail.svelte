@@ -9,9 +9,9 @@ let { showAlert = $bindable(false), msg = $bindable(''), type = $bindable('error
 </script>
 {#if showAlert}
 {#if type === 'error'}
-<div id="alert-box" class="alert-base alert-error alert flex flex-row items-center bg-red-200 p-5 rounded border-b-2 border-red-300 fade-in">
+<div id="alert-box" class="alert-base alert-error alert flex flex-row items-center bg-red-200 p-5 rounded border-b-2 border-red-300 fade-in relative">
     <button class="alert-close" onclick={() => {showAlert = false}} aria-label="close">x</button>
-    <div class="alert-icon flex items-center bg-red-100 border-2 border-red-500 justify-center h-10 w-10 flex-shrink-0 rounded-full">
+    <div class="alert-icon flex items-center bg-red-100 border-2 border-red-500 justify-center h-10 w-10 flex-shrink-0 rounded-full mt-[1.3rem]">
         <span class="text-red-500">
             <svg fill="currentColor"
                  viewBox="0 0 20 20"

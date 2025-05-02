@@ -1,12 +1,12 @@
 <script lang="ts">
-	interface Props {
-		segment: string;
-		filter?: import('svelte').Snippet;
-		search?: import('svelte').Snippet;
-	}
+interface Props {
+  segment: string;
+  filter?: import('svelte').Snippet;
+  search?: import('svelte').Snippet;
+}
 
-	let { segment, filter, search }: Props = $props();
-	let logoUrl = segment === 'cert' ? '/certs' : '/projects';
+let { segment, filter, search }: Props = $props();
+let logoUrl = segment === 'cert' ? '/certs' : '/projects';
 </script>
 
 <header id="app-header" class="col header">
