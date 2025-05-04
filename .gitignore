@@ -16,3 +16,4 @@ yarn-error.log
 /static/collecting
 static/res/project/feature-img/projectIcon.afdesign
 dev-dist
+files-to-remove.txt

@@ -15,11 +15,11 @@ export const extractPage = (rest: string) => {
   if (rest.includes('page/')) {
     const page = Number(rest.split('page/')[1].replace('/', ''));
     if (page < 1) {
-      error(404, 'Not found');
+      throw error(404, 'Not found');
     }
     return page;
   }
   return 1;
 };
 
-export { error, makeTitle, appendToData };
+export { error, appendToData };

@@ -1,23 +1,20 @@
 <script lang="ts">
 import '@/routes/(app)/projects.scss';
-import Header from '@/routes/(app)/projects/components/Header.svelte';
+import Header from '@/routes/(app)/components/Header.svelte';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
 import { page as SveltePage } from '$app/state';
-import { projectBackRoute } from '@/stores/client-route';
 import ProjectSingle from '@/routes/(app)/projects/components/ProjectSingle.svelte';
-import { getPrjFeatureImage } from '@/lib/utils/common';
-import { config } from '@/lib/config/config';
+import type { ProjectDataPage } from '@/routes/(app)/projects/types/projects'
+import { onMount } from 'svelte';
+
 
 interface Props {
-  data: any;
+  data: ProjectDataPage;
 }
 
 let { data }: Props = $props();
 let showSpinner = $state(false);
 
-//history.pushState({}, null, newUrl);
-let viewKey = $state(0);
-let isView = $state(data.rest?.includes('/view/') || false);
 beforeNavigate(() => {
   showSpinner = true;
 });
@@ -30,10 +27,11 @@ let page: number = $state(0);
 
 $effect(() => {
   page = data.res.page;
-  if (isView) {
-    viewKey = viewKey + 1;
-  }
 });
+
+onMount(() => {
+	showSpinner = false;
+})
 
 const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 </script>
@@ -47,7 +45,7 @@ const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 	<meta property="og:url" content={pageUrl} />
 	<meta
 		property="og:image"
-		content={isView ? data?.res?.data?.[0]?.og_image : config.defaultOpenGraphImage}
+		content={data?.res?.data?.[0]?.og_image}
 	/>
 </svelte:head>
 

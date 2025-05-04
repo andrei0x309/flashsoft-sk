@@ -17,7 +17,7 @@ try {
     Deno.copyFileSync(megaJsonPath, megaJsonPathBackup);
   }
 } catch (e) {
-  console.log('No backup created');
+  console.info('No backup created');
 }
 
 // load the current megaFiles.json
@@ -28,7 +28,7 @@ try {
   megaFiles = {};
 }
 
-console.log('Loaded', Object.keys(megaFiles).length, 'files');
+console.info('Loaded', Object.keys(megaFiles).length, 'files');
 
 // const megaFiles = {}
 
@@ -43,12 +43,12 @@ async function crawlDirectory(relativePath: string): Promise<string[]> {
       const relativePath = entry.path.replace(absolutePath, '').replace(/\\/g, '/').replace(/^\//, '');
 
       if (excludePatterns.some((pattern) => relativePath.includes(pattern))) {
-        console.log('Excluding', relativePath);
+        console.info('Excluding', relativePath);
         continue;
       }
 
       if (!mustMatchPatterns.some((pattern) => relativePath.includes(pattern))) {
-        console.log('Excluding', relativePath);
+        console.info('Excluding', relativePath);
         continue;
       }
 
@@ -69,11 +69,11 @@ const megaSyncFolder = async () => {
   });
   const { code, stdout, stderr } = await exec.output();
   if (code !== 0) {
-    console.log('Error', code);
-    console.log(stderr);
-    console.log(new TextDecoder().decode(stdout));
+    console.warn('Error', code);
+    console.warn(stderr);
+    console.warn(new TextDecoder().decode(stdout));
   }
-  console.log('Synced', megaFolder);
+  console.info('Synced', megaFolder);
 };
 
 const megeGetExportedFile = async (file: string) => {
@@ -86,9 +86,9 @@ const megeGetExportedFile = async (file: string) => {
   });
   const { code, stdout, stderr } = await exec.output();
   if (code !== 0) {
-    console.log('Error', code);
-    console.log(stderr);
-    console.log(new TextDecoder().decode(stdout));
+    console.warn('Error', code);
+    console.warn(stderr);
+    console.warn(new TextDecoder().decode(stdout));
   }
   const output = new TextDecoder().decode(stdout);
   const exportedLink = output.split(': ')[1].trim();
@@ -96,18 +96,18 @@ const megeGetExportedFile = async (file: string) => {
 };
 
 await megaSyncFolder();
-console.log('Synced', megaFolder);
+console.info('Synced', megaFolder);
 
 const files = await crawlDirectory(filesLocation);
 const excludeFilesAlreadyExported = files.filter((file) => !megaFiles[file]);
 
 const numFiles = excludeFilesAlreadyExported.length;
-console.log('Files Length: ', files.length);
-console.log('Found ', numFiles, ' files to export');
+console.info('Files Length: ', files.length);
+console.info('Found ', numFiles, ' files to export');
 
 for (const file of excludeFilesAlreadyExported) {
   const [fileName, link] = await megeGetExportedFile(file);
-  console.log('Exported', fileName, link);
+  console.info('Exported', fileName, link);
   megaFiles[fileName] = link;
 }
 

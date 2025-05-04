@@ -13,6 +13,7 @@ import RightSideMenu from './right-side/RightSideMenu.svelte';
 import RightSideLogo from './right-side/RightSideLogo.svelte';
 import RightSideName from './right-side/RightSideName.svelte';
 import RightSideLinks from './right-side/RightSideLinks.svelte';
+import BackToTop from './right-side/BackToTop.svelte';
 
 const { indexPageDescription, indexPageTitle } = config;
 
@@ -75,8 +76,6 @@ const html = data?.html;
 
 		<RightSideLinks />
 		
-		
 	</aside>
-	<!--
-	<a href="#0" class="cd-top">Top</a> -->
+	<BackToTop />
 	</main>

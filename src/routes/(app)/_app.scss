@@ -23,12 +23,12 @@
   min-width: 0;
   word-wrap: break-word;
   background-color: var(--color-zinc-900);
+  background: linear-gradient(0.25turn, var(--color-zinc-900), var(--color-zinc-900), oklab(0.195 0 0));
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.69);
   border-radius: 0.5rem;
   color: darkgray;
   padding: 0.8rem;
-  opacity: 0.89;
 }
 
 .card-body {
@@ -69,6 +69,13 @@ h1.headtitle {
   margin-left: 1rem;
   font-weight: 700;
   background: linear-gradient(to left, var(--color-orange-50), var(--color-amber-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-card-title:hover {
+  background: linear-gradient(to left, var(--color-orange-500), var(--color-yellow-500));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

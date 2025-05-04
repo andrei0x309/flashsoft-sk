@@ -117,7 +117,7 @@ $blocks: #201c29;
 $shadow: #070509;
 
 
-button.tag {
+a.tag {
   text-decoration: none;
   white-space: nowrap;
   font-size: 0.8rem;
@@ -129,15 +129,15 @@ button.tag {
   border: 0.1em solid $border;
   border-radius: 2em;
 
-  transition: transform 0.2s;
+  transition: transform 0.1s;
   transition-timing-function: cubic-bezier(0.45, -0.85, 0.55, -0.45);
 
 
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.16);
     background: linear-gradient(to right, #ff8a00, #da1b60);
-    -webkit-background-clip: text;
     background-clip: text;
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 }

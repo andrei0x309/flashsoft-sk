@@ -106,8 +106,6 @@ export const POST: RequestHandler = async ({ request }) => {
       }
     };
 
-    console.log(token);
-
     const response = await fetch(EMAIL_API_ENDPOINT, {
       method: 'POST',
       headers: {

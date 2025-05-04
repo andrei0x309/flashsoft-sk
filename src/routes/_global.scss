@@ -69,11 +69,10 @@ body {
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
   height: 100%;
-  background: linear-gradient(318deg, var(--color-zinc-800), var(--color-zinc-50)), url(../../../images/bg-af021.webp);
-  background-size: 100vw 100vh;
+  background: linear-gradient(318deg, var(--color-zinc-800), var(--color-zinc-900)), url(/images/bg-a0f21.webp);
   background-position: 0;
   background-attachment: fixed;
-  background-blend-mode: darken;
+  background-blend-mode: soft-light;
 }
 
 /* latin-ext */

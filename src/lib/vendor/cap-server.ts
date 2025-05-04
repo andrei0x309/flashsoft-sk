@@ -234,12 +234,12 @@ export class Cap extends EventEmitter {
         this.config.state.tokensList = JSON.parse(data) || {};
         this._cleanExpiredTokens();
       } catch {
-        console.log(`[cap] Tokens file not found, creating a new empty one`);
+        console.warn(`[cap] Tokens file not found, creating a new empty one`);
         await fs.writeFile(this.config.tokens_store_path, '{}', 'utf-8');
         this.config.state.tokensList = {};
       }
     } catch (error) {
-      console.log(`[cap] Couldn't load or write tokens file, using empty state`);
+      console.warn(`[cap] Couldn't load or write tokens file, using empty state`);
       this.config.state.tokensList = {};
     }
   }

@@ -3,7 +3,7 @@ import { checkData, extractPage, error, appendToData } from '@/lib/utils/page';
 import { loadProjects } from '@/lib/projects/projects';
 
 export const load: PageServerLoad = async (rest) => {
-  const restPath = '/projects/' + (rest.params.rest ?? '/');
+  const restPath = '/projects' + (rest.params?.rest ? `/${rest.params.rest}` : '');
   if (!rest.params.rest) {
     const data = await loadProjects(1);
     return appendToData(checkData(data), {

@@ -390,7 +390,8 @@ h3 span:after {
 	top:15%;
 	background: var(--color-stone-900);
 	border-radius:4px 4px 0 0;
-	border-bottom: 0.1rem solid #222
+	border-bottom: 0.1rem solid #222;
+  box-shadow: 0px 3vh 5vh 1vh var(--color-zinc-500);
 }
 
 .camera {

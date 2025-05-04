@@ -37,7 +37,7 @@ export const POST: RequestHandler = async ({ request }) => {
         }
       });
 
-      console.log('[cap] Challenge redeemed');
+      console.info('[cap] Challenge redeemed');
     }
 
     return json(result);
