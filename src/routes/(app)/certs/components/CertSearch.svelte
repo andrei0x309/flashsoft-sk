@@ -122,7 +122,7 @@ const submitForm = (e: Event) => {
                   <input
                     type="search"
                     placeholder="What are you looking for?"
-                    class="form__input max-w-[18rem]"
+                    class="form__input max-w-[28rem]"
                     bind:value={searchInput}
                   >
                   <!-- v-on:click="submitForm()" -->

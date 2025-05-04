@@ -114,26 +114,18 @@ main#app {
  
       &:before {
         width: 100%;
-        /* Make sure we fill in the whole image area */
-        min-height: 21vh;
+        min-height: 90%;
         position: absolute;
         top: 0;
         left: 0;
         display: flex;
-        /* We want to center copy from alt tag horizontally & vertically */
         align-items: center;
         justify-content: center;
-  
-  
-        background: rgb(43, 128, 153);
-        background: radial-gradient(circle, rgba(43, 128, 153, 1) 33%, rgba(18, 83, 97, 1) 68%);
-  
+        background: var(--color-zinc-900);
+        background: radial-gradient(circle, var(--color-neutral-900) 33%, var(--color-neutral-950) 68%);
         color: #FFF;
         font-size: 1rem;
         font-weight: bold;
-  
-  
-        /* Cool trick: we're using CSS attr() function to retrieve alt property copy */
         content: " IMG-Broken : " attr(alt);
       }
   
@@ -344,7 +336,6 @@ main#app {
   /* modules/search.css */
   
   .search {
-    background-color: #42454e;
     border-radius: .125rem;
     font-size: 12px;
     font-size: .75rem;

@@ -13,7 +13,7 @@ export const GET: RequestHandler = async ({ url }) => {
     }
     return json({ data });
   } catch (e) {
-    console.log(e);
+    console.error(e);
     return json({ error: 'Internal Server Error' }, { status: 500 });
   }
 };

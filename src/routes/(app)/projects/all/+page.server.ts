@@ -1,10 +1,15 @@
 import type { PageServerLoad } from './$types';
-import { checkData, extractPage, error, appendToData } from '@/lib/utils/page';
+import { checkData, error, appendToData } from '@/lib/utils/page';
 import { loadAllProjects } from '@/lib/projects/projects';
 
-export const load: PageServerLoad = async (rest) => {
-  const restPath = '/projects/' + (rest.params.rest ?? '/');
+export const load: PageServerLoad = async () => {
+  const restPath = '/projects/all';
   const data = await loadAllProjects();
+
+  if(data?.res?.error) {
+    return error(404);
+  }
+
   return appendToData(checkData(data), {
     rest: restPath,
     pageTitle: 'All Projects andrei0x309 | flashsoft.eu',

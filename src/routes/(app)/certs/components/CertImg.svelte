@@ -9,6 +9,7 @@ interface CertImgProps {
 }
 
 let loaded = $state(false);
+let isError = $state(false);
 interface Props {
   propData: CertImgProps;
   lazy?: boolean;
@@ -39,11 +40,11 @@ onMount(() => {
 </script>
 
 <template>
-	<div>
+	<div class="relative">
 		{#if !loaded}
 			<div class="spinner size"></div>
 		{/if}
-		{#if browser}
+		{#if browser && !isError}
 		<Lightbox>
 		<img
 			loading={lazy ? 'lazy' : 'eager'}
@@ -55,6 +56,10 @@ onMount(() => {
 			onload={() => {
 				loaded = true;
 			}}
+			onerror={() => {
+				loaded = true;
+				isError = true;
+			}}	
 		/>
 		</Lightbox>
 		{:else}
@@ -68,6 +73,10 @@ onMount(() => {
 		alt={altContent}
 		onload={() => {
 			loaded = true;
+		}}
+		onerror={() => {
+			loaded = true;
+			isError = true;
 		}}
 		/>
 		{/if}

@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/db-client/supaClientFS';
 import { optionalChain } from '@/lib/utils/index';
-import { checkData, extractPage, error, appendToData, makeTitle } from '@/lib/utils/page';
+import { checkData, extractPage, error, appendToData } from '@/lib/utils/page';
 
 type SupaClient = typeof supabase;
 type PostgesQueryBuilder = ReturnType<SupaClient['from']>;
@@ -44,6 +44,7 @@ export const loadFilteredCerts = async (page = 1, tag_ids: number[]) => {
     cert_description,
     cert_file_name,
     cert_feature_image,
+    cert_slug,
     weight,
     cat:fsk_cert_cat(
         cat_name,
@@ -82,12 +83,13 @@ export const loadCerts = async (page: number, search = false, searchTerms: strin
       .end();
 
     const resDb = optionalChain(
-      supabase.from('fsk_cert').select(`
+  supabase.from('fsk_cert').select(`
   id,
   cert_name,
   cert_file_name,
   cert_description,
   cert_feature_image,
+  cert_slug,
   weight,
   cat:fsk_cert_cat(
       cat_name,
@@ -109,7 +111,6 @@ export const loadCerts = async (page: number, search = false, searchTerms: strin
 
     const [count, res] = await Promise.all([countDb, resDb]);
 
-    console.log(res);
     (res as unknown as { page: number }).page = page;
     (res as unknown as { totalPages: number }).totalPages = Math.ceil((count?.count ?? 0) / 9);
 
@@ -125,7 +126,7 @@ export const loadCerts = async (page: number, search = false, searchTerms: strin
   }
 };
 
-export const loadCert = async (id: number, title: string) => {
+export const loadCert = async (slug: string) => {
   try {
     const res = await supabase
       .from('fsk_cert')
@@ -135,6 +136,7 @@ export const loadCert = async (id: number, title: string) => {
       cert_file_name,
       cert_description,
       cert_feature_image,
+      cert_slug,
       weight,
       cat:fsk_cert_cat(
           cat_name,
@@ -145,7 +147,8 @@ export const loadCert = async (id: number, title: string) => {
           name
       )
       `)
-      .eq('id', id);
+      .eq('cert_slug', slug)
+      .limit(1);
     const { data, error } = res;
     if (error) {
       return null;
@@ -153,13 +156,11 @@ export const loadCert = async (id: number, title: string) => {
     if (data?.length === 0) {
       return -1;
     }
-    const cert = data[0];
-    if (makeTitle(cert?.cert_name) !== title) {
-      return -1;
-    }
+
     return {
-      res: cert
+      res
     };
+
   } catch (e) {
     return null;
   }

@@ -45,8 +45,6 @@ const submitEmail = async (event: Event) => {
   event.preventDefault();
   const capToken = (document?.querySelector('form input[name="cap-token"]') as HTMLInputElement)?.value;
 
-  console.log(capToken);
-
   setLoadEmail(true);
   const data = {
     email,

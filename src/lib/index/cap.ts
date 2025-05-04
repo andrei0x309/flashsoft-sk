@@ -67,7 +67,7 @@ export const updateCapState = async (state: {
       updated_at: new Date().toISOString()
     });
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };
 

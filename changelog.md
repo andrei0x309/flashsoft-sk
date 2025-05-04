@@ -1,12 +1,20 @@
 # Change Log
 
+## dev/1 - 5/4/2025
+
+- added custom error pages
+- removed some heavy files from history
+- changes in design
+- refactored some parts of /app/projects/...
+- refactored some parts of /app/certs/...
+
 ## dev/1 - 5/2/2025
 
-- Created this changelog project is much older than this changelog
-- Replaced HCaptcha with Cap
-- Refactored many parts of app code
-- Updated all dependencies
-- Prepering to open source
+- created this changelog project is much older than this changelog
+- replaced HCaptcha with Cap
+- refactored many parts of /app/projects/...
+- updated all dependencies
+- prepering to open source
 - removed deno scripting in favor of bun
 - restructured database
 - removed partytown

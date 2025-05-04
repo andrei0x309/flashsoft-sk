@@ -1,21 +1,22 @@
 <script lang="ts">
 import '@/routes/(app)/projects.scss';
-import Header from '../components/Header.svelte';
+import Header from '@/routes/(app)/components/Header.svelte';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
 import { page as SveltePage } from '$app/state';
 import { config } from '@/lib/config/config';
-import ProjectList from '../components/ProjectList.svelte';
+import ProjectList from '@/routes/(app)/projects/components/ProjectList.svelte';
+import GoBack from '@/routes/(app)/components/GoBack.svelte';
+import type { ProjectDataPage } from '@/routes/(app)/projects/types/projects'
+import { onMount } from "svelte";
+
 
 interface Props {
-  data: any;
+  data: ProjectDataPage;
 }
 
 let { data }: Props = $props();
 let showSpinner = $state(false);
 
-//history.pushState({}, null, newUrl);
-let viewKey = $state(0);
-let isView = $state(data.rest?.includes('/view/') || false);
 beforeNavigate(() => {
   showSpinner = true;
 });
@@ -28,10 +29,11 @@ let page: number = $state(0);
 
 $effect(() => {
   page = data.res.page;
-  if (isView) {
-    viewKey = viewKey + 1;
-  }
 });
+
+onMount(() => {
+	showSpinner = false;
+})
 
 const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 </script>
@@ -45,7 +47,7 @@ const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 	<meta property="og:url" content={pageUrl} />
 	<meta
 		property="og:image"
-		content={isView ? data?.res?.data?.[0]?.og_image : config.defaultOpenGraphImage}
+		content={config.defaultOpenGraphImage}
 	/>
 </svelte:head>
 
@@ -56,7 +58,7 @@ const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 		<div class="project-spinner"></div>
 	{/if}
 	<div>
-    <h1 class="text-left text-1xl font-bold p-4 cursor-default -mt-4">List of all projects</h1>
+    <GoBack backRoute="/projects"/><h1 class="text-left text-1xl font-bold p-4 cursor-default -mt-4">List of all projects</h1>
 		<ProjectList {data} />
 	</div>
 </main>

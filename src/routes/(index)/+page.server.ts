@@ -54,7 +54,7 @@ export const load: PageServerLoad = async () => {
       html
     };
   } catch (e) {
-    console.log(e);
+    console.error(e);
     error(500, 'Internal Server Error');
   }
 };

@@ -1,43 +1,35 @@
 <script lang="ts">
-import CertImg from './CertImg.svelte';
-import CertPagination from './CertPagination.svelte';
-import { makeTitle } from '@/lib/utils/page';
+import CertImg from '@/routes/(app)/certs/components/CertImg.svelte';
+import CertPagination from '@/routes/(app)/certs/components/CertPagination.svelte';
 import { certBackRoute } from '@/stores/client-route';
 import { page as SveltePage } from '$app/state';
-interface Cert {
-  id: number;
-  cert_name: string;
-  cert_feature_image: string;
-  cert_file_name: string;
-  cat: {
-    cat_name: string;
-    cat_icon_name: string;
-  };
-  tags: {
-    id: number;
-    name: string;
-  }[];
-  weight: number;
-}
+import type { CertData } from '@/routes/(app)/certs/types/cert'
+
+ 
 interface Props {
-  currentPage: number;
-  maxPage: number;
-  rest: string;
-  data?: any;
+  data: CertData;
+  class?: string;
 }
 
-let { currentPage, maxPage, rest, data = [] as Cert[] }: Props = $props();
+let { data, class: className = '' }: Props = $props();
+
+const certs = data?.res?.data ?? [];
+const maxPage = data?.res?.totalPages
+const currentPage = data?.res?.page
+const rest = data?.rest
+
+if(!className) className = '';
 
 const setBackRoute = () => {
   certBackRoute.set(SveltePage.url.toString());
 };
 </script>
 
-{#if data.length > 0}
+{#if certs.length > 0}
 	<div
-		class="card-deck certbottommagin mx-2 md:mx-4 lg:mx-6 grid-cols-1 grid md:grid-cols-2 lg:grid-cols-3  gap-2 md:gap-4"
+		class={`card-deck certbottommagin mx-2 md:mx-4 lg:mx-6 grid-cols-1 grid md:grid-cols-2 lg:grid-cols-3  gap-2 md:gap-4 ${className}`}
 	>
-		{#each data as cert, i (i)}
+		{#each certs as cert, i (i)}
 			<div class="card">
 				<CertImg
 					propData={{
@@ -72,9 +64,10 @@ const setBackRoute = () => {
 				<div class="card-footer">
       <small class="text-muted"> 
        
-          <a onclick={setBackRoute} href="{`/certs/view/${cert['id']}/${makeTitle(cert['cert_name'])}`}" ><button type="button" class="btn-11 raise"><span class="icon-expand" style="color:#f11154;"></span>&nbsp;&nbsp;&nbsp;View Details</button></a>
-          <a href="{`${cert['cert_file_name']}`}" rel="external" >
-            <button type="button" class="btn-11 raise">
+          <a onclick={setBackRoute} href="{`/certs/view/${cert['cert_slug']}`}" >
+			<button type="button" class="btn-11 raise cursor-pointer"><span class="icon-expand" style="color:#f11154;"></span>&nbsp;&nbsp;&nbsp;View Details</button></a>
+          <a  href="{`${cert['cert_file_name']}`}" target="_blank" rel="external" >
+            <button type="button" class="btn-11 raise cursor-pointer">
               <span class="icon-file-pdf-o" style="color:#f11154;"></span>&nbsp;&nbsp;&nbsp;View PDF</button>
            </a> 
            </small>
@@ -83,7 +76,7 @@ const setBackRoute = () => {
 		{/each}
 	</div>
 
-	<CertPagination {maxPage} {currentPage} {rest} />
+	<CertPagination {maxPage} {currentPage} rest={rest?.replace(/page.*?\/?$/gm, '')} />
 {:else}
 	<div class="card-deck certbottommagin mx-2 md:mx-4 lg:mx-6 grid-cols-1 grid cert-error-box" style="grid-auto-rows: min-content;">
 		<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" class="w-32 h-32 mx-auto"
