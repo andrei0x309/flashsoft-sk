@@ -17,13 +17,15 @@
 
 .card {
   position: relative;
-  display: flex;
+  display: flex
+;
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: rgb(29 36 44 / 87%);
+  background-color: var(--color-zinc-900);
+  background: linear-gradient(0.25turn, var(--color-zinc-900), var(--color-zinc-900), oklab(0.195 0 0));
   background-clip: border-box;
-  border: 1px solid rgb(0 0 0 / 69%);
+  border: 1px solid rgba(0, 0, 0, 0.69);
   border-radius: 0.5rem;
   color: darkgray;
   padding: 0.8rem;
@@ -66,7 +68,14 @@ h1.headtitle {
   margin-top: 0.2rem;
   margin-left: 1rem;
   font-weight: 700;
-  background: linear-gradient(to left, #fdfdfd, #0061ffb0);
+  background: linear-gradient(to left, var(--color-orange-50), var(--color-amber-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-card-title:hover {
+  background: linear-gradient(to left, var(--color-orange-500), var(--color-yellow-500));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -74,6 +83,7 @@ h1.headtitle {
 
 h2.header-card-title {
   font-size: 1.3rem;
+  margin-bottom: 0.9rem;
 }
 
 h1.header-card-title {
@@ -159,7 +169,7 @@ $main-color: #0b0809;
 }
 
 .skew-menu ul li {
-  background: var(--color-zinc-900);
+  background: var(--color-neutral-700);
   float: left;
   margin-bottom: 0.2rem;
   border-right: 0.5rem solid oklch(0.18 0 0);

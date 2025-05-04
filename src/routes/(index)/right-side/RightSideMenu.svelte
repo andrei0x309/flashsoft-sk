@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TipIcon from '../icons/TipIcon.svelte';
+import TipIcon from '../icons/TipIcon.svelte';
 </script>
 
 <nav class="rsn pt-18">

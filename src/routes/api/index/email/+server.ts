@@ -1,21 +1,25 @@
-import { supabase } from '@/lib/node/supaClientFS';
-import { SECRET_EMAIL_ID as EMAIL_ID, SECRET_EMAIL_KEY as EMAIL_SECRET, SECRET_HCAPTCHA_SECRET } from '$env/static/private';
+import { supabase } from '@/lib/db-client/supaClientFS';
+import { SECRET_EMAIL_ID as EMAIL_ID, SECRET_EMAIL_KEY as EMAIL_SECRET } from '$env/static/private';
 import { validateEmail } from '@/lib/utils/server/email';
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
+import { getCapInstanceAndState, getCapChallengeConfig } from '@/lib/index/cap';
 
 const EMAIL_API_AUTH = 'https://api.sendpulse.com/oauth/access_token';
 const EMAIL_API_ENDPOINT = 'https://api.sendpulse.com/smtp/emails';
 
 export const POST: RequestHandler = async ({ request }) => {
-  let name, email, message, hCaptcha;
+  let name, email, message, capToken;
   try {
-    ({ name, email, message, hCaptcha } = await request.json());
+    ({ name, email, message, capToken } = await request.json());
   } catch (_error) {
-    return json({ error: 'Missing required fields, email, hCaptcha, message' }, { status: 400 });
+    return json({ error: 'Invalid JSON' }, { status: 400 });
   }
-  if (!email || !message || !hCaptcha) {
-    return json({ error: 'Missing required fields, email, hCaptcha, message' }, { status: 400 });
+  if (!email || !message) {
+    return json({ error: 'Missing required fields, emai or message' }, { status: 400 });
+  }
+  if (!capToken) {
+    return json({ error: 'Missing required fields, capToken' }, { status: 400 });
   }
   if (message.length > 2000) {
     return json({ error: 'Message too long' }, { status: 400 });
@@ -31,22 +35,17 @@ export const POST: RequestHandler = async ({ request }) => {
   }
 
   try {
-    const response = await fetch(`https://hcaptcha.com/siteverify`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: new URLSearchParams({
-        secret: SECRET_HCAPTCHA_SECRET,
-        response: hCaptcha
-      })
-    });
-    const { success } = await response.json();
+    const { cap } = await getCapInstanceAndState();
+
+    const validate = await cap.validateToken(capToken, getCapChallengeConfig());
+
+    const { success } = validate;
+
     if (!success) {
-      return json({ error: 'Invalid hCaptcha' }, { status: 400 });
+      return json({ error: 'Invalid captcha' }, { status: 400 });
     }
   } catch (_error) {
-    return json({ error: 'Error validating hCaptcha' }, { status: 500 });
+    return json({ error: 'Error validating captcha' }, { status: 500 });
   }
 
   try {
@@ -81,6 +80,7 @@ export const POST: RequestHandler = async ({ request }) => {
       }
 
       token = await response.json();
+
       const { error } = await supabase
         .from('fsk_email_token')
         .upsert({ id: 1, token: JSON.stringify(token), expiration: new Date(expiration).toISOString() });
@@ -128,39 +128,3 @@ export const POST: RequestHandler = async ({ request }) => {
     return json({ error: `Internal Server Error: ${String(e)}` }, { status: 500 });
   }
 };
-
-// import { createClient, SupabaseClientOptions } from "https://esm.sh/@supabase/supabase-js@2.48.1";
-
-// const SUPA_TOKEN = Deno.env.get('SECRET_SUPA_TOKEN') as string
-// const EMAIL_ID = Deno.env.get('SECRET_EMAIL_ID') as string
-// const EMAIL_SECRET = Deno.env.get('SECRET_EMAIL_KEY') as string
-// const SECRET_HCAPTCHA_SECRET = Deno.env.get('SECRET_HCAPTCHA_SECRET') as string
-
-// const EMAIL_API_AUTH = 'https://api.sendpulse.com/oauth/access_token'
-// const EMAIL_API_ENDPOINT = 'https://api.sendpulse.com/smtp/emails'
-
-// const printSecrets = () => {
-//   console.log('SUPA_TOKEN', SUPA_TOKEN)
-//   console.log('EMAIL_ID', EMAIL_ID)
-//   console.log('EMAIL_SECRET', EMAIL_SECRET)
-//   console.log('SECRET_HCAPTCHA_SECRET', SECRET_HCAPTCHA_SECRET)
-// }
-
-// printSecrets()
-
-// const options = {
-//   schema: "public",
-//   autoRefreshToken: true,
-//   persistSession: true,
-//   detectSessionInUrl: true,
-// } as SupabaseClientOptions<"public">;
-
-// const supabase = createClient(
-//   "https://lcspcmmpolegvalxkfsu.supabase.co",
-//   SUPA_TOKEN,
-//   options,
-// );
-
-// export default async (request: Request) => {
-
-// }

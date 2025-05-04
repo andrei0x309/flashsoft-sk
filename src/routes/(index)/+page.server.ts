@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import { supabase } from '@/lib/node/supaClientFS';
+import { supabase } from '@/lib/db-client/supaClientFS';
 import { error } from '@sveltejs/kit';
 
 const prepareHtml = (html: string) => {
@@ -16,16 +16,16 @@ const prepareHtml = (html: string) => {
     .replace(/<a/gms, '<a rel="noopener noreferrer external" ') // indicate to sveltekit to not preload external links
     .replace(/href="\//gms, 'href="https://github.com/'); // fix links
 
-    const capPattern = /<div class="col-12 col-lg-6 d-flex flex-column pr-lg-5">.*?<\/div>.*?<\/div>.*?<\/div>/gms
+  const capPattern = /<div class="col-12 col-lg-6 d-flex flex-column pr-lg-5">.*?<\/div>.*?<\/div>.*?<\/div>/gms;
 
-    const captureActivity = parsedHtml.match(capPattern);
-    if (captureActivity) {
-      graph = parsedHtml.replace(capPattern, '');
-      if(captureActivity[0]) {
-      activity = captureActivity[0]
-      }
+  const captureActivity = parsedHtml.match(capPattern);
+  if (captureActivity) {
+    graph = parsedHtml.replace(capPattern, '');
+    if (captureActivity[0]) {
+      activity = captureActivity[0];
     }
-    return activity ? `${graph}|||${activity}` : graph;
+  }
+  return activity ? `${graph}|||${activity}` : graph;
 };
 
 const updateContributions = async () => {
@@ -54,7 +54,7 @@ export const load: PageServerLoad = async () => {
       html
     };
   } catch (e) {
-    console.log(e);
+    console.error(e);
     error(500, 'Internal Server Error');
   }
 };

@@ -114,26 +114,18 @@ main#app {
  
       &:before {
         width: 100%;
-        /* Make sure we fill in the whole image area */
-        min-height: 21vh;
+        min-height: 90%;
         position: absolute;
         top: 0;
         left: 0;
         display: flex;
-        /* We want to center copy from alt tag horizontally & vertically */
         align-items: center;
         justify-content: center;
-  
-  
-        background: rgb(43, 128, 153);
-        background: radial-gradient(circle, rgba(43, 128, 153, 1) 33%, rgba(18, 83, 97, 1) 68%);
-  
+        background: var(--color-zinc-900);
+        background: radial-gradient(circle, var(--color-neutral-900) 33%, var(--color-neutral-950) 68%);
         color: #FFF;
         font-size: 1rem;
         font-weight: bold;
-  
-  
-        /* Cool trick: we're using CSS attr() function to retrieve alt property copy */
         content: " IMG-Broken : " attr(alt);
       }
   
@@ -344,7 +336,6 @@ main#app {
   /* modules/search.css */
   
   .search {
-    background-color: #42454e;
     border-radius: .125rem;
     font-size: 12px;
     font-size: .75rem;
@@ -366,7 +357,6 @@ main#app {
   
   .search input[type="submit"],
   .btn-search-box {
-    background-color: #1bba9a;
     color: #fff;
     font-weight: bold;
     margin-left: 8px;
@@ -374,15 +364,7 @@ main#app {
     padding: 6px 10px;
     padding: .375rem .625rem;
   }
-  
-  .search input[type="submit"]:focus,
-  .search input[type="submit"]:hover,
-  .btn-search-box:hover,
-  .btn-search-box:focus {
-    background-color: #189e83;
-  }
-  
-  
+ 
   
   /* mobile paginator smaller to fit */
   
@@ -709,11 +691,11 @@ main#app {
     font-family: "Open Sans", sans-serif;
     margin-left: 2em;
     padding: 0 1.2em 0 1.2em;
-    background: #117c7c;
+    background: var(--color-sky-700);
     color: #fff;
     text-decoration: none;
     border-radius: 0.3rem;
-    box-shadow: 1px 1px 1px #2bb19e;
+    box-shadow: 1px 1px 1px  var(--color-sky-950)
   }
   
   .tags li:before,
@@ -724,7 +706,7 @@ main#app {
     left: -1.8em;
     width: 0;
     height: 0;
-    border-color: transparent rgb(68 97 110) transparent transparent;
+    border-color: transparent var(--color-sky-600) transparent transparent;
     border-style: solid;
     border-width: 0.98em 0.98em 0.98em;
   }

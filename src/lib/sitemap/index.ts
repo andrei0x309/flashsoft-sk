@@ -1,5 +1,4 @@
-import { supabase } from '@/lib/node/supaClientFS';
-import { makeTitle } from '@/lib/utils/common';
+import { supabase } from '@/lib/db-client/supaClientFS';
 
 const CERT_PATH = 'certs';
 const PROJECT_PATH = 'projects';
@@ -24,7 +23,7 @@ export const generatePaths = async () => {
   let { data } = await supabase.from('fsk_cert').select('id, cert_name');
   for (const cert of data ?? []) {
     paths.push({
-      url: `${CERT_PATH}/view/${cert.id}/${makeTitle(cert.cert_name)}`,
+      url: `${CERT_PATH}/view/${cert.cert_slug}`,
       priority: 0.6
     });
   }
@@ -85,7 +84,7 @@ export const generatePaths = async () => {
 
   for (const project of data ?? []) {
     paths.push({
-      url: `${PROJECT_PATH}/view/${project.id}/${makeTitle((project as unknown as { title: string }).title)}`,
+      url: `${PROJECT_PATH}/view/${project.slug}`,
       priority: 0.7
     });
   }

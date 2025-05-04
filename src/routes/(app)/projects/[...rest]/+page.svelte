@@ -1,24 +1,21 @@
 <script lang="ts">
 import '@/routes/(app)/projects.scss';
-// import { page } from '$app/stores';
-import Header from '../../Header.svelte';
-// import type { PageServerLoad } from './$types';
+import Header from '@/routes/(app)/components/Header.svelte';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
 import { page as SveltePage } from '$app/state';
-import { projectBackRoute } from '@/stores/client-route';
-import ProjectSingle from '../ProjectSingle.svelte';
-import { getPrjFeatureImage } from '@/lib/utils/common';
+import { config } from '@/lib/config/config';
+import ProjectList from '../components/ProjectList.svelte';
+import Pagination from '../components/Pagination.svelte';
+import { onMount } from "svelte";
+import type { ProjectDataPage } from '@/routes/(app)/projects/types/projects'
 
 interface Props {
-  data: any;
+  data: ProjectDataPage;
 }
 
 let { data }: Props = $props();
 let showSpinner = $state(false);
 
-//history.pushState({}, null, newUrl);
-let viewKey = $state(0);
-let isView = $state(false);
 beforeNavigate(() => {
   showSpinner = true;
 });
@@ -27,20 +24,17 @@ afterNavigate(() => {
   showSpinner = false;
 });
 
-const setBackRoute = () => {
-  projectBackRoute.set(SveltePage.url.toString());
-};
-
 let page: number = $state(0);
 
 $effect(() => {
   page = data.res.page;
-  isView = data.rest?.includes('/view/') || false;
-  if (isView) {
-    viewKey = viewKey + 1;
-  }
 });
 
+onMount(() => {
+	showSpinner = false;
+})
+
+const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 </script>
 
 <svelte:head>
@@ -49,8 +43,8 @@ $effect(() => {
     <meta property="og:title" content="{data.pageTitle}" />
     <meta property="og:description" content="{data.pageDescription}">
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={`${SveltePage.url}`} />
-    <meta property="og:image" content="{data?.res?.data?.[0]?.og_image}" />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content="{config.defaultOpenGraphImageProjects}" />
 
 {#if page > 1}
 <link rel="prev" href="/projects/page/{page - 1}" />
@@ -62,89 +56,16 @@ $effect(() => {
 
 <Header segment="projects" />
 
-{#if !isView}
 <main class="{`project-main md:mx-4 mb-2 ${showSpinner? 'blink-loading': ''}`}" id="app">
-    <!-- v-if='isLoading' -->
     {#if showSpinner}
     <div class="project-spinner"></div>
     {/if}
-    <!-- v-bind:class="{ 'project-main-loading':isLoading }" -->
-    <div >
-        <!-- v-for="projects in dataProject"  -->
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- v-for="project in projects" -->
-      {#each data.res.data as project}
-      <div  class="card mb-6">
-      <div class="row no-gutters">
-    
-        <div class="flex flex-col md:flex-row justify-center">
-        <figure class="project-card block md:inline max-w-[16rem] mx-auto w-full">
+    <div>
+    <h1 class="text-left text-1xl font-bold p-4 cursor-default -mt-4">Projects page {page} of {data.res.totalPages}</h1>
+    <ProjectList data={data} />
 
-                        <!-- v-bind:src="getImgFilePath(project.feature_image)" v-bind:alt="'Project ' + project.feature_image + 'image'" -->
+		<Pagination {page} totalPages={data.res.totalPages} />
 
-        <img class="project-img-feature" 
-        src={getPrjFeatureImage(project.feature_image)} alt="{'Project ' + project.title + 'image'}"
-        width="800" height="600" />
-                <!-- <figcaption >
-                <span class="info" >
-                    <span>Git Repo</span>
-                    <span>gitlab/repo </span>
-                </span>
-            </figcaption> -->
-        </figure>
-            <div class="card-body text-left grow">
-                <!-- {{ project.title }} -->
-            <h2 class="card-title header-card-title">
-                {project.title}
-            </h2>
-            <!-- {{ project.short_description }} -->
-            <p class="card-text">{project.short_description}</p>
-            <!-- {{ JSON.parse(project.cat).cat_name }} -->
-            <p class="card-text my-4" ><b>Category:</b><br> {project.cat.cat_name}<p>
-            <p class="card-text mt-2">
-            <a onclick={setBackRoute} href={`/projects/view/${project.id}/${(project.title).replace(/ /gms, '-')}`} class="button center btn-pagination btn-projects px-2 pt-1 pb-2">
-                <small class="text-muted">Details</small>
-            </a>
-           </p>
-          </div>
-        </div>
-      </div>
-          <div class="row no-gutters">
-                    <!--           @if(count($project['techs_data']))
-                     
-                    -->
-                    <!-- v-show='Array.isArray(JSON.parse(project.techs_data)) && JSON.parse(project.techs_data).length' -->
-                 <p class="project-tags my-3"  ><span>Technology</span>
-                    <!-- v-for="tech in JSON.parse(project.techs_data)"  {{ tech.name }}  -->
-                    {#each project.techs as tech}
-                    <button class="tag">{ tech.name }</button>
-                    {/each}
-                 </p>
-    
-          </div>
     </div>
-    {/each}
-       
-    </div>
-    <!-- v-show='showPrevious' -->
-    <div class="flex justify-center">
-    {#if page > 1}
-    <a href={`/projects/page/${page-1}`} class="btn-projects p-2 mx-2 my-1" >&#8249; Previous </a>
-    {/if}
-    <!-- v-show='showNext' -->
-    {#if page < data.res.totalPages}
-    <a href={`/projects/page/${page+1}`} class=" btn-projects p-2 mx-2 my-1">Next &#8250;</a>
-    {/if}
-    </div>
-    </div>
-     </main>
-    {:else}
-    {#key viewKey}
-    <ProjectSingle data={data} />
-    {/key}
-{/if}
+</main>
 
-<a rel="nofollow external" href="https://status.flashsoft.eu">
-  <img class="mx-auto mt-2 mb-6" src="https://uptime.betterstack.com/status-badges/v1/monitor/1u13o.svg" alt="flashsoft.eu Status" />
-</a>

@@ -1,7 +1,5 @@
 <script lang="ts">
-
-    const { class: className } = $props<{ class?: string | undefined }>();
-    
+const { class: className } = $props<{ class?: string | undefined }>();
 </script>
     
 <svg class={className} viewBox="0 0 21 12" fill="none" xmlns="http://www.w3.org/2000/svg">

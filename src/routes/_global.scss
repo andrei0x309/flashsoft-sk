@@ -69,11 +69,10 @@ body {
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
   height: 100%;
-  background: linear-gradient(90deg, rgb(34 32 50), rgb(21 7 44 / 96%)), url(../../../images/bg.png);
-  background-size: 100vw 130vh;
+  background: linear-gradient(318deg, var(--color-zinc-800), var(--color-zinc-900)), url(/images/bg-a0f21.webp);
   background-position: 0;
   background-attachment: fixed;
-  background-blend-mode: luminosity;
+  background-blend-mode: soft-light;
 }
 
 /* latin-ext */

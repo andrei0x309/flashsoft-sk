@@ -43,14 +43,14 @@ const setLoadEmail = (isSending = true) => {
 
 const submitEmail = async (event: Event) => {
   event.preventDefault();
-  const hCaptcha = (document?.querySelector('form div iframe') as HTMLElement)?.dataset?.hcaptchaResponse;
+  const capToken = (document?.querySelector('form input[name="cap-token"]') as HTMLInputElement)?.value;
 
   setLoadEmail(true);
   const data = {
     email,
     name,
     message,
-    hCaptcha
+    capToken
   };
 
   const recentEmail = localStorage.getItem('recent-email');
@@ -131,7 +131,11 @@ const renderCaptcha = () => {
 // 		observer.observe(HCScriptEl, config);
 // }
 
-onMount(() => {});
+onMount(() => {
+  import('@/lib/vendor/cap').then((module) => {
+    module.capMount();
+  });
+});
 </script>
 
 <section id="section-contact">
@@ -154,14 +158,12 @@ onMount(() => {});
 						rows="5"
 						placeholder="Message"
 					></textarea>
+				 
+          <cap-widget
+            id="cap"
+            data-cap-api-endpoint="/api/index/cap/"
+          ></cap-widget>
 
-					<div bind:this={hcaptchaElement} class="flex justify-center"></div>
-					<script
-						src="https://js.hcaptcha.com/1/api.js?render=explicit"
-						async
-						defer
-						onload={renderCaptcha}
-					></script>
 					<button
 						onclick={submitEmail}
 						id="form-submit"

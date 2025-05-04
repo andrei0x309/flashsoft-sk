@@ -1,5 +1,5 @@
 <script lang="ts">
-    import ScoutIcon from '../icons/ScoutIcon.svelte';
+import ScoutIcon from '../icons/ScoutIcon.svelte';
 </script>
 
 <div class="rs-slc inline-block ml-p10 mt-p10">
@@ -19,7 +19,7 @@
         <li class="relative">
             <a
                 rel="noopener noreferrer external"
-                href="https://gitea.flashsoft.eu/explore/repos"
+                href="https://scoutgame.xyz/u/andrei0x309"
                 target="_blank">BuilderScout <i class="rs-slc-nonactive"><ScoutIcon class="w-6 h-6 inline relative top-[-0.2rem]"/></i></a
             >
         </li>

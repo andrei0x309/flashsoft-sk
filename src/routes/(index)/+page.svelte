@@ -1,5 +1,5 @@
 <script lang="ts">
-import { config } from '$lib/config';
+import { config } from '@/lib/config/config';
 import MainSection from './left-side/MainSection.svelte';
 import ContactForm from './left-side/ContactForm.svelte';
 import Interests from './left-side/Interests.svelte';
@@ -9,11 +9,11 @@ import Footer from './left-side/Footer.svelte';
 import SideMenu from './mobile/SideMenu.svelte';
 
 import PaperWeight from './right-side/PaperWeight.svelte';
-import RightSideMenu from './right-side/RightSideMenu.svelte'
+import RightSideMenu from './right-side/RightSideMenu.svelte';
 import RightSideLogo from './right-side/RightSideLogo.svelte';
 import RightSideName from './right-side/RightSideName.svelte';
 import RightSideLinks from './right-side/RightSideLinks.svelte';
-
+import BackToTop from './right-side/BackToTop.svelte';
 
 const { indexPageDescription, indexPageTitle } = config;
 
@@ -35,7 +35,7 @@ const html = data?.html;
 	<meta property="og:description" content={indexPageDescription} />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://flashsoft.eu" />
-	<meta property="og:image" content="https://flashsoft.eu/res/og-flashsoft-v2.webp" />
+	<meta property="og:image" content={config.defaultOpenGraphImage} />
 
 	<!-- Schema  -->
 	<script type="application/ld+json">
@@ -76,8 +76,6 @@ const html = data?.html;
 
 		<RightSideLinks />
 		
-		
 	</aside>
-	<!--
-	<a href="#0" class="cd-top">Top</a> -->
+	<BackToTop />
 	</main>
