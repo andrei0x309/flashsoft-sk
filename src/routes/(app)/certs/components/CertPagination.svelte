@@ -1,5 +1,4 @@
 <script lang="ts">
-import { PUBLIC_HTTP_ROOT } from '$env/static/public';
 import { onMount } from 'svelte';
 
 interface Props {
@@ -55,7 +54,7 @@ if (maxPage < 6) {
             <span aria-hidden="true" class="page-link">‹</span>
         {:else}
             <a
-                href={`${PUBLIC_HTTP_ROOT}${(`${rest}/page/${currentPage-1}`).replace(/\/+/g, '/')}`}
+                href={`${(`${rest}/page/${currentPage-1}`).replace(/\/+/g, '/')}`}
                 rel="prev"
                 aria-label="« Previous"
                 class="page-link"
@@ -72,7 +71,7 @@ if (maxPage < 6) {
             {:else}
                 <li class="page-item">
                     <a
-                        href={`${PUBLIC_HTTP_ROOT}${(`${rest}/page/${link}`).replace(/\/+/g, '/')}`}
+                        href={`${(`${rest}/page/${link}`).replace(/\/+/g, '/')}`}
                         class="page-link"
                         >{link}</a
                     >
@@ -85,7 +84,7 @@ if (maxPage < 6) {
             <span aria-hidden="true" class="page-link">›</span>
         {:else}
             <a
-                href={`${PUBLIC_HTTP_ROOT}${(`${rest}/page/${currentPage+1}`).replace(/\/+/g, '/')}`}
+                href={`${(`${rest}/page/${currentPage+1}`).replace(/\/+/g, '/')}`}
                 rel="next"
                 aria-label="Next »"
                 class="page-link"

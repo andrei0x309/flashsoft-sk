@@ -68,9 +68,6 @@ onMount(() => {
 				<p class="text-muted">
 					{data?.res?.data?.[0]?.cat?.cat_name}
 				</p>
-				<!-- {#if data?.res?.data?.[0]?.cat?.cat_description}
-					<small>{data.res.data[0].cat.cat_description}</small>
-				{/if} -->
 				<h2 class="headings mt-4 mb-2">Description</h2>
 				<p>
 					{data?.res?.data?.[0]?.short_description}

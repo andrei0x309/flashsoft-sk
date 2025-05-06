@@ -1,35 +1,12 @@
 <script lang="ts">
-  import { afterNavigate, beforeNavigate } from "$app/navigation";
-  import { projectBackRoute } from "@/stores/client-route";
-  import { onMount } from "svelte";
   import { getPrjFeatureImage } from "@/lib/utils/common";
   import type { ProjectData } from "@/routes/(app)/projects/types/projects";
-
-  // import { Lightbox } from 'svelte-lightbox';
-  // import { browser } from '$app/environment';
-
-  let backRoute: string = $state("");
-
-  let showSpinner = $state(false);
   interface Props {
     data: ProjectData;
   }
 
   let { data }: Props = $props();
 
-  beforeNavigate(() => {
-    showSpinner = true;
-  });
-
-  afterNavigate(() => {
-    showSpinner = false;
-  });
-
-  onMount(() => {
-    projectBackRoute.subscribe((val) => {
-      backRoute = val || "/projects";
-    });
-  });
 </script>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

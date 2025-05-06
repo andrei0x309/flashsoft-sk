@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/db-client/supaClientFS';
 import { error } from '@/lib/utils/page';
+import type { PostgrestSingleResponse } from '@supabase/supabase-js';
 
 export const loadProjects = async (page = 1) => {
   try {
@@ -35,7 +36,7 @@ export const loadProjects = async (page = 1) => {
       res
     };
   } catch (e) {
-    conssole.error(e);
+    console.error(e);
     return null;
   }
 };
@@ -145,7 +146,7 @@ export const loadProjectByCat = async (catSlug: string, page: number) => {
     };
   }
   catch (e) {
-    conssole.error(e);
+    console.error(e);
     return null;
   }
 }
@@ -196,9 +197,14 @@ export const loadProjectsByTech = async (techSlug: string, page: number) => {
     if (page > (res as unknown as { totalPages: number }).totalPages) {
       throw error(404, 'Not found');
     }
+    type resRetType = {res: PostgrestSingleResponse<any[]> } & {res: {
+      page: number;
+      totalPages: number;
+      tech: { name: string };
+    }}
     return {
-      res
-     };
+      res 
+     } as unknown as resRetType
   }
   catch (e) {
     console.error(e);

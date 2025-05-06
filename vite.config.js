@@ -3,10 +3,25 @@ import { sveltekit } from '@sveltejs/kit/vite';
 // import { SvelteKitPWA } from '@vite-pwa/sveltekit'
 import tailwindcss from '@tailwindcss/vite';
 
+function externalizeCDNImport(targetUrl) {
+  return {
+    name: 'externalize-cdn-import', // A name for your plugin
+    resolveId(source, importer, options) {
+      if (source === targetUrl) {
+        console.info(`[externalize-cdn-import] Marking ${targetUrl} as external.`);
+        return { id: source, external: true };
+      }
+      return null;
+    }
+  };
+}
+
 /** @type {import('vite').UserConfig} */
 const config = {
   build: {
-    minify: false
+    rollupOptions: {
+      plugins: [externalizeCDNImport("https://cdn.jsdelivr.net/npm/@cap.js/wasm@0.0.3/browser/cap_wasm.min.js")]
+    }
   },
   define: {
     __DATE__: `'${new Date().toISOString()}'`,
@@ -68,7 +83,7 @@ const config = {
     // 		kit: {}
     // 	}
     // ),
-  ]
+  ],
 };
 
 export default config;

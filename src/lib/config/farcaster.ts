@@ -1,6 +1,6 @@
 import { config } from './config';
 const IS_DEV_ENABLED = config.IS_DEV_ENABLED;
-import type { TriggerConfig } from '$lib/types/farcaster-frame-v2';
+import type { TriggerConfig } from '$lib/types/mini-app';
 
 export const FCConfig = {
   JFS: {
@@ -25,7 +25,7 @@ export const FCConfig = {
     // App name. Required.
     // Max length of 32 characters.
     // Example: "Yoink!"
-    name: config.siteName,
+    name: config.hostname,
 
     // Default launch URL. Required.
     // Max 512 characters.
@@ -94,7 +94,7 @@ export const FCConfig = {
   tags: config.farcaster.extendedMetadata.tags,
   heroImageUrl: IS_DEV_ENABLED ? config.devBaseUrl + '/images/ogs/ffe-og-index.webp' : config.baseSiteUrl + '/images/ogs/ffe-og-index.webp',
   tagline: config.farcaster.extendedMetadata.description,
-  ogTitle: config.siteName,
+  ogTitle: config.hostname,
   ogDescription: config.farcaster.extendedMetadata.description,
   ogImageUrl: IS_DEV_ENABLED ? config.devBaseUrl + '/images/ogs/ffe-og-index.webp' : config.baseSiteUrl + '/images/ogs/ffe-og-index.webp'
 };

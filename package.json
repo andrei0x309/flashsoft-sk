@@ -11,7 +11,8 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "test:unit": "vitest",
     "lint": "bun x biome lint --write",
-    "format": "bun x biome format --write"
+    "format": "bun x biome format --write",
+    "rewrite-history": "git filter-repo --paths-from-file files-to-remove.txt --invert-paths --force"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -42,7 +43,8 @@
     "workbox-window": "^7.3.0"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.49.4"
+    "@supabase/supabase-js": "^2.49.4",
+    "@types/bun": "^1.2.12"
   },
   "removedDependencies": {
     "eslint": "^9.19.0",

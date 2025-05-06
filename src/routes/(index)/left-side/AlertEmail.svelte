@@ -32,7 +32,7 @@ let { showAlert = $bindable(false), msg = $bindable(''), type = $bindable('error
     </div>
 </div>
 {:else if type === 'success'}
-<div id="alert-box" class="alert-base alert flex flex-row items-center bg-green-200 p-5 rounded border-b-2 border-green-300 fade-in">
+<div id="alert-box" class="alert-base alert flex flex-row items-center bg-green-200 p-5 rounded border-b-2 border-green-300 fade-in relative">
     <button class="alert-close" onclick={() => {showAlert = false}} aria-label="close">x</button>
     <div class="alert-icon flex items-center bg-green-100 border-2 border-green-500 justify-center h-10 w-10 flex-shrink-0 rounded-full">
         <span class="text-green-500">
@@ -55,7 +55,7 @@ let { showAlert = $bindable(false), msg = $bindable(''), type = $bindable('error
     </div>
 </div>
 {:else if type === 'info'}
-<div id="alert-box" class="alert-base alert flex flex-row items-center bg-blue-200 p-5 rounded border-b-2 border-blue-300 fade-in">
+<div id="alert-box" class="alert-base alert flex flex-row items-center bg-blue-200 p-5 rounded border-b-2 border-blue-300 fade-in relative">
     <button class="alert-close" onclick={() => {showAlert = false}} aria-label="close">x</button>
     <div class="alert-icon flex items-center bg-blue-100 border-2 border-blue-500 justify-center h-10 w-10 flex-shrink-0 rounded-full">
         <span class="text-blue-500">

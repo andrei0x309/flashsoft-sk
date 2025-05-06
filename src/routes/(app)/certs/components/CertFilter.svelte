@@ -2,8 +2,6 @@
 import { goto } from '$app/navigation';
 import { slide } from 'svelte/transition';
 
-import { PUBLIC_HTTP_ROOT, PUBLIC_RUN_ENV } from '$env/static/public';
-
 let tags: any[] = $state([]);
 
 interface Props {
@@ -17,7 +15,7 @@ let allTags = $state(false);
 let loadingTags = $state(false);
 
 const fetchTags = async (all = false) => {
-  const response = await fetch(`${PUBLIC_HTTP_ROOT}/api/cert/get/tags${all ? '?all=true' : ''}`);
+  const response = await fetch(`/api/cert/get/tags${all ? '?all=true' : ''}`);
   if (!response.ok) throw new Error(response.statusText);
   const json = await response.json();
   return json;

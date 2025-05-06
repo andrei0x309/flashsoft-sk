@@ -19,7 +19,7 @@ export interface ProjectData {
       techs: [
         {
           name: string;
-          slug:: string;
+          slug: string;
         }
       ];
       mega: string;

@@ -131,10 +131,14 @@ const renderCaptcha = () => {
 // 		observer.observe(HCScriptEl, config);
 // }
 
+const initCaptcha = () => {
+  if((window as any).capMount) {
+    (window as any).capMount();
+  }
+}
+
 onMount(() => {
-  import('@/lib/vendor/cap').then((module) => {
-    module.capMount();
-  });
+ 
 });
 </script>
 
@@ -158,7 +162,7 @@ onMount(() => {
 						rows="5"
 						placeholder="Message"
 					></textarea>
-				 
+				 <script src="/res/vendor/cap/cap.js" onload={() => { initCaptcha() }}></script>
           <cap-widget
             id="cap"
             data-cap-api-endpoint="/api/index/cap/"

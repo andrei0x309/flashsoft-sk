@@ -2,9 +2,14 @@
 /// <reference lib="dom" />
 /// <reference types="node" />
 
-import crypto from 'crypto';
-import fs from 'fs/promises';
-import { EventEmitter } from 'events';
+import crypto from 'node:crypto';
+import fs from 'node:fs/promises';
+import { EventEmitter } from 'node:events';
+
+const process = {
+on: () => {},
+once: () => {}
+};
 
 /**
  * @typedef {import('node:crypto')} Crypto
@@ -98,8 +103,8 @@ export class Cap extends EventEmitter {
     ['SIGINT', 'SIGTERM', 'SIGQUIT'].forEach((signal) => {
       process.once(signal, () => {
         this.cleanup()
-          .then(() => process.exit(0))
-          .catch(() => process.exit(1));
+          .then(() => console.info(`[cap] Exiting...`))
+          .catch((e) => console.error(`[cap] Failed to exit gracefully`, e));;
       });
     });
   }

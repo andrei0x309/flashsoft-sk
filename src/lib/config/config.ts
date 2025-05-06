@@ -12,6 +12,8 @@ export const config = {
   defaultOpenGraphImageCerts: 'https://flashsoft.eu/res/og-flashsoft-courses-v2.webp',
   hostname: 'flashsoft.eu',
   IS_DEV_ENABLED,
+  devBaseUrl,
+  baseSiteUrl,
   farcaster: {
    miniAppEnabled: true,
    followButtonEnabled: true,

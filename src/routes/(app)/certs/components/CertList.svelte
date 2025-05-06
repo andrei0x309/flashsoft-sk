@@ -33,7 +33,7 @@ const setBackRoute = () => {
 			<div class="card">
 				<CertImg
 					propData={{
-						imageSource: `/res/cert_pic/${cert['cert_feature_image']}`,
+						imageSource: `/res/cert_pic_opt/${cert['cert_feature_image']}`,
 						certName: cert['cert_name']
 					}}
 					lazy={i > 3}

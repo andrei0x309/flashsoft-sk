@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
-import { checkData, extractPage, error, appendToData } from '@/lib/utils/page';
-import { loadCerts, loadFilteredCerts, loadCert } from '@/lib/certs/certs';
+import { checkData, error, appendToData } from '@/lib/utils/page';
+import { loadCert } from '@/lib/certs/certs';
 
 export const load: PageServerLoad = async (rest) => {
     if (!rest.params?.slug) {
@@ -9,7 +9,7 @@ export const load: PageServerLoad = async (rest) => {
 
     const restPath = '/certs/view' + (rest.params.slug ?? '/');
     const slug = rest.params.slug;
-    const data = (await loadCert(slug)) as { res: Record<string, unknown> };
+    const data = (await loadCert(slug)) as { res: any,  error: any };;
 
     const certName = data?.res?.data?.[0]?.cert_name
     const id = data?.res?.data?.[0]?.id

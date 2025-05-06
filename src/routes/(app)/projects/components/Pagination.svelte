@@ -1,11 +1,4 @@
 <script lang="ts">
-import { afterNavigate, beforeNavigate } from '$app/navigation';
-import { projectBackRoute } from '@/stores/client-route';
-import { onMount } from 'svelte';
-
-let backRoute: string = $state('');
-
-let showSpinner = $state(false);
 interface Props {
   page: number;
   totalPages: number;
@@ -13,19 +6,6 @@ interface Props {
 
 let { page, totalPages }: Props = $props();
 
-beforeNavigate(() => {
-  showSpinner = true;
-});
-
-afterNavigate(() => {
-  showSpinner = false;
-});
-
-onMount(() => {
-  projectBackRoute.subscribe((val) => {
-    backRoute = val || '/projects';
-  });
-});
 </script>
 
 <div class="flex justify-center">

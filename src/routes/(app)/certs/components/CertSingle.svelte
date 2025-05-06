@@ -34,7 +34,7 @@ const cert = data.res?.data?.[0];
 		<div class="card-body">
 			<CertImg
 				propData={{
-					imageSource: `/res/cert_pic/${cert.cert_feature_image}`,
+					imageSource: `/res/cert_pic_opt/${cert.cert_feature_image}`,
 					certName: cert.cert_name
 				}}
 				lazy={false}
