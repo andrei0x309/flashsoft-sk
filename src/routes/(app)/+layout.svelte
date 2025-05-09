@@ -2,6 +2,8 @@
 import '../tailwind.css';
 import { analyticsCode } from '$lib/utils/analytics';
 import BackToTop from '@/routes/(index)/right-side/BackToTop.svelte'
+import Status from '@/routes/(index)/left-side/Status.svelte'
+
 interface Props {
   children?: import('svelte').Snippet;
 }
@@ -25,9 +27,7 @@ let { children }: Props = $props();
 
 {@render children?.()}
 
-<a rel="nofollow external" href="https://status.flashsoft.eu">
-	<img class="mx-auto mt-2 mb-6" src="https://uptime.betterstack.com/status-badges/v1/monitor/1u13o.svg" alt="flashsoft.eu Status" />
-</a>
+<Status class="mb-4" />
 
 <BackToTop />
 

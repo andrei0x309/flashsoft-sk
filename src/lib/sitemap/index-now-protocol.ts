@@ -1,6 +1,6 @@
 import { generatePaths } from './index';
 import { wait } from '@/lib/common/misc';
-import { config } from '@/lib/config/index';
+import { config } from '@/lib/config/config';
 
 // This is safe must match the /616E647265693078333039.txt
 const indexNowKey = '616E647265693078333039';

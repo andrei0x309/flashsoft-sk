@@ -4,6 +4,8 @@ create table public.fsk_prj_tech_type (
   description text null,
   created_at timestamp without time zone null default now(),
   updated_at timestamp without time zone null default now(),
+  slug text not null,
   constraint fsk_prj_tech_type_pkey primary key (id),
+  constraint fsk_prj_tech_type_slug_key unique (slug),
   constraint fsk_prj_tech_type_id_check check ((id > 0))
 ) TABLESPACE pg_default;

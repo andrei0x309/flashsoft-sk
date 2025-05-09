@@ -17,9 +17,9 @@ interface Props {
 
 let { data }: Props = $props();
 
-const hasMega = data?.res?.data?.[0]?.mega || false;
-const hasYoutube = data?.res?.data?.[0]?.youtube || false;
-const hasMegaOrYoutube = hasMega || hasYoutube;
+const megaLink = data?.res?.data?.[0]?.mega;
+const youtubeLink = data?.res?.data?.[0]?.youtube || false;
+const hasMegaOrYoutube = megaLink || youtubeLink;
 const links = data?.res?.data?.[0]?.links;
 const screenPics = data?.res?.data?.[0]?.screen_pics;
 const techs = data?.res?.data?.[0]?.techs;
@@ -87,13 +87,13 @@ onMount(() => {
         {#if hasMegaOrYoutube}
         <h2 class="headings mt-4">Demo Video</h2>
         {/if}
-        {#if hasMega}
-        <MegaEmbed source={data?.res?.data?.[0]?.mega} />
-        {:else if hasYoutube}
+        {#if megaLink}
+        <MegaEmbed source={megaLink} />
+        {:else if youtubeLink}
          <!-- Implement YouTube video here -->
         {/if}
 
-				{#if Object.keys(screenPics).length > 0}
+				{#if Object.keys(screenPics ?? {}).length > 0}
 					<h2 class="headings mt-4">Screenshots</h2>
 					<small>click to Zoom</small>
 					<div

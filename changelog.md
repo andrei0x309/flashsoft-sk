@@ -1,5 +1,12 @@
 # Change Log
 
+## dev/2 - 5/4/2025
+
+- added script and local route to generate og images for projects
+- minor fixes and reseed some parts of the database
+- minor accessibility, and performance improvements
+- added special route to copy redirects to root
+
 ## dev/1 - 5/4/2025
 
 - added custom error pages

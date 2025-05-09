@@ -4,6 +4,8 @@ create table public.fsk_prj_cat (
   cat_description text not null,
   created_at timestamp without time zone null default now(),
   updated_at timestamp without time zone null default now(),
+  slug text not null,
   constraint fsk_prj_cat_pkey primary key (id),
+  constraint fsk_prj_cat_slug_key unique (slug),
   constraint fsk_prj_cat_id_check1 check ((id > 0))
 ) TABLESPACE pg_default;

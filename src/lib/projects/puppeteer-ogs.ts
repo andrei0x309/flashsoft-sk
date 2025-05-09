@@ -12,6 +12,11 @@ const generateProjectOgs = async () => {
     userDataDir = '~/.config/microsoft-edge-dev';
   }
 
+  const allProjectsPage = 'http://localhost:5173/projects/ogs/';
+  const divSelector = `.project-main .card`
+  const ogFolder = './static/images/projects-ogs/'
+
+
   const options = {
     executablePath,
     headless: true,
@@ -23,38 +28,60 @@ const generateProjectOgs = async () => {
     waitForInitialPage: true
   };
   const browser = await puppeteer.launch(options);
+  
+  const page = await browser.newPage();
 
-  // const page = await browser.newPage();
+  await page.setViewport({ width: 1920, height: 1080 });
 
-  // // Set viewport size (optional)
-  // await page.setViewport({ width: 1200, height: 800 });
+  await page.goto(allProjectsPage);
 
-  // // Load the local HTML file
-  // await page.goto(`file://${htmlFilePath}`);
+  await page.waitForSelector(divSelector);
 
-  // // Wait for the div element to be available
-  // await page.waitForSelector(divSelector);
 
-  // // Get bounding box of the div element
-  // const divBoundingBox = await page.evaluate(selector => {
-  //   const element = document.querySelector(selector);
-  //   const { x, y, width, height } = element.getBoundingClientRect();
-  //   return { x, y, width, height };
-  // }, divSelector);
+  const allCards = await page.$$(divSelector);
 
-  // // Capture screenshot of the div element
-  // await page.screenshot({
-  //   path: 'div_image.png',
-  //   clip: {
-  //     x: divBoundingBox.x,
-  //     y: divBoundingBox.y,
-  //     width: divBoundingBox.width,
-  //     height: divBoundingBox.height
-  //   }
-  // });
+  const onlyForFilenames = [] as string[];
 
-  // console.log('Image captured for div:', divSelector);
+  for (const card of allCards) {
+    const divBoundingBox = await card.boundingBox();
+    const slug = await page.evaluate(
+      (element) => element?.querySelector('a.button ')?.getAttribute('href')
+      , card
+    );
 
-  // // Close the browser
-  // await browser.close();
+  if(!slug || !divBoundingBox) {
+     console.warn('Skipping card due to missing slug or bounding box:', card);
+     continue;
+  }
+
+  const onlyFileName = slug.split('/').pop()
+
+  if (!onlyFileName) {
+    console.warn('Skipping card due to missing filename in slug:', card);
+    continue;
+  }
+
+  if(onlyForFilenames.length && !onlyForFilenames.includes(onlyFileName)) {
+    console.log(`Skipping ${onlyFileName} as it is not in the list of onlyForFilenames.`);
+    continue;
+  }
+
+  await page.screenshot({
+    path: `${ogFolder}${onlyFileName}.webp`,
+    clip: {
+      x: divBoundingBox.x,
+      y: divBoundingBox.y,
+      width: divBoundingBox.width,
+      height: divBoundingBox.height
+    },
+    quality: 90,
+    type: 'webp',
+  });
+ }
+  await page.close();
+  await browser.close();
+
+  console.log('All screenshots saved successfully.');
 };
+
+generateProjectOgs();

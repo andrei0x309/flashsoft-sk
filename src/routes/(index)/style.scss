@@ -915,6 +915,10 @@ a.gitlab-button:active {
 
 // TEST
  
+.position-absolute {
+  position: absolute;
+}
+
 .ContributionCalendar-grid {
   width: max-content;
   border-collapse: separate;
@@ -983,8 +987,30 @@ a.gitlab-button:active {
 width: 94%;
 
 .position-relative {
-    position: relative;
+  position: relative;
 }
+
+.tooltip {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  background: var(--color-zinc-800);
+  border-radius: 1rem;
+  padding: 0.1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 0.9rem;
+  color: rgb(228, 153, 56);
+  z-index: 1000; 
+}
+
+.tooltip[popover] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: none;
+}
+
+
 
 .float-right {
     float: right;

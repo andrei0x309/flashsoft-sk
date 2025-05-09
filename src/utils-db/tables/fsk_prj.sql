@@ -14,8 +14,9 @@ create table public.fsk_prj (
   screen_pics jsonb null,
   og_image text null,
   youtube text null,
-  slug text null,
+  slug text not null,
   mega text null,
   constraint fsk_prj_pkey primary key (id),
+  constraint fsk_prj_slug_key unique (slug),
   constraint FK_fsk_prj_fsk_prj_cat foreign KEY (cat_id) references fsk_prj_cat (id) on update CASCADE on delete CASCADE
 ) TABLESPACE pg_default;
