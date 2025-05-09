@@ -18,11 +18,14 @@ export const load: PageServerLoad = async (rest) => {
       case 'page': {
         const page = extractPage(rest.params.rest);
 
+        const pageText = page > 1 ? ' Page ' + page : '';
+
+
         const data = await loadProjects(page);
         return appendToData(checkData(data), {
           rest: restPath,
-          pageTitle: `Projects andrei0x309 | flashsoft.eu | Page ${page}`,
-          pageDescription: 'Dev projects using React, Svelte, Deno, Node, Android etc.'
+          pageTitle: `Projects andrei0x309 | flashsoft.eu |${pageText}`,
+          pageDescription: 'Dev projects using React, Svelte, Deno, Node, Android etc.' + pageText
         });
       }
       default: {

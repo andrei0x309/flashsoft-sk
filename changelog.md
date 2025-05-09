@@ -1,6 +1,12 @@
 # Change Log
 
-## dev/2 - 5/4/2025
+## dev/2 - 5/9/2025
+
+- ensured all titles are unique on paginated pages
+- refactored the rest route for certs
+- added new entries to sitemap generation
+
+## dev/2 - 5/8/2025
 
 - added script and local route to generate og images for projects
 - minor fixes and reseed some parts of the database
