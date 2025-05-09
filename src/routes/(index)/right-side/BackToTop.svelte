@@ -52,5 +52,5 @@
   <svelte:window onscroll={handleOnScroll} />
   
   <button class={`back-to-top cursor-pointer ${hidden ? 'back-to-top-hidden': ''}`} onclick={goTop} aria-label="Back to top">
-    <img src="/images/cd-top-arrow.svg" alt="Back to top" />
+    <img src="/images/cd-top-arrow.svg" class="w-5 h-5" alt="Back to top" />
   </button>

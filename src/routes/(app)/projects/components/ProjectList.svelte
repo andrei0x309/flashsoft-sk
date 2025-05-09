@@ -3,13 +3,14 @@
   import type { ProjectData } from "@/routes/(app)/projects/types/projects";
   interface Props {
     data: ProjectData;
+    class?: string;
   }
 
-  let { data }: Props = $props();
+  let { data, class: className = '' }: Props = $props();
 
 </script>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class={`grid grid-cols-1 md:grid-cols-2 gap-4 ${className}`}>
   {#each data.res.data as project}
     <div class="card mb-6">
       <div class="row no-gutters">

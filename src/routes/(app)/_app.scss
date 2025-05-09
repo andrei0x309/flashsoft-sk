@@ -98,15 +98,16 @@ footer {
 
 }
 
+header.header {
+  margin: 0.5rem 0.7rem 1rem 0.7rem;
+}
 
 header.header,
 footer {
-  margin: 0.5rem 0.7rem 1rem 0.7rem;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   border-radius: 0.3em;
   overflow: hidden;
-  // background-color: rgb(56 27 22 / 30%);
 }
 
 header.header::before,

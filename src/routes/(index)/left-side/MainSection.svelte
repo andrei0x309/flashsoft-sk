@@ -1,7 +1,67 @@
 <script lang="ts">
 import SideMenuToggle from '../mobile/SideMenuToggle.svelte';
+import { onMount } from 'svelte';
 
 const { sideMenu, closeMenu, html } = $props<{ sideMenu: HTMLElement | undefined; closeMenu: () => void; html: string }>();
+
+
+onMount(() => {
+    if (html) {
+        const tooltips = document.querySelectorAll('tool-tip[popover="manual"]') as any as NodeListOf<HTMLElement & { showPopover: () => void; hidePopover: () => void; togglePopover: () => void; }>;
+
+tooltips.forEach(tooltip => {
+  const targetElementId = tooltip.getAttribute('for');
+
+  if (targetElementId) {
+    const targetElement = document.getElementById(targetElementId);
+
+    if (targetElement) {
+      tooltip.classList.remove('sr-only');
+      tooltip.classList.add('tooltip');
+
+
+      // Function to position and show the tooltip
+      const positionAndShowTooltip = () => {
+         const targetRect = targetElement.getBoundingClientRect();
+         const tooltipRect = tooltip.getBoundingClientRect();
+
+         const offset = 20;
+
+         const topPosition = targetRect.top - tooltipRect.height - offset + window.scrollY; // Add scrollY for correct position if page is scrolled
+         const leftPosition = targetRect.left + (targetRect.width / 2) - (tooltipRect.width / 2) + window.scrollX; // Add scrollX for correct position if page is scrolled
+         tooltip.style.top = topPosition + 'px';
+         tooltip.style.left = leftPosition + 'px';
+         tooltip.showPopover();
+      };
+
+      // Add event listeners for hover and focus
+      targetElement.addEventListener('mouseover', positionAndShowTooltip);
+      targetElement.addEventListener('focus', positionAndShowTooltip);
+
+
+      // Add event listeners to hide the tooltip
+      targetElement.addEventListener('mouseout', () => {
+        // Use the hidePopover() method to hide the linked tooltip
+        // This will trigger the CSS transition for the fade-out effect
+        tooltip.hidePopover();
+      });
+
+      targetElement.addEventListener('blur', () => {
+         tooltip.hidePopover();
+      });
+
+    } else {
+      // Log a warning if the target element specified in the 'for' attribute was not found
+      console.warn(`Tooltip target element not found for ID: ${targetElementId}`);
+    }
+  } else {
+     // Log a warning if a tooltip element is missing the 'for' attribute
+     console.warn('Tooltip element found without a "for" attribute:', tooltip);
+  }
+});
+
+    }
+});
 
 const htmlPats = html.split('|||');
 </script>

@@ -13,10 +13,12 @@ export const load: PageServerLoad = async (rest) => {
   }
 
   const catName = data?.res?.data?.[0]?.cat?.name;
+  const pageText = page > 1 ? ' Page ' + page : '';
+
 
   return appendToData(checkData(data), {
     rest: restPath,
-    pageTitle: 'Projects in category ' + catName + ' | flashsoft.eu',
-    pageDescription: 'Projects in category ' + catName +' by andrei0x309'
+    pageTitle: 'Projects in category ' + catName + ' | flashsoft.eu' + pageText,
+    pageDescription: 'Projects in category ' + catName +' by andrei0x309' + pageText
   });
 };

@@ -15,11 +15,14 @@ export const load: PageServerLoad = async (req) => {
   if(page < 1) {
     page = 1;
   }
+
+  const pageText = page > 1 ? 'Page ' + page : '';
+
   return appendToData(checkData(await loadCerts(page, true, searchTerms)), {
     rest: restPath,
     searchInput: searchTerms.join(' '),
-    pageTitle: 'Searching cert for ' + searchTerms.join(' ').substring(0, 20) + '...',
-    pageDescription: 'Searching cert for ' + searchTerms.join(' ').substring(0, 170) + '...'
+    pageTitle: 'Searching cert for ' + searchTerms.join(' ').substring(0, 20) + '...' + pageText,
+    pageDescription: 'Searching cert for ' + searchTerms.join(' ').substring(0, 170) + '...' + pageText
   });
 
 };
