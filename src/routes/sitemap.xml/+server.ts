@@ -11,9 +11,9 @@ export const GET: RequestHandler = async () => {
 		${(await generatePaths())
       .map(
         (page) => `<url>
-			<loc>${website}/${page.url}</loc>
+			<loc>${website}/${page.url?.replace('&', '&amp;')}</loc>
 			<changefreq>monthly</changefreq>
-			<priority>${page.priority ?? 0.5}</priority>
+			<priority>${page.priority ?? '0.5'}</priority>
 		  </url>`
       )
       .join('')}
