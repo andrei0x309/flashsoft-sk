@@ -35,13 +35,7 @@ const prepareHtml = (html: string) => {
 const updateContributions = async () => {
   let html = await (await fetch('https://github.com/users/andrei0x309/contributions')).text();
   const updated_at = new Date().toISOString();
-  // console.log('-------------------------------------------------');
-  // console.log(html);
-  // console.log('-------------------------------------------------');
-
   html = prepareHtml(html);
-  if(html === '') {}
-  // await supabase.from('fsk_github_contributions').upsert([{ id: 1, html, updated_at }]);
   return { html, updated_at };
 };
 
@@ -55,9 +49,9 @@ export const load: PageServerLoad = async () => {
       ({ html, updated_at } = await updateContributions());
     }
     setTimeout(async () => {
-      // if (Date.now() - new Date(updated_at).getTime() > 1000 * 60 * 60 * 6) {
+      if (Date.now() - new Date(updated_at).getTime() > 1000 * 60 * 60 * 6) {
         await updateContributions();
-      // }
+      }
     }, 100);
     return {
       html
