@@ -9,14 +9,14 @@ export const generatePaths = async () => {
   // Front page
   paths.push({
     url: '/',
-    priority: 1,
+    priority: '1.0',
     changefreq: 'weekly'
   });
 
   // Cert
   paths.push({
     url: CERT_PATH,
-    priority: 0.7
+    priority: '0.7',
   });
 
   // Single
@@ -24,7 +24,7 @@ export const generatePaths = async () => {
   for (const cert of data ?? []) {
     paths.push({
       url: `${CERT_PATH}/view/${cert.cert_slug}`,
-      priority: 0.6
+      priority: '0.6',
     });
   }
   // Default pages
@@ -33,7 +33,7 @@ export const generatePaths = async () => {
   for (let i = 1; i <= page; i++) {
     paths.push({
       url: `${CERT_PATH}/page/${i}`,
-      priority: 0.5
+      priority: '0.5'
     });
   }
   // Top 3 tags
@@ -68,7 +68,7 @@ export const generatePaths = async () => {
     for (let i = 1; i <= page; i++) {
       paths.push({
         url: `${CERT_PATH}/filter/tags/${tag.tag_id}/tags/page/${i}`,
-        priority: 0.5
+        priority: '0.5'
       });
     }
   }
@@ -76,7 +76,7 @@ export const generatePaths = async () => {
   // Projects
   paths.push({
     url: PROJECT_PATH,
-    priority: 0.8
+    priority: '0.9'
   });
   // Single
   const { data: projectData } = await supabase.from('fsk_prj').select('id, title, slug');
@@ -84,7 +84,7 @@ export const generatePaths = async () => {
   for (const project of projectData ?? []) {
     paths.push({
       url: `${PROJECT_PATH}/view/${project.slug}`,
-      priority: 0.7
+      priority: '0.8'
     });
   }
 
@@ -93,7 +93,7 @@ export const generatePaths = async () => {
   for (const category of categories ?? []) {
     paths.push({
       url: `${PROJECT_PATH}/category/${category.slug}`,
-      priority: 0.6
+      priority: '0.7'
     });
   }
 
@@ -102,7 +102,7 @@ export const generatePaths = async () => {
   for (const tech of techs ?? []) {
     paths.push({
       url: `${PROJECT_PATH}/technology/${tech.slug}`,
-      priority: 0.5
+      priority: '0.6'
     });
   }
 
@@ -113,7 +113,7 @@ export const generatePaths = async () => {
   for (let i = 1; i <= page; i++) {
     paths.push({
       url: `${PROJECT_PATH}/page/${i}`,
-      priority: 0.4
+      priority: '0.5'
     });
   }
 

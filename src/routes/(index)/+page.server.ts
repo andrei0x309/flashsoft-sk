@@ -1,30 +1,34 @@
 import type { PageServerLoad } from './$types';
 import { supabase } from '@/lib/db-client/supaClientFS';
 import { error } from '@sveltejs/kit';
+import * as cheerio from 'cheerio';
 
+ 
 const prepareHtml = (html: string) => {
   let graph = '';
   let activity = '';
-  const parsedHtml = html
-    .replace(/<div[^>]+Box-header Box-header--blue.*?(<div class="js-calendar-graph)/gms, '$1') // remove potential github ADS
-    .replace(/<div class="js-activity-overview-graph-container.*?<\/div>/gms, '') // remove activity graph
-    .replace(/<details.*?<\/details>/gms, '') // remove details
-    .replace(/<svg.*?js-calendar-graph-svg.*?>/gms, '<svg class="js-calendar-graph-svg" width="99%" viewBox="0 0 717 112">') // make svg responsive
-    .replace(/<div class="float-left.*?<\/div>/gms, '') // remove float left
-    .replace(/height: 10px/gms, 'height: 0.8vw') // increase height of graph
-    .replace(/width: 10px/gms, 'width: 0.8vw') // increase width of graph
-    .replace(/<a/gms, '<a rel="noopener noreferrer external" ') // indicate to sveltekit to not preload external links
-    .replace(/href="\//gms, 'href="https://github.com/'); // fix links
+  const githubHtml =  cheerio.load(html);
+  const githubGraph = githubHtml('.graph-before-activity-overview');
+  const githubActivity = githubHtml('#user-activity-overview');
 
-  const capPattern = /<div class="col-12 col-lg-6 d-flex flex-column pr-lg-5">.*?<\/div>.*?<\/div>.*?<\/div>/gms;
+  if (githubGraph.length > 0) {
+    // remove 'How we count contributions
+    githubGraph.find('.Link--muted').remove();
+    // add h2
+    githubHtml('h2').prependTo(githubGraph);
 
-  const captureActivity = parsedHtml.match(capPattern);
-  if (captureActivity) {
-    graph = parsedHtml.replace(capPattern, '');
-    if (captureActivity[0]) {
-      activity = captureActivity[0];
-    }
+    graph = githubGraph.html() as string;
+  } else {
+    return '';
   }
+  
+  if(githubActivity.length > 0) {
+    // remove . js-activity-overview-graph-container
+    githubActivity.find('.js-activity-overview-graph-container').remove();
+    activity = githubActivity.html() as string;
+  }
+
+  
   return activity ? `${graph}|||${activity}` : graph;
 };
 
@@ -32,7 +36,6 @@ const updateContributions = async () => {
   let html = await (await fetch('https://github.com/users/andrei0x309/contributions')).text();
   const updated_at = new Date().toISOString();
   html = prepareHtml(html);
-  await supabase.from('fsk_github_contributions').upsert([{ id: 1, html, updated_at }]);
   return { html, updated_at };
 };
 

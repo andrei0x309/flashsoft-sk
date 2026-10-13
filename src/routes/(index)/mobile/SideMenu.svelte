@@ -1,7 +1,7 @@
 <script lang="ts">
 import TipIcon from '../icons/TipIcon.svelte';
 
-import ScoutIcon from '../icons/ScoutIcon.svelte';
+import DailyDev from '../icons/DailyDev.svelte';
 
 let { sideMenu = $bindable(), closeMenu } = $props<{ sideMenu: HTMLElement | undefined; closeMenu: () => void }>();
 let close: HTMLElement | undefined; // document.getElementById('menu-close');
@@ -75,8 +75,8 @@ let close: HTMLElement | undefined; // document.getElementById('menu-close');
                 <a
                     rel="noopener noreferrer external"
                     class="text-gray-200 p-2 inline-block"
-                    href="https://scoutgame.xyz/u/andrei0x309"
-                    target="_blank">BuilderScout<i class="text-custom-v"><ScoutIcon class="w-6 h-6 inline relative top-[-0.2rem] left-[0.2rem]"/></i></a
+                    href="https://dly.to/QKvBAn2vMgs"
+                    target="_blank">DailyDev <i class="text-custom-v"><DailyDev class="w-6 h-6 inline relative top-[-0.2rem] left-[0.2rem]"/></i></a
                 >
             </li>
         </ul>

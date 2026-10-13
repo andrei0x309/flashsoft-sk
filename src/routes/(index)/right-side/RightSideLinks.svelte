@@ -1,5 +1,5 @@
 <script lang="ts">
-import ScoutIcon from '../icons/ScoutIcon.svelte';
+import DailyDevIcon from '../icons/DailyDev.svelte';
 </script>
 
 <div class="rs-slc inline-block ml-p10 mt-p10">
@@ -19,8 +19,8 @@ import ScoutIcon from '../icons/ScoutIcon.svelte';
         <li class="relative">
             <a
                 rel="noopener noreferrer external"
-                href="https://scoutgame.xyz/u/andrei0x309"
-                target="_blank">BuilderScout <i class="rs-slc-nonactive"><ScoutIcon class="w-6 h-6 inline relative top-[-0.2rem]"/></i></a
+                href="https://dly.to/QKvBAn2vMgs"
+                target="_blank">DailyDev <i class="rs-slc-nonactive"><DailyDevIcon class="w-6 h-6 inline relative top-[-0.2rem] text-white"/></i></a
             >
         </li>
     </ul>
@@ -44,7 +44,7 @@ import ScoutIcon from '../icons/ScoutIcon.svelte';
         <li class="relative">
             <a
                 rel="noopener nofollow noreferrer external"
-                href="https://pinterest.com/andrei0x309/"
+                href="https://www.reddit.com/user/andrei0x309"
                 target="_blank">Reddit <i class="icon-reddit rs-slc-nonactive"></i></a
             >
         </li>

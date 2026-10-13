@@ -18,7 +18,7 @@ export const submitNewUrls = async () => {
   const paths = await generatePaths();
   // make sure paths are less then 10k
   const urlSets = [] as string[][];
-  const urls = paths.map((path) => path.url);
+  const urls = paths.map((path) => `https://${config.hostname}/${path.url}`);
   if (urls.length > 10000) {
     do {
       urlSets.push(urls.splice(0, 10000));
