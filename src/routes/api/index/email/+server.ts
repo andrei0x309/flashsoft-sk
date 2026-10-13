@@ -76,6 +76,7 @@ export const POST: RequestHandler = async ({ request }) => {
       });
 
       if (response.status !== 200) {
+        console.error('Error getting auth token', await response.text());
         return json({ error: 'Error Getting Auth Token' }, { status: 500 });
       }
 
