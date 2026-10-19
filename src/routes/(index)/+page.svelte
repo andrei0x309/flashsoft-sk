@@ -23,7 +23,7 @@ const closeMenu = () => {
   sideMenu?.classList.remove('sideMenuToggle');
 };
 
-let { data } = $props<{ data: { html: string } }>();
+let { data }: { data: { html: string } } = $props();
 
 const html = data?.html;
 </script>
