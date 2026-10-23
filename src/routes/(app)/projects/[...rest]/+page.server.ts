@@ -1,6 +1,6 @@
-import type { PageServerLoad } from './$types';
-import { checkData, extractPage, error, appendToData } from '@/lib/utils/page';
 import { loadProjects } from '@/lib/projects/projects';
+import { appendToData, checkData, error, extractPage } from '@/lib/utils/page';
+import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async (rest) => {
   const restPath = '/projects' + (rest.params?.rest ? `/${rest.params.rest}` : '');
@@ -19,7 +19,6 @@ export const load: PageServerLoad = async (rest) => {
         const page = extractPage(rest.params.rest);
 
         const pageText = page > 1 ? ' Page ' + page : '';
-
 
         const data = await loadProjects(page);
         return appendToData(checkData(data), {

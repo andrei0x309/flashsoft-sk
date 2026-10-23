@@ -1,39 +1,37 @@
 <script lang="ts">
-    import '@/routes/(app)/cert.scss';
-    import { afterNavigate, beforeNavigate } from '$app/navigation';
-    import Header from '@/routes/(app)/components/Header.svelte';
-    import CertFilter from '@/routes/(app)/certs/components/CertFilter.svelte';
-    import CertSearch from '@/routes/(app)/certs/components/CertSearch.svelte';
-    import CertList from '@/routes/(app)/certs/components/CertList.svelte';
-    import { page as SveltePage } from '$app/state';
-    import { config } from '@/lib/config/config';
-    import type { CertData } from '@/routes/(app)/certs/types/cert'
-    import { onMount } from 'svelte';
-    
-    interface Props {
-      data: CertData;
-    }
-    
-    let { data }: Props = $props();
-    let isLoading = $state(false);
-    
-    let pagKey = $state(0);
-    beforeNavigate(() => {
-        isLoading = true;
-    });
-    
-    afterNavigate(() => {
-      pagKey = pagKey + 1;
-      isLoading = false;
-    });
+import '@/routes/(app)/cert.scss';
+import { afterNavigate, beforeNavigate } from '$app/navigation';
+import { page as SveltePage } from '$app/state';
+import { config } from '@/lib/config/config';
+import CertFilter from '@/routes/(app)/certs/components/CertFilter.svelte';
+import CertList from '@/routes/(app)/certs/components/CertList.svelte';
+import CertSearch from '@/routes/(app)/certs/components/CertSearch.svelte';
+import type { CertData } from '@/routes/(app)/certs/types/cert';
+import Header from '@/routes/(app)/components/Header.svelte';
+import { onMount } from 'svelte';
 
-    onMount(() => {
-        isLoading = false;
-    })
-    
+interface Props {
+  data: CertData;
+}
 
-    const pageUrl = SveltePage.url.href.replace('http://', 'https://');
-    
+let { data }: Props = $props();
+let isLoading = $state(false);
+
+let pagKey = $state(0);
+beforeNavigate(() => {
+  isLoading = true;
+});
+
+afterNavigate(() => {
+  pagKey = pagKey + 1;
+  isLoading = false;
+});
+
+onMount(() => {
+  isLoading = false;
+});
+
+const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 </script>
 
 

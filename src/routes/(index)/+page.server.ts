@@ -1,13 +1,12 @@
-import type { PageServerLoad } from './$types';
 import { supabase } from '@/lib/db-client/supaClientFS';
 import { error } from '@sveltejs/kit';
 import * as cheerio from 'cheerio';
+import type { PageServerLoad } from './$types';
 
- 
 const prepareHtml = (html: string) => {
   let graph = '';
   let activity = '';
-  const githubHtml =  cheerio.load(html);
+  const githubHtml = cheerio.load(html);
   const githubGraph = githubHtml('.graph-before-activity-overview');
   const githubActivity = githubHtml('#user-activity-overview');
 
@@ -21,14 +20,13 @@ const prepareHtml = (html: string) => {
   } else {
     return '';
   }
-  
-  if(githubActivity.length > 0) {
+
+  if (githubActivity.length > 0) {
     // remove . js-activity-overview-graph-container
     githubActivity.find('.js-activity-overview-graph-container').remove();
     activity = githubActivity.html() as string;
   }
 
-  
   return activity ? `${graph}|||${activity}` : graph;
 };
 

@@ -1,8 +1,8 @@
 <script lang="ts">
-import AlertEmail from './AlertEmail.svelte';
-import { onMount } from 'svelte';
-import Lazy from '@/components/Lazy.svelte';
 import { browser } from '$app/environment';
+import Lazy from '@/components/Lazy.svelte';
+import { onMount } from 'svelte';
+import AlertEmail from './AlertEmail.svelte';
 
 let email: string = $state('');
 let name: string = $state('');
@@ -132,14 +132,12 @@ const renderCaptcha = () => {
 // }
 
 const initCaptcha = () => {
-  if((window as any).capMount) {
+  if ((window as any).capMount) {
     (window as any).capMount();
   }
-}
+};
 
-onMount(() => {
- 
-});
+onMount(() => {});
 </script>
 
 <section id="section-contact">

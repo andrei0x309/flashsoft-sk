@@ -1,5 +1,5 @@
+import { appendToData, makeTitle } from '@/lib/utils/common';
 import { error } from '@sveltejs/kit';
-import { makeTitle, appendToData } from '@/lib/utils/common';
 
 export const checkData = (data: unknown): Record<string, unknown> => {
   if (!data) {

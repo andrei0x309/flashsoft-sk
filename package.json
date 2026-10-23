@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",
-  
+
     "cheerio": "^1.2.0"
   },
   "removedDependencies": {

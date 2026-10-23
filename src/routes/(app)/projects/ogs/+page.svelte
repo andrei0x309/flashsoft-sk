@@ -1,42 +1,41 @@
 <script lang="ts">
-    import '@/routes/(app)/projects.scss';
-    import Header from '@/routes/(app)/components/Header.svelte';
-    import { afterNavigate, beforeNavigate } from '$app/navigation';
-    import { page as SveltePage } from '$app/state';
-    import { config } from '@/lib/config/config';
-    import ProjectList from '@/routes/(app)/projects/components/ProjectList.svelte';
-    import GoBack from '@/routes/(app)/components/GoBack.svelte';
-    import type { ProjectDataPage } from '@/routes/(app)/projects/types/projects'
-    import { onMount } from "svelte";
-    
-    
-    interface Props {
-      data: ProjectDataPage;
-    }
-    
-    let { data }: Props = $props();
-    let showSpinner = $state(false);
-    
-    beforeNavigate(() => {
-      showSpinner = true;
-    });
-    
-    afterNavigate(() => {
-      showSpinner = false;
-    });
-    
-    let page: number = $state(0);
-    
-    $effect(() => {
-      page = data.res.page;
-    });
-    
-    onMount(() => {
-        showSpinner = false;
-    })
-    
-    const pageUrl = SveltePage.url.href.replace('http://', 'https://');
-    </script>
+import '@/routes/(app)/projects.scss';
+import { afterNavigate, beforeNavigate } from '$app/navigation';
+import { page as SveltePage } from '$app/state';
+import { config } from '@/lib/config/config';
+import GoBack from '@/routes/(app)/components/GoBack.svelte';
+import Header from '@/routes/(app)/components/Header.svelte';
+import ProjectList from '@/routes/(app)/projects/components/ProjectList.svelte';
+import type { ProjectDataPage } from '@/routes/(app)/projects/types/projects';
+import { onMount } from 'svelte';
+
+interface Props {
+  data: ProjectDataPage;
+}
+
+let { data }: Props = $props();
+let showSpinner = $state(false);
+
+beforeNavigate(() => {
+  showSpinner = true;
+});
+
+afterNavigate(() => {
+  showSpinner = false;
+});
+
+let page: number = $state(0);
+
+$effect(() => {
+  page = data.res.page;
+});
+
+onMount(() => {
+  showSpinner = false;
+});
+
+const pageUrl = SveltePage.url.href.replace('http://', 'https://');
+</script>
     
     <svelte:head>
         <title>{data.pageTitle}</title>

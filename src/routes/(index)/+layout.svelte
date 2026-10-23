@@ -7,7 +7,6 @@ interface Props {
 }
 
 let { children }: Props = $props();
-
 </script>
 
 <svelte:head>

@@ -11,7 +11,7 @@
     "strict": true,
     "lib": ["esnext", "webworker"],
     "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "Bundler"
   }
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
   //

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Status from './Status.svelte';
+import Status from './Status.svelte';
 </script>
 
 <footer class="left-side-footer">

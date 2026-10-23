@@ -1,24 +1,22 @@
 <script lang="ts">
-   
-    interface Props {
-        backRoute: string;
-        rel?: string;
-        text?: string;
-        class?: string;
-    }
+interface Props {
+  backRoute: string;
+  rel?: string;
+  text?: string;
+  class?: string;
+}
 
-     let {  backRoute, rel, text, class: className = '' }: Props = $props();
+let { backRoute, rel, text, class: className = '' }: Props = $props();
 
-     if (rel === undefined) {
-        rel = '';
-     }
-     if (text === undefined) {
-        text = 'Go back';
-     }
-     if (backRoute === undefined) {
-        backRoute = '/';
-     }
-
+if (rel === undefined) {
+  rel = '';
+}
+if (text === undefined) {
+  text = 'Go back';
+}
+if (backRoute === undefined) {
+  backRoute = '/';
+}
 </script>
   
   <a class={`inline hover:font-bold group ${className}`} href={backRoute} rel={rel}>

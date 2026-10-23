@@ -1,5 +1,5 @@
-import type { RequestHandler } from './$types';
 import { renderRobots } from '$lib/utils/server/robots';
+import type { RequestHandler } from './$types';
 export const prerender = true;
 
 export const GET: RequestHandler = async () => {

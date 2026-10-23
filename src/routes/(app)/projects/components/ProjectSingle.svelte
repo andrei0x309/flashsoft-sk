@@ -1,12 +1,12 @@
 <script lang="ts">
+import { browser } from '$app/environment';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
+import { getPrjFeatureImage } from '@/lib/utils/common';
+import type { ProjectData } from '@/routes/(app)/projects/types/projects';
 import { projectBackRoute } from '@/stores/client-route';
 import { onMount } from 'svelte';
-import { getPrjFeatureImage } from '@/lib/utils/common';
 import { Lightbox } from 'svelte-lightbox';
-import { browser } from '$app/environment';
 import MegaEmbed from './MegaEmbed.svelte';
-import type { ProjectData } from '@/routes/(app)/projects/types/projects';
 
 let backRoute: string = $state('');
 

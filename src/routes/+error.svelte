@@ -1,28 +1,26 @@
 <script lang="ts">
-     import "@/routes/tailwind.css";
-     import '@/routes/_global.scss';
-     import { page as SveltePage  } from '$app/state';
-     import {config} from '@/lib/config/config'
-     
+import '@/routes/tailwind.css';
+import '@/routes/_global.scss';
+import { page as SveltePage } from '$app/state';
+import { config } from '@/lib/config/config';
 
-    interface Props {
-        data: any;
-    }
+interface Props {
+  data: any;
+}
 
-    let { data = $bindable() }: Props = $props();
-    const sidebarData = data?.sidebarData
+let { data = $bindable() }: Props = $props();
+const sidebarData = data?.sidebarData;
 
-    let featureImage = $state('')
-    try{
-        featureImage = (new URL(data?.res?.feature_image)).href
-    } catch {
-        featureImage = ''
-    }
+let featureImage = $state('');
+try {
+  featureImage = new URL(data?.res?.feature_image).href;
+} catch {
+  featureImage = '';
+}
 
-    const errorMsg = SveltePage?.error?.message || 'Unknown reason'
-    const errorStatus = SveltePage?.status || '500'
-    data.pageTitle = 'Error ' + errorStatus + ' - ' + errorMsg
-    
+const errorMsg = SveltePage?.error?.message || 'Unknown reason';
+const errorStatus = SveltePage?.status || '500';
+data.pageTitle = 'Error ' + errorStatus + ' - ' + errorMsg;
 </script>
 
 <svelte:head>

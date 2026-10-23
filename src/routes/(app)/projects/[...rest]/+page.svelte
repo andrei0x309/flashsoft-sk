@@ -1,13 +1,13 @@
 <script lang="ts">
 import '@/routes/(app)/projects.scss';
-import Header from '@/routes/(app)/components/Header.svelte';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
 import { page as SveltePage } from '$app/state';
 import { config } from '@/lib/config/config';
-import ProjectList from '../components/ProjectList.svelte';
+import Header from '@/routes/(app)/components/Header.svelte';
+import type { ProjectDataPage } from '@/routes/(app)/projects/types/projects';
+import { onMount } from 'svelte';
 import Pagination from '../components/Pagination.svelte';
-import { onMount } from "svelte";
-import type { ProjectDataPage } from '@/routes/(app)/projects/types/projects'
+import ProjectList from '../components/ProjectList.svelte';
 
 interface Props {
   data: ProjectDataPage;
@@ -31,8 +31,8 @@ $effect(() => {
 });
 
 onMount(() => {
-	showSpinner = false;
-})
+  showSpinner = false;
+});
 
 const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 </script>

@@ -1,18 +1,18 @@
-import type { PageServerLoad } from './$types';
-import { checkData, extractPage, error, appendToData } from '@/lib/utils/page';
 import { loadCerts } from '@/lib/certs/certs';
+import { appendToData, checkData, error, extractPage } from '@/lib/utils/page';
+import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async (req) => {
-  let restPath = '/certs/search'
+  let restPath = '/certs/search';
   const searchTerms = req.url.searchParams.getAll('q');
-  restPath += '?q=' + searchTerms.join(' ')
+  restPath += '?q=' + searchTerms.join(' ');
   let page = Number(req.params.num) || 1;
 
-  if(req.params.num) {
-    restPath += '/page/' + page
+  if (req.params.num) {
+    restPath += '/page/' + page;
   }
-  
-  if(page < 1) {
+
+  if (page < 1) {
     page = 1;
   }
 
@@ -24,5 +24,4 @@ export const load: PageServerLoad = async (req) => {
     pageTitle: 'Searching cert for ' + searchTerms.join(' ').substring(0, 20) + '...' + pageText,
     pageDescription: 'Searching cert for ' + searchTerms.join(' ').substring(0, 170) + '...' + pageText
   });
-
 };

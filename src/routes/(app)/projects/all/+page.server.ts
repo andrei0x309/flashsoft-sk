@@ -1,12 +1,12 @@
-import type { PageServerLoad } from './$types';
-import { checkData, error, appendToData } from '@/lib/utils/page';
 import { loadAllProjects } from '@/lib/projects/projects';
+import { appendToData, checkData, error } from '@/lib/utils/page';
+import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
   const restPath = '/projects/all';
   const data = await loadAllProjects();
 
-  if(data?.res?.error) {
+  if (data?.res?.error) {
     return error(404);
   }
 

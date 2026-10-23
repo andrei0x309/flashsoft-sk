@@ -1,6 +1,6 @@
 export const prerender = true;
-import type { RequestHandler } from './$types';
 import { generatePaths } from '@/lib/sitemap/index';
+import type { RequestHandler } from './$types';
 
 const website = 'https://flashsoft.eu';
 

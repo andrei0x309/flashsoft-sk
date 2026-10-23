@@ -1,27 +1,27 @@
 <script lang="ts">
-    export let showOnPx = 250;
-    let hidden = true;
-  
-    function goTop() {
-      document.body.scrollIntoView();
-    }
-  
-    function scrollContainer() {
-      return document.documentElement || document.body;
-    }
-  
-    function handleOnScroll() {
-      if (!scrollContainer()) {
-        return;
-      }
-  
-      if (scrollContainer().scrollTop > showOnPx) {
-        hidden = false;
-      } else {
-        hidden = true;
-      }
-    }
-  </script>
+export let showOnPx = 250;
+let hidden = true;
+
+function goTop() {
+  document.body.scrollIntoView();
+}
+
+function scrollContainer() {
+  return document.documentElement || document.body;
+}
+
+function handleOnScroll() {
+  if (!scrollContainer()) {
+    return;
+  }
+
+  if (scrollContainer().scrollTop > showOnPx) {
+    hidden = false;
+  } else {
+    hidden = true;
+  }
+}
+</script>
   
   <style scoped>
     .back-to-top {

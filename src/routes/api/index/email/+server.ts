@@ -1,9 +1,9 @@
-import { supabase } from '@/lib/db-client/supaClientFS';
 import { SECRET_EMAIL_ID as EMAIL_ID, SECRET_EMAIL_KEY as EMAIL_SECRET } from '$env/static/private';
+import { supabase } from '@/lib/db-client/supaClientFS';
+import { getCapChallengeConfig, getCapInstanceAndState } from '@/lib/index/cap';
 import { validateEmail } from '@/lib/utils/server/email';
-import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
-import { getCapInstanceAndState, getCapChallengeConfig } from '@/lib/index/cap';
+import type { RequestHandler } from './$types';
 
 const EMAIL_API_AUTH = 'https://api.sendpulse.com/oauth/access_token';
 const EMAIL_API_ENDPOINT = 'https://api.sendpulse.com/smtp/emails';
@@ -82,9 +82,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
       token = await response.json();
 
-      const { error } = await supabase
-        .from('fsk_email_token')
-        .upsert({ id: 1, token: JSON.stringify(token), expiration: new Date(expiration).toISOString() });
+      const { error } = await supabase.from('fsk_email_token').upsert({ id: 1, token: JSON.stringify(token), expiration: new Date(expiration).toISOString() });
       if (error) {
         console.error('Error updating token in DB', JSON.stringify(error));
       }

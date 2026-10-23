@@ -1,10 +1,9 @@
-import type { RequestHandler } from './$types';
 import fs from 'node:fs';
+import type { RequestHandler } from './$types';
 
 export const prerender = true;
 
 export const GET: RequestHandler = async () => {
- 
   const contnet = fs.readFileSync('_redirects', 'utf8');
 
   return new Response(contnet, {

@@ -5,7 +5,6 @@ interface Props {
 }
 
 let { page, totalPages }: Props = $props();
-
 </script>
 
 <div class="flex justify-center">
