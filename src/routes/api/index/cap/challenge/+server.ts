@@ -18,5 +18,5 @@ export const POST: RequestHandler = async () => {
     }
   });
 
-  return json(newState);
+  return Response.json(newState);
 };

@@ -1,6 +1,5 @@
 import crypto from 'node:crypto';
 import { getCapInstanceAndState, updateCapState } from '@/lib/index/cap';
-import { json } from '@sveltejs/kit';
 import type { RequestHandler } from '../$types';
 
 export const POST: RequestHandler = async ({ request }) => {
@@ -9,7 +8,7 @@ export const POST: RequestHandler = async ({ request }) => {
     const { token, solutions } = body;
 
     if (!token || !solutions) {
-      return json({ success: false }, { status: 400 });
+      return Response.json({ success: false }, { status: 400 });
     }
 
     const { cap, state } = await getCapInstanceAndState();
@@ -19,7 +18,7 @@ export const POST: RequestHandler = async ({ request }) => {
     const tokenSplit = result?.token?.split(':');
 
     if (!tokenSplit?.length) {
-      return json({ success: false }, { status: 400 });
+      return Response.json({ success: false }, { status: 400 });
     }
 
     const tokenHash = crypto.createHash('sha256').update(tokenSplit[1]).digest('hex');
@@ -40,9 +39,9 @@ export const POST: RequestHandler = async ({ request }) => {
       console.info('[cap] Challenge redeemed');
     }
 
-    return json(result);
+    return Response.json(result);
   } catch (e) {
     console.error(e);
-    return json({ success: false }, { status: 400 });
+    return Response.json({ success: false }, { status: 400 });
   }
 };

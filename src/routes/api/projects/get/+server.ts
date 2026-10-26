@@ -1,6 +1,5 @@
 // import { error } from '@sveltejs/kit';
 import { supabase } from '@/lib/db-client/supaClientFS';
-import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ url }) => {
@@ -31,12 +30,12 @@ export const GET: RequestHandler = async ({ url }) => {
     (res as unknown as { totalPages: number }).totalPages = (count?.count ?? 0) / 4;
 
     if (page > (res as unknown as { totalPages: number }).totalPages) {
-      return json({ error: 'Not found' }, { status: 404 });
+      return Response.json({ error: 'Not found' }, { status: 404 });
     }
 
     return json(res);
   } catch (e) {
     console.error(e);
-    return json({ error: 'Internal Server Error' }, { status: 500 });
+    return Response.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 };
