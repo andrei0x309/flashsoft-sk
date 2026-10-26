@@ -57,5 +57,9 @@
     "autoprefixer": "^10.4.20"
   },
   "type": "module",
-  "license": "MIT"
+  "license": "MIT",
+  "imports": {
+    "#lib": "./src/lib/index.js",
+    "#lib/*": "./src/lib/*"
+  }
 }

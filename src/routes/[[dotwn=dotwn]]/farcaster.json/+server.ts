@@ -1,4 +1,4 @@
-import { generateFcWellKnown } from '$lib/farcaster/mini-app';
+import { generateFcWellKnown } from '#lib/farcaster/mini-app.js';
 import type { EntryGenerator, RequestHandler } from './$types';
 
 export const entries: EntryGenerator = () => {

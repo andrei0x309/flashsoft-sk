@@ -1,6 +1,6 @@
 import { config } from './config';
 const IS_DEV_ENABLED = config.IS_DEV_ENABLED;
-import type { TriggerConfig } from '$lib/types/mini-app';
+import type { TriggerConfig } from '#lib/types/mini-app.js';
 
 export const FCConfig = {
   JFS: {

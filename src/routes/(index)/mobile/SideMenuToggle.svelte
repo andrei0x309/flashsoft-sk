@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Swipe } from '$lib/utils/swipe';
+import { Swipe } from '#lib/utils/swipe.js';
 import { onMount } from 'svelte';
 
 let { sideMenu, closeMenu } = $props();

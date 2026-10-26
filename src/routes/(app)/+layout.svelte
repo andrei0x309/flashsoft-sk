@@ -1,6 +1,6 @@
 <script lang="ts">
 import '../tailwind.css';
-import { analyticsCode } from '$lib/utils/analytics';
+import { analyticsCode } from '#lib/utils/analytics.js';
 import Status from '@/routes/(index)/left-side/Status.svelte';
 import BackToTop from '@/routes/(index)/right-side/BackToTop.svelte';
 
