@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
-  "files": { "ignoreUnknown": false, "ignore": ["build/**", ".svelte-kit", ".netlify"] },
+  "files": { "ignoreUnknown": false, "includes": ["**", "!**/build/**", "!**/.svelte-kit", "!**/.netlify"] },
   "formatter": {
     "enabled": true,
     "useEditorconfig": true,
@@ -12,31 +12,31 @@
     "lineWidth": 180,
     "attributePosition": "auto",
     "bracketSpacing": true,
-    "ignore": [
-      "**/.DS_Store",
-      "**/node_modules",
-      "./build",
-      "./.svelte-kit",
-      "./package",
-      "**/.env",
-      "**/.env.*",
-      "**/pnpm-lock.yaml",
-      "**/package-lock.json",
-      "**/yarn.lock",
-      "**/static"
+    "includes": [
+      "**",
+      "!**/.DS_Store",
+      "!**/node_modules",
+      "!build",
+      "!.svelte-kit",
+      "!package",
+      "!**/.env",
+      "!**/.env.*",
+      "!**/pnpm-lock.yaml",
+      "!**/package-lock.json",
+      "!**/yarn.lock",
+      "!**/static"
     ]
   },
-  "organizeImports": { "enabled": true },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": false,
       "complexity": {
         "noExtraBooleanCast": "error",
-        "noMultipleSpacesInRegularExpressionLiterals": "error",
         "noUselessCatch": "error",
         "noUselessTypeConstraint": "error",
-        "noWith": "error"
+        "noAdjacentSpacesInRegex": "error"
       },
       "correctness": {
         "noConstAssign": "error",
@@ -58,16 +58,17 @@
         "noUnsafeOptionalChaining": "error",
         "noUnusedLabels": "error",
         "noUnusedPrivateClassMembers": "error",
-        "noUnusedVariables": "error",
-        "useArrayLiterals": "off",
+        "noUnusedVariables": "off",
         "useIsNan": "error",
         "useValidForDirection": "error",
-        "useYield": "error"
+        "useYield": "error",
+        "useValidTypeof": "error"
       },
       "style": {
         "noNamespace": "error",
         "useAsConstAssertion": "error",
-        "useBlockStatements": "off"
+        "useBlockStatements": "off",
+        "useArrayLiterals": "off"
       },
       "suspicious": {
         "noAsyncPromiseExecutor": "error",
@@ -81,7 +82,7 @@
         "noDuplicateObjectKeys": "error",
         "noDuplicateParameters": "error",
         "noEmptyBlockStatements": "error",
-        "noExplicitAny": "error",
+        "noExplicitAny": "off",
         "noExtraNonNullAssertion": "error",
         "noFallthroughSwitchClause": "error",
         "noFunctionAssign": "error",
@@ -97,23 +98,24 @@
         "noUnsafeNegation": "error",
         "useGetterReturn": "error",
         "useNamespaceKeyword": "error",
-        "useValidTypeof": "error"
+        "noWith": "error"
       }
     },
-    "ignore": [
-      "**/*.cjs",
-      "**/.DS_Store",
-      "**/node_modules",
-      "./build",
-      "./.svelte-kit",
-      "./package",
-      "**/.env",
-      "**/.env.*",
-      "**/pnpm-lock.yaml",
-      "**/package-lock.json",
-      "**/yarn.lock",
-      "**/static",
-      "**/bun.lock"
+    "includes": [
+      "**",
+      "!**/*.cjs",
+      "!**/.DS_Store",
+      "!**/node_modules",
+      "!build",
+      "!.svelte-kit",
+      "!package",
+      "!**/.env",
+      "!**/.env.*",
+      "!**/pnpm-lock.yaml",
+      "!**/package-lock.json",
+      "!**/yarn.lock",
+      "!**/static",
+      "!**/bun.lock"
     ]
   },
   "javascript": {
@@ -128,7 +130,7 @@
       "attributePosition": "auto",
       "bracketSpacing": true
     },
-    "globals": ["__VERSION__", "__SK_VERSION__"]
+    "globals": ["__VERSION__", "__SK_VERSION__", "Bun"]
   },
-  "overrides": [{ "include": ["*.svelte"] }, { "include": ["*.svelte"] }, { "include": ["*.svelte"] }, { "include": ["*.svelte"] }]
+  "overrides": [{ "includes": ["**/*.svelte"] }, { "includes": ["**/*.svelte"] }, { "includes": ["**/*.svelte"] }, { "includes": ["**/*.svelte"] }]
 }

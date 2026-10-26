@@ -1,5 +1,5 @@
-import { loadProjectByCat } from '@/lib/projects/projects';
-import { appendToData, checkData, error } from '@/lib/utils/page';
+import { loadProjectByCat } from '#/lib/projects/projects.ts';
+import { appendToData, checkData, error } from '#/lib/utils/page.ts';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async (rest) => {

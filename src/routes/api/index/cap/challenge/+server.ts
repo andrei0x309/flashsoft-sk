@@ -1,5 +1,5 @@
-import { getCapInstanceAndState, updateCapState } from '@/lib/index/cap';
-import { getCapChallengeConfig } from '@/lib/index/cap';
+import { getCapInstanceAndState, updateCapState } from '#/lib/index/cap';
+import { getCapChallengeConfig } from '#/lib/index/cap';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from '../$types';
 

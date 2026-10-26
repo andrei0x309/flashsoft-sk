@@ -1,5 +1,5 @@
 <script lang="ts">
-import { config } from '@/lib/config/config';
+import { config } from '#/lib/config/config.ts';
 import ContactForm from './left-side/ContactForm.svelte';
 import Footer from './left-side/Footer.svelte';
 import Interests from './left-side/Interests.svelte';
@@ -25,7 +25,7 @@ const closeMenu = () => {
 
 let { data }: { data: { html: string } } = $props();
 
-const html = data?.html;
+const html = $derived(data?.html);
 </script>
 
 <svelte:head>

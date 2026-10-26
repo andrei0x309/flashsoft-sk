@@ -1,7 +1,7 @@
 <script lang="ts">
 import { browser } from '$app/env';
-import Lazy from '@/components/Lazy.svelte';
-import { onMount } from 'svelte';
+import Lazy from '#/components/Lazy.svelte';
+// import { onMount } from 'svelte';
 import AlertEmail from './AlertEmail.svelte';
 
 let email: string = $state('');
@@ -131,7 +131,6 @@ const initCaptcha = () => {
   }
 };
 
-onMount(() => {});
 </script>
 
 <section id="section-contact">

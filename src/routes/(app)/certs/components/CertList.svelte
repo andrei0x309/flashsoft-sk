@@ -1,9 +1,9 @@
 <script lang="ts">
 import { page as SveltePage } from '$app/state';
-import CertImg from '@/routes/(app)/certs/components/CertImg.svelte';
-import CertPagination from '@/routes/(app)/certs/components/CertPagination.svelte';
-import type { CertData } from '@/routes/(app)/certs/types/cert';
-import { certBackRoute } from '@/stores/client-route';
+import CertImg from '#/routes/(app)/certs/components/CertImg.svelte';
+import CertPagination from '#/routes/(app)/certs/components/CertPagination.svelte';
+import type { CertData } from '#/routes/(app)/certs/types/cert.ts';
+import { certBackRoute } from '#/stores/client-route.ts';
 
 interface Props {
   data: CertData;
@@ -12,12 +12,10 @@ interface Props {
 
 let { data, class: className = '' }: Props = $props();
 
-const certs = data?.res?.data ?? [];
-const maxPage = data?.res?.totalPages;
-const currentPage = data?.res?.page;
-const rest = data?.rest;
-
-if (!className) className = '';
+const certs = $derived(data?.res?.data ?? []);
+const maxPage = $derived(data?.res?.totalPages);
+const currentPage = $derived(data?.res?.page);
+const rest = $derived(data?.rest);
 
 const setBackRoute = () => {
   certBackRoute.set(SveltePage.url.toString());

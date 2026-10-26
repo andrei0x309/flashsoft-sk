@@ -1,9 +1,9 @@
 <script lang="ts">
 import { browser } from '$app/env';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
-import { getPrjFeatureImage } from '@/lib/utils/common';
-import type { ProjectData } from '@/routes/(app)/projects/types/projects';
-import { projectBackRoute } from '@/stores/client-route';
+import { getPrjFeatureImage } from '#/lib/utils/common.ts';
+import type { ProjectData } from '#/routes/(app)/projects/types/projects.ts';
+import { projectBackRoute } from '#/stores/client-route.ts';
 import { onMount } from 'svelte';
 import { Lightbox } from 'svelte-lightbox';
 import MegaEmbed from './MegaEmbed.svelte';
@@ -17,12 +17,12 @@ interface Props {
 }
 
 let { data }: Props = $props();
-const megaLink = data?.res?.data?.[0]?.mega;
-const youtubeLink = data?.res?.data?.[0]?.youtube || false;
-const hasMegaOrYoutube = megaLink || youtubeLink;
-const links = data?.res?.data?.[0]?.links;
-const screenPics = data?.res?.data?.[0]?.screen_pics;
-const techs = data?.res?.data?.[0]?.techs;
+const megaLink = $derived(data?.res?.data?.[0]?.mega);
+const youtubeLink = $derived(data?.res?.data?.[0]?.youtube || false);
+const hasMegaOrYoutube = $derived(megaLink || youtubeLink);
+const links = $derived(data?.res?.data?.[0]?.links);
+const screenPics = $derived(data?.res?.data?.[0]?.screen_pics);
+const techs = $derived(data?.res?.data?.[0]?.techs);
 
 beforeNavigate(({ shallow, type }) => {
   if (shallow && type === 'goto') return;

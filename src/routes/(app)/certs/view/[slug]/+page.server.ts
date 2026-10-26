@@ -1,5 +1,5 @@
-import { loadCert } from '@/lib/certs/certs';
-import { appendToData, checkData, error } from '@/lib/utils/page';
+import { loadCert } from '#/lib/certs/certs.ts';
+import { appendToData, checkData, error } from '#/lib/utils/page.ts';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async (rest) => {

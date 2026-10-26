@@ -1,4 +1,4 @@
-import { appendToData, makeTitle } from '@/lib/utils/common';
+import { appendToData, makeTitle } from '#/lib/utils/common';
 import { error } from '@sveltejs/kit';
 
 export const checkData = (data: unknown): Record<string, unknown> => {

@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/db-client/supaClientFS';
+import { supabase } from '#/lib/db-client/supaClientFS';
 import { error } from '@sveltejs/kit';
 import * as cheerio from 'cheerio';
 import type { PageServerLoad } from './$types';

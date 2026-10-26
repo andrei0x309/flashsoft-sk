@@ -1,8 +1,8 @@
 <script lang="ts">
-import '@/routes/tailwind.css';
-import '@/routes/_global.scss';
+import '#/routes/tailwind.css';
+import '#/routes/_global.scss';
 import { page as SveltePage } from '$app/state';
-import { config } from '@/lib/config/config';
+import { config } from '#/lib/config/config.ts';
 
 interface Props {
   data: any;

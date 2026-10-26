@@ -1,12 +1,12 @@
 <script lang="ts">
-import { getPrjFeatureImage } from '@/lib/utils/common';
-import type { ProjectData } from '@/routes/(app)/projects/types/projects';
+import { getPrjFeatureImage } from '#/lib/utils/common.ts';
+import type { ProjectData } from '#/routes/(app)/projects/types/projects.ts';
 interface Props {
   data: ProjectData;
   class?: string;
 }
 
-let { data, class: className = '' }: Props = $props();
+const { data, class: className = '' }: Props = $props();
 </script>
 
 <div class={`grid grid-cols-1 md:grid-cols-2 gap-4 ${className}`}>

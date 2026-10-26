@@ -2,7 +2,7 @@
 
 Svelte kit project deployed at [https://flashsoft.eu](https://flashsoft.eu).
 
-Uses Supabase, Node.js, Deno, and SvelteKit
+Uses Supabase, Bun, Netlify, and SvelteKit
 
 ## Status
 

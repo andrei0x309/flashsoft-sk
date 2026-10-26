@@ -1,5 +1,5 @@
 import crypto from 'node:crypto';
-import { getCapInstanceAndState, updateCapState } from '@/lib/index/cap';
+import { getCapInstanceAndState, updateCapState } from '#/lib/index/cap';
 import type { RequestHandler } from '../$types';
 
 export const POST: RequestHandler = async ({ request }) => {

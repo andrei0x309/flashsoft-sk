@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/db-client/supaClientFS';
+import { supabase } from '#/lib/db-client/supaClientFS';
 
 const CERT_PATH = 'certs';
 const PROJECT_PATH = 'projects';

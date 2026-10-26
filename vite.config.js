@@ -23,7 +23,6 @@ const config = {
       preprocess: [preprocess({ preserve: ['ld+json'] })],
       serviceWorker: { register: false },
       adapter: adapter({ edge: true, split: false }),
-      alias: { '@': './src' }
     })
   ]
 };

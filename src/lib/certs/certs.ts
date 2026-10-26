@@ -1,6 +1,6 @@
-import { supabase } from '@/lib/db-client/supaClientFS';
-import { optionalChain } from '@/lib/utils/index';
-import { appendToData, checkData, error, extractPage } from '@/lib/utils/page';
+import { supabase } from '#/lib/db-client/supaClientFS';
+import { optionalChain } from '#/lib/utils/index';
+import { appendToData, checkData, error, extractPage } from '#/lib/utils/page';
 
 type SupaClient = typeof supabase;
 type PostgesQueryBuilder = ReturnType<SupaClient['from']>;

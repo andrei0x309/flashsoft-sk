@@ -6,17 +6,13 @@ interface Props {
   class?: string;
 }
 
-let { backRoute, rel, text, class: className = '' }: Props = $props();
+let {
+  backRoute = '/',
+  rel = '',
+  text = 'Go back',
+  class: className = ''
+}: Props = $props();
 
-if (rel === undefined) {
-  rel = '';
-}
-if (text === undefined) {
-  text = 'Go back';
-}
-if (backRoute === undefined) {
-  backRoute = '/';
-}
 </script>
   
   <a class={`inline hover:font-bold group ${className}`} href={backRoute} rel={rel}>

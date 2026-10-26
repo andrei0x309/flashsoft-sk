@@ -6,7 +6,8 @@ interface Props {
 }
 
 let { segment, filter, search }: Props = $props();
-let logoUrl = segment === 'cert' ? '/certs' : '/projects';
+
+let logoUrl = $derived(segment === 'cert' ? '/certs' : '/projects');
 </script>
 
 <header id="app-header" class="col header">

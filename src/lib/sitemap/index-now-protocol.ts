@@ -1,5 +1,5 @@
-import { wait } from '@/lib/common/misc';
-import { config } from '@/lib/config/config';
+import { wait } from '#/lib/common/misc.ts';
+import { config } from '#/lib/config/config.ts';
 import { generatePaths } from './index';
 
 // This is safe must match the /616E647265693078333039.txt

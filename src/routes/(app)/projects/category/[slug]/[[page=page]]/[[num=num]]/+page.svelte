@@ -1,12 +1,12 @@
 <script lang="ts">
-import '@/routes/(app)/projects.scss';
+import '#/routes/(app)/projects.scss';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
 import { page as SveltePage } from '$app/state';
-import { config } from '@/lib/config/config';
-import GoBack from '@/routes/(app)/components/GoBack.svelte';
-import Header from '@/routes/(app)/components/Header.svelte';
-import ProjectList from '@/routes/(app)/projects/components/ProjectList.svelte';
-import type { ProjectDataPage } from '@/routes/(app)/projects/types/projects';
+import { config } from '#/lib/config/config.ts';
+import GoBack from '#/routes/(app)/components/GoBack.svelte';
+import Header from '#/routes/(app)/components/Header.svelte';
+import ProjectList from '#/routes/(app)/projects/components/ProjectList.svelte';
+import type { ProjectDataPage } from '#/routes/(app)/projects/types/projects.ts';
 import { onMount } from 'svelte';
 
 interface Props {
@@ -29,13 +29,10 @@ afterNavigate(({ shallow, type }) => {
 });
 
 let page: number = $state(0);
-let catName = $state(data.res.cat?.cat_name || '');
+let catName = $derived(data.res.cat?.cat_name || '');
 
 $effect(() => {
   page = data.res.page;
-  if (data.res.cat) {
-    catName = data.res.cat.cat_name;
-  }
 });
 
 onMount(() => {

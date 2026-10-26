@@ -2,7 +2,13 @@
 import { onMount } from 'svelte';
 import SideMenuToggle from '../mobile/SideMenuToggle.svelte';
 
-const { sideMenu, closeMenu, html } = $props() as { sideMenu: HTMLElement | undefined; closeMenu: () => void; html: string };
+interface Props {
+  sideMenu: HTMLElement | undefined;
+  closeMenu: () => void;
+  html: string;
+}
+
+let { sideMenu, closeMenu, html } : Props = $props();
 
 onMount(() => {
   if (html) {
@@ -60,7 +66,7 @@ onMount(() => {
   }
 });
 
-const htmlPats = html.split('|||');
+const htmlPats = $derived(html.split('|||'));
 </script>
 
 <section id="section-projects">

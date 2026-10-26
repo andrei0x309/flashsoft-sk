@@ -1,8 +1,8 @@
 <script lang="ts">
-import CertImg from '@/routes/(app)/certs/components/CertImg.svelte';
-import type { CertData } from '@/routes/(app)/certs/types/cert';
-import GoBack from '@/routes/(app)/components/GoBack.svelte';
-import { certBackRoute } from '@/stores/client-route';
+import CertImg from '#/routes/(app)/certs/components/CertImg.svelte';
+import type { CertData } from '#/routes/(app)/certs/types/cert.ts';
+import GoBack from '#/routes/(app)/components/GoBack.svelte';
+import { certBackRoute } from '#/stores/client-route.ts';
 import { onMount } from 'svelte';
 
 let backRoute: string = $state('');
@@ -21,7 +21,7 @@ onMount(() => {
   });
 });
 
-const cert = data.res?.data?.[0];
+const cert = $derived(data.res?.data?.[0]);
 </script>
 
 <div class="{`text-center md:mx-4 mb-2 flex ${classname}`}">

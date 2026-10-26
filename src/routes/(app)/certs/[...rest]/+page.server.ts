@@ -1,5 +1,5 @@
-import { loadCert, loadCerts, loadFilteredCerts } from '@/lib/certs/certs';
-import { appendToData, checkData, error, extractPage } from '@/lib/utils/page';
+import { loadCert, loadCerts, loadFilteredCerts } from '#/lib/certs/certs.ts';
+import { appendToData, checkData, error, extractPage } from '#/lib/utils/page.ts';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async (rest) => {
@@ -12,7 +12,7 @@ export const load: PageServerLoad = async (rest) => {
     return appendToData(checkData(data), {
       rest: restPath,
       pageTitle: 'Courses and Certs | flashsoft.eu',
-      pageDescription: 'Courses and Certs from Linkedin, PluralSight, Udemy, Udacity, Coursera, Edx, etc.'
+      pageDescription: 'Courses and Certs from Linkedin, PluralSight, Udemy, Udacity, Coursera, Edx, Google, Microsoft, FCC.'
     });
   } else {
     const params = rest.params.rest.split('/');

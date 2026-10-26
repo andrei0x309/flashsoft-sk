@@ -1,5 +1,5 @@
 // import { error } from '@sveltejs/kit';
-import { supabase } from '@/lib/db-client/supaClientFS';
+import { supabase } from '#/lib/db-client/supaClientFS.ts';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ url }) => {
@@ -33,7 +33,7 @@ export const GET: RequestHandler = async ({ url }) => {
       return Response.json({ error: 'Not found' }, { status: 404 });
     }
 
-    return json(res);
+    return Response.json(res);
   } catch (e) {
     console.error(e);
     return Response.json({ error: 'Internal Server Error' }, { status: 500 });

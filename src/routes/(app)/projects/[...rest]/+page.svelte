@@ -1,10 +1,10 @@
 <script lang="ts">
-import '@/routes/(app)/projects.scss';
+import '#/routes/(app)/projects.scss';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
 import { page as SveltePage } from '$app/state';
-import { config } from '@/lib/config/config';
-import Header from '@/routes/(app)/components/Header.svelte';
-import type { ProjectDataPage } from '@/routes/(app)/projects/types/projects';
+import { config } from '#/lib/config/config.ts';
+import Header from '#/routes/(app)/components/Header.svelte';
+import type { ProjectDataPage } from '#/routes/(app)/projects/types/projects.ts';
 import { onMount } from 'svelte';
 import Pagination from '../components/Pagination.svelte';
 import ProjectList from '../components/ProjectList.svelte';
@@ -13,7 +13,7 @@ interface Props {
   data: ProjectDataPage;
 }
 
-let { data }: Props = $props();
+const { data }: Props = $props();
 let showSpinner = $state(false);
 
 beforeNavigate(({ shallow, type }) => {

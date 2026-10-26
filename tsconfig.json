@@ -5,7 +5,8 @@
     "strict": true,
     "lib": ["esnext", "webworker"],
     "module": "ESNext",
-    "moduleResolution": "Bundler"
+    "moduleResolution": "Bundler",
+    "types": ["bun", "node", "$app/types"]
   },
   "include": ["src", "vite.config.js", "playwright.config.ts", "tests"]
 }

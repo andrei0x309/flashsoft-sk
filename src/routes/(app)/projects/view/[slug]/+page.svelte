@@ -1,10 +1,10 @@
 <script lang="ts">
-import '@/routes/(app)/projects.scss';
+import '#/routes/(app)/projects.scss';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
 import { page as SveltePage } from '$app/state';
-import Header from '@/routes/(app)/components/Header.svelte';
-import ProjectSingle from '@/routes/(app)/projects/components/ProjectSingle.svelte';
-import type { ProjectDataPage } from '@/routes/(app)/projects/types/projects';
+import Header from '#/routes/(app)/components/Header.svelte';
+import ProjectSingle from '#/routes/(app)/projects/components/ProjectSingle.svelte';
+import type { ProjectDataPage } from '#/routes/(app)/projects/types/projects.ts';
 import { onMount } from 'svelte';
 
 interface Props {

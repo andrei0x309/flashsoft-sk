@@ -60,6 +60,7 @@ async function crawlDirectory(relativePath: string): Promise<string[]> {
   return filePaths;
 }
 
+
 const megaSyncFolder = async () => {
   const cmd = [];
   cmd.push('sync');
