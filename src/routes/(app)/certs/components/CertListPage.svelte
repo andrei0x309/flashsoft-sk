@@ -18,11 +18,16 @@ let { data }: Props = $props();
 let isLoading = $state(false);
 
 let pagKey = $state(0);
-beforeNavigate(() => {
+
+beforeNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   isLoading = true;
 });
 
-afterNavigate(() => {
+afterNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   pagKey = pagKey + 1;
   isLoading = false;
 });
@@ -36,20 +41,25 @@ const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 
 
 <svelte:head>
-<title>{ data.pageTitle }</title>
-<meta name="description" content="{data.pageDescription}">
-<meta property="og:title" content="{data.pageTitle}" />
-<meta property="og:description" content="{data.pageDescription}">
-<meta property="og:type" content="website" />
-<meta property="og:url" content={pageUrl} />
+  <title>{data.pageTitle}</title>
+  <meta name="description" content={data.pageDescription} />
+  <meta property="og:title" content={data.pageTitle} />
+
+  <meta
+    property="og:description"
+    content={data.pageDescription}
+  />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={pageUrl} />
 <meta property="og:image" content={config.defaultOpenGraphImageCerts} />
 
-{#if (data?.res?.page ?? 1) > 1}
+  {#if (data?.res?.page ?? 1) > 1}
 <link rel="prev" href="/{data?.rest}/page/{(data?.res?.page ?? 1) - 1}" />
-{/if}
-{#if (data?.res?.page ?? 1) < data.res?.totalPages}
+  {/if}
+  {#if (data?.res?.page ?? 1) < data.res?.totalPages}
 <link rel="next" href="/{data?.rest}/page/{(data?.res?.page ?? 1) + 1}" />
-{/if}
+  {/if}
 </svelte:head>
 
 <Header segment="cert">

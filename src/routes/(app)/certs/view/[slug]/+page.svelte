@@ -17,11 +17,15 @@ interface Props {
 let { data }: Props = $props();
 let isLoading = $state(false);
 
-beforeNavigate(() => {
+beforeNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   isLoading = true;
 });
 
-afterNavigate(() => {
+afterNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   isLoading = false;
 });
 
@@ -31,30 +35,36 @@ onMount(() => {
   isLoading = false;
 });
 </script>
+
+<svelte:head>
+  <title>{data.pageTitle}</title>
+  <meta name="description" content={data.pageDescription} />
+  <meta property="og:title" content={data.pageTitle} />
+
+  <meta
+    property="og:description"
+    content={data.pageDescription}
+  />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={pageUrl} />
+
+  <meta
+    property="og:image"
+    content={config.defaultOpenGraphImageCerts}
+  />
+</svelte:head>
+
+<main id="app">
     
-    <svelte:head>
-    <title>{ data.pageTitle }</title>
-    <meta name="description" content="{data.pageDescription}">
-    <meta property="og:title" content="{data.pageTitle}" />
-    <meta property="og:description" content="{data.pageDescription}">
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={pageUrl} />
-    <meta property="og:image" content={config.defaultOpenGraphImageCerts} />
-    
- 
-    </svelte:head>
-    
-    <main id="app">
-    
-    <Header segment="cert">
-        {#snippet filter()}
+  <Header segment="cert">
+    {#snippet filter()}
                     <CertFilter  selectedTags={ data?.res?.tag_ids ?? []} expanded={(data?.res?.tag_ids ?? []).length > 0} />
-                {/snippet}
-        {#snippet search()}
+    {/snippet}
+    {#snippet search()}
                     <CertSearch  searchInput={data?.searchInput ?? ''} expanded={(data?.searchInput ?? '').length > 0} />
-                {/snippet}
-    </Header>
-    
+    {/snippet}
+  </Header>
+
     <CertSingle class={isLoading? 'blink-loading': ''} data={data ?? {}} />
-    </main>
-    
+</main>    

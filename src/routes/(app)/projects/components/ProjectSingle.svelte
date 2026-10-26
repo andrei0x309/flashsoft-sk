@@ -24,11 +24,15 @@ const links = data?.res?.data?.[0]?.links;
 const screenPics = data?.res?.data?.[0]?.screen_pics;
 const techs = data?.res?.data?.[0]?.techs;
 
-beforeNavigate(() => {
+beforeNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   showSpinner = true;
 });
 
-afterNavigate(() => {
+afterNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   showSpinner = false;
 });
 

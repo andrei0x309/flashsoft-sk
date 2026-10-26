@@ -14,11 +14,15 @@ interface Props {
 let { data }: Props = $props();
 let showSpinner = $state(false);
 
-beforeNavigate(() => {
+beforeNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   showSpinner = true;
 });
 
-afterNavigate(() => {
+afterNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   showSpinner = false;
 });
 
@@ -50,4 +54,4 @@ const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 
 <Header segment="projects" />
 
-<ProjectSingle {data} />
+<ProjectSingle data={data} />

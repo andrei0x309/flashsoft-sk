@@ -16,11 +16,15 @@ interface Props {
 let { data }: Props = $props();
 let showSpinner = $state(false);
 
-beforeNavigate(() => {
+beforeNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   showSpinner = true;
 });
 
-afterNavigate(() => {
+afterNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   showSpinner = false;
 });
 
@@ -69,6 +73,6 @@ const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 		<h1 class="text-left text-1xl font-bold p-4 cursor-default -mt-4">Projects {techName ? 'in ' + techName: ''}</h1>
 		{/if}
 
-		<ProjectList {data} />
+		<ProjectList data={data} />
 	</div>
 </main>

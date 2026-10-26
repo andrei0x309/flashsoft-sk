@@ -16,11 +16,15 @@ interface Props {
 let { data }: Props = $props();
 let showSpinner = $state(false);
 
-beforeNavigate(() => {
+beforeNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   showSpinner = true;
 });
 
-afterNavigate(() => {
+afterNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   showSpinner = false;
 });
 
@@ -57,7 +61,12 @@ const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 		<div class="project-spinner"></div>
 	{/if}
 	<div>
-    <GoBack backRoute="/projects"/><h1 class="text-left text-1xl font-bold p-4 cursor-default -mt-4">List of all projects</h1>
-		<ProjectList {data} />
+		<GoBack backRoute="/projects" />
+
+		<h1
+			class="text-left text-1xl font-bold p-4 cursor-default -mt-4"
+		>List of all projects</h1>
+
+		<ProjectList data={data} />
 	</div>
 </main>
