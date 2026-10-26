@@ -1,5 +1,5 @@
 <script lang="ts">
-import { browser } from '$app/environment';
+import { browser } from '$app/env';
 import Lazy from '@/components/Lazy.svelte';
 import { onMount } from 'svelte';
 import AlertEmail from './AlertEmail.svelte';
@@ -99,13 +99,7 @@ const renderCaptcha = () => {
     (
       window as unknown as {
         hcaptcha: {
-          render: (
-            el: HTMLElement,
-            op: {
-              sitekey: string;
-              theme: string;
-            }
-          ) => void;
+          render: (el: HTMLElement, op: { sitekey: string; theme: string }) => void;
         };
       }
     ).hcaptcha.render(hcaptchaElement, {
@@ -144,58 +138,58 @@ onMount(() => {});
 	<div class="ls-h mb-0">
 		<h2 class="my-3">Contact form</h2>
 	</div>
-	<div id="ls-ct-fr" class="ls-ct-fr">
+  <div id="ls-ct-fr" class="ls-ct-fr">
 		<div bind:this={spinner} id="spinner" class="spinner spinner__1"></div>
 		<AlertEmail bind:showAlert bind:msg={alertMsg} bind:type={alertType} />
-		{#if browser}
-			<Lazy>
-				<form bind:this={mailForm} id="mail-form">
+    {#if browser}
+      <Lazy>
+        <form bind:this={mailForm} id="mail-form">
 					<input bind:value={name} id="form-name" name="name" type="text" placeholder="Name" />
 					<input bind:value={email} id="form-email" name="email" type="email" placeholder="Email" />
-					<textarea
-						bind:value={message}
-						id="form-message"
-						name="message"
-						cols="30"
-						rows="5"
-						placeholder="Message"
-					></textarea>
+          <textarea
+            bind:value={message}
+            id="form-message"
+            name="message"
+            cols="30"
+            rows="5"
+            placeholder="Message"
+          ></textarea>
 				 <script src="/res/vendor/cap/cap.js" onload={() => { initCaptcha() }}></script>
           <cap-widget
             id="cap"
             data-cap-api-endpoint="/api/index/cap/"
           ></cap-widget>
 
-					<button
-						onclick={submitEmail}
-						id="form-submit"
-						type="submit"
-						value="Send"
-						class="btn-submit"><i class="icon-paper-plane-o"></i>&nbsp;Send&nbsp;</button
-					>
-				</form>
-			</Lazy>
-		{:else}
-			<form bind:this={mailForm} id="mail-form">
+          <button
+            onclick={submitEmail}
+            id="form-submit"
+            type="submit"
+            value="Send"
+            class="btn-submit"
+          ><i class="icon-paper-plane-o"></i>Send</button>
+        </form>
+      </Lazy>
+    {:else}
+      <form bind:this={mailForm} id="mail-form">
 				<input bind:value={name} id="form-name" name="name" type="text" placeholder="Name" />
 				<input bind:value={email} id="form-email" name="email" type="email" placeholder="Email" />
-				<textarea
-					bind:value={message}
-					id="form-message"
-					name="message"
-					cols="30"
-					rows="5"
-					placeholder="Message"
-				></textarea>
+        <textarea
+          bind:value={message}
+          id="form-message"
+          name="message"
+          cols="30"
+          rows="5"
+          placeholder="Message"
+        ></textarea>
 
-				<button
-					onclick={submitEmail}
-					id="form-submit"
-					type="submit"
-					value="Send"
-					class="btn-submit"><i class="icon-paper-plane-o"></i>&nbsp;Send&nbsp;</button
-				>
-			</form>
-		{/if}
-	</div>
+        <button
+          onclick={submitEmail}
+          id="form-submit"
+          type="submit"
+          value="Send"
+          class="btn-submit"
+        ><i class="icon-paper-plane-o"></i>Send</button>
+      </form>
+    {/if}
+  </div>
 </section>

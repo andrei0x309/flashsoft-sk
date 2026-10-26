@@ -1,5 +1,5 @@
 <script lang="ts">
-import { browser } from '$app/environment';
+import { browser } from '$app/env';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
 import { getPrjFeatureImage } from '@/lib/utils/common';
 import type { ProjectData } from '@/routes/(app)/projects/types/projects';
@@ -11,12 +11,12 @@ import MegaEmbed from './MegaEmbed.svelte';
 let backRoute: string = $state('');
 
 let showSpinner = $state(false);
+
 interface Props {
   data: ProjectData;
 }
 
 let { data }: Props = $props();
-
 const megaLink = data?.res?.data?.[0]?.mega;
 const youtubeLink = data?.res?.data?.[0]?.youtube || false;
 const hasMegaOrYoutube = megaLink || youtubeLink;
@@ -77,21 +77,24 @@ onMount(() => {
 					<ul class="list-group">
 						{#each Object.entries(links) as [name, href]}
 							<li class="list-group-item my-1">
-								<a class="underline hover:font-bold" {href} target="_blank" rel="noopener noreferrer external">
-									{name}
-								</a>
+								<a
+									class="underline hover:font-bold"
+									href={href}
+									target="_blank"
+									rel="noopener noreferrer external"
+								>{name}</a>
 							</li>
 						{/each}
 					</ul>
 				{/if}
-        {#if hasMegaOrYoutube}
-        <h2 class="headings mt-4">Demo Video</h2>
-        {/if}
-        {#if megaLink}
-        <MegaEmbed source={megaLink} />
-        {:else if youtubeLink}
-         <!-- Implement YouTube video here -->
-        {/if}
+				{#if hasMegaOrYoutube}
+					<h2 class="headings mt-4">Demo Video</h2>
+				{/if}
+				{#if megaLink}
+					<MegaEmbed source={megaLink} />
+				{:else if youtubeLink}
+					<!-- Implement YouTube video here -->
+				{/if}
 
 				{#if Object.keys(screenPics ?? {}).length > 0}
 					<h2 class="headings mt-4">Screenshots</h2>
@@ -102,12 +105,24 @@ onMount(() => {
 						{#if browser}
 							{#each Object.entries(screenPics) as [name, src]}
 								<Lightbox>
-									<img class="project-img-feature" {src} alt={name} width="800" height="600" />
+									<img
+										class="project-img-feature"
+										src={src}
+										alt={name}
+										width="800"
+										height="600"
+									/>
 								</Lightbox>
 							{/each}
 						{:else}
 							{#each Object.entries(screenPics) as [name, src]}
-								<img class="project-img-feature" {src} alt={name} width="800" height="600" />
+								<img
+									class="project-img-feature"
+									src={src}
+									alt={name}
+									width="800"
+									height="600"
+								/>
 							{/each}
 						{/if}
 					</div>

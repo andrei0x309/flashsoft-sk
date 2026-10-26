@@ -1,5 +1,5 @@
 <script lang="ts">
-import { browser } from '$app/environment';
+import { browser } from '$app/env';
 import { onMount } from 'svelte';
 import { Lightbox } from 'svelte-lightbox';
 
@@ -45,40 +45,40 @@ onMount(() => {
 			<div class="spinner size"></div>
 		{/if}
 		{#if browser && !isError}
-		<Lightbox>
-		<img
-			loading={lazy ? 'lazy' : 'eager'}
-			class="{`mx-auto card-img-top aspect-ratio-image  ${loaded ? '' : 'hidden'}`}"
-			width="800"
-			height="600"
-			src={imgSrc}
-			alt={altContent}
-			onload={() => {
-				loaded = true;
-			}}
-			onerror={() => {
-				loaded = true;
-				isError = true;
-			}}	
-		/>
-		</Lightbox>
+			<Lightbox>
+				<img
+					loading={lazy ? 'lazy' : 'eager'}
+					class={`mx-auto card-img-top aspect-ratio-image  ${loaded ? '' : 'hidden'}`}
+					width="800"
+					height="600"
+					src={imgSrc}
+					alt={altContent}
+					onload={() => {
+						loaded = true;
+					}}
+					onerror={() => {
+						loaded = true;
+						isError = true;
+					}}
+				/>
+			</Lightbox>
 		{:else}
-		<img
-		loading={lazy ? 'lazy' : 'eager'}
-		class="{`card-img-top ${loaded ? '' : 'hidden'}}`}"
-		width="800"
-		height="600"
-		src={imgSrc}
-		{srcset}
-		alt={altContent}
-		onload={() => {
-			loaded = true;
-		}}
-		onerror={() => {
-			loaded = true;
-			isError = true;
-		}}
-		/>
+			<img
+				loading={lazy ? 'lazy' : 'eager'}
+				class={`card-img-top ${loaded ? '' : 'hidden'}}`}
+				width="800"
+				height="600"
+				src={imgSrc}
+				srcset={srcset}
+				alt={altContent}
+				onload={() => {
+					loaded = true;
+				}}
+				onerror={() => {
+					loaded = true;
+					isError = true;
+				}}
+			/>
 		{/if}
 		
 	</div>
