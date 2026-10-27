@@ -4,8 +4,7 @@ interface Props {
   totalPages: number;
 }
 
-let { page, totalPages }: Props = $props();
-
+const { page, totalPages }: Props = $props();
 </script>
 
 <div class="flex justify-center">

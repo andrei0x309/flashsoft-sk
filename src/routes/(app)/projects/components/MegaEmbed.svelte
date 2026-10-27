@@ -2,7 +2,7 @@
 interface Props {
   source: string;
 }
-let { source }: Props = $props();
+const { source }: Props = $props();
 </script>
 
 

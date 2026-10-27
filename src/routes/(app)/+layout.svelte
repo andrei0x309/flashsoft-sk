@@ -1,8 +1,8 @@
 <script lang="ts">
 import '../tailwind.css';
-import { analyticsCode } from '$lib/utils/analytics';
-import BackToTop from '@/routes/(index)/right-side/BackToTop.svelte'
-import Status from '@/routes/(index)/left-side/Status.svelte'
+import { analyticsCode } from '#lib/utils/analytics.js';
+import Status from '#/routes/(index)/left-side/Status.svelte';
+import BackToTop from '#/routes/(index)/right-side/BackToTop.svelte';
 
 interface Props {
   children?: import('svelte').Snippet;

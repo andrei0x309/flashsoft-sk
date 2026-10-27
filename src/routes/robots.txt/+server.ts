@@ -1,8 +1,8 @@
+import { renderRobots } from '#lib/utils/server/robots.js';
 import type { RequestHandler } from './$types';
-import { renderRobots } from '$lib/utils/server/robots';
 export const prerender = true;
 
-export const GET: RequestHandler = async () => {
+export const GET: RequestHandler = () => {
   return new Response(renderRobots(), {
     headers: {
       'Cache-Control': 'max-age=0, s-maxage=3600',

@@ -1,19 +1,19 @@
 <script lang="ts">
-import { config } from '@/lib/config/config';
-import MainSection from './left-side/MainSection.svelte';
+import { config } from '#/lib/config/config.ts';
 import ContactForm from './left-side/ContactForm.svelte';
+import Footer from './left-side/Footer.svelte';
 import Interests from './left-side/Interests.svelte';
+import MainSection from './left-side/MainSection.svelte';
 import Skills from './left-side/Skills.svelte';
 import Techs from './left-side/Techs.svelte';
-import Footer from './left-side/Footer.svelte';
 import SideMenu from './mobile/SideMenu.svelte';
 
-import PaperWeight from './right-side/PaperWeight.svelte';
-import RightSideMenu from './right-side/RightSideMenu.svelte';
-import RightSideLogo from './right-side/RightSideLogo.svelte';
-import RightSideName from './right-side/RightSideName.svelte';
-import RightSideLinks from './right-side/RightSideLinks.svelte';
 import BackToTop from './right-side/BackToTop.svelte';
+import PaperWeight from './right-side/PaperWeight.svelte';
+import RightSideLinks from './right-side/RightSideLinks.svelte';
+import RightSideLogo from './right-side/RightSideLogo.svelte';
+import RightSideMenu from './right-side/RightSideMenu.svelte';
+import RightSideName from './right-side/RightSideName.svelte';
 
 const { indexPageDescription, indexPageTitle } = config;
 
@@ -25,7 +25,7 @@ const closeMenu = () => {
 
 let { data }: { data: { html: string } } = $props();
 
-const html = data?.html;
+const html = $derived(data?.html);
 </script>
 
 <svelte:head>

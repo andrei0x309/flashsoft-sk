@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/db-client/supaClientFS';
+import { supabase } from '#/lib/db-client/supaClientFS';
 
 const CERT_PATH = 'certs';
 const PROJECT_PATH = 'projects';
@@ -16,7 +16,7 @@ export const generatePaths = async () => {
   // Cert
   paths.push({
     url: CERT_PATH,
-    priority: '0.7',
+    priority: '0.7'
   });
 
   // Single
@@ -24,7 +24,7 @@ export const generatePaths = async () => {
   for (const cert of data ?? []) {
     paths.push({
       url: `${CERT_PATH}/view/${cert.cert_slug}`,
-      priority: '0.6',
+      priority: '0.6'
     });
   }
   // Default pages
@@ -105,7 +105,6 @@ export const generatePaths = async () => {
       priority: '0.6'
     });
   }
-
 
   // Default pages
   count = await supabase.from('fsk_prj').select('*', { count: 'exact', head: true });

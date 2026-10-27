@@ -1,6 +1,6 @@
+import { loadProject } from '#/lib/projects/projects.ts';
+import { appendToData, checkData } from '#/lib/utils/page.ts';
 import type { PageServerLoad } from './$types';
-import { checkData, appendToData } from '@/lib/utils/page';
-import { loadProject } from '@/lib/projects/projects';
 
 export const load: PageServerLoad = async (rest) => {
   const slug = rest.params.slug;

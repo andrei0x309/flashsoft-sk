@@ -3,13 +3,15 @@
 /// <reference types="node" />
 
 import crypto from 'node:crypto';
-import fs from 'node:fs/promises';
 import { EventEmitter } from 'node:events';
+import fs from 'node:fs/promises';
 
-const process = {
-on: () => {},
-once: () => {}
-};
+if (typeof process === 'undefined') {
+  global.process = {
+    on: () => null,
+    once: () => null
+  };
+}
 
 /**
  * @typedef {import('node:crypto')} Crypto
@@ -95,7 +97,7 @@ export class Cap extends EventEmitter {
       ...configObj
     };
     if (!this.config.noFSState) {
-      this._loadTokens().catch(() => {});
+      this._loadTokens().catch((e) => console.error(`[cap] Failed to load tokens file`, e));
     }
 
     process.on('beforeExit', () => this.cleanup());
@@ -104,7 +106,7 @@ export class Cap extends EventEmitter {
       process.once(signal, () => {
         this.cleanup()
           .then(() => console.info(`[cap] Exiting...`))
-          .catch((e) => console.error(`[cap] Failed to exit gracefully`, e));;
+          .catch((e) => console.error(`[cap] Failed to exit gracefully`, e));
       });
     });
   }

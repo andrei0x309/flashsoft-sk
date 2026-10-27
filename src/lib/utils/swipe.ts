@@ -32,7 +32,7 @@ export class Swipe {
             this.touches[event.type].x = touch.pageX;
             this.touches[event.type].y = touch.pageY;
             break;
-          case 'touchend':
+          case 'touchend': {
             this.touches[event.type] = true;
             // eslint-disable-next-line no-case-declarations
             let x = this.touches.touchstart.x - this.touches.touchmove.x,
@@ -43,6 +43,7 @@ export class Swipe {
             else this.touches.direction = this.touches.touchstart.y < this.touches.touchmove.y ? 'down' : 'up';
             this.callback(event, this.touches.direction);
             break;
+          }
         }
       }
     }

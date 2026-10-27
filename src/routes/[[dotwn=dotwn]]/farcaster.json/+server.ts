@@ -1,5 +1,5 @@
-import type { RequestHandler, EntryGenerator } from './$types';
-import { generateFcWellKnown } from '$lib/farcaster/mini-app';
+import { generateFcWellKnown } from '#lib/farcaster/mini-app.js';
+import type { EntryGenerator, RequestHandler } from './$types';
 
 export const entries: EntryGenerator = () => {
   return [{ dotwn: '.well-known' }];

@@ -227,11 +227,6 @@ nav.skew-menu ul li a.active {
   transform: translateY(-0.25em);
 }
 
-.btn-11 {
-  color: rgb(255 255 255 / 72%);
-  transition: 0.25s;
-}
-
 .btn-11:hover,
 .btn-11:focus {
   border-color: #cacaca;
@@ -239,6 +234,8 @@ nav.skew-menu ul li a.active {
 }
 
 .btn-11 {
+  color: rgb(255 255 255 / 72%);
+  transition: 0.25s;
   background: none;
   border: 1px solid;
   font: inherit;

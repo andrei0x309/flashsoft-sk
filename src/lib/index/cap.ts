@@ -1,6 +1,6 @@
-import { supabase } from '@/lib/db-client/supaClientFS';
-import { getDiffFromNow } from '@/lib/common/misc';
-import { Cap } from '@/lib/vendor/cap-server';
+import { getDiffFromNow } from '#/lib/common/misc';
+import { supabase } from '#/lib/db-client/supaClientFS';
+import { Cap } from '#/lib/vendor/cap-server';
 
 export const loadCapState = async () => {
   try {

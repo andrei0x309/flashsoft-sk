@@ -1,12 +1,12 @@
 <script lang="ts">
-import '@/routes/(app)/projects.scss';
-import Header from '@/routes/(app)/components/Header.svelte';
+import '#/routes/(app)/projects.scss';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
 import { page as SveltePage } from '$app/state';
-import { config } from '@/lib/config/config';
-import ProjectList from '@/routes/(app)/projects/components/ProjectList.svelte';
-import GoBack from '@/routes/(app)/components/GoBack.svelte';
-import type { ProjectDataPage } from '@/routes/(app)/projects/types/projects';
+import { config } from '#/lib/config/config.ts';
+import GoBack from '#/routes/(app)/components/GoBack.svelte';
+import Header from '#/routes/(app)/components/Header.svelte';
+import ProjectList from '#/routes/(app)/projects/components/ProjectList.svelte';
+import type { ProjectDataPage } from '#/routes/(app)/projects/types/projects.ts';
 import { onMount } from 'svelte';
 
 interface Props {
@@ -16,30 +16,30 @@ interface Props {
 let { data }: Props = $props();
 let showSpinner = $state(false);
 
-beforeNavigate(() => {
+beforeNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   showSpinner = true;
 });
 
-afterNavigate(() => {
+afterNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   showSpinner = false;
 });
 
 let page: number = $state(0);
-let techName = $state(data.res.tech?.name || '')
+const techName = $derived(data.res.tech?.name || '');
 
 $effect(() => {
   page = data.res.page;
-  if (data.res.tech) {
-    techName = data.res.tech.name;
-  }
 });
 
 onMount(() => {
-	showSpinner = false;
-})
+  showSpinner = false;
+});
 
 const pageUrl = SveltePage.url.href.replace('http://', 'https://');
-
 </script>
 
 <svelte:head>
@@ -70,6 +70,6 @@ const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 		<h1 class="text-left text-1xl font-bold p-4 cursor-default -mt-4">Projects {techName ? 'in ' + techName: ''}</h1>
 		{/if}
 
-		<ProjectList {data} />
+		<ProjectList data={data} />
 	</div>
 </main>

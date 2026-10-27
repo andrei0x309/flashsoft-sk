@@ -8,43 +8,51 @@ interface Props {
 }
 
 let { maxPage, currentPage, rest }: Props = $props();
-const isMinPage = currentPage === 1;
-const isMaxPage = currentPage === maxPage;
+
+// Use $derived for simple reactive values
+const isMinPage = $derived(currentPage === 1);
+const isMaxPage = $derived(currentPage === maxPage);
 
 onMount(() => {
   console.log('pag remounted', currentPage);
 });
 
-const linkList: (number | string)[] = [];
-if (maxPage < 6) {
-  for (let i = 1; i <= maxPage; i++) {
-    linkList.push(i);
-  }
-} else {
-  if (currentPage >= maxPage - 2) {
-    linkList.push(1, 2, '...');
-    if (currentPage === maxPage) {
-      linkList.push(maxPage - 1, maxPage);
-    } else {
-      linkList.push(maxPage - 2, maxPage - 1, maxPage);
+// Use $derived.by for complex multi-line logic
+const linkList = $derived.by(() => {
+  const list: (number | string)[] = [];
+  
+  if (maxPage < 6) {
+    for (let i = 1; i <= maxPage; i++) {
+      list.push(i);
     }
   } else {
-    if (currentPage <= 2) {
-      linkList.push(1, 2);
-      if (currentPage === 2) {
-        linkList.push('...', currentPage + 1, currentPage + 2, currentPage + 3, '...', maxPage - 1, maxPage);
+    if (currentPage >= maxPage - 2) {
+      list.push(1, 2, '...');
+      if (currentPage === maxPage) {
+        list.push(maxPage - 1, maxPage);
       } else {
-        linkList.push('...', currentPage + 2, currentPage + 3, currentPage + 4, '...', maxPage - 1, maxPage);
+        list.push(maxPage - 2, maxPage - 1, maxPage);
       }
     } else {
-      if (currentPage === 3) {
-        linkList.push(1, 2, '...', currentPage, currentPage + 1, '...', maxPage - 1, maxPage);
+      if (currentPage <= 2) {
+        list.push(1, 2);
+        if (currentPage === 2) {
+          list.push('...', currentPage + 1, currentPage + 2, currentPage + 3, '...', maxPage - 1, maxPage);
+        } else {
+          list.push('...', currentPage + 2, currentPage + 3, currentPage + 4, '...', maxPage - 1, maxPage);
+        }
       } else {
-        linkList.push(1, 2, '...', currentPage - 1, currentPage, currentPage + 1, '...', maxPage - 1, maxPage);
+        if (currentPage === 3) {
+          list.push(1, 2, '...', currentPage, currentPage + 1, '...', maxPage - 1, maxPage);
+        } else {
+          list.push(1, 2, '...', currentPage - 1, currentPage, currentPage + 1, '...', maxPage - 1, maxPage);
+        }
       }
     }
   }
-}
+  
+  return list;
+});
 </script>
 
 <nav aria-label="Pagination Navigation">

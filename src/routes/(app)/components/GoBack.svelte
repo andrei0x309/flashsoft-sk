@@ -1,23 +1,17 @@
 <script lang="ts">
-   
-    interface Props {
-        backRoute: string;
-        rel?: string;
-        text?: string;
-        class?: string;
-    }
+interface Props {
+  backRoute: string;
+  rel?: string;
+  text?: string;
+  class?: string;
+}
 
-     let {  backRoute, rel, text, class: className = '' }: Props = $props();
-
-     if (rel === undefined) {
-        rel = '';
-     }
-     if (text === undefined) {
-        text = 'Go back';
-     }
-     if (backRoute === undefined) {
-        backRoute = '/';
-     }
+let {
+  backRoute = '/',
+  rel = '',
+  text = 'Go back',
+  class: className = ''
+}: Props = $props();
 
 </script>
   

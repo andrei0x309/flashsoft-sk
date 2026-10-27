@@ -1,6 +1,11 @@
 <script lang="ts">
-const { class: className,
-    fill = '#fff' } = $props<{ class?: string | undefined, fill?: string }>();
+
+interface Props {
+  class?: string | undefined;
+  fill?: string;
+}
+
+const { class: className, fill = '#fff' }: Props = $props();
 </script>
 
 <svg class={className} viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg"

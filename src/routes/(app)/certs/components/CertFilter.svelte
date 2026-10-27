@@ -70,7 +70,6 @@ $effect(() => {
     }
   }
 });
-
 </script>
 <div class="container-fluid ml-2">    
  

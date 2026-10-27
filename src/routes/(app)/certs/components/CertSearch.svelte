@@ -1,6 +1,6 @@
 <script lang="ts">
-import { slide } from 'svelte/transition';
 import { goto } from '$app/navigation';
+import { slide } from 'svelte/transition';
 interface Props {
   expanded?: boolean;
   searchInput?: string;

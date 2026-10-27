@@ -1,67 +1,75 @@
 <script lang="ts">
-    import '@/routes/(app)/projects.scss';
-    import Header from '@/routes/(app)/components/Header.svelte';
-    import { afterNavigate, beforeNavigate } from '$app/navigation';
-    import { page as SveltePage } from '$app/state';
-    import { config } from '@/lib/config/config';
-    import ProjectList from '@/routes/(app)/projects/components/ProjectList.svelte';
-    import GoBack from '@/routes/(app)/components/GoBack.svelte';
-    import type { ProjectDataPage } from '@/routes/(app)/projects/types/projects'
-    import { onMount } from "svelte";
-    
-    
-    interface Props {
-      data: ProjectDataPage;
-    }
-    
-    let { data }: Props = $props();
-    let showSpinner = $state(false);
-    
-    beforeNavigate(() => {
-      showSpinner = true;
-    });
-    
-    afterNavigate(() => {
-      showSpinner = false;
-    });
-    
-    let page: number = $state(0);
-    
-    $effect(() => {
-      page = data.res.page;
-    });
-    
-    onMount(() => {
-        showSpinner = false;
-    })
-    
-    const pageUrl = SveltePage.url.href.replace('http://', 'https://');
-    </script>
-    
-    <svelte:head>
-        <title>{data.pageTitle}</title>
-        <meta name="description" content={data.pageDescription} />
-        <meta property="og:title" content={data.pageTitle} />
+import '#/routes/(app)/projects.scss';
+import { afterNavigate, beforeNavigate } from '$app/navigation';
+import { page as SveltePage } from '$app/state';
+import { config } from '#/lib/config/config.ts';
+import GoBack from '#/routes/(app)/components/GoBack.svelte';
+import Header from '#/routes/(app)/components/Header.svelte';
+import ProjectList from '#/routes/(app)/projects/components/ProjectList.svelte';
+import type { ProjectDataPage } from '#/routes/(app)/projects/types/projects.ts';
+import { onMount } from 'svelte';
+
+interface Props {
+  data: ProjectDataPage;
+}
+
+let { data }: Props = $props();
+let showSpinner = $state(false);
+
+beforeNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
+  showSpinner = true;
+});
+
+afterNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
+  showSpinner = false;
+});
+
+let page: number = $state(0);
+
+$effect(() => {
+  page = data.res.page;
+});
+
+onMount(() => {
+  showSpinner = false;
+});
+
+const pageUrl = SveltePage.url.href.replace('http://', 'https://');
+</script>
+
+<svelte:head>
+  <title>{data.pageTitle}</title>
+  <meta name="description" content={data.pageDescription} />
+  <meta property="og:title" content={data.pageTitle} />
         <meta property="og:description" content={data.pageDescription} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={pageUrl} />
-        <meta
-            property="og:image"
-            content={config.defaultOpenGraphImage}
-        />
-    </svelte:head>
-    
-    <Header segment="projects" />
-    
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={pageUrl} />
+  <meta
+    property="og:image"
+    content={config.defaultOpenGraphImage}
+  />
+</svelte:head>
+
+<Header segment="projects" />
+
     <main class={`project-main md:mx-4 mb-2 ${showSpinner ? 'blink-loading' : ''}`} id="app">
-        {#if showSpinner}
-            <div class="project-spinner"></div>
-        {/if}
-        <div>
-        <GoBack backRoute="/projects"/><h1 class="text-left text-1xl font-bold p-4 cursor-default -mt-4">List of all projects</h1>
-            <ProjectList {data} class="project-list-overide" />
-        </div>
-    </main>
+  {#if showSpinner}
+    <div class="project-spinner"></div>
+  {/if}
+  <div>
+    <GoBack backRoute="/projects" />
+
+    <h1
+      class="text-left text-1xl font-bold p-4 cursor-default -mt-4"
+    >List of all projects</h1>
+
+    <ProjectList data={data} class="project-list-overide" />
+  </div>
+</main>
 
 <style lang="scss">
 :global(.project-list-overide) {

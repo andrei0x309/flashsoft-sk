@@ -1,12 +1,11 @@
 <script lang="ts">
-import '@/routes/(app)/projects.scss';
-import Header from '@/routes/(app)/components/Header.svelte';
+import '#/routes/(app)/projects.scss';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
 import { page as SveltePage } from '$app/state';
-import ProjectSingle from '@/routes/(app)/projects/components/ProjectSingle.svelte';
-import type { ProjectDataPage } from '@/routes/(app)/projects/types/projects'
+import Header from '#/routes/(app)/components/Header.svelte';
+import ProjectSingle from '#/routes/(app)/projects/components/ProjectSingle.svelte';
+import type { ProjectDataPage } from '#/routes/(app)/projects/types/projects.ts';
 import { onMount } from 'svelte';
-
 
 interface Props {
   data: ProjectDataPage;
@@ -15,11 +14,15 @@ interface Props {
 let { data }: Props = $props();
 let showSpinner = $state(false);
 
-beforeNavigate(() => {
+beforeNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   showSpinner = true;
 });
 
-afterNavigate(() => {
+afterNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   showSpinner = false;
 });
 
@@ -30,8 +33,8 @@ $effect(() => {
 });
 
 onMount(() => {
-	showSpinner = false;
-})
+  showSpinner = false;
+});
 
 const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 </script>
@@ -51,4 +54,4 @@ const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 
 <Header segment="projects" />
 
-<ProjectSingle {data} />
+<ProjectSingle data={data} />

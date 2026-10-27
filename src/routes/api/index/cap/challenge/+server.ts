@@ -1,7 +1,7 @@
-import type { RequestHandler } from '../$types';
+import { getCapInstanceAndState, updateCapState } from '#/lib/index/cap';
+import { getCapChallengeConfig } from '#/lib/index/cap';
 import { json } from '@sveltejs/kit';
-import { getCapInstanceAndState, updateCapState } from '@/lib/index/cap';
-import { getCapChallengeConfig } from '@/lib/index/cap';
+import type { RequestHandler } from '../$types';
 
 export const POST: RequestHandler = async () => {
   const { cap, state } = await getCapInstanceAndState();
@@ -18,5 +18,5 @@ export const POST: RequestHandler = async () => {
     }
   });
 
-  return json(newState);
+  return Response.json(newState);
 };

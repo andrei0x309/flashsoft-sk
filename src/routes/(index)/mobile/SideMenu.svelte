@@ -3,7 +3,12 @@ import TipIcon from '../icons/TipIcon.svelte';
 
 import DailyDev from '../icons/DailyDev.svelte';
 
-let { sideMenu = $bindable(), closeMenu } = $props<{ sideMenu: HTMLElement | undefined; closeMenu: () => void }>();
+interface Props {
+    sideMenu?: HTMLElement | undefined;
+    closeMenu: () => void;
+}
+
+let { sideMenu = $bindable(), closeMenu } : Props = $props();
 let close: HTMLElement | undefined; // document.getElementById('menu-close');
 </script>
 
@@ -68,7 +73,7 @@ let close: HTMLElement | undefined; // document.getElementById('menu-close');
                     rel="noopener nofollow noreferrer external"
                     class="text-gray-200 p-2 inline-block"
                     href="https://github.com/andrei0x309"
-                    target="_blank">GitHub <i class="icon-linkedin text-custom-v"></i></a
+                    target="_blank">GitHub <i class="icon-github-original"></i></a
                 >
             </li>
             <li>

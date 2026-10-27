@@ -1,6 +1,6 @@
 export const prerender = true;
+import { generatePaths } from '#/lib/sitemap/index.ts';
 import type { RequestHandler } from './$types';
-import { generatePaths } from '@/lib/sitemap/index';
 
 const website = 'https://flashsoft.eu';
 

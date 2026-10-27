@@ -1,6 +1,6 @@
-import { supabase } from '@/lib/db-client/supaClientFS';
-import { optionalChain } from '@/lib/utils/index';
-import { checkData, extractPage, error, appendToData } from '@/lib/utils/page';
+import { supabase } from '#/lib/db-client/supaClientFS.ts';
+import { optionalChain } from '#/lib/utils/index.ts';
+import { appendToData, checkData, error, extractPage } from '#/lib/utils/page.ts';
 
 type SupaClient = typeof supabase;
 type PostgesQueryBuilder = ReturnType<SupaClient['from']>;
@@ -77,13 +77,11 @@ export const loadFilteredCerts = async (page = 1, tag_ids: number[]) => {
 export const loadCerts = async (page: number, search = false, searchTerms: string[] = []) => {
   try {
     const countDb = optionalChain(supabase.from('fsk_cert').select('*', { count: 'exact', head: true }))
-      .if(search, (chain: PostgesQueryBuilderSelect) =>
-        chain.or(searchTerms.map((t) => `cert_name.ilike.%${t}%,cert_description.ilike.%${t}%`).join(','))
-      )
+      .if(search, (chain: PostgesQueryBuilderSelect) => chain.or(searchTerms.map((t) => `cert_name.ilike.%${t}%,cert_description.ilike.%${t}%`).join(',')))
       .end();
 
     const resDb = optionalChain(
-  supabase.from('fsk_cert').select(`
+      supabase.from('fsk_cert').select(`
   id,
   cert_name,
   cert_file_name,
@@ -101,9 +99,7 @@ export const loadCerts = async (page: number, search = false, searchTerms: strin
   )
   `)
     )
-      .if(search, (chain: PostgesQueryBuilderSelect) =>
-        chain.or(searchTerms.map((t) => `cert_name.ilike.%${t}%,cert_description.ilike.%${t}%`).join(','))
-      )
+      .if(search, (chain: PostgesQueryBuilderSelect) => chain.or(searchTerms.map((t) => `cert_name.ilike.%${t}%,cert_description.ilike.%${t}%`).join(',')))
       .end()
       .order('weight', { ascending: false, nullsFirst: false })
       .order('id', { ascending: false })
@@ -160,7 +156,6 @@ export const loadCert = async (slug: string) => {
     return {
       res
     };
-
   } catch (e) {
     return null;
   }

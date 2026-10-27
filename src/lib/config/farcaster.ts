@@ -1,6 +1,6 @@
 import { config } from './config';
 const IS_DEV_ENABLED = config.IS_DEV_ENABLED;
-import type { TriggerConfig } from '$lib/types/mini-app';
+import type { TriggerConfig } from '#lib/types/mini-app.js';
 
 export const FCConfig = {
   JFS: {
@@ -12,11 +12,12 @@ export const FCConfig = {
           signature:
             'MHg0NGFjYWQ5NDg1ZTliOWJlODZlMDkxYzA0YWM4MTg0ZDUwM2U0ZmJmMzU3N2ViYzliMmFmMjA3MTU1NTZmYTc4Mzk3OWM2NjRlOTEwODAxZTYyYzg5Mzk3OTU1N2RjNjBhZGYxNDNmYTBlN2I2MmVjMjk3ZjQxZDdiMTc5YjFmZTFi'
         }
-      :  {
-         header: "eyJmaWQiOjE3OTEsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHhmOWM0ODNlNTFjOUIzNGMyYmNENTgyNTYwMzBlQjQzMmFEQTAyNDhmIn0",
-         payload: "eyJkb21haW4iOiJmbGFzaHNvZnQuZXUifQ",
-         signature: "MHg1MWRkMWMwNDZlM2I5ODNlMzM3M2IxYzg3NmQ0NTk5MGUzMDE5YWE0ZmFkNGRhYTI1YTY4ZWU0MGJjYjY4NGRiNmZkMzc0Yzk1OWRlMDExYTA2ODBjNzRmNmM3NDkzODlkMjAzNGU1OWEyZTA2ZjdmZWZhNDFjZjM4M2RmNDFmOTFj"
-      }
+      : {
+          header: 'eyJmaWQiOjE3OTEsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHhmOWM0ODNlNTFjOUIzNGMyYmNENTgyNTYwMzBlQjQzMmFEQTAyNDhmIn0',
+          payload: 'eyJkb21haW4iOiJmbGFzaHNvZnQuZXUifQ',
+          signature:
+            'MHg1MWRkMWMwNDZlM2I5ODNlMzM3M2IxYzg3NmQ0NTk5MGUzMDE5YWE0ZmFkNGRhYTI1YTY4ZWU0MGJjYjY4NGRiNmZkMzc0Yzk1OWRlMDExYTA2ODBjNzRmNmM3NDkzODlkMjAzNGU1OWEyZTA2ZjdmZWZhNDFjZjM4M2RmNDFmOTFj'
+        }
   },
   FrameConfig: {
     // Manifest version. Required.

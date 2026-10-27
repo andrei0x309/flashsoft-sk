@@ -30,14 +30,14 @@ export interface ProjectData {
     totalPages: number;
     page: number;
     tech?: {
-        name: string;
-        slug: string;
-      }
+      name: string;
+      slug: string;
+    };
     cat?: {
       cat_name: string;
       cat_description: string;
       slug: string;
-    }
+    };
   };
 }
 

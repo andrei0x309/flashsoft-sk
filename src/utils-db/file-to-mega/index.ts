@@ -1,6 +1,6 @@
-import fs from 'node:fs'
+import fs from 'node:fs';
+import { readdir } from 'node:fs/promises';
 import path from 'node:path';
-import { readdir } from "node:fs/promises";
 
 const megaJsonPath = './src/utils-db/db/megaFiles.json';
 const megaJsonPathBackup = './src/utils-db/db/megaFilesBackup.json';
@@ -38,36 +38,36 @@ async function crawlDirectory(relativePath: string): Promise<string[]> {
   const filePaths: string[] = [];
   const currentDir = process.cwd(); // Get the current working directory
   const absolutePath = path.join(currentDir, relativePath);
-  
+
   const filesFound = await readdir(absolutePath, { recursive: true });
 
-
   for await (const entry of filesFound) {
-      const relativePath = entry.replace(absolutePath, '').replace(/\\/g, '/').replace(/^\//, '');
+    const relativePath = entry.replace(absolutePath, '').replace(/\\/g, '/').replace(/^\//, '');
 
-      if (excludePatterns.some((pattern) => relativePath.includes(pattern))) {
-        console.info('Excluding', relativePath);
-        continue;
-      }
+    if (excludePatterns.some((pattern) => relativePath.includes(pattern))) {
+      console.info('Excluding', relativePath);
+      continue;
+    }
 
-      if (!mustMatchPatterns.some((pattern) => relativePath.includes(pattern))) {
-        console.info('Excluding', relativePath);
-        continue;
-      }
+    if (!mustMatchPatterns.some((pattern) => relativePath.includes(pattern))) {
+      console.info('Excluding', relativePath);
+      continue;
+    }
 
-      filePaths.push(relativePath);
+    filePaths.push(relativePath);
   }
 
   return filePaths;
 }
 
-const megaSyncFolder = async () => {
+
+const megaSyncFolder = () => {
   const cmd = [];
   cmd.push('sync');
   cmd.push(filesLocation);
   cmd.push(`${megaFolder}`);
   const exec = Bun.spawnSync([megaCmdPath, ...cmd]);
-  const { exitCode, stdout, stderr } = exec
+  const { exitCode, stdout, stderr } = exec;
   if (exitCode !== 0) {
     console.warn('Error', exitCode);
     console.warn(new TextDecoder().decode(stderr));
@@ -76,13 +76,13 @@ const megaSyncFolder = async () => {
   console.info('Synced', megaFolder);
 };
 
-const megeGetExportedFile = async (file: string) => {
+const megeGetExportedFile = (file: string) => {
   const cmd = [];
   cmd.push('export');
   cmd.push(`${megaFolder}/${file}`);
   cmd.push('-a');
   const exec = Bun.spawnSync([megaCmdPath, ...cmd]);
-  const { exitCode, stdout, stderr } = exec
+  const { exitCode, stdout, stderr } = exec;
   if (exitCode !== 0) {
     console.warn('Error', exitCode);
     console.warn(new TextDecoder().decode(stderr));

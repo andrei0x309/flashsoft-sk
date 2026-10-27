@@ -1,34 +1,38 @@
 <script lang="ts">
+import { browser } from '$app/env';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
-import { projectBackRoute } from '@/stores/client-route';
+import { getPrjFeatureImage } from '#/lib/utils/common.ts';
+import type { ProjectData } from '#/routes/(app)/projects/types/projects.ts';
+import { projectBackRoute } from '#/stores/client-route.ts';
 import { onMount } from 'svelte';
-import { getPrjFeatureImage } from '@/lib/utils/common';
 import { Lightbox } from 'svelte-lightbox';
-import { browser } from '$app/environment';
 import MegaEmbed from './MegaEmbed.svelte';
-import type { ProjectData } from '@/routes/(app)/projects/types/projects';
 
 let backRoute: string = $state('');
 
 let showSpinner = $state(false);
+
 interface Props {
   data: ProjectData;
 }
 
 let { data }: Props = $props();
+const megaLink = $derived(data?.res?.data?.[0]?.mega);
+const youtubeLink = $derived(data?.res?.data?.[0]?.youtube || false);
+const hasMegaOrYoutube = $derived(megaLink || youtubeLink);
+const links = $derived(data?.res?.data?.[0]?.links);
+const screenPics = $derived(data?.res?.data?.[0]?.screen_pics);
+const techs = $derived(data?.res?.data?.[0]?.techs);
 
-const megaLink = data?.res?.data?.[0]?.mega;
-const youtubeLink = data?.res?.data?.[0]?.youtube || false;
-const hasMegaOrYoutube = megaLink || youtubeLink;
-const links = data?.res?.data?.[0]?.links;
-const screenPics = data?.res?.data?.[0]?.screen_pics;
-const techs = data?.res?.data?.[0]?.techs;
+beforeNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
 
-beforeNavigate(() => {
   showSpinner = true;
 });
 
-afterNavigate(() => {
+afterNavigate(({ shallow, type }) => {
+  if (shallow && type === 'goto') return;
+
   showSpinner = false;
 });
 
@@ -77,21 +81,24 @@ onMount(() => {
 					<ul class="list-group">
 						{#each Object.entries(links) as [name, href]}
 							<li class="list-group-item my-1">
-								<a class="underline hover:font-bold" {href} target="_blank" rel="noopener noreferrer external">
-									{name}
-								</a>
+								<a
+									class="underline hover:font-bold"
+									href={href}
+									target="_blank"
+									rel="noopener noreferrer external"
+								>{name}</a>
 							</li>
 						{/each}
 					</ul>
 				{/if}
-        {#if hasMegaOrYoutube}
-        <h2 class="headings mt-4">Demo Video</h2>
-        {/if}
-        {#if megaLink}
-        <MegaEmbed source={megaLink} />
-        {:else if youtubeLink}
-         <!-- Implement YouTube video here -->
-        {/if}
+				{#if hasMegaOrYoutube}
+					<h2 class="headings mt-4">Demo Video</h2>
+				{/if}
+				{#if megaLink}
+					<MegaEmbed source={megaLink} />
+				{:else if youtubeLink}
+					<!-- Implement YouTube video here -->
+				{/if}
 
 				{#if Object.keys(screenPics ?? {}).length > 0}
 					<h2 class="headings mt-4">Screenshots</h2>
@@ -102,12 +109,24 @@ onMount(() => {
 						{#if browser}
 							{#each Object.entries(screenPics) as [name, src]}
 								<Lightbox>
-									<img class="project-img-feature" {src} alt={name} width="800" height="600" />
+									<img
+										class="project-img-feature"
+										src={src}
+										alt={name}
+										width="800"
+										height="600"
+									/>
 								</Lightbox>
 							{/each}
 						{:else}
 							{#each Object.entries(screenPics) as [name, src]}
-								<img class="project-img-feature" {src} alt={name} width="800" height="600" />
+								<img
+									class="project-img-feature"
+									src={src}
+									alt={name}
+									width="800"
+									height="600"
+								/>
 							{/each}
 						{/if}
 					</div>
