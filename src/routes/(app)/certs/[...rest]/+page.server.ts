@@ -32,7 +32,7 @@ export const load: PageServerLoad = async (rest) => {
             .split('/tags/')[1]
             .split('/')
             .map((t) => Number(t))
-            .filter((t) => !isNaN(t));
+            .filter((t) => !Number.isNaN(t));
 
           if (!tag_ids || tag_ids.length === 0) {
             throw error(404, 'Not found');

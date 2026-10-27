@@ -3,7 +3,7 @@ import adapter from '@sveltejs/adapter-netlify';
 // import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
 
-import { join } from 'path';
+import { join } from 'node:path';
 import { sveltekit } from '@sveltejs/kit/vite';
 // import { SvelteKitPWA } from '@vite-pwa/sveltekit'
 import tailwindcss from '@tailwindcss/vite';

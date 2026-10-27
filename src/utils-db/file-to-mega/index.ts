@@ -61,7 +61,7 @@ async function crawlDirectory(relativePath: string): Promise<string[]> {
 }
 
 
-const megaSyncFolder = async () => {
+const megaSyncFolder = () => {
   const cmd = [];
   cmd.push('sync');
   cmd.push(filesLocation);
@@ -76,7 +76,7 @@ const megaSyncFolder = async () => {
   console.info('Synced', megaFolder);
 };
 
-const megeGetExportedFile = async (file: string) => {
+const megeGetExportedFile = (file: string) => {
   const cmd = [];
   cmd.push('export');
   cmd.push(`${megaFolder}/${file}`);

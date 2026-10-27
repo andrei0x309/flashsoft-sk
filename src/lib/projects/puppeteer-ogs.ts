@@ -1,4 +1,4 @@
-import os from 'os';
+import os from 'node:os';
 import puppeteer from 'puppeteer-core';
 
 const generateProjectOgs = async () => {
@@ -79,4 +79,4 @@ const generateProjectOgs = async () => {
   console.log('All screenshots saved successfully.');
 };
 
-generateProjectOgs();
+await generateProjectOgs();
