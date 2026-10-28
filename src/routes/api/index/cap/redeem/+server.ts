@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
-import { getCapInstanceAndState, updateCapState } from '#/lib/index/cap';
-import type { RequestHandler } from '../$types';
+import { getCapInstanceAndState, updateCapState } from '#/lib/index/cap.ts';
+import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ request }) => {
   try {

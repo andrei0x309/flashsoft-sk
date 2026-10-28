@@ -1,4 +1,4 @@
-import { renderRobots } from '#lib/utils/server/robots.js';
+import { renderRobots } from '#lib/utils/server/robots.ts';
 import type { RequestHandler } from './$types';
 export const prerender = true;
 
