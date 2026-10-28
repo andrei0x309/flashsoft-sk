@@ -6,12 +6,10 @@ import crypto from 'node:crypto';
 import { EventEmitter } from 'node:events';
 import fs from 'node:fs/promises';
 
-if (typeof process === 'undefined') {
-  global.process = {
+const process = {
     on: () => null,
     once: () => null
-  };
-}
+};
 
 /**
  * @typedef {import('node:crypto')} Crypto

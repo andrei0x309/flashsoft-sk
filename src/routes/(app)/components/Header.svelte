@@ -110,7 +110,7 @@ let logoUrl = $derived(segment === 'cert' ? '/certs' : '/projects');
 					{/if}
 				</div>
 			</a>
-			<nav class="skew-menu top-[1rem] relative">
+			<nav class="skew-menu top-4 relative">
 				<ul>
 					<li><a href="/"><span class="icon-arrow-left"></span> Front Page</a></li>
 					<li>

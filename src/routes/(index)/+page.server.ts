@@ -1,12 +1,12 @@
-import { supabase } from '#/lib/db-client/supaClientFS';
+import { supabase } from '#/lib/db-client/supaClientFS.ts';
 import { error } from '@sveltejs/kit';
-import * as cheerio from 'cheerio';
+import { load as cheerioLoad }from 'cheerio/slim';
 import type { PageServerLoad } from './$types';
 
 const prepareHtml = (html: string) => {
   let graph = '';
   let activity = '';
-  const githubHtml = cheerio.load(html);
+  const githubHtml = cheerioLoad(html);
   const githubGraph = githubHtml('.graph-before-activity-overview');
   const githubActivity = githubHtml('#user-activity-overview');
 
