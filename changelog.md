@@ -1,5 +1,13 @@
 # Change Log
 
+## dev/2 - 10/27/2026
+
+- refactored sitemap generation
+- removed some links and icons
+- updated dependencies
+- used cheerio for parsing GitHub Contributions
+- migrated to SvelteKit v3
+
 ## dev/2 - 5/9/2025
 
 - ensured all titles are unique on paginated pages

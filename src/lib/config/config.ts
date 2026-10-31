@@ -13,21 +13,5 @@ export const config = {
   hostname: 'flashsoft.eu',
   IS_DEV_ENABLED,
   devBaseUrl,
-  baseSiteUrl,
-  farcaster: {
-    miniAppEnabled: true,
-    followButtonEnabled: true,
-    followFid: 1791,
-    extendedMetadata: {
-      description,
-      tags: ['developer', 'personal', 'flashsoft', 'sveltekit'],
-      // games, social, finance, utility, productivity, health-fitness, news-media, music, shopping, education, developer-tools, entertainment, art-creativity
-      primaryCategory: 'utility',
-      subtitle: title,
-      screenshotUrls: [
-        IS_DEV_ENABLED ? devBaseUrl + '/hotlink-ok/screenshots/screenshot-1.png' : baseSiteUrl + '/hotlink-ok/screenshots/screenshot-1.png',
-        IS_DEV_ENABLED ? devBaseUrl + '/hotlink-ok/screenshots/screenshot-2.png' : baseSiteUrl + '/hotlink-ok/screenshots/screenshot-2.png'
-      ]
-    }
-  }
+  baseSiteUrl
 };

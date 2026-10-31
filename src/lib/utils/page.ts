@@ -1,5 +1,5 @@
-import { appendToData, makeTitle } from '#/lib/utils/common';
 import { error } from '@sveltejs/kit';
+import { appendToData, makeTitle } from '#/lib/utils/common.ts';
 
 export const checkData = (data: unknown): Record<string, unknown> => {
   if (!data) {
@@ -22,4 +22,4 @@ export const extractPage = (rest: string) => {
   return 1;
 };
 
-export { error, appendToData };
+export { appendToData, error  };

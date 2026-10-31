@@ -1,7 +1,13 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
-  "files": { "ignoreUnknown": false, "includes": ["**", "!**/build/**", "!**/.svelte-kit", "!**/.netlify"] },
+  "files": { "ignoreUnknown": false, "includes": ["**", "!**/build", "!**/.svelte-kit", "!**/.netlify"] },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true,
+      "allowWrongLineComments": true
+    }
+  },
   "formatter": {
     "enabled": true,
     "useEditorconfig": true,
@@ -31,7 +37,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": false,
+      "preset": "none",
       "complexity": {
         "noExtraBooleanCast": "error",
         "noUselessCatch": "error",

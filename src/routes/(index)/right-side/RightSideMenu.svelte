@@ -3,7 +3,7 @@ import TipIcon from '../icons/TipIcon.svelte';
 </script>
 
 <nav class="rsn pt-18">
-				<ul class="leading-[3rem] text-[1.2rem]">
+				<ul class="leading-12 text-[1.2rem]">
 					<li>
 						<a rel="section" href="#section-projects"
 							><i class="icon-home" aria-hidden="true"></i>Projects</a

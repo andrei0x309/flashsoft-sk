@@ -1,8 +1,7 @@
-import { SECRET_EMAIL_ID as EMAIL_ID, SECRET_EMAIL_KEY as EMAIL_SECRET } from '$app/env/private';
-
 import { supabase } from '#/lib/db-client/supaClientFS.ts';
 import { getCapChallengeConfig, getCapInstanceAndState } from '#/lib/index/cap.ts';
 import { validateEmail } from '#/lib/utils/server/email.ts';
+import { SECRET_EMAIL_ID as EMAIL_ID, SECRET_EMAIL_KEY as EMAIL_SECRET } from '$app/env/private';
 import type { RequestHandler } from './$types';
 
 const EMAIL_API_AUTH = 'https://api.sendpulse.com/oauth/access_token';
