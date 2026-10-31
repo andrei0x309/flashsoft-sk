@@ -1,8 +1,8 @@
 export const prerender = true;
+
+import { config } from '#/lib/config/config.ts';
 import { generatePaths } from '#/lib/sitemap/index.ts';
 import type { RequestHandler } from './$types';
-
-const website = 'https://flashsoft.eu';
 
 export const GET: RequestHandler = async () => {
   return new Response(
@@ -11,7 +11,7 @@ export const GET: RequestHandler = async () => {
 		${(await generatePaths())
       .map(
         (page) => `<url>
-			<loc>${website}/${page.url?.replace('&', '&amp;')}</loc>
+			<loc>${config.baseSiteUrl}/${page.url?.replace('&', '&amp;')}</loc>
 			<changefreq>monthly</changefreq>
 			<priority>${page.priority ?? '0.5'}</priority>
 		  </url>`

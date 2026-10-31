@@ -1,6 +1,6 @@
 <script lang="ts">
-import { Swipe } from '#lib/utils/swipe.js';
 import { onMount } from 'svelte';
+import { Swipe } from '#lib/utils/swipe.ts';
 
 let { sideMenu, closeMenu } = $props();
 let toggle: HTMLElement | undefined; // document.getElementById('menu_toggle');

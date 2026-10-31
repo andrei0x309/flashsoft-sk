@@ -1,6 +1,6 @@
-import { supabase } from '#/lib/db-client/supaClientFS.ts';
 import { error } from '@sveltejs/kit';
-import { load as cheerioLoad }from 'cheerio/slim';
+import { load as cheerioLoad } from 'cheerio/slim';
+import { supabase } from '#/lib/db-client/supaClientFS.ts';
 import type { PageServerLoad } from './$types';
 
 const prepareHtml = (html: string) => {

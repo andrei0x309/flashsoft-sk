@@ -1,5 +1,4 @@
-import { getCapInstanceAndState, updateCapState } from '#/lib/index/cap.ts';
-import { getCapChallengeConfig } from '#/lib/index/cap.ts';
+import { getCapChallengeConfig, getCapInstanceAndState, updateCapState } from '#/lib/index/cap.ts';
 import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async () => {
