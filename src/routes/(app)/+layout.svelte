@@ -34,6 +34,7 @@ onMount(() => {
 	<link rel="mask-icon" href="/fs-icon-mask.svg" color="#5bbad5">
 	<meta name="theme-color" content="#ffffff">
 	<link rel="dns-prefetch preconnect" href="https://fonts.gstatic.com"/>
+	<link rel="manifest" href="/site.webmanifest" />
 
 </svelte:head>
 

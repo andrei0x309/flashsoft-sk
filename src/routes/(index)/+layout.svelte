@@ -24,6 +24,7 @@ onMount(() => {
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="author" content="andrei0x309" />
+	<meta name="theme-color" content="#ffffff" />
 
 	<!-- FavIcon  -->
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -32,8 +33,8 @@ onMount(() => {
 	<link rel="icon" type="image/x-icon" href="/favicon.ico">
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 	<link rel="mask-icon" href="/fs-icon-mask.svg" color="#5bbad5" />
-	<meta name="theme-color" content="#ffffff" />
-
+	<link rel="manifest" href="/site.webmanifest" />
+	
 	<link rel="dns-prefetch preconnect" href="https://fonts.gstatic.com" />
 	{#if analyticsCode}
 		<link rel="preconnect" href="https://www.googletagmanager.com" />
