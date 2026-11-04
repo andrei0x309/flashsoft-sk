@@ -1,9 +1,9 @@
 <script lang="ts">
-import { page as SveltePage } from '$app/state';
 import CertImg from '#/routes/(app)/certs/components/CertImg.svelte';
 import CertPagination from '#/routes/(app)/certs/components/CertPagination.svelte';
 import type { CertData } from '#/routes/(app)/certs/types/cert.ts';
 import { certBackRoute } from '#/stores/client-route.ts';
+import { page as SveltePage } from '$app/state';
 
 interface Props {
   data: CertData;

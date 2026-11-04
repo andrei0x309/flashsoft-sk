@@ -1,11 +1,11 @@
 <script lang="ts">
 import '#/routes/(app)/projects.scss';
-import { afterNavigate, beforeNavigate } from '$app/navigation';
-import { page as SveltePage } from '$app/state';
+import { onMount } from 'svelte';
 import { config } from '#/lib/config/config.ts';
 import Header from '#/routes/(app)/components/Header.svelte';
 import type { ProjectDataPage } from '#/routes/(app)/projects/types/projects.ts';
-import { onMount } from 'svelte';
+import { afterNavigate, beforeNavigate } from '$app/navigation';
+import { page as SveltePage } from '$app/state';
 import Pagination from '../components/Pagination.svelte';
 import ProjectList from '../components/ProjectList.svelte';
 

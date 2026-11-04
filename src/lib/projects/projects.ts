@@ -1,6 +1,6 @@
+import type { PostgrestSingleResponse } from '@supabase/supabase-js';
 import { supabase } from '#/lib/db-client/supaClientFS.ts';
 import { error } from '#/lib/utils/page.ts';
-import type { PostgrestSingleResponse } from '@supabase/supabase-js';
 
 export const loadProjects = async (page = 1) => {
   try {

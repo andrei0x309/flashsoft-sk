@@ -1,14 +1,13 @@
 <script lang="ts">
+import DailyDev from '../icons/DailyDev.svelte';
 import TipIcon from '../icons/TipIcon.svelte';
 
-import DailyDev from '../icons/DailyDev.svelte';
-
 interface Props {
-    sideMenu?: HTMLElement | undefined;
-    closeMenu: () => void;
+  sideMenu?: HTMLElement | undefined;
+  closeMenu: () => void;
 }
 
-let { sideMenu = $bindable(), closeMenu } : Props = $props();
+let { sideMenu = $bindable(), closeMenu }: Props = $props();
 let close: HTMLElement | undefined; // document.getElementById('menu-close');
 </script>
 

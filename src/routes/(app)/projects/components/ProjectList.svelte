@@ -1,6 +1,7 @@
 <script lang="ts">
 import { getPrjFeatureImage } from '#/lib/utils/common.ts';
 import type { ProjectData } from '#/routes/(app)/projects/types/projects.ts';
+
 interface Props {
   data: ProjectData;
   class?: string;
