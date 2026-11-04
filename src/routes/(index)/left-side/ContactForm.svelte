@@ -1,6 +1,6 @@
 <script lang="ts">
-import { browser } from '$app/env';
 import Lazy from '#/components/Lazy.svelte';
+import { browser } from '$app/env';
 // import { onMount } from 'svelte';
 import AlertEmail from './AlertEmail.svelte';
 
@@ -130,7 +130,6 @@ const initCaptcha = () => {
     (window as any).capMount();
   }
 };
-
 </script>
 
 <section id="section-contact">

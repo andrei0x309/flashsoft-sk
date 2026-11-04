@@ -14,7 +14,7 @@ export const entries: EntryGenerator = () => {
 
 export const prerender = true;
 
-export const GET: RequestHandler = async () => {
+export const GET: RequestHandler = () => {
 
   return new Response(content, {
     headers: {
