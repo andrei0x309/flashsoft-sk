@@ -57,7 +57,7 @@ onMount(() => {
 
 <main id="app">
     
-  <Header segment="cert">
+  <Header segment="cert" single={true}>
     {#snippet filter()}
                     <CertFilter  selectedTags={ data?.res?.tag_ids ?? []} expanded={(data?.res?.tag_ids ?? []).length > 0} />
     {/snippet}

@@ -48,11 +48,13 @@ const pageUrl = SveltePage.url.href.replace('http://', 'https://');
 	<meta property="og:title" content={data.pageTitle} />
 	<meta property="og:description" content={data.pageDescription} />
 	<meta property="og:type" content="website" />
+	{#if SveltePage.status === 200}
 	<meta property="og:url" content={pageUrl} />
 	<meta
 		property="og:image"
 		content={config.defaultOpenGraphImageProjects}
 	/>
+	{/if}
 </svelte:head>
 
 <Header segment="projects" />
