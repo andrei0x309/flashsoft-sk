@@ -17,7 +17,7 @@ let close: HTMLElement | undefined; // document.getElementById('menu-close');
 
     <ul class="sidebar-menu-nav">
         <li class="sidemenu">
-            <a id="lsm-projects" href="#section-projects"
+            <a id="lsm-projects" href="/prpjects"
                 ><i class="icon-home text-custom-v" aria-hidden="true"></i>Projects</a
             >
         </li>

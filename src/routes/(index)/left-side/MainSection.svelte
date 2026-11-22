@@ -69,10 +69,10 @@ onMount(() => {
 const htmlPats = $derived(html.split('|||'));
 </script>
 
-<section id="section-projects">
+<section id="section-activity">
     <div class="ls-h mb-4 relative">
         <SideMenuToggle sideMenu={sideMenu} closeMenu={closeMenu} />
-        <p class="inline-block my-1">projects</p>
+        <p class="inline-block my-1">activity</p>
     </div>
     <div class="ls-pr-ct flex -mr-4 -ml-4 text-center p-6 justify-center flex-col items-center mb-2">
         {#if !(typeof htmlPats?.[0] === 'undefined')}

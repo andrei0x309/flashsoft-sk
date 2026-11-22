@@ -1,7 +1,7 @@
 <script lang="ts">
-import { browser } from '$app/env';
 import { onMount } from 'svelte';
 import { Lightbox } from 'svelte-lightbox';
+import { browser } from '$app/env';
 
 interface CertImgProps {
   imageSource: string;

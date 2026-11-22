@@ -5,7 +5,7 @@ import TipIcon from '../icons/TipIcon.svelte';
 <nav class="rsn pt-18">
 				<ul class="leading-12 text-[1.2rem]">
 					<li>
-						<a rel="section" href="#section-projects"
+						<a rel="section" href="/projects"
 							><i class="icon-home" aria-hidden="true"></i>Projects</a
 						>
 					</li>
