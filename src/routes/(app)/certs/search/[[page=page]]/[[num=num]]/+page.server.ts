@@ -1,11 +1,11 @@
 import { loadCerts } from '#/lib/certs/certs.ts';
-import { appendToData, checkData, error, extractPage } from '#/lib/utils/page.ts';
+import { appendToData, checkData } from '#/lib/utils/page.ts';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async (req) => {
   let restPath = '/certs/search';
-  const searchTerms = req.url.searchParams.getAll('q');
-  restPath += '?q=' + searchTerms.join(' ');
+  const searchTerms = req.url.searchParams.get('q')?.split(' ')
+  restPath += searchTerms ? '?q=' + searchTerms.join('%20') : ''
   let page = Number(req.params.num) || 1;
 
   if (req.params.num) {
@@ -18,10 +18,10 @@ export const load: PageServerLoad = async (req) => {
 
   const pageText = page > 1 ? 'Page ' + page : '';
 
-  return appendToData(checkData(await loadCerts(page, true, searchTerms)), {
+  return appendToData(checkData(await loadCerts(page, true, searchTerms), true), {
     rest: restPath,
-    searchInput: searchTerms.join(' '),
-    pageTitle: 'Searching cert for ' + searchTerms.join(' ').substring(0, 20) + '...' + pageText,
-    pageDescription: 'Searching cert for ' + searchTerms.join(' ').substring(0, 170) + '...' + pageText
+    searchInput: searchTerms?.join(' '),
+    pageTitle: 'Searching cert for ' + searchTerms?.join(' ').substring(0, 20) + '...' + pageText,
+    pageDescription: 'Searching cert for ' + searchTerms?.join(' ').substring(0, 170) + '...' + pageText
   });
 };

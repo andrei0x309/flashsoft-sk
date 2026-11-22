@@ -12,10 +12,10 @@ let { maxPage, currentPage, rest }: Props = $props();
 // Use $derived for simple reactive values
 const isMinPage = $derived(currentPage === 1);
 const isMaxPage = $derived(currentPage === maxPage);
+const restPath = $derived(rest.includes('?') ? rest.split('?')[0] : rest);
+const queryParams = $derived(rest.includes('?') ? `?${rest.split('?')[1]}`.replace('/', '') : '')
 
-onMount(() => {
-  console.log('pag remounted', currentPage);
-});
+// onMount(() => {});
 
 // Use $derived.by for complex multi-line logic
 const linkList = $derived.by(() => {
@@ -62,7 +62,7 @@ const linkList = $derived.by(() => {
             <span aria-hidden="true" class="page-link">‹</span>
         {:else}
             <a
-                href={`${(`${rest}/page/${currentPage-1}`).replace(/\/+/g, '/')}`}
+                href={`${(`${restPath}/page/${currentPage-1}${queryParams}`).replace(/\/+/g, '/')}`}
                 rel="prev"
                 aria-label="« Previous"
                 class="page-link"
@@ -79,7 +79,7 @@ const linkList = $derived.by(() => {
             {:else}
                 <li class="page-item">
                     <a
-                        href={`${(`${rest}/page/${link}`).replace(/\/+/g, '/')}`}
+                        href={`${(`${restPath}/page/${link}${queryParams}`).replace(/\/+/g, '/')}`}
                         class="page-link"
                         >{link}</a
                     >
@@ -92,7 +92,7 @@ const linkList = $derived.by(() => {
             <span aria-hidden="true" class="page-link">›</span>
         {:else}
             <a
-                href={`${(`${rest}/page/${currentPage+1}`).replace(/\/+/g, '/')}`}
+                href={`${(`${restPath}/page/${currentPage+1}${queryParams}`).replace(/\/+/g, '/')}`}
                 rel="next"
                 aria-label="Next »"
                 class="page-link"

@@ -1,6 +1,6 @@
 <script lang="ts">
-import { goto } from '$app/navigation';
 import { slide } from 'svelte/transition';
+import { goto } from '$app/navigation';
 
 let tags: any[] = $state([]);
 

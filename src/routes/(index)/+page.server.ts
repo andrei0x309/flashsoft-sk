@@ -3,6 +3,7 @@ import { load as cheerioLoad } from 'cheerio/slim';
 import { supabase } from '#/lib/db-client/supaClientFS.ts';
 import type { PageServerLoad } from './$types';
 
+
 const prepareHtml = (html: string) => {
   let graph = '';
   let activity = '';
@@ -24,6 +25,8 @@ const prepareHtml = (html: string) => {
   if (githubActivity.length > 0) {
     // remove . js-activity-overview-graph-container
     githubActivity.find('.js-activity-overview-graph-container').remove();
+    // remove .js-org-filter-links-container
+    githubActivity.find('.js-org-filter-links-container').remove();
     activity = githubActivity.html() as string;
   }
 
@@ -48,7 +51,7 @@ export const load: PageServerLoad = async () => {
     }
     setTimeout(async () => {
       if (Date.now() - new Date(updated_at).getTime() > 1000 * 60 * 60 * 6) {
-        await updateContributions();
+      await updateContributions();
       }
     }, 100);
     return {

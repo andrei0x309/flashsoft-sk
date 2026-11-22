@@ -1,9 +1,9 @@
 <script lang="ts">
+import { onMount } from 'svelte';
 import CertImg from '#/routes/(app)/certs/components/CertImg.svelte';
 import type { CertData } from '#/routes/(app)/certs/types/cert.ts';
 import GoBack from '#/routes/(app)/components/GoBack.svelte';
 import { certBackRoute } from '#/stores/client-route.ts';
-import { onMount } from 'svelte';
 
 let backRoute: string = $state('');
 interface Props {
@@ -41,9 +41,9 @@ const cert = $derived(data.res?.data?.[0]);
 
 			<div class="card-text">
 				<h2 class="headings mt-4">Issued by</h2>
-				<p class="text-muted my-2">
-					{cert.cat?.cat_name}
-					<img class="cat-icon w-8 inline-block" src="/res/cert/cat_icons/{cert['cat']?.cat_icon_name}.svg" alt="{cert['cat']?.cat_name}" />
+				<p class="text-muted my-2 mt-4">
+					<span class="relative top-1 right-1">{cert.cat?.cat_name}</span>
+					<img class="w-5 inline-block" src="/res/cert/cat_icons/{cert['cat']?.cat_icon_name}.svg" alt="{cert['cat']?.cat_name}" />
 
 				</p>
 				{#if cert?.cert_description}
@@ -53,7 +53,7 @@ const cert = $derived(data.res?.data?.[0]);
 					</p>
 				{/if}
 				{#if cert?.tags?.length}
-					<h2 class="headings mt-4 mb-2">Tags</h2>
+					<h2 class="headings mt-8 mb-1">Tags</h2>
 					<ul class="tags">
 						{#each cert.tags as tag}
 							<li>
@@ -65,7 +65,7 @@ const cert = $derived(data.res?.data?.[0]);
 			</div>
 
 			<div class="card-footer" style="margin-top: 1rem;">
-				<GoBack class="button raise btn-11 px-4 pt-2 pb-3 inline-block text-[1.2rem] mt-8" backRoute={'/certs'} />
+				<GoBack class="button raise btn-11 px-4 pt-2 pb-3 inline-block text-[1.2rem] mt-8" backRoute={backRoute} />
 
 				<a  href="{`${cert['cert_file_name']}`}" target="_blank" rel="external" >
 					<button type="button" class="btn-11 raise cursor-pointer">

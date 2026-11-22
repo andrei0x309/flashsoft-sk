@@ -37,7 +37,7 @@ const setBackRoute = () => {
 				/>
 
 				<div class="card-body">
-					<h2 class="card-title cert-card-title">{cert['cert_name']}</h2>
+					<a class="hover:sepia-[0.5]" onclick={setBackRoute} href="{`/certs/view/${cert['cert_slug']}`}"><h2 class="card-title cert-card-title">{cert['cert_name']}</h2></a>
 
 					{#if cert['tags']?.length}
 						<p style="margin-bottom: 0.5em;">Tags:</p>
